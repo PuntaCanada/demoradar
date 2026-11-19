@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T16:18:21.400Z",
-  "count": 1344,
+  "updated_at": "2026-11-19T16:19:30.399Z",
+  "count": 1346,
   "events": [
     {
       "id": "dresden-8951a73b36d21bec",
@@ -663,6 +663,21 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "police-cologne-f0738361372a71b2",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Köln",
+      "date": "2026-11-20",
+      "start": "11:00",
+      "end": "16:00",
+      "title": "Schulstreik gegen die Wehrpflicht",
+      "location": "",
+      "route": "",
+      "source": "Polizei Köln – amtliche Pressemitteilung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/12415/6393559",
+      "source_status": "Laut Polizei bereits Ende Oktober bestätigt; Route kann sich ändern"
+    },
+    {
       "id": "berlin-110",
       "country": "DE",
       "state": "Berlin",
@@ -729,6 +744,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "police-cologne-56b73605c84b93d1",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Köln",
+      "date": "2026-11-20",
+      "start": "13:00",
+      "end": "19:00",
+      "title": "Unsere Zukunft liegt in unseren Händen (Gen Z regelt Köln)",
+      "location": "",
+      "route": "",
+      "source": "Polizei Köln – amtliche Pressemitteilung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/12415/6393559",
+      "source_status": "Bei der Polizei angezeigt; Veranstaltungsort und Route in Abstimmung, keine abschließende Bestätigung aus dieser Quelle"
     },
     {
       "id": "berlin-119",
