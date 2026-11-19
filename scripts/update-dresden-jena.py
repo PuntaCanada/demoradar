@@ -46,6 +46,17 @@ def main():
     data=json.loads(EVENTS.read_text("utf-8"))
     for city,url in [("Dresden",DRESDEN),("Jena",JENA)]:
         entry={"city":city,"url":url,"status":"unavailable","imported":0}
+        if city=="Dresden":
+            try:
+                state=json.loads(Path("data/dresden-source.json").read_text(encoding="utf-8"))
+                entry["status"]=state.get("status","unavailable")
+                entry["imported"]=state.get("count",0)
+                entry["url"]=state.get("url",url)
+                entry["note"]="Amtliche Dresdner JSON-Schnittstelle; Einträge werden direkt importiert."
+            except Exception as error:
+                entry["note"]=str(error)[:200]
+            report["sources"].append(entry)
+            continue
         try:
             page=fetch(url)
             p=Reader();p.feed(page)
