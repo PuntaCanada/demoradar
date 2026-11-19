@@ -29,20 +29,20 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
     item.status==="verified_one_off"?"verified_one_off":
     item.status==="unavailable_no_import"?"unavailable":
     item.status==="not_verified_no_import"?"no_matching_items":"unknown",
-    item.count,"One specific police press announcement, not a regularly updated assembly feed");
+    item.count,"One specific police press announcement, not a regularly updated assembly feed",item.checked_on);
  }
  const dortmund=files.policeDortmund||{};
  add("Dortmund","Nordrhein-Westfalen","Polizei Dortmund",
   dortmund.status==="verified_one_off"?"verified_one_off":
   dortmund.status==="unavailable_no_import"?"unavailable":
   dortmund.status==="unverified_content_no_import"?"no_matching_items":"unknown",
-  dortmund.count,"Single dated police assembly announcement, not a rolling register");
+  dortmund.count,"Single dated police assembly announcement, not a rolling register",dortmund.checked_on);
  const frankfurtArchive=files.policeFrankfurtArchive||{};
  add("Frankfurt am Main","Hessen","Polizeipräsidium Frankfurt (Archiv)",
   frankfurtArchive.status==="verified_historical_notice"?"verified_historical_one_off":
   frankfurtArchive.status==="unavailable_no_import"?"unavailable":
   frankfurtArchive.status==="unverified_no_import"?"no_matching_items":"unknown",
-  frankfurtArchive.count,"Two individually evidenced historical assembly records, not an ongoing feed");
+  frankfurtArchive.count,"Two individually evidenced historical assembly records, not an ongoing feed",frankfurtArchive.checked_on);
  const leipzig=files.policeLeipzig||{};
  add("Leipzig","Sachsen","Polizeidirektion Leipzig",leipzig.status==="verified_notice"?"verified_one_off":leipzig.status==="unavailable_no_import"?"unavailable":"unknown",leipzig.count,"One dated police notice, not a rolling feed");
  const archive=files.leipzigArchive||{};
