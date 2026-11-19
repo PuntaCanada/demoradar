@@ -2,6 +2,7 @@
 // DemoRadar: optional YouTube/Twitch discovery. Uses official APIs, no scraping.
 // Deliberately creates a review queue, NOT publicly approved event streams.
 import {readFileSync,writeFileSync} from "node:fs";
+import {matchEvents} from "./stream-matcher.mjs";
 const OUT="data/stream-discoveries.json";
 const api={youtube:process.env.YOUTUBE_API_KEY||"",twitchId:process.env.TWITCH_CLIENT_ID||"",twitchSecret:process.env.TWITCH_CLIENT_SECRET||""};
 const read=path=>{try{return JSON.parse(readFileSync(path,"utf8"))}catch{return {}}};
@@ -19,25 +20,6 @@ const unique=new Map(recent.map(e=>[e.id,e]));
 const seen=new Set();
 const candidates=[];
 const errors=[];
-const clean=s=>String(s||"").toLocaleLowerCase("de").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9äöüß]+/g," ").trim();
-const stop=new Set("gegen fuer fur mit ohne die der das den dem eine einer einem aus von und zur zum fur pro demonstration kundgebung demo veranstaltung live livestream stream protest demonstrationen deutschland germany heute morgen bericht".split(" "));
-const terms=s=>clean(s).split(/\s+/).filter(t=>t.length>=4&&!stop.has(t));
-const core=s=>new Set(terms(s));
-function matchEvent(title,date){
- const titleClean=clean(title),tokens=core(title);
- if(!tokens.size)return [];
- const matches=[];
- for(const e of unique.values()){
-  if(!titleClean.includes(clean(e.city)))continue;
-  if(date&&Math.abs(new Date(e.date+"T12:00:00Z")-new Date(date))>3*day)continue;
-  const t=[...core(e.title)];
-  const meaningful=t.filter(w=>tokens.has(w));
-  if(meaningful.length<2)continue; // city alone or generic "Demo Berlin" is not enough
-  if(!/(demo|kundgebung|protest|versammlung|demonstration|mahnwache|streik|aufzug)/i.test(title))continue;
-  matches.push({event_id:e.id,city:e.city,date:e.date,matched_terms:meaningful.slice(0,6)});
- }
- return matches.slice(0,4);
-}
 async function json(url,opts={}){
  const response=await fetch(url,{...opts,headers:{"accept":"application/json",...(opts.headers||{})},signal:AbortSignal.timeout(12000)});
  if(!response.ok)throw Error("HTTP "+response.status+" at "+new URL(url).hostname);
@@ -47,11 +29,11 @@ function add(video){
  if(!video?.url||!video?.title||!video?.channel)return;
  const key=video.platform+"|"+video.url;
  if(seen.has(key))return;seen.add(key);
- const matches=matchEvent(video.title,video.date);
+ const matches=matchEvents(video,[...unique.values()]);
  if(!matches.length)return;
  for(const event of matches){
   candidates.push({...video,...event,reviewed:false,auto_match:true,
-   note:"AUTOMATIC CANDIDATE ONLY: two distinct topic terms plus city, date and demonstration keyword. Verify before publishing."});
+   note:"AUTOMATIC CANDIDATE ONLY: unique city, event-day proximity and two distinctive topic terms matched. Verify independently before publishing."});
  }
 }
 const discoveryStats={youtube_channels_checked:0,youtube_videos_checked:0,youtube_streams_seen:0,twitch_channels_checked:0};
