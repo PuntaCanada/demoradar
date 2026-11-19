@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "policy": "Human-reviewed public event-matched stream links only. Presence is not proof the broadcaster is currently live. No third-party embed or automatic API search.",
+  "streams": []
+}
