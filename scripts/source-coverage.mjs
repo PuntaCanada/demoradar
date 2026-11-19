@@ -1,7 +1,7 @@
 // Source coverage audit: observations only. Never invent or import demonstrations.
 // All city counts derive exclusively from previously published event records.
 import {readFileSync,writeFileSync} from "node:fs";
-import {cityMatches,explicitDateInTitle,nearbyDate} from "./stream-matcher.mjs";
+import {cityMatches,explicitDateInTitle,nearbyDate,ambiguousOrInvalidTitleDates} from "./stream-matcher.mjs";
 const read=(path)=>{try{return JSON.parse(readFileSync(path,"utf8"))}catch{return {}}};
 export function analyzeCoverage(events, samples, sources, options={}){
  const now=options.now||new Date();
@@ -29,6 +29,7 @@ export function analyzeCoverage(events, samples, sources, options={}){
   const dates=[...new Set(matching.flatMap(([,x])=>[...x.dates]))].sort();
   const videos=samples.filter(v=>v&&v.title&&cityMatches(v.title,city));
   const matchedDate=videos.filter(v=>{
+   if(ambiguousOrInvalidTitleDates(v.title))return false;
    const named=explicitDateInTitle(v.title);
    return dates.some(date=>(!named||named===date)&&(
     nearbyDate(v.date,date,v.status)||
