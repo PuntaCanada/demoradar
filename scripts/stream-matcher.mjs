@@ -51,6 +51,25 @@ export function ambiguousOrInvalidTitleDates(title){
  }
  return dates.size>1;
 }
+// Only known public platform hosts; malformed or malicious account links are ignored.
+export function platformAccount(raw,platform){
+ let url;
+ try{url=new URL(String(raw||""))}catch{return ""}
+ if(url.protocol!=="https:"||url.username||url.password||url.port)return "";
+ if(platform==="youtube"){
+  if(!["youtube.com","www.youtube.com"].includes(url.hostname.toLowerCase()))return "";
+  const parts=url.pathname.split("/").filter(Boolean);
+  if(parts.length!==1||!/^@[A-Za-z0-9._-]{3,80}$/.test(parts[0]))return "";
+  return parts[0];
+ }
+ if(platform==="twitch"){
+  if(!["twitch.tv","www.twitch.tv"].includes(url.hostname.toLowerCase()))return "";
+  const parts=url.pathname.split("/").filter(Boolean);
+  if(parts.length!==1||!/^[a-zA-Z0-9_]{3,25}$/.test(parts[0]))return "";
+  return parts[0].toLowerCase();
+ }
+ return "";
+}
 export function localDay(timestamp){
  const dt=new Date(timestamp);
  if(!Number.isFinite(dt.getTime()))return "";
