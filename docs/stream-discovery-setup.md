@@ -7,18 +7,18 @@ Stand: 19. November 2026. **YouTube-API ist aktiv und im GitHub-Workflow erfolgr
 - Automatisch entdeckte Treffer aus `data/stream-discoveries.json` werden **nur als mögliche, unbestätigte Zuordnung** dargestellt (farblich abgesetzt).
 - Ein vorläufiger Live-Hinweis wird nur angezeigt, wenn die offizielle Plattformabfrage jünger als 15 Minuten ist. Beim Offenlassen der Seite wird er minütlich neu bewertet; das ersetzt keine neue Plattformabfrage.
 - Ohne Treffer gibt es weiterhin Suchlinks zu YouTube und Twitch.
-- Die sechs ursprünglich genannten Streamer sowie zusätzliche öffentlich bestätigte YouTube-Kanäle liegen als Kandidaten in `data/streamer-candidates.json`. Einige YouTube-Kanäle sind noch nicht eindeutig bestätigt.
+- Die sechs ursprünglich genannten Streamer sowie weitere öffentlich belegte YouTube-Kanäle liegen als Kandidaten in `data/streamer-candidates.json`. Einige YouTube-Kanäle sind noch nicht eindeutig bestätigt.
 
 ## Technischer Aufbau
 - `scripts/update-streams.mjs` liest die letzten 50 Kanal-Uploads über `channels.list`, `playlistItems.list` und `videos.list`. Es nutzt keine kostspieligen `search.list`-Anfragen; drei API-Abfragen je YouTube-Kanal und Lauf.
-- Der GitHub-Workflow `.github/workflows/stream-discovery.yml` ist auf 15-Minuten-Takt eingerichtet. Die sieben eingebundenen YouTube-Kanäle verbrauchen überschlägig 21 API-Einheiten pro Lauf (etwa 2.016 pro Tag bei pünktlicher Ausführung); API-Quoten können sich ändern.
+- Der GitHub-Workflow `.github/workflows/stream-discovery.yml` ist auf 15-Minuten-Takt eingerichtet. Die zehn erfolgreich geprüften YouTube-Kanäle verbrauchen überschlägig 30 API-Einheiten pro Lauf (etwa 2.880 pro Tag bei pünktlicher Ausführung); API-Quoten können sich ändern.
 - `scripts/stream-matcher.mjs` prüft Wortgrenzen beim Ortsnamen, Berliner Kalenderdatum statt ungeprüfter UTC-Tagesangabe, konkreten Demonstrationsbezug und mindestens zwei spezifische Themenbegriffe. Für kurze Titel sind ein Themenbegriff und ein namentlich genannter markanter Veranstaltungsort erforderlich.
 - Bei gleich guten Zuordnungen zu mehreren Demos wird **kein** automatischer Treffer angezeigt.
-- Livestreams müssen am Veranstaltungstag stattfinden. Aufzeichnungen können im engen Datumsfenster nachträglich veröffentlicht worden sein. Zusätzlich wird ein explizit im Videotitel genanntes Datum gegen das Veranstaltungsdatum geprüft. Die Veranstaltungsrecherche reicht bis zu 30 Tage zurück.
-- `scripts/test-stream-matcher.mjs` enthält 27 sicherheitsorientierte Fälle, etwa falscher Ort, falsches Datum, Gaming-Streams, Kurzthemen und mehrdeutige Doppelveranstaltungen. Die Tests laufen vor jeder API-Abfrage.
+- Livestreams müssen am Veranstaltungstag stattfinden. Aufzeichnungen können im engen Datumsfenster nachträglich veröffentlicht worden sein. Zusätzlich wird ein explizit im Videotitel genanntes Datum gegen das Veranstaltungsdatum geprüft. Die Veranstaltungsrecherche reicht bis zu 30 Tage zurück. Videotitel wie `Köln14.11.26` werden erkannt; ein tatsächlich später veröffentlichter Archiv-Ausschnitt bleibt als ungeprüfter Vorschlag markiert.
+- `scripts/test-stream-matcher.mjs` enthält 33 sicherheitsorientierte Fälle, etwa falscher Ort, falsches Datum, Gaming-Streams, Kurzthemen und mehrdeutige Doppelveranstaltungen. Die Tests laufen vor jeder API-Abfrage.
 - `data/stream-discoveries.json` enthält Kandidaten als `reviewed: false`, keine bestätigten Veranstaltungsstreams. Es bleibt strikt getrennt von `data/live-streams.json`.
 - Es werden maximal 20 YouTube-Kanäle und höchstens 100 mögliche Treffer verwaltet. Ein LIVE-Hinweis verfällt nach 15 Minuten.
-- Die Zahl geprüfter Kanäle, Videos, Streams und API-Fehler steht in der Ergebnisdatei.
+- Die Zahl geprüfter Kanäle, Videos, Streams und API-Fehler steht in der Ergebnisdatei. Drei echte Videotitel pro Kanal werden als öffentliche, begrenzte Diagnose-Stichprobe gespeichert; diese Titel sind **keine** Demo-Zuordnungen. `scripts/stream-coverage-audit.mjs` protokolliert zusätzlich, ob Stadt, Datum und Thema überhaupt in den importierten Demonstrationsmeldungen auftauchen.
 
 ## Einmalige kostenfreie Inbetriebnahme (ohne Schlüssel im Chat zu teilen)
 1. Google Cloud Console: YouTube Data API v3 in eigenem Projekt aktivieren, eingeschränkten API-Key für YouTube Data API erstellen und kostenlose Nutzungsquoten prüfen.
@@ -33,3 +33,10 @@ Stand: 19. November 2026. **YouTube-API ist aktiv und im GitHub-Workflow erfolgr
 - YouTube ist als Kanalabfrage aktiv, aber **ein geprüfter Event-Match ist nicht garantiert**. Twitch ist mangels Secrets noch nicht aktiviert. Beide APIs unterliegen Kontingenten und Verfügbarkeitsgrenzen.
 - Eigene Datenschutz- und Nutzungsrechtshinweise für veröffentlichte Metadaten und Links prüfen.
 - Keine automatischen Kontosperren, keine politischen Favorisierungen, keine automatischen Video-Reuploads.
+
+## Geprüfte Erkenntnisse aus dem echten Workflow am 19.11.2026
+- **10 YouTube-Kanäle**, **500 Video-Metadatensätze**, **228 beendete oder laufende Streams**; keine gemeldeten API-Fehler.
+- Eine nach Kanälen ausgeglichene Stichprobe von **23 öffentlich verfügbaren Videotiteln** traf auf **2.148** eingelesene DemoRadar-Veranstaltungsdatensätze.
+- Nur **5** Titel hatten einen Ortsbezug zu importierten Veranstaltungsdaten, **0** erfüllten zusätzlich die Datumsprüfung. Es wurden **keine** ungeprüften Streams als bestätigte LIVE-Berichte ausgegeben.
+- Reale Videotitel zeigen u.a. Kurzdatumsformen `14.11.26`, an Ortsnamen angeklebte Daten, nachträgliche Videoausschnitte und die Worte `Gegendemo` oder `Naziaufmarsch`. Diese Schreibweisen sind nun in den konservativen Prüfkriterien berücksichtigt.
+- **Die Hauptgrenze ist die Abdeckung der Demo-Termine**, nicht die Video-API. Nicht vorhandene Termine werden weder erfunden noch aus einem Videotitel als amtliche Versammlung importiert.
