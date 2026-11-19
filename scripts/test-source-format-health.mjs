@@ -21,6 +21,13 @@ const stale=inspectFeedHealth(fresh,{...good,rostock:{...good.rostock,checked_on
 assert.deepEqual(stale.feeds[2].issues,["not_checked_today"]);
 const drop=inspectFeedHealth(fresh,{...good,berlin:{...good.berlin,count:30}},{today});
 assert.deepEqual(drop.feeds[0].issues,["large_count_drop"]);
+const persistent=inspectFeedHealth(drop,{...good,berlin:{...good.berlin,count:30}},{today});
+assert.deepEqual(persistent.feeds[0].issues,["large_count_drop"],"A second bad response cannot silently clear the count-drop warning");
+assert.equal(persistent.feeds[0].baseline_count,1250);
+const recovered=inspectFeedHealth(persistent,good,{today});
+assert.equal(recovered.feeds[0].issues.length,0);
+assert.equal(recovered.feeds[0].baseline_count,1250);
+
 assert.equal(drop.feeds[0].last_success.count,30,"A warning must not rewrite or refuse a genuinely validated import");
 assert.deepEqual(inspectFeedHealth(fresh,{...good,dresden:{...good.dresden,count:0}},{today}).feeds[1].issues,["unexpected_empty"]);
 assert.deepEqual(inspectFeedHealth(fresh,{...good,berlin:{status:"ok",checked_on:today,count:-1}},{today}).feeds[0].issues,["invalid_count"]);
@@ -28,4 +35,4 @@ assert.throws(()=>inspectFeedHealth({},good,{today:"2026-02-31"}),/Invalid inspe
 assert.equal(inspectFeedHealth(fresh,good,{today}).warning_count,0,"Recovered feeds clear active warnings");
 assert.equal(inspectFeedHealth({},good,{today}).feeds[1].last_success.count,44);
 assert.equal(inspectFeedHealth(fresh,good,{today}).feeds.every(f=>f.note.includes("No conclusion")),true);
-console.log("source-format-health: 20 integrity and failure-regression assertions passed");
+console.log("source-format-health: 24 integrity and failure-regression assertions passed");
