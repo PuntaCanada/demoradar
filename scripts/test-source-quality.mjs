@@ -52,4 +52,16 @@ const extra=sourceHealth({...files,policeDortmund:{status:"verified_one_off",cou
 assert.equal(extra.find(s=>s.source==="Polizei Dortmund").status,"verified_one_off");
 assert.equal(extra.find(s=>s.source==="Polizeipräsidium Frankfurt (Archiv)").status,"verified_historical_one_off");
 assert.equal(extra.find(s=>s.source==="Polizeipräsidium Frankfurt (Archiv)").count,2);
-console.log("source-quality: 28 explicit data-integrity assertions passed");
+const realCheck=sourceHealth({...files,nrwPolice:{sources:[
+ {city:"Bonn",status:"verified_one_off",count:1,checked_on:"2026-11-19"},
+ {city:"Münster",status:"verified_one_off",count:2,checked_on:"2026-11-13"}
+]},policeDortmund:{status:"verified_one_off",count:1,checked_on:"2026-11-19"},
+ policeFrankfurtArchive:{status:"verified_historical_notice",count:2,checked_on:"2026-11-18"}
+},{today:"2026-11-19"}).sources;
+const checked=source=>realCheck.find(s=>s.source===source);
+assert.equal(checked("Polizei Bonn").check_freshness,"recent");
+assert.equal(checked("Polizei Münster").check_freshness,"outdated_check");
+assert.equal(checked("Polizei Dortmund").last_checked,"2026-11-19");
+assert.equal(checked("Polizeipräsidium Frankfurt (Archiv)").check_freshness,"recent");
+assert.equal(checked("Polizeipräsidium Frankfurt (Archiv)").status,"verified_historical_one_off");
+console.log("source-quality: 33 explicit data-integrity assertions passed");
