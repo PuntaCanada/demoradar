@@ -63,12 +63,12 @@ try:
  previous={}
  try:previous=json.loads(STATUS.read_text(encoding="utf8"))
  except (OSError,ValueError):pass
- if previous!=status:STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2)+"\\n",encoding="utf8")
+ if previous!=status:STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
  print("Rostock:",len(events),"events; total:",len(combined))
 except Exception as e:
  status={"url":URL,"status":"unavailable","checked_on":TODAY.isoformat(),"error":str(e)[:150],"count":0,"coverage":"Rostock city only; previous verified events preserved"}
  previous={}
  try:previous=json.loads(STATUS.read_text(encoding="utf8"))
  except (OSError,ValueError):pass
- if previous!=status:STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2)+"\\n",encoding="utf8")
+ if previous!=status:STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
  print("Rostock import skipped; Berlin remains available:",repr(e))
