@@ -10,12 +10,15 @@ Stand: 19. November 2026. **Implementiert, aber mangels API-Credentials noch nic
 - Die sechs vom Nutzer genannten Streamer liegen als Kandidaten in `data/streamer-candidates.json`. Einige YouTube-Kanäle sind noch nicht eindeutig bestätigt.
 
 ## Technischer Aufbau
-- `scripts/update-streams.mjs` nutzt offiziell dokumentierte YouTube Data API und Twitch Helix API, ohne Fremdseiten zu scrapen.
-- GitHub Action `.github/workflows/stream-discovery.yml` prüft bei gesetzten Schlüsseln alle 15 Minuten. Ohne Schlüssel beendet sie sich ohne Datenänderung.
-- Matching: Stadt im Videotitel, mindestens zwei nichttriviale Themenwörter aus dem Veranstaltungstitel, Demo-Begriff im Videotitel, Datumsnähe maximal drei Tage. Es sind nur Vorschläge, keine bestätigten Event-Streams.
-- Letzte 7 und nächste 7 Tage aus `data/events.json` und `data/demos-events.json` bilden den Suchraum.
-- Geprüfte Streams in `data/live-streams.json` bleiben strikt getrennt; Vorschläge werden nicht automatisch als `reviewed=true` markiert.
-- Begrenzung der Ausgabe auf 100 Vorschläge, Verfallsdatum 14 Tage. Es werden nur geänderte Ergebnisse committet.
+- `scripts/update-streams.mjs` liest die letzten 50 Kanal-Uploads über `channels.list`, `playlistItems.list` und `videos.list`. Es nutzt keine kostspieligen `search.list`-Anfragen; drei API-Abfragen je YouTube-Kanal und Lauf.
+- Der GitHub-Workflow `.github/workflows/stream-discovery.yml` ist auf 15-Minuten-Takt eingerichtet. Die vorhandenen drei YouTube-Kanäle verbrauchen überschlägig 9 API-Einheiten pro Lauf; API-Quoten können sich ändern.
+- `scripts/stream-matcher.mjs` prüft Wortgrenzen beim Ortsnamen, Berliner Kalenderdatum statt ungeprüfter UTC-Tagesangabe, konkreten Demonstrationsbezug und mindestens zwei spezifische Themenbegriffe. Für kurze Titel sind ein Themenbegriff und ein namentlich genannter markanter Veranstaltungsort erforderlich.
+- Bei gleich guten Zuordnungen zu mehreren Demos wird **kein** automatischer Treffer angezeigt.
+- Livestreams müssen am Veranstaltungstag stattfinden. Aufzeichnungen können mit engem Zeitfenster später publiziert worden sein.
+- `scripts/test-stream-matcher.mjs` enthält 20 sicherheitsorientierte Fälle, etwa falscher Ort, falsches Datum, Gaming-Streams, Kurzthemen und mehrdeutige Doppelveranstaltungen. Die Tests laufen vor jeder API-Abfrage.
+- `data/stream-discoveries.json` enthält Kandidaten als `reviewed: false`, keine bestätigten Veranstaltungsstreams. Es bleibt strikt getrennt von `data/live-streams.json`.
+- Es werden maximal 20 YouTube-Kanäle und höchstens 100 mögliche Treffer verwaltet. Ein LIVE-Hinweis verfällt nach 15 Minuten.
+- Die Zahl geprüfter Kanäle, Videos, Streams und API-Fehler steht in der Ergebnisdatei.
 
 ## Einmalige kostenfreie Inbetriebnahme (ohne Schlüssel im Chat zu teilen)
 1. Google Cloud Console: YouTube Data API v3 in eigenem Projekt aktivieren, eingeschränkten API-Key für YouTube Data API erstellen und kostenlose Nutzungsquoten prüfen.
