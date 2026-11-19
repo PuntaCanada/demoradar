@@ -64,16 +64,16 @@ try{
  };
  await send("Page.enable");await send("Runtime.enable");
  const rootUrl="http://127.0.0.1:"+port;
- const stateCode='(()=>({language:document.documentElement.lang,cityCount:document.querySelector("#city")?.options.length||0,month:document.querySelector("#resultText")?.textContent||"",calendar:document.querySelector("#calendar")?.querySelectorAll(".day-events").length||0,width:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,bodyScrollWidth:document.body.scrollWidth,toolbar:document.querySelector(".toolbar")?.getBoundingClientRect().width,heading:document.querySelector("h1")?.textContent||"",floating:getComputedStyle(document.querySelector(".floating-calendar-link")).position}))()';
+ const stateCode='(()=>({language:document.documentElement.lang,cityCount:document.querySelector("#city")?.options.length||0,month:document.querySelector("#resultText")?.textContent||"",calendar:document.querySelector("#calendar")?.querySelectorAll(".day-events").length||0,width:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,bodyScrollWidth:document.body.scrollWidth,toolbar:document.querySelector(".toolbar")?.getBoundingClientRect().width,heading:document.querySelector("h1")?.textContent||"",mapStates:document.querySelectorAll("#heatmapSvg .heatmap-state").length,floating:getComputedStyle(document.querySelector(".floating-calendar-link")).position}))()';
  async function navigate(path,width){
   await send("Emulation.setDeviceMetricsOverride",{width,height:850,deviceScaleFactor:1,mobile:width<=430});
   await send("Page.navigate",{url:rootUrl+path});
   let state;
   for(let i=0;i<70;i++){
-   try{state=await evaluate(stateCode);if(state.cityCount>1&&state.calendar>0)break}catch{}
+   try{state=await evaluate(stateCode);if(state.cityCount>1&&state.calendar>0&&state.mapStates===16)break}catch{}
    await delay(140);
   }
-  assert.ok(state?.cityCount>1&&state.calendar>0,"Data/calendar did not render: "+path+" "+JSON.stringify(state));
+  assert.ok(state?.cityCount>1&&state.calendar>0&&state.mapStates===16,"Data/calendar did not render: "+path+" "+JSON.stringify(state));
   assert.equal(state.language,path.startsWith("/en/")?"en":"de","HTML route language");
   assert.equal(state.floating,"fixed","Floating calendar link remains visible");
   assert.ok(state.scrollWidth<=width+2&&state.bodyScrollWidth<=width+2,"Horizontal overflow at "+width+"px: "+JSON.stringify(state));
@@ -86,6 +86,8 @@ try{
   }
  }
  await navigate("/",375);
+ await evaluate('document.querySelector("#heatmapSvg [aria-label^=\\\"Sachsen:\\\"]").dispatchEvent(new MouseEvent("click",{bubbles:true}));true');
+ assert.equal(await evaluate('document.getElementById("region").value'),"Sachsen","Clickable state heatmap filters calendar");
  await evaluate('(()=>{const r=document.getElementById("region");r.value="Sachsen";r.dispatchEvent(new Event("change",{bubbles:true}));return true})()');
  const saxony=await evaluate('(()=>({options:[...document.getElementById("city").options].map(e=>e.value),label:document.getElementById("resultText").textContent}))()');
  assert.ok(saxony.options.includes("Dresden")&&!saxony.options.includes("Berlin"),"State/city filter must be linked");
