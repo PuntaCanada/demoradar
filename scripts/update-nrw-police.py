@@ -29,7 +29,7 @@ def parse(html,city):
  # Münster uses an abbreviated 20.11. in its original notice. The explicitly
  # dated 19 Nov 2026 publication provides the year, not an inferred event date.
  if city=="Bonn" and "20.11.2026" not in body:return []
- if city=="Münster" and not re.search(r"Freitag\\s*\\(20\\.11\\.\\)",body):return []
+ if city=="Münster" and not re.search(r"Freitag\s*\(20\.11\.\)",body):return []
  if "Polizei "+city not in body:return []
  def make(title,start,end,place):
   return {"id":"police-nrw-"+hashlib.sha256((SOURCES[city]+"|"+title).encode()).hexdigest()[:16],
