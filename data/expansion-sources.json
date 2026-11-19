@@ -52,8 +52,7 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "unavailable",
-      "error": "<urlopen error timed out>"
+      "status": "reachable_unverified_event_feed"
     }
   ]
 }
