@@ -111,6 +111,21 @@ Die drei verifizierten regelmäßig abrufbaren Feeds Berlin, Dresden und Rostock
 
 **Hinweis zu Rechten:** Öffentliche Sichtbarkeit der amtlichen Rohdaten ist nicht automatisch eine pauschale offene Nachnutzungslizenz. Das Projekt führt Quellenattribution und einzelne amtlich belegte Tatsachen; es bezeichnet keine der genannten Behörden-HTML-Seiten ohne ausdrücklichen Nachweis als vollständig offen lizenzierten Demonstrationsfeed.
 
+## Öffentliche Quellenstatus-Seite: alle 16 Bundesländer (19.11.2026)
+
+Neu: [deutsche Quellenübersicht](https://demoradar.pages.dev/sources/) und [englische Quellenübersicht](https://demoradar.pages.dev/en/sources/) mit eigenem SEO-Canonical und alternativen Sprachfassungen in der Sitemap. Von der Heatmap sind beide Seiten ohne zusätzliche Anmeldung erreichbar. Der Quellennachweis führt ausschließlich zu offiziellen Seiten oder den dokumentierten Originalmitteilungen. Suchen und Filtern funktionieren ohne Server und ohne kostenpflichtige Infrastruktur.
+
+Die clientseitige Quelle dieser Anzeige ist **nur** die bereits veröffentlichte, konservative Datenlage in `data/state-source-coverage.json`, `data/source-quality.json` und `data/source-format-health.json`. Die Seite trennt:
+
+- Bundeslandweit fehlenden regelmäßigen Feed (ein Bindestrich bei fehlenden gemeldeten Veranstaltungen ist **keine amtliche Nullmeldung**);
+- örtliche Behördenfeeds, ausgewählte Pressemitteilungen und historische Einzelbelege;
+- zuletzt nachweislich erfolgten Abruf, vorhandene Quellenfehler und vermutete Formatprobleme;
+- tatsächlich gelieferte Quelldatensätze – **keine** vermeintlich vollständige Zahl aktueller Demonstrationen.
+
+Das Ganze ist vollständig bilingual und enthält zugängliche Formulare, Quellverweise und Fehlerzustände. Die Quelldaten werden als Text gerendert, nicht als fremder HTML-Code. Die Browserchecks in `scripts/test-browser.mjs` prüfen beide Sprachrouten auf 320, 375 und 1280 Pixeln, alle 16 Bundesländer, die Suche, die Filter und fehlende horizontale Überläufe. `scripts/test-source-registry.mjs` überprüft außerdem Sitemap, Quellendaten, Sprachlinks und Quelltext-Sicherheit.
+
+**Recherche:** [Leipzigs Open-Data-Projekt „Rallymap“](https://opendata.leipzig.de/showcase/rallymap) beschreibt lediglich das Ziel offener Versammlungsdaten und verlinkt derzeit **keinen aktuellen offenen Datensatz**. Die GovData-Suche zu Versammlungen bietet ebenfalls keinen bestätigten neuen deutschlandweit wiederverwendbaren Demonstrationstermin-Feed. Eine zusätzliche Quelle wird daher **nicht** ungeprüft als laufender offizieller Feed importiert. Rechtlich geklärte Rechte zur Nachnutzung ganzer Feeds bleiben Voraussetzung für breitere Importe; die Sichtbarkeit einer Polizeimeldung allein ersetzt sie nicht.
+
 ## Qualitätssicherung
 
 - `scripts/test-police-notices.py`: offizielle Fakten und Datum werden mit Offline-Prüfungen validiert; fehlende Quellen und unbestätigte Orte erzeugen keine erfundenen Termine.
