@@ -128,6 +128,34 @@
       "evidence_url": "https://www.youtube.com/channel/UCteg8z4joUZTWTCw4QEzihQ",
       "verification": "public_youtube_channel_identified",
       "monitoring": "automatic_candidate_only"
+    },
+    {
+      "id": "schmidtkes-welt",
+      "name": "Schmidtkes Welt",
+      "platforms": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@SchmidtkesWelt",
+          "status": "verified_public_channel"
+        }
+      ],
+      "evidence_url": "https://www.youtube.com/channel/UCg8_GltYuSB8ZIwNmkb8G6g",
+      "verification": "public_youtube_channel_identified",
+      "monitoring": "automatic_candidate_only"
+    },
+    {
+      "id": "beobachter-live",
+      "name": "Beobachter Live",
+      "platforms": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@beobachterlive",
+          "status": "verified_public_channel"
+        }
+      ],
+      "evidence_url": "https://www.youtube.com/watch?v=-wcutuA2NzE",
+      "verification": "public_youtube_channel_identified",
+      "monitoring": "automatic_candidate_only"
     }
   ]
 }
