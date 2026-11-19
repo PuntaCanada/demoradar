@@ -11,8 +11,8 @@ assert.ok(home.includes('href="/community/"'),"Homepage should link to forum");
 assert.ok(de.includes('<html lang="de">')&&eng.includes('<html lang="en">'),"Forum bilingual");
 for(const route of ["/community/","/en/community/"])assert.ok(sitemap.includes("https://demoradar.pages.dev"+route),"Community in sitemap: "+route);
 for(const page of [de,eng]){
- for(const template of ["livestream.yml","organizer.yml","community-topic.yml"])assert.ok(page.includes("template="+template),"Community form reachable: "+template);
- assert.ok(page.includes("/issues/1"),"First discussion available");
+ for(const template of ["livestream.yml","organizer.yml"])assert.ok(page.includes("template="+template),"Community submission form reachable: "+template);
+ assert.ok(page.includes("https://demoradar.forumieren.de/"),"Forumieren forum linked");
 }
 assert.ok(Array.isArray(streams.streams)&&Array.isArray(contacts.contacts),"Reviewed-only lists exist");
 assert.ok(js.includes("trustedStreamUrl")&&js.includes("reviewedLinks"),"Strict public stream link filter");
