@@ -80,6 +80,37 @@ function reviewedLinks(event){
  ).slice(0,3);
  return {streams,contacts};
 }
+// Only reviewed links explicitly attached to a demonstration are shown as matches.
+// Live status expires after 15 minutes unless a fresh verified check is recorded.
+function eventStreams(event){
+ const now=Date.now();
+ return reviewedStreams.filter(item=>{
+  if(!item||item.event_id!==event.id||item.reviewed!==true)return false;
+  if(!item.evidence_url||!safeSourceUrl(item.evidence_url)||!trustedStreamUrl(item.url))return false;
+  const expiry=Date.parse(item.valid_until||"");
+  return Number.isFinite(expiry)&&expiry>now;
+ }).slice(0,5).map(item=>{
+  const main=trustedStreamUrl(item.url);
+  const playback=trustedStreamUrl(item.recording_url);
+  const checked=Date.parse(item.live_checked_at||"");
+  const isLive=item.live_status==="live"&&Number.isFinite(checked)&&checked<=now&&now-checked<15*60000;
+  const recording=Boolean(playback&&item.recording_reviewed===true);
+  return {...item,platform:main.platform,isLive,recording,playbackUrl:recording?playback.url:""};
+ });
+}
+function streamSearchUrl(event){
+ return "https://www.youtube.com/results?search_query="+encodeURIComponent([event.title,event.city,event.date,"Demo Livestream"].filter(Boolean).join(" ").slice(0,220));
+}
+function streamTeaser(event){
+ const german=locale().startsWith("de"),streams=eventStreams(event);
+ if(streams.length){
+  return '<div class="event-stream-teaser">'+streams.map(item=>{
+   const label=item.isLive?"🔴 LIVE · ":item.recording?(german?"▶ Aufzeichnung · ":"▶ Recording · "):(german?"🎥 Stream-Link · ":"🎥 Stream link · ");
+   return '<a href="'+esc(item.recording?item.playbackUrl:item.url)+'" target="_blank" rel="noopener noreferrer">'+esc(label+String(item.channel||item.label||item.platform))+'</a>';
+  }).join("")+'</div>';
+ }
+ return '<div class="event-stream-teaser"><a href="'+esc(streamSearchUrl(event))+'" target="_blank" rel="noopener noreferrer">'+esc(german?"🎥 Streams & Aufzeichnungen suchen":"🎥 Search streams & recordings")+'</a></div>';
+}
 function communityExtra(event){
  const {streams,contacts}=reviewedLinks(event);
  const eventLink=(window.location.origin||"https://demoradar.pages.dev")+(locale()==="de-DE"?"/":"/en/")+detailHref(event);
@@ -91,10 +122,12 @@ function communityExtra(event){
   [T("detail.searchTwitch"),"https://www.twitch.tv/search?term="+encodeURIComponent(searchPhrase)],
   [T("detail.searchTikTok"),"https://www.tiktok.com/search?q="+encodeURIComponent(searchPhrase)]
  ].map(([label,url])=>'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>').join("");
- const streamList=streams.map(s=>{
-  const u=trustedStreamUrl(s.url);
-  return u?'<li><a href="'+esc(u.url)+'" target="_blank" rel="noopener noreferrer">'+esc(u.platform)+': '+esc(s.label||s.channel||T("detail.streams"))+'</a></li>':"";
- }).filter(Boolean).join("");
+ const german=locale().startsWith("de");
+ const streamList=eventStreams(event).map(s=>{
+  const label=s.isLive?"🔴 LIVE":s.recording?(german?"▶ Aufzeichnung":"▶ Recording"):(german?"Stream-Link · Live-Status ungeprüft":"Stream link · Live status unverified");
+  const url=s.recording?s.playbackUrl:s.url;
+  return '<li><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label+" · "+String(s.channel||s.label||s.platform))+'</a></li>';
+ }).join("");
  const contactList=contacts.map(c=>'<li><a href="'+esc(safeSourceUrl(c.url))+'" target="_blank" rel="noopener noreferrer">'+esc(c.organizer)+'</a></li>').join("");
  return '<section class="detail-community-actions">'+
   '<h3>'+esc(T("detail.streams"))+'</h3>'+
@@ -116,7 +149,7 @@ function loadCommunityLinks(){
  ]).then(([streams,contacts])=>{
   reviewedStreams=Array.isArray(streams?.streams)?streams.streams:[];
   reviewedContacts=Array.isArray(contacts?.contacts)?contacts.contacts:[];
-  renderDetail();
+  renderDetail();render();renderFeatured();
  }).catch(()=>{});
 }
 const detailHref=e=>"?event="+encodeURIComponent(e.id)+"#eventDetail";
@@ -253,7 +286,7 @@ function renderFeatured(){
    const articles=Array.isArray(articleMatches[e.id])?articleMatches[e.id].slice(0,2):[];
    const links=articles.map(n=>'<a href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.candidateTitle"))+'" >'+esc(n.source)+": "+esc(n.title)+'</a>').join("");
    const meta=(x.id==="week"?esc(formatDate(e.date))+" · ":"")+esc(e.start||T("calendar.timeUnknown"))+(e.start?" ":"")+" · "+esc(e.city)+(e.location?" · "+esc(e.location):"")+(e.organizer?" · "+esc(e.organizer):"")+(e.registered_participants?" · "+esc(T("feature.registered"))+": "+esc(e.registered_participants):"");
-   return '<article class="featured-item topic-card topic-'+topicSlug(e.title)+'"><span class="featured-badge topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><h3><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(e.title)+'</a></h3>'+statusPills(e)+'<div class="featured-meta">'+meta+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(T("feature.source"))+'</a><a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.searchTitle"))+'" >'+esc(T("feature.newsSearch"))+'</a></div>'+(links?'<div class="featured-meta"><strong>'+esc(T("feature.candidate"))+'</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
+   return '<article class="featured-item topic-card topic-'+topicSlug(e.title)+'"><span class="featured-badge topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><h3><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(e.title)+'</a></h3>'+statusPills(e)+'<div class="featured-meta">'+meta+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(T("feature.source"))+'</a><a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.searchTitle"))+'" >'+esc(T("feature.newsSearch"))+'</a></div>'+streamTeaser(e)+(links?'<div class="featured-meta"><strong>'+esc(T("feature.candidate"))+'</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
   }).join("");
  }
 }
@@ -326,7 +359,7 @@ window.addEventListener?.("popstate",renderDetail);
 
 function card(e){
 const fields=[e.location,e.route?T("event.route")+": "+e.route:"",e.organizer?T("event.organizer")+": "+e.organizer:"",e.registered_participants?T("event.participants")+": "+e.registered_participants:""].filter(Boolean);
-return '<article class="event-list-card topic-card topic-'+topicSlug(e.title)+'"><div class="event-card-top"><span class="topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><span class="small">'+esc(formatDate(e.date))+" · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</span></div>"+statusPills(e)+"<strong>"+esc(e.title)+'</strong><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(T("detail.open"))+'</a><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||T("calendar.officialSource"))+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div></article>';
+return '<article class="event-list-card topic-card topic-'+topicSlug(e.title)+'"><div class="event-card-top"><span class="topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><span class="small">'+esc(formatDate(e.date))+" · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</span></div>"+statusPills(e)+"<strong>"+esc(e.title)+'</strong><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(T("detail.open"))+'</a><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||T("calendar.officialSource"))+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div>'+streamTeaser(e)+'</article>';
 }
 document.getElementById("calendar").addEventListener("click",ev=>{const btn=ev.target.closest("[data-date]");if(!btn)return;selectedDay=btn.dataset.date;toggle(true)});
 function toggle(l){listMode=l;if(!l)selectedDay=null;document.getElementById("calendarWrap").classList.toggle("hidden",l);document.getElementById("list").classList.toggle("visible",l);document.getElementById("calendarBtn").classList.toggle("active",!l);document.getElementById("listBtn").classList.toggle("active",l);render()}
