@@ -1,0 +1,51 @@
+name: DemoRadar Website und Cloudflare prüfen
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'index.html'
+      - 'en/index.html'
+      - 'i18n.js'
+      - 'live.js'
+      - 'scripts/test-frontend.mjs'
+      - 'scripts/test-i18n.mjs'
+      - 'scripts/build-language-pages.mjs'
+      - '.github/workflows/verify-site.yml'
+permissions:
+  contents: read
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prüfe DE und EN HTML, Übersetzungen, Kalender und Filter
+        run: |
+          node scripts/build-language-pages.mjs
+          node --check live.js
+          node --check i18n.js
+          node scripts/test-i18n.mjs
+          node scripts/test-frontend.mjs
+      - name: Prüfe Cloudflare-HTTP-Auslieferung unabhängig von GitHub
+        continue-on-error: true
+        run: |
+          set -eu
+          for route in / /en/ /sitemap.xml /data/events.json; do
+            url="https://demoradar.pages.dev$route"
+            code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
+            echo "$route -> HTTP $code"
+            if [ "$code" != "200" ]; then
+              echo "::warning::Cloudflare route $route returned HTTP $code"
+              exit 1
+            fi
+            case "$route" in
+              /en/) grep -q '<html lang="en">' /tmp/demoradar_response || (echo "::warning::Cloudflare English page not English" && exit 1) ;;
+              /) grep -q '<html lang="de">' /tmp/demoradar_response || (echo "::warning::Cloudflare German page not German" && exit 1) ;;
+              /sitemap.xml) grep -q 'demoradar.pages.dev/en/' /tmp/demoradar_response || (echo "::warning::English URL missing from live sitemap" && exit 1) ;;
+              /data/events.json) grep -q '"events"' /tmp/demoradar_response || (echo "::warning::Live events JSON missing" && exit 1) ;;
+            esac
+          done
+          echo "Cloudflare endpoints are reachable and include expected data."
