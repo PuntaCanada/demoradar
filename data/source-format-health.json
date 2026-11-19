@@ -12,6 +12,7 @@
         "count": 1361,
         "checked_on": "2026-11-19"
       },
+      "baseline_count": 1361,
       "observed_count": 1361,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
@@ -26,6 +27,7 @@
         "count": 42,
         "checked_on": "2026-11-19"
       },
+      "baseline_count": 42,
       "observed_count": 42,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
@@ -40,6 +42,7 @@
         "count": 8,
         "checked_on": "2026-11-19"
       },
+      "baseline_count": 8,
       "observed_count": 8,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
