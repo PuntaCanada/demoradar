@@ -18,7 +18,7 @@ const sourceLabel=state=>{
 const healthDetail=state=>{
  const entries=(sourceHealth?.sources||[]).filter(s=>s.state===state);
  if(!entries.length)return "";
- const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnavailable":"map.healthUnknown");
+ const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnavailable":"map.healthUnknown");
  return entries.map(s=>s.city+": "+label(s.status)+(s.check_freshness==="outdated_check"?" · "+T("map.checkOutdated"):s.check_freshness==="recent"?" · "+T("map.checkRecent"):"")).join(" · ");
 };
 const sourceDetails=state=>{
