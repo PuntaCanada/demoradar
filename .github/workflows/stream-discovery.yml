@@ -17,7 +17,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: demoradar-stream-discovery
+  group: demoradar-data-refresh
   cancel-in-progress: false
 jobs:
   discover:
