@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T17:15:49.956Z",
-  "count": 1352,
+  "updated_at": "2026-11-19T17:40:20.960Z",
+  "count": 1355,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -19,6 +19,36 @@
       "source": "Polizeidirektion Leipzig – amtliche Ankündigung vom 26. Oktober",
       "source_url": "https://www.polizei.sachsen.de/de/einsatz-zum-versammlungsgeschehen-am-31-oktober-in-leipzig-44215.html",
       "source_status": "Historische, von Polizei Leipzig dokumentierte Versammlung; nicht mehr bevorstehend"
+    },
+    {
+      "id": "police-frankfurt-archive-f2561a6477cb26e0",
+      "country": "DE",
+      "state": "Hessen",
+      "city": "Frankfurt am Main",
+      "date": "2026-11-14",
+      "start": "12:30",
+      "end": "15:00",
+      "title": "Gen Z regelt – Kundgebung an der Hauptwache",
+      "location": "Hauptwache",
+      "route": "",
+      "source": "Polizeipräsidium Frankfurt am Main – amtliche Originalmeldung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/4970/6390267",
+      "source_status": "Historische, ausdrücklich angekündigte Kundgebung; keine komplette Versammlungsliste"
+    },
+    {
+      "id": "police-frankfurt-archive-0c42a003dc462f14",
+      "country": "DE",
+      "state": "Hessen",
+      "city": "Frankfurt am Main",
+      "date": "2026-11-14",
+      "start": "16:00",
+      "end": "19:00",
+      "title": "Aufzug im Zusammenhang mit dem Irankonflikt",
+      "location": "Goetheplatz",
+      "route": "",
+      "source": "Polizeipräsidium Frankfurt am Main – amtliche Originalmeldung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/4970/6390267",
+      "source_status": "Historische, ausdrücklich angekündigte Kundgebung; keine komplette Versammlungsliste"
     },
     {
       "id": "dresden-8951a73b36d21bec",
@@ -366,6 +396,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "police-dortmund-5eec8dad0e7e223a",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Dortmund",
+      "date": "2026-11-20",
+      "start": "",
+      "end": "",
+      "title": "GenZ regelt",
+      "location": "Nördlicher Bereich des Dortmunder Hauptbahnhofs",
+      "route": "",
+      "source": "Polizei Dortmund – amtliche Pressemitteilung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/4971/6393424",
+      "source_status": "Versammlung angemeldet; Zeitpunkt nur nachmittags angegeben, Route nicht abschließend übernommen"
     },
     {
       "id": "police-nrw-00fb7ffd992b1f7d",
@@ -1273,6 +1318,26 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "rostock-cf0dcd0255d38c49",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-21",
+      "start": "10:00",
+      "end": "14:00",
+      "title": "Aufrechterhaltung der Straßenbahnlinie bis zur Endhaltestelle Neuer Friedhof",
+      "postal_code": "",
+      "location": "öffentliche Gehwegfläche im Bereich zwischen der Satower Straße und der Wendeschleife der Straßenbahn",
+      "route": "",
+      "kind": "Kundgebung",
+      "organizer": "",
+      "registered_participants": "ca. 10 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-176",
       "country": "DE",
       "state": "Berlin",
@@ -1431,26 +1496,6 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "rostock-374452886be53a60",
-      "country": "DE",
-      "state": "Mecklenburg-Vorpommern",
-      "city": "Rostock",
-      "date": "2026-11-21",
-      "start": "12:00",
-      "end": "16:00",
-      "title": "Trans Day of Remembrance 2026",
-      "postal_code": "",
-      "location": "öffentliche Gehwegfläche Ecke Am Strom / Kirchenstraße / Bahnhofsbrücke vor dem Gebäude Hausnummer 59",
-      "route": "",
-      "kind": "Kundegbung",
-      "organizer": "",
-      "registered_participants": "ca. 3 Personen",
-      "event_status": "beschieden",
-      "source": "Hanse- und Universitätsstadt Rostock",
-      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
-      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-206",
@@ -21843,6 +21888,16 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Polizei Berlin",
+      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
+    },
+    {
+      "name": "Stadt Rostock",
+      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }

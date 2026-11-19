@@ -1,7 +1,7 @@
 {
   "version": 1,
   "scope": "non-actionable warnings only; no events are generated or removed",
-  "checked_sources": 11,
+  "checked_sources": 13,
   "alerts": [
     {
       "city": "Frankfurt am Main",

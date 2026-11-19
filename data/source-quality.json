@@ -73,6 +73,26 @@
       "check_freshness": "unknown"
     },
     {
+      "city": "Dortmund",
+      "state": "Nordrhein-Westfalen",
+      "source": "Polizei Dortmund",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "Single dated police assembly announcement, not a rolling register",
+      "last_checked": null,
+      "check_freshness": "unknown"
+    },
+    {
+      "city": "Frankfurt am Main",
+      "state": "Hessen",
+      "source": "Polizeipräsidium Frankfurt (Archiv)",
+      "status": "verified_historical_one_off",
+      "count": 2,
+      "scope": "Two individually evidenced historical assembly records, not an ongoing feed",
+      "last_checked": null,
+      "check_freshness": "unknown"
+    },
+    {
       "city": "Leipzig",
       "state": "Sachsen",
       "source": "Polizeidirektion Leipzig",
