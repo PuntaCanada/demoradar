@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize} from "./stream-matcher.mjs";
+import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize,ambiguousOrInvalidTitleDates} from "./stream-matcher.mjs";
 const date="2026-11-19",iso="2026-11-19T12:00:00Z";
 const events=[
  {id:"berlin-climate",city:"Berlin",date,title:"Kundgebung Klimaschutz und Energiewende"},
@@ -45,4 +45,9 @@ assert.equal(matchEvents(lateVideo,late).length,1,"late excerpt matched using ex
 assert.equal(matchEvents({...lateVideo,title:"Naziaufmarsch Antifa Gegendemo Köln13.11.26"},late).length,0,"wrong explicit date rejected");
 assert.equal(matchEvents({...lateVideo,published_at:"2027-01-19T10:00:00Z",date:"2027-01-19T10:00:00Z"},late).length,0,"late uploads beyond thirty days rejected");
 assert.equal(matchEvents({...lateVideo,title:"Nur Antifa Gegendemo Köln14.11.26"},late).length,0,"generic demo term and city do not count twice");
-console.log("stream-matcher: 33 safety checks passed");
+assert.equal(ambiguousOrInvalidTitleDates("Demo Berlin 19.11.2026 und 20.11.2026"),true,"multi-day compilation not a unique match");
+assert.equal(ambiguousOrInvalidTitleDates("Demo Berlin 31.02.2026"),true,"impossible explicit day");
+assert.equal(ambiguousOrInvalidTitleDates("Demo Berlin 19.11.2026"),false);
+assert.equal(find("Demo Berlin Klimaschutz Energiewende 31.02.2026",iso).length,0,"invalid title date must not fall through");
+assert.equal(find("Demo Berlin Klimaschutz Energiewende 19.11.2026 und 20.11.2026",iso).length,0,"multiple dates must not imply one event");
+console.log("stream-matcher: 38 safety checks passed");
