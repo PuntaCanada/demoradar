@@ -8,7 +8,6 @@ const read=path=>{try{return JSON.parse(readFileSync(path,"utf8"))}catch{return 
 const channels=read("data/streamer-candidates.json").channels||[];
 const events=[...(read("data/events.json").events||[]),...(read("data/demos-events.json").events||[])];
 const now=new Date();
-const now=new Date();
 // YouTube search.list costs 100 quota units per request. Check YouTube every 2h
 // (3 listed YouTube channels => ~3,600 search units/day, below default 10,000).
 // Twitch remains on the 15-minute schedule when configured.
