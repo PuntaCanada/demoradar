@@ -19,6 +19,9 @@ for(const [path,lang] of [["sources/index.html","de"],["en/sources/index.html","
  assert.ok(html.includes('aria-live="polite"'));
  assert.ok(html.includes('hreflang="'+(lang==="en"?"de":"en")+'"'));
 }
+const sitemap=readFileSync("sitemap.xml","utf8");
+for(const route of ["/sources/","/en/sources/"])assert.ok(sitemap.includes("https://demoradar.pages.dev"+route));
+assert.ok(!sitemap.includes(String.raw`\\n`),"Sitemap must contain real XML newlines, never a literal escaped backslash-n");
 const script=readFileSync("sources/source-status.js","utf8");
 assert.ok(script.includes('textContent=txt'),"All source descriptions must be plain text, never HTML");
 assert.ok(!script.includes(".innerHTML"),"Never inject untrusted source names as HTML");
