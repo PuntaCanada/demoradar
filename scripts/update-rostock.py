@@ -1,8 +1,10 @@
-import json,re,hashlib,urllib.request
+import json,re,hashlib,urllib.request,datetime as dt
 from pathlib import Path
 from html.parser import HTMLParser
 URL="https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
 FILE=Path("data/events.json")
+STATUS=Path("data/rostock-source.json")
+TODAY=dt.date.today()
 class Text(HTMLParser):
  def __init__(self): super().__init__();self.parts=[];self.skip=0
  def handle_starttag(self,t,a):
@@ -37,6 +39,10 @@ try:
    m=re.search(re.escape(name)+r":\s*([^\n]+)",tail,re.I)
    return clean(m.group(1)) if m else ""
   date=f"{match.group(3)}-{match.group(2)}-{match.group(1)}"
+  try:
+   day=dt.date.fromisoformat(date)
+  except ValueError:continue
+  if day<TODAY-dt.timedelta(days=30) or day>TODAY+dt.timedelta(days=550):continue
   route=field("Beschiedener Streckenverlauf") or field("Beantragter Streckenverlauf")
   kind=field("Versammlungsart")
   place=route if kind.lower() not in ("aufzug","demonstrationszug") else ""
@@ -53,6 +59,16 @@ try:
   data["events"]=combined;data["count"]=len(combined)
   data["sources"]=[{"name":"Polizei Berlin","url":"https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"},{"name":"Stadt Rostock","url":URL}]
   FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n")
+ status={"url":URL,"status":"ok","count":len(events),"checked_on":TODAY.isoformat(),"coverage":"Rostock municipal public list only; not Mecklenburg-Vorpommern"}
+ previous={}
+ try:previous=json.loads(STATUS.read_text(encoding="utf8"))
+ except (OSError,ValueError):pass
+ if previous!=status:STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2)+"\\n",encoding="utf8")
  print("Rostock:",len(events),"events; total:",len(combined))
 except Exception as e:
+ status={"url":URL,"status":"unavailable","checked_on":TODAY.isoformat(),"error":str(e)[:150],"count":0,"coverage":"Rostock city only; previous verified events preserved"}
+ previous={}
+ try:previous=json.loads(STATUS.read_text(encoding="utf8"))
+ except (OSError,ValueError):pass
+ if previous!=status:STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2)+"\\n",encoding="utf8")
  print("Rostock import skipped; Berlin remains available:",repr(e))
