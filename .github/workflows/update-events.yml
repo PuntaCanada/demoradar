@@ -111,7 +111,7 @@ jobs:
               if git push; then break; fi
               echo "Push raced with a repository update; rebasing on latest main (attempt $attempt)"
               git fetch origin main
-              git rebase origin/main || { git rebase --abort; exit 1; }
+              git rebase origin/main || { git rebase --abort; echo "::warning::Newer repository data changed at the same time; this run will not overwrite it. Next scheduled run rebuilds from fresh sources."; exit 0; }
               if [ "$attempt" = 3 ]; then git push; fi
             done
           else
