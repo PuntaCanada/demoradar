@@ -37,6 +37,7 @@ function buildEnglish(){
  html=html.replace("Live-Daten werden vorbereitet","Loading live event data");
  html=html.replace("Noch keine verifizierten Termine","No verified events yet");
  html=html.replace("Die Filter sind vorbereitet. Nach Anbindung geprüfter Quellen erscheinen hier automatisch Veranstaltungen mit Quellen- und Aktualisierungsangaben.","Events from checked sources will appear here with attribution and update details.");
+ html=html.replace(/href="\/community\/"/g,'href="/en/community/"');
  html=html.replace('data-language="de" aria-pressed="true"','data-language="de" aria-pressed="false"').replace('data-language="en" aria-pressed="false"','data-language="en" aria-pressed="true"');
  return html;
 }
@@ -45,6 +46,7 @@ if(de!==original)writeFileSync("index.html",de);
 mkdirSync("en",{recursive:true});
 writeFileSync("en/index.html",buildEnglish());
 const alternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/"/>';
-writeFileSync("sitemap.xml",'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>'+origin+'/</loc>'+alternate+'</url>\n<url><loc>'+origin+'/en/</loc>'+alternate+'</url>\n</urlset>\n');
+const communityAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/community/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/community/"/>';
+writeFileSync("sitemap.xml",'<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n<url><loc>'+origin+'/</loc>'+alternate+'</url>\\n<url><loc>'+origin+'/en/</loc>'+alternate+'</url>\\n<url><loc>'+origin+'/community/</loc>'+communityAlternate+'</url>\\n<url><loc>'+origin+'/en/community/</loc>'+communityAlternate+'</url>\\n</urlset>\\n'.replace(/\\\\n/g,'\\n'));
 writeFileSync("robots.txt","User-agent: *\nAllow: /\nSitemap: "+origin+"/sitemap.xml\n");
 console.log("Built German and English indexable routes and multilingual sitemap");
