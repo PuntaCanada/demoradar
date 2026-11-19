@@ -112,18 +112,27 @@ function provisionalEventStreams(event){
   return s.status==="recording"||s.status==="live"&&now-when<15*60000;
  }).slice(0,3);
 }
+function streamStateLabel(s,german){
+ if(s.isLive)return "🔴 LIVE";
+ if(s.recording)return german?"▶ Aufzeichnung (geprüft)":"▶ Recording (reviewed)";
+ return german?"🎥 Stream-Link (geprüft)":"🎥 Stream link (reviewed)";
+}
+function candidateStateLabel(s,german){
+ if(s.status==="live")return german?"🔴 Stream läuft · Demo-Bezug ungeprüft":"🔴 Stream live · event match unverified";
+ return german?"▶ Mögliche Aufzeichnung · ungeprüft":"▶ Possible recording · unverified";
+}
 function streamTeaser(event){
  const german=locale().startsWith("de"),streams=eventStreams(event);
  if(streams.length){
   return '<div class="event-stream-teaser">'+streams.map(item=>{
-   const label=item.isLive?"🔴 LIVE · ":item.recording?(german?"▶ Aufzeichnung · ":"▶ Recording · "):(german?"🎥 Stream-Link · ":"🎥 Stream link · ");
+   const label=streamStateLabel(item,german)+" · ";
    return '<a href="'+esc(item.recording?item.playbackUrl:item.url)+'" target="_blank" rel="noopener noreferrer">'+esc(label+String(item.channel||item.label||item.platform))+'</a>';
   }).join("")+'</div>';
  }
  const twitch="https://www.twitch.tv/search?term="+encodeURIComponent([event.title,event.city,event.date].filter(Boolean).join(" ").slice(0,180));
  const provisional=provisionalEventStreams(event);
  const possible=provisional.length?'<div class="event-stream-teaser tentative">'+provisional.map(s=>{
-  const status=s.status==="live"?(german?"🔴 Möglicher LIVE-Bezug":"🔴 Possible LIVE match"):(german?"▶ Mögliche Aufzeichnung":"▶ Possible recording");
+  const status=candidateStateLabel(s,german);
   return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer" title="'+esc(german?"Automatischer, noch ungeprüfter Veranstaltungsbezug":"Automatically matched; event association not confirmed")+'">'+esc(status+" · "+String(s.channel||s.platform))+'</a>';
  }).join("")+'</div>':"";
  return possible+'<div class="event-stream-teaser"><a href="'+esc(streamSearchUrl(event))+'" target="_blank" rel="noopener noreferrer">'+esc(german?"🎥 YouTube-Streams / Aufzeichnungen suchen":"🎥 Search YouTube streams / replays")+'</a><a href="'+esc(twitch)+'" target="_blank" rel="noopener noreferrer">'+esc(german?"Twitch durchsuchen":"Search Twitch")+'</a></div>';
@@ -141,15 +150,15 @@ function communityExtra(event){
  ].map(([label,url])=>'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>').join("");
  const german=locale().startsWith("de");
  const streamList=eventStreams(event).map(s=>{
-  const label=s.isLive?"🔴 LIVE":s.recording?(german?"▶ Aufzeichnung":"▶ Recording"):(german?"Stream-Link · Live-Status ungeprüft":"Stream link · Live status unverified");
+  const label=streamStateLabel(s,german);
   const url=s.recording?s.playbackUrl:s.url;
   return '<li><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label+" · "+String(s.channel||s.label||s.platform))+'</a></li>';
  }).join("");
- const possible=provisionalEventStreams(event).map(s=>'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc((s.status==="live"?"🔴 ":"▶ ")+(german?"Möglicher Treffer (ungeprüft)":"Possible match (unverified)")+" · "+String(s.channel||s.platform))+'</a></li>').join("");
+ const possible=provisionalEventStreams(event).map(s=>'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(candidateStateLabel(s,german)+" · "+String(s.channel||s.platform))+'</a></li>').join("");
  const contactList=contacts.map(c=>'<li><a href="'+esc(safeSourceUrl(c.url))+'" target="_blank" rel="noopener noreferrer">'+esc(c.organizer)+'</a></li>').join("");
  return '<section class="detail-community-actions">'+
   '<h3>'+esc(T("detail.streams"))+'</h3>'+
-  (streamList?'<ul>'+streamList+'</ul>':possible?'<p>'+esc(german?"Automatisch gefundene, noch ungeprüfte mögliche Treffer:":"Automatically discovered, unverified possible matches:")+'</p><ul>'+possible+'</ul>':'<p>'+esc(T("detail.streamEmpty"))+'</p>')+
+  (streamList?'<p class="small">'+esc(german?"Redaktionell geprüfte Zuordnung zur Veranstaltung":"Event association reviewed")+'</p><ul>'+streamList+'</ul>':possible?'<p class="small">'+esc(german?"Automatisch gefundene Vorschläge: Bitte Veranstaltungsbezug selbst prüfen.":"Automated suggestions: Please verify event association yourself.")+'</p><ul>'+possible+'</ul>':'<p>'+esc(T("detail.streamEmpty"))+'</p>')+
   '<p>'+esc(T("detail.streamNotice"))+'</p>'+
   '<a href="'+esc(suggestionLink("livestream.yml"))+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.streamSuggest"))+'</a>'+
   '<p><strong>'+esc(T("detail.streamSearch"))+'</strong></p>'+searching+'<p>'+esc(T("detail.searchDisclaimer"))+'</p>'+
