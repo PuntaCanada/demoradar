@@ -64,6 +64,23 @@ Die Heatmap kombiniert weiterhin die bewusst zurückhaltende Länderabdeckung au
 
 Die YouTube-Zuordnung hat neue Tests für Videos mit widersprüchlichen Datumsangaben oder unmöglichen Kalendertagen. Solche Videos werden nicht automatisch einer bestimmten Veranstaltung zugeordnet; selbst erfolgreiche Vorschläge bleiben `reviewed:false`.
 
+## Aktualisierung vom 19. November 2026: Dortmund und Frankfurt
+
+Neu und auf den jeweiligen Originalbeleg beschränkt:
+
+- **Dortmund, 20.11.2026, GenZ regelt:** [amtliche Originalmeldung vom 18.11.](https://www.presseportal.de/blaulicht/pm/4971/6393424). Angezeigter Start im nördlichen Bereich des Dortmunder Hauptbahnhofs, als Endpunkt Friedensplatz genannt. **Keine exakte Startzeit und keine abschließende Aufzugsroute** aus dieser Quelle belegt. `scripts/update-dortmund-police.py` erstellt höchstens einen Termin, sobald der Originaltext den Datums-/Themen-/Ortscheck erfüllt.
+- **Frankfurt am Main, 14.11.2026:** [Originalmeldung des Polizeipräsidiums vom 13.11.](https://www.presseportal.de/blaulicht/pm/4970/6390267). Zwei einzelne historisch belegte Fälle: `Gen Z regelt` an der Hauptwache, 12:30–15:00 Uhr, sowie Aufzug zum Irankonflikt ab Goetheplatz, 16:00–19:00 Uhr. Eine zusätzlich erwähnte Kundgebung an der Bockenheimer Warte wird mangels eindeutig bezeichnetem Thema **nicht** eigenständig importiert. `scripts/import-frankfurt-police-archive.py` hält diese Einträge ausschließlich im Archivzeitfenster vor.
+
+Beide Einzelfall-Importer verwenden überprüfte Verlagsseiten amtlicher Polizeimitteilungen zur Entnahme kurzer Tatsachenfelder (Datum, Thema, bekannte Uhrzeit/Ortsangabe, Quellenverweis). Es erfolgt **kein** Kopieren fremder Artikelfassungen oder Bilder und keine Behauptung, die Behördenmitteilungen seien vollumfängliche oder allgemein freigegebene maschinenlesbare Kalender.
+
+Die Datenbestandszählung im festen Zeitfenster 20.10.–26.11.2026 ist nach dem Stream-Abgleich vom 19.11. bei **441 eindeutigen Datensätzen** angelangt. Das enthält historische Einträge und ist keine amtliche Bundesstatistik und keine Zahl aktueller/live laufender Demos. In diesem Zeitraum wurden 1 Dortmund- und 2 Frankfurt-Archiv-Einträge neu aufgenommen. Hamburg und Düsseldorf bleiben in der Stichprobe ohne verifizierten eigenen Eintrag; das besagt ausdrücklich **nichts über tatsächlich stattfindende Versammlungen**.
+
+Quellenfrische:
+- `scripts/audit-source-quality.mjs` wertet für neue Polizeiquellen das `checked_on`-Feld aus, das nur bei einem tatsächlichen geplanten Abruf erzeugt wird. Vergleich `recent`/ `outdated_check`/ `unknown` ist kein Beleg einer aktuellen Veranstaltungsanmeldung.
+- Die Heatmap zeigt für betroffene Quellen das Datum und hebt nicht erreichbare bzw. überalterte Prüfungen in Warnfarbe hervor; fehlender Status bleibt neutral.
+- `scripts/test-dortmund-police.py`, `scripts/test-frankfurt-police-archive.py` und `scripts/test-source-quality.mjs` schützen gegen Datums-/Ortsvermutungen und falsche Vollständigkeitsbehauptungen.
+- Streamer-Links werden vor jeder YouTube/Twitch-Abfrage gegen explizit zulässige HTTPS-Domains und Handles geprüft; Video-Event-Matches bleiben **Vorschläge**, nicht automatisch redaktionell bestätigte LIVE-Links.
+
 ## Qualitätssicherung
 
 - `scripts/test-police-notices.py`: offizielle Fakten und Datum werden mit Offline-Prüfungen validiert; fehlende Quellen und unbestätigte Orte erzeugen keine erfundenen Termine.
