@@ -2,7 +2,7 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T18:04:04.766Z",
+  "updated_at": "2026-11-19T18:05:29.124Z",
   "count": 1355,
   "events": [
     {
@@ -1025,7 +1025,7 @@
       "location": "öffentliche Gehweg-Fläche im Bereich Neuer Markt 1a",
       "route": "",
       "kind": "Kundgebung",
-      "organizer": "Landesschülerrat M-V",
+      "organizer": "",
       "registered_participants": "ca. 500 Personen",
       "event_status": "beschieden",
       "source": "Hanse- und Universitätsstadt Rostock",
@@ -21888,6 +21888,16 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Polizei Berlin",
+      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
+    },
+    {
+      "name": "Stadt Rostock",
+      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }
