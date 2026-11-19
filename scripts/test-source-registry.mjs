@@ -1,0 +1,31 @@
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+const states=JSON.parse(readFileSync("data/state-source-coverage.json","utf8")).states;
+const report=JSON.parse(readFileSync("data/source-quality.json","utf8"));
+const formats=JSON.parse(readFileSync("data/source-format-health.json","utf8"));
+assert.equal(states.length,16);
+assert.equal(new Set(states.map(x=>x.state)).size,16);
+assert.ok(report.sources.every(s=>states.some(x=>x.state===s.state)));
+assert.ok(formats.feeds.every(f=>report.sources.some(s=>s.city===f.city)));
+for(const [path,lang] of [["sources/index.html","de"],["en/sources/index.html","en"]]){
+ const html=readFileSync(path,"utf8");
+ assert.ok(html.includes('<html lang="'+lang+'">'));
+ assert.ok(html.includes('id="stateGrid"'));
+ assert.ok(html.includes('id="sourceSearch"'));
+ assert.ok(html.includes('id="sourceFilter"'));
+ assert.ok(html.includes('rel="canonical" href="https://demoradar.pages.dev/'+(lang==="en"?"en/":"")+'sources/"'));
+ assert.ok(html.includes('href="/sources/source-status.css"'));
+ assert.ok(html.includes('src="/sources/source-status.js"'));
+ assert.ok(html.includes('aria-live="polite"'));
+ assert.ok(html.includes('hreflang="'+(lang==="en"?"de":"en")+'"'));
+}
+const script=readFileSync("sources/source-status.js","utf8");
+assert.ok(script.includes('textContent=txt'),"All source descriptions must be plain text, never HTML");
+assert.ok(!script.includes(".innerHTML"),"Never inject untrusted source names as HTML");
+assert.ok(script.includes('rel="noopener noreferrer"')||script.includes('link.rel="noopener noreferrer"'));
+assert.ok(script.includes('Promise.all('));
+assert.ok(script.includes('data/source-format-health.json'));
+const de=readFileSync("index.html","utf8"),en=readFileSync("en/index.html","utf8");
+assert.ok(de.includes('href="/sources/"'));
+assert.ok(en.includes('href="/en/sources/"'));
+console.log("source registry: all 16 states, locale navigation, provenance and XSS checks passed");
