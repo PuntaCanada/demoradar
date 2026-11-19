@@ -1,5 +1,17 @@
 {
-  "version": 1,
-  "policy": "Human-reviewed public event-matched stream links only. Presence is not proof the broadcaster is currently live. No third-party embed or automatic API search.",
+  "version": 2,
+  "policy": "Only links verified against an exact event_id and public supporting evidence may appear below an event. A channel being online is not proof it is streaming that demonstration. A LIVE badge requires live_status=live and live_checked_at less than 15 minutes old. Recording links require recording_reviewed=true. No unverified autoplay/embeds.",
+  "fields": {
+    "event_id": "Exact ID from /data/events.json or /data/demos-events.json",
+    "url": "Public stream or channel URL on YouTube/Twitch/TikTok/Instagram",
+    "channel": "Public streamer name",
+    "reviewed": "Must be true after source/date/location verified",
+    "evidence_url": "Public evidence showing connection with this specific demonstration",
+    "valid_until": "ISO time through which link may be displayed; can cover archival playback",
+    "live_status": "Optional 'live'; never set from a channel's general streaming status alone",
+    "live_checked_at": "ISO last verification time; LIVE expires after 15 minutes",
+    "recording_url": "Optional permanent recording URL",
+    "recording_reviewed": "Must be true before showing the link as an archive"
+  },
   "streams": []
 }
