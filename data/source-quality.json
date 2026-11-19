@@ -53,6 +53,26 @@
       "check_freshness": "recent"
     },
     {
+      "city": "Bonn",
+      "state": "Nordrhein-Westfalen",
+      "source": "Polizei Bonn",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "One specific police press announcement, not a regularly updated assembly feed",
+      "last_checked": null,
+      "check_freshness": "unknown"
+    },
+    {
+      "city": "Münster",
+      "state": "Nordrhein-Westfalen",
+      "source": "Polizei Münster",
+      "status": "no_matching_items",
+      "count": 0,
+      "scope": "One specific police press announcement, not a regularly updated assembly feed",
+      "last_checked": null,
+      "check_freshness": "unknown"
+    },
+    {
       "city": "Leipzig",
       "state": "Sachsen",
       "source": "Polizeidirektion Leipzig",
