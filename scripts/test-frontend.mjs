@@ -72,6 +72,11 @@ for(const path of ["/","/en/"]){
  assert.ok(el("calendar").innerHTML.includes("data-date="),"Calendar populated with real events");
  assert.equal(el("city").options.length,4,"Three cities plus All cities after dedupe");
  assert.equal(el("todayCount").textContent,en?"3 listings":"3 Meldungen","Official duplicate is suppressed");
+ assert.ok(el("todayItems").innerHTML.includes('topic-badge topic-peace'),"Featured peace label is visible");
+ assert.ok(el("todayItems").innerHTML.includes('topic-badge topic-democracy'),"Featured democracy label is visible");
+ assert.ok(el("list").innerHTML.includes('topic-badge topic-peace'),"Calendar list displays a category label");
+ assert.ok(el("list").innerHTML.includes('topic-badge topic-democracy'),"Calendar list uses distinct category styling");
+ assert.ok(el("todayItems").innerHTML.includes(en?"Peace &amp; war":"Frieden &amp; Krieg"),"Topic labels are translated");
  assert.ok(el("notice").innerHTML.includes("Demos Berlin"),"Community provenance displayed: "+path+" "+el("notice").innerHTML);
  el("region").value="Sachsen";el("region").fire("change");
  assert.equal(el("city").options.length,2,"State filter limits city choices");
@@ -98,4 +103,8 @@ assert.ok(html.includes('name="viewport"'));
 assert.ok(english.includes('name="viewport"'));
 assert.ok(html.includes("max-width:440px")&&html.includes(".quick-links")&&html.includes("floating-calendar-link"));
 assert.ok(html.includes("grid-template-columns:repeat(2,minmax(0,1fr))"),"Mobile two-column navigation");
+for(const category of ["climate","peace","social","migration","democracy","other"]){
+ assert.ok(html.includes(".topic-"+category+"{"),"Each topic has a distinct CSS palette: "+category);
+}
+assert.ok(html.includes("font-size:14px"),"Category labels have enlarged text");
 console.log("DE and EN: calendar, cities/states, text filters, highlights, dates, dedupe, language routes, data errors, mobile CSS smoke tests passed.");
