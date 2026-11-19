@@ -2,7 +2,7 @@
 // DemoRadar: optional YouTube/Twitch discovery. Uses official APIs, no scraping.
 // Deliberately creates a review queue, NOT publicly approved event streams.
 import {readFileSync,writeFileSync} from "node:fs";
-import {matchEvents} from "./stream-matcher.mjs";
+import {matchEvents,platformAccount} from "./stream-matcher.mjs";
 const OUT="data/stream-discoveries.json";
 const api={youtube:process.env.YOUTUBE_API_KEY||"",twitchId:process.env.TWITCH_CLIENT_ID||"",twitchSecret:process.env.TWITCH_CLIENT_SECRET||""};
 const read=path=>{try{return JSON.parse(readFileSync(path,"utf8"))}catch{return {}}};
@@ -50,7 +50,7 @@ const discoveryStats={youtube_channels_checked:0,youtube_videos_checked:0,youtub
 async function youtube(){
  if(!api.youtube)return;
  const accounts=channels.flatMap(c=>(c.platforms||[]).filter(p=>p.platform==="youtube")
-   .map(p=>({name:c.name,handle:new URL(p.url).pathname.split("/").filter(Boolean)[0]})));
+   .map(p=>({name:c.name,handle:platformAccount(p.url,"youtube")})));
  const uniqueHandles=[...new Map(accounts.filter(x=>x.handle?.startsWith("@")).map(x=>[x.handle.toLowerCase(),x])).values()].slice(0,20);
  for(const entry of uniqueHandles){
   try{
@@ -82,7 +82,7 @@ async function youtube(){
 }
 async function twitch(){
  if(!api.twitchId||!api.twitchSecret)return;
- const accounts=channels.flatMap(c=>(c.platforms||[]).filter(p=>p.platform==="twitch").map(p=>({name:c.name,login:new URL(p.url).pathname.split("/").filter(Boolean)[0]}))).filter(x=>x.login);
+ const accounts=channels.flatMap(c=>(c.platforms||[]).filter(p=>p.platform==="twitch").map(p=>({name:c.name,login:platformAccount(p.url,"twitch")}))).filter(x=>x.login);
  if(!accounts.length)return;
  try{
   const token=await json("https://id.twitch.tv/oauth2/token",{method:"POST",headers:{"content-type":"application/x-www-form-urlencoded"},body:new URLSearchParams({client_id:api.twitchId,client_secret:api.twitchSecret,grant_type:"client_credentials"})});
