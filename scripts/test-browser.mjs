@@ -92,6 +92,25 @@ try{
  await evaluate('document.querySelector("[data-language=en]").click();true');
  for(let i=0;i<50;i++){if(await evaluate("location.pathname")==="/en/")break;await delay(100)}
  assert.equal(await evaluate("location.pathname"),"/en/","DE/EN switch navigates to /en/");
+ const sample=JSON.parse(readFileSync("data/events.json","utf8")).events[0];
+ assert.ok(sample?.id,"Fixture needs an event ID");
+ const query="?event="+encodeURIComponent(sample.id)+"#eventDetail";
+ await navigate("/"+query,375);
+ let details;
+ for(let i=0;i<50;i++){
+  details=await evaluate('(()=>({visible:!document.getElementById("eventDetail").hidden,title:document.getElementById("eventDetailTitle")?.textContent||"",copy:!!document.getElementById("eventShare"),source:!!document.querySelector("#eventDetailContent a[target=_blank]")}))()');
+  if(details.visible&&details.title===sample.title)break;
+  await delay(110);
+ }
+ assert.ok(details.visible&&details.title===sample.title,"Direct event link shows title and overlay: "+JSON.stringify(details));
+ assert.ok(details.copy&&details.source,"Details expose sharing and original source");
+ await evaluate('document.querySelector("[data-language=en]").click();true');
+ for(let i=0;i<50;i++){if(await evaluate("location.pathname")==="/en/")break;await delay(100)}
+ assert.ok((await evaluate("location.search")).includes(encodeURIComponent(sample.id)),"Language switch preserves shared event ID");
+ assert.ok(await evaluate('!document.getElementById("eventDetail").hidden'),"English event detail can be opened from shared link");
+ await evaluate('document.getElementById("eventDetailClose").click();true');
+ assert.equal(await evaluate('document.getElementById("eventDetail").hidden'),true,"Detail close button hides overlay");
+ assert.ok(!(await evaluate("location.search")).includes("event="),"Closing event detail removes query parameter");
  assert.equal(exceptions.length,0,"Browser runtime exceptions: "+exceptions.join(" | "));
  console.log("Chromium mobile/desktop, language switch, filters, calendar and no horizontal overflow: OK");
 }finally{
