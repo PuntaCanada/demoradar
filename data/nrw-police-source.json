@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "mode": "original_police_announcement_facts_only",
+  "sources": [
+    {
+      "city": "Bonn",
+      "source": "https://www.presseportal.de/blaulicht/pm/7304/6393705",
+      "status": "verified_one_off",
+      "count": 1
+    },
+    {
+      "city": "Münster",
+      "source": "https://www.presseportal.de/blaulicht/pm/11187/6394182",
+      "status": "not_verified_no_import",
+      "count": 0
+    }
+  ],
+  "rights": "Short factual date, subject and announced places only; original police articles/images not reproduced"
+}

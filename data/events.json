@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T16:57:35.354Z",
-  "count": 1349,
+  "updated_at": "2026-11-19T17:12:21.300Z",
+  "count": 1350,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -627,6 +627,21 @@
       "source": "Polizeidirektion Leipzig – amtliche Ankündigung",
       "source_url": "https://www.polizei.sachsen.de/de/einsatz-anlaesslich-des-schuelerstreiks-und-des-protestes-der-generation-z-am-20-november-2026-44497.html",
       "source_status": "Bei der Versammlungsbehörde angezeigt; keine Vollständigkeitsgarantie"
+    },
+    {
+      "id": "police-nrw-ac5130fbcf80de25",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Bonn",
+      "date": "2026-11-20",
+      "start": "10:00",
+      "end": "14:00",
+      "title": "Protestkundgebung gegen die Wiedereinführung der Wehrpflicht",
+      "location": "Poppelsdorfer Allee",
+      "route": "",
+      "source": "Polizei Bonn – amtliche Pressemitteilung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/7304/6393705",
+      "source_status": "Ausdrücklich angekündigt; aktuelle Veranstaltungsdetails bei der Behörde prüfen"
     },
     {
       "id": "berlin-101",
