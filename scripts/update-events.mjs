@@ -25,8 +25,15 @@ if(!Array.isArray(payload.index)||payload.index.length===0||payload.index.length
  if(Array.isArray(saved?.events)&&saved.events.length){console.warn("Berlin returned invalid index; preserving verified events");process.exit(0)}
  throw Error("Unexpected index / refusing empty overwrite")
 }
-const parseDate=s=>{const m=/^(\d{2})\.(\d{2})\.(\d{4})$/.exec(String(s||""));return m?m[3]+"-"+m[2]+"-"+m[1]:null};
-const events=payload.index.map(item=>({id:"berlin-"+String(item.id),country:"DE",state:"Berlin",city:"Berlin",date:parseDate(item.datum),start:String(item.von||""),end:String(item.bis||""),title:String(item.thema||"").replace(/\s+/g," ").trim(),postal_code:String(item.plz||""),location:String(item.strasse_nr||"").replace(/\s+/g," ").trim(),route:String(item.aufzugsstrecke||"").replace(/\s+/g," ").trim(),source:"Polizei Berlin – Versammlungsbehörde",source_url:SOURCE,source_status:"behördlich angezeigt"})).filter(e=>e.date&&e.title);
+const parseDate=s=>{const m=/^(\d{2})\.(\d{2})\.(\d{4})$/.exec(String(s||""));if(!m)return null;const iso=m[3]+"-"+m[2]+"-"+m[1];const parsed=new Date(iso+"T12:00:00Z");return Number.isFinite(parsed.getTime())&&parsed.toISOString().slice(0,10)===iso?iso:null};
+const usable=payload.index.filter(item=>item&&typeof item==="object"&&item.id!==null&&item.id!==undefined&&String(item.id).trim()&&parseDate(item.datum)&&String(item.thema||"").trim());
+if(usable.length===0||usable.length<payload.index.length*0.9){
+ await report("unavailable",null,"Unexpected event field format: "+usable.length+"/"+payload.index.length+" valid rows");
+ let old;try{old=JSON.parse(await readFile(target,"utf8"))}catch{}
+ if(Array.isArray(old?.events)&&old.events.length){console.warn("Berlin format drift: preserving last verified events");process.exit(0)}
+ throw Error("Berlin official JSON schema drift without usable existing events");
+}
+const events=usable.map(item=>({id:"berlin-"+String(item.id),country:"DE",state:"Berlin",city:"Berlin",date:parseDate(item.datum),start:String(item.von||""),end:String(item.bis||""),title:String(item.thema||"").replace(/\s+/g," ").trim(),postal_code:String(item.plz||""),location:String(item.strasse_nr||"").replace(/\s+/g," ").trim(),route:String(item.aufzugsstrecke||"").replace(/\s+/g," ").trim(),source:"Polizei Berlin – Versammlungsbehörde",source_url:SOURCE,source_status:"behördlich angezeigt"})).filter(e=>e.date&&e.title);
 if(events.length===0)throw Error("No valid dated items");
 await report("ok",events.length);
 events.sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start)||a.id.localeCompare(b.id));
