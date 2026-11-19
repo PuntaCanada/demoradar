@@ -42,6 +42,28 @@ Der neue Importer `scripts/update-police-notices.py` prüft ausschließlich die 
 
 Die Quellen werden unter `data/expansion-sources.json` ausschließlich zum Monitoring geführt, wenn keine zulässige aktuelle Datenübernahme möglich ist. Quellenkontakte und Nutzungsrechte bleiben Voraussetzungen für weitere Imports.
 
+## Neue amtliche Leipziger Quelle (19. November 2026)
+
+Die [Originalankündigung der Polizeidirektion Leipzig](https://www.polizei.sachsen.de/de/einsatz-anlaesslich-des-schuelerstreiks-und-des-protestes-der-generation-z-am-20-november-2026-44497.html) vom 17. November 2026 enthält ausdrücklich zwei am 20. November angezeigte Versammlungen:
+- **Internationaler Schulstreik gegen die Wehrpflicht**, 10:00–16:45 Uhr, Kundgebung auf dem kleinen Wilhelm-Leuschner-Platz; geplanter Aufzug im Anschluss.
+- **Gen Z regelt**, 17:00–21:00 Uhr, geplanter Start auf dem kleinen Wilhelm-Leuschner-Platz.
+
+`scripts/update-leipzig-police.py` akzeptiert nur diese ausdrücklich erlaubte Einzelquelle, prüft Datum, Polizeiautorenschaft, zwei voneinander getrennte Zeitfenster und bekannten Platz und speichert nur knappe Tatsachen mit Originalquellenverweis. Eine konkrete endgültige Route wird nicht übernommen. Es handelt sich nicht um eine vollständige Leipziger Versammlungsliste. Die Ergebnisse von `scripts/test-leipzig-police.py` werden vor jeder Übernahme geprüft.
+
+## Automatische Quellengüte und Datenlücken
+
+`scripts/audit-source-quality.mjs` erzeugt `data/source-quality.json` aus den **tatsächlichen Ergebnissen** der Importer – nicht durch Spekulation oder Auswertung der Medienlage. Die fünf Zustände sind:
+
+- `observed_data`: Ein geprüfter Import hat Quelldatensätze geliefert; dies besagt nichts über landesweite Vollständigkeit.
+- `verified_one_off`: Eine konkrete amtliche Einzelmeldung ist aktuell belegt, kein regelmäßiger Event-Feed.
+- `no_matching_items`: Eine Quelle ist erreichbar, aber der konservative Importer hat keine passenden Einträge übernommen.
+- `unavailable`: Die Quelle war nicht erreichbar; frühere Einträge werden nicht als abgesagt bezeichnet.
+- `unknown`: Keine ausreichende Statusbeobachtung.
+
+Die Heatmap kombiniert weiterhin die bewusst zurückhaltende Länderabdeckung aus `data/state-source-coverage.json` mit dieser beobachteten Quellengüte. **Fehlende Einträge oder Quellen sind kein Nachweis dafür, dass keine Demonstrationen stattfinden.** Auch eine offizielle Stadtquelle ist keine komplette Bundeslandabdeckung.
+
+Die YouTube-Zuordnung hat neue Tests für Videos mit widersprüchlichen Datumsangaben oder unmöglichen Kalendertagen. Solche Videos werden nicht automatisch einer bestimmten Veranstaltung zugeordnet; selbst erfolgreiche Vorschläge bleiben `reviewed:false`.
+
 ## Qualitätssicherung
 
 - `scripts/test-police-notices.py`: offizielle Fakten und Datum werden mit Offline-Prüfungen validiert; fehlende Quellen und unbestätigte Orte erzeugen keine erfundenen Termine.
