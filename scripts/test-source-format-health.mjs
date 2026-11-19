@@ -1,0 +1,31 @@
+import assert from "node:assert/strict";
+import {inspectFeedHealth} from "./source-format-health.mjs";
+const today="2026-11-19";
+const good={berlin:{status:"ok",count:1250,checked_on:today},
+ dresden:{status:"ok",count:44,checked_on:today},
+ rostock:{status:"ok",count:8,checked_on:today}};
+const fresh=inspectFeedHealth({},good,{today});
+assert.equal(fresh.version,1);
+assert.equal(fresh.feeds.length,3);
+assert.equal(fresh.warning_count,0);
+assert.equal(fresh.feeds[0].last_success.count,1250);
+assert.equal(fresh.feeds[2].last_checked,today);
+const failed=inspectFeedHealth(fresh,{...good,berlin:{status:"unavailable",count:0,checked_on:today,error:"Unexpected index / refusing empty overwrite"}},{today});
+assert.equal(failed.warning_count,1);
+assert.deepEqual(failed.feeds[0].issues,["format_change_suspected"]);
+assert.equal(failed.feeds[0].last_success.count,1250,"Outage never deletes verified baseline");
+assert.equal(failed.feeds[0].status,"unverified");
+const outage=inspectFeedHealth(fresh,{...good,dresden:{status:"unavailable",count:0,checked_on:today,error:"HTTP 503"}},{today});
+assert.deepEqual(outage.feeds[1].issues,["unavailable"]);
+const stale=inspectFeedHealth(fresh,{...good,rostock:{...good.rostock,checked_on:"2026-11-16"}},{today});
+assert.deepEqual(stale.feeds[2].issues,["not_checked_today"]);
+const drop=inspectFeedHealth(fresh,{...good,berlin:{...good.berlin,count:30}},{today});
+assert.deepEqual(drop.feeds[0].issues,["large_count_drop"]);
+assert.equal(drop.feeds[0].last_success.count,30,"A warning must not rewrite or refuse a genuinely validated import");
+assert.deepEqual(inspectFeedHealth(fresh,{...good,dresden:{...good.dresden,count:0}},{today}).feeds[1].issues,["unexpected_empty"]);
+assert.deepEqual(inspectFeedHealth(fresh,{...good,berlin:{status:"ok",checked_on:today,count:-1}},{today}).feeds[0].issues,["invalid_count"]);
+assert.throws(()=>inspectFeedHealth({},good,{today:"2026-02-31"}),/Invalid inspection day/);
+assert.equal(inspectFeedHealth(fresh,good,{today}).warning_count,0,"Recovered feeds clear active warnings");
+assert.equal(inspectFeedHealth({},good,{today}).feeds[1].last_success.count,44);
+assert.equal(inspectFeedHealth(fresh,good,{today}).feeds.every(f=>f.note.includes("No conclusion")),true);
+console.log("source-format-health: 20 integrity and failure-regression assertions passed");
