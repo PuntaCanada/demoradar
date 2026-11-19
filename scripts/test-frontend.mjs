@@ -30,7 +30,7 @@ const dataMap={
   checked_at:new Date().toISOString()
  }]}
 };
-async function mount(path,{failed=false}={}){
+async function mount(path,{failed=false,withReviewed=false,detail=false}={}){
  const all=new Map();
  function el(id){
   if(all.has(id))return all.get(id);
@@ -59,12 +59,23 @@ async function mount(path,{failed=false}={}){
   addEventListener(event,cb){this.listeners[event]=cb},
   dispatchEvent(event){this.listeners[event.type]?.(event)}
  };
- const location={pathname:path,search:"",hash:"#demo-kalender",assigned:null,assign(url){this.assigned=url}};
+ const location={pathname:path,search:detail?"?event=berlin-1":"",hash:"#demo-kalender",assigned:null,assign(url){this.assigned=url}};
  const window={location};
  const localStorage={getItem(){return null},setItem(){}};
- const fetch=url=>failed&&url==="/data/events.json"?Promise.reject(new Error("network failure")):Promise.resolve({ok:dataMap[url]!==undefined,status:dataMap[url]!==undefined?200:404,json:async()=>structuredClone(dataMap[url])});
+ const reviewed={streams:[{
+ event_id:"berlin-1",reviewed:true,evidence_url:"https://www.youtube.com/watch?v=LIVE123",
+ url:"https://www.youtube.com/watch?v=LIVE123",channel:"Geprüfter Kanal",
+ valid_until:new Date(Date.now()+86400000).toISOString(),live_status:"live",
+ live_checked_at:new Date().toISOString(),
+ recording_url:"https://www.youtube.com/watch?v=REPLAY123",recording_reviewed:true
+}]};
+ const fetch=url=>failed&&url==="/data/events.json"?Promise.reject(new Error("network failure")):Promise.resolve({
+ ok:(withReviewed&&url==="/data/live-streams.json")||dataMap[url]!==undefined,
+ status:(withReviewed&&url==="/data/live-streams.json")||dataMap[url]!==undefined?200:404,
+ json:async()=>structuredClone(withReviewed&&url==="/data/live-streams.json"?reviewed:dataMap[url])
+ });
  const Option=class{constructor(text,value){this.text=text;this.value=value}};
- const ctx={window,document:doc,location,navigator:{language:path.startsWith("/en/")?"en-GB":"de-DE"},localStorage,Option,fetch,Date,Intl,URL,console,CustomEvent:class{constructor(type,config){this.type=type;this.detail=config?.detail}}};
+ const ctx={window,document:doc,location,navigator:{language:path.startsWith("/en/")?"en-GB":"de-DE"},localStorage,Option,fetch,Date,Intl,URL,URLSearchParams,console,CustomEvent:class{constructor(type,config){this.type=type;this.detail=config?.detail}}};
  runInNewContext(i18n,ctx,{filename:"i18n.js"});
  runInNewContext(js,ctx,{filename:"live.js"});
  for(let i=0;i<12;i++)await new Promise(resolve=>setImmediate(resolve));
@@ -106,6 +117,14 @@ for(const path of ["/","/en/"]){
  assert.equal(location.assigned,(en?"/":"/en/")+"#demo-kalender","Switch navigates and preserves section");
  const failedPage=await mount(path,{failed:true});
  assert.equal(failedPage.el("notice").textContent,failedPage.i18n.t("source.loadFailed"),"Failed fetch is disclosed");
+}
+for(const path of ["/","/en/"]){
+ const mixed=await mount(path,{withReviewed:true,detail:true});
+ const rendered=mixed.el("eventDetailContent").innerHTML;
+ assert.ok(rendered.includes("LIVE123"),"Fresh reviewed LIVE link displayed");
+ assert.ok(rendered.includes("REPLAY123")===false,"LIVE must link to actual live playback, not old archive");
+ assert.ok(rendered.includes(path==="/en/"?"Additional automated suggestions":"Weitere automatisch gefundene Vorschläge"),"Possible recording remains visible beside reviewed LIVE");
+ assert.ok(rendered.includes("TEST123"),"Unverified archive retained separately");
 }
 assert.ok(html.includes('name="viewport"'));
 assert.ok(english.includes('name="viewport"'));
