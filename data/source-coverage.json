@@ -211,6 +211,15 @@
           "reuse_rights_verified": false
         }
       ]
+    },
+    {
+      "city": "Münster",
+      "event_count": 6,
+      "days_with_events": 4,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
     }
   ],
   "missing_official_feed_warning": "City count 0 does not prove no demonstrations. No stream-derived events are imported."
