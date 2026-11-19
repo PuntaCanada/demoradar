@@ -2,7 +2,7 @@
 "use strict";
 const dictionary={
 de:{
-"header.subtitle":"Demonstrationen transparent entdecken","nav.calendar":"Kalender","nav.today":"Heute","nav.week":"Diese Woche",
+"header.subtitle":"Demonstrationen transparent entdecken","nav.calendar":"Kalender","nav.today":"Heute","nav.week":"Diese Woche","nav.community":"Community","jump.community":"Austausch & Community","detail.streams":"Livestreams zur Veranstaltung","detail.streamNotice":"Links werden vor der Anzeige geprüft. Ein vorhandener Stream-Link bedeutet nicht, dass er aktuell live ist.","detail.streamEmpty":"Noch kein geprüfter Stream zur Veranstaltung.","detail.streamSuggest":"Öffentlichen Stream vorschlagen","detail.contact":"Organisator kontaktieren","detail.contactEmpty":"Kein bestätigter öffentlicher Organisationskontakt hinterlegt.","detail.contactSuggest":"Offiziellen Organisationskontakt vorschlagen","detail.community":"Über diese Veranstaltung diskutieren","detail.platform":"Plattform",
 "hero.eyebrow":"Unabhängig · Quellenbasiert · Offen","hero.title":"Was bewegt Deutschland?","hero.description":"Demonstrationen und Kundgebungen entdecken – unabhängig von der politischen Richtung.","hero.beta":"🇩🇪 Deutschland · Beta",
 "jump.calendar":"Kalenderübersicht","jump.today":"Wichtig heute","jump.tomorrow":"Morgen wichtig","jump.week":"Diese Woche wichtig",
 "calendar.eyebrow":"Die große Terminübersicht","calendar.title":"Demonstrationskalender Deutschland","calendar.description":"Alle verfügbaren Termine nach Datum, Bundesland, Thema und politischem Bezug durchsuchen.","calendar.jump":"Kalender ansehen ↓","calendar.subtitle":"Veranstaltungskalender",
@@ -29,7 +29,7 @@ de:{
 "page.title":"DemoRadar — Demonstrationen im Überblick","page.description":"DemoRadar – Demonstrationen, Kundgebungen und Proteste finden. Transparenter Kalender für Deutschland."
 },
 en:{
-"header.subtitle":"Discover demonstrations and protests","nav.calendar":"Calendar","nav.today":"Today","nav.week":"This week",
+"header.subtitle":"Discover demonstrations and protests","nav.calendar":"Calendar","nav.today":"Today","nav.week":"This week","nav.community":"Community","jump.community":"Discuss & connect","detail.streams":"Livestreams for this event","detail.streamNotice":"Links are checked before publication. A stream URL does not mean the channel is currently live.","detail.streamEmpty":"No verified public stream for this event yet.","detail.streamSuggest":"Suggest a public stream","detail.contact":"Contact the organizer","detail.contactEmpty":"No confirmed official organizer contact available.","detail.contactSuggest":"Suggest an official contact","detail.community":"Discuss this event","detail.platform":"Platform",
 "hero.eyebrow":"Independent · Source-based · Open","hero.title":"What's happening in Germany?","hero.description":"Explore demonstrations, rallies and protests across the political spectrum.","hero.beta":"🇩🇪 Germany · Beta",
 "jump.calendar":"Demonstration calendar","jump.today":"Important today","jump.tomorrow":"Important tomorrow","jump.week":"Important this week",
 "calendar.eyebrow":"Browse upcoming events","calendar.title":"Germany demonstration calendar","calendar.description":"Find available events by date, federal state, topic and political context.","calendar.jump":"View calendar ↓","calendar.subtitle":"Event calendar",
