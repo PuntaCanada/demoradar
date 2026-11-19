@@ -69,6 +69,7 @@ def main():
  for city,url in SOURCES.items():
   row={"city":city,"source":url,"status":"out_of_retention","count":0}
   if -90<=(today-DAY).days<=30:
+   row["checked_on"]=today.isoformat()
    try:
     records=parse(fetch(city),city)
     row.update(status="verified_one_off" if records else "not_verified_no_import",count=len(records))
