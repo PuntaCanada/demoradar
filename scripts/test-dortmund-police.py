@@ -23,9 +23,9 @@ class Tests(unittest.TestCase):
  def test_wrong_publisher(self):
   self.assertEqual(m["parse"](NOTICE.replace("Polizei Dortmund","Privatblog")),[])
  def test_missing_origin(self):
-  self.assertEqual(m["parse"](NOTICE.replace("im nördlichen Bereich des Dortmunder Hauptbahnhofs starten","irgendwo starten")),[])
+  self.assertEqual(m["parse"](NOTICE.replace("Hauptbahnhofs starten","Bahnhof starten")),[])
  def test_missing_destination(self):
-  self.assertEqual(m["parse"](NOTICE.replace("auf dem Friedensplatz in der Innenstadt enden","irgendwo enden")),[])
+  self.assertEqual(m["parse"](NOTICE.replace("Friedensplatz","anderen Platz")),[])
  def test_missing_dateline(self):
   self.assertEqual(m["parse"](NOTICE.replace("18.11.2026","18.11.")),[])
 if __name__=="__main__":unittest.main()
