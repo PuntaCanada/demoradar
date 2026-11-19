@@ -18,7 +18,7 @@ class Response:
  def read(self,*args):return self.body
 class RostockSourceTests(unittest.TestCase):
  def row(self,date,title):
-  return '<h3>„'+title+'“</h3><p>Versammlungsbeginn: '+date.strftime("%d.%m.%Y")+', 14:00:00</p><p>Versammlungsart: Kundgebung</p>'
+  return '<h3>„'+title+'“</h3><p>Versammlungsbeginn: '+date.strftime("%d.%m.%Y")+', 14:00:00</p><p>Versammlungsart: Kundgebung</p><p>Anmeldende: Erika Mustermann</p>'
  def test_retention_and_provenance(self):
   now=dt.date.today()
   html='<html><body>'+self.row(now-dt.timedelta(days=20),"Testkundgebung für Frieden und Bildung")+self.row(now-dt.timedelta(days=40),"Alte Demonstration außerhalb des Archivs")+'</body></html>'
@@ -35,6 +35,8 @@ class RostockSourceTests(unittest.TestCase):
     self.assertEqual(records[0]["date"],(now-dt.timedelta(days=20)).isoformat())
     self.assertEqual(source["count"],1)
     self.assertEqual(source["status"],"ok")
+    self.assertTrue(all(e.get("organizer","")=="" for e in records),"Private applicant names must not be republished")
+    self.assertNotIn("Erika Mustermann",json.dumps(data,ensure_ascii=False))
     self.assertEqual(source["checked_on"],now.isoformat())
     self.assertTrue(any(e["id"]=="berlin-test" for e in data["events"]))
     before=Path("data/events.json").read_bytes()
