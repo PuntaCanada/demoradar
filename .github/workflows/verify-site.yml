@@ -9,6 +9,7 @@ on:
       - 'live.js'
       - 'scripts/test-frontend.mjs'
       - 'scripts/test-i18n.mjs'
+      - 'scripts/test-browser.mjs'
       - 'scripts/build-language-pages.mjs'
       - '.github/workflows/verify-site.yml'
 permissions:
@@ -29,6 +30,8 @@ jobs:
           node --check i18n.js
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
+      - name: Prüfe echte Browseransicht auf Smartphone und Desktop
+        run: node scripts/test-browser.mjs
       - name: Prüfe Cloudflare-HTTP-Auslieferung unabhängig von GitHub
         continue-on-error: true
         run: |
