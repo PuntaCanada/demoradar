@@ -98,10 +98,27 @@ def parse_detail(url,raw,today):
 def main():
  status={"source":INDEX,"mode":"conservative_factual_extraction","licence":"No blanket open-data licence verified for the city HTML; reuse only unprotected factual details with direct attribution.","status":"unavailable","count":0}
  try:
-  index=Page();index.feed(fetch(INDEX))
-  links=candidate_links(index)
+  # City calendar is alphabetically paginated (ten rows per page). Scanning
+  # only the first page would systematically miss "Demonstration" and "Versammlung".
+  # Limit to at most twelve pages, stop early when a page has no new items.
+  links=[]
+  pages_checked=0
+  for offset in range(0,120,10):
+   url=INDEX if offset==0 else INDEX+"?start="+str(offset)
+   try:
+    index=Page();index.feed(fetch(url))
+    pages_checked+=1
+    links.extend(candidate_links(index))
+    # Last page has fewer than ten matching detail links, excluding navigation.
+    detail_paths=[urllib.parse.urlparse(urllib.parse.urljoin(INDEX,h)).path for h,_ in index.links]
+    if offset>0 and not any("/leben-in-koeln/verkehr/verkehrskalender/" in q and not q.endswith(("index.html","/")) for q in detail_paths):break
+   except Exception as ex:
+    if offset==0:raise
+    print("Cologne pagination page unavailable:",offset,str(ex)[:90])
+    break
+  links=list(dict.fromkeys(links))[:MAX_LINKS]
   if not links:
-   status.update(status="reachable_no_matching_detail_links",count=0,links_inspected=0)
+   status.update(status="reachable_no_matching_detail_links",count=0,links_inspected=0,pages_checked=pages_checked)
    raise LookupError("No clearly labelled demonstrations on sampled calendar page; no import")
   now=dt.date.today()
   found=[]
@@ -122,7 +139,7 @@ def main():
   if combined!=data["events"]:
    data["events"]=combined;data["count"]=len(combined)
    FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-  status.update(status="ok",count=len(found),links_inspected=len(links),retained=len(existing))
+  status.update(status="ok",count=len(found),links_inspected=len(links),retained=len(existing),pages_checked=pages_checked)
  except LookupError as ex:
   status["note"]=str(ex)[:180]
   print("Cologne source reachable, but no demonstration links currently matched")
