@@ -16,6 +16,10 @@ on:
       - 'live.js'
       - 'i18n.js'
       - 'scripts/test-i18n.mjs'
+      - 'scripts/build-language-pages.mjs'
+      - 'en/index.html'
+      - 'sitemap.xml'
+      - 'robots.txt'
       - 'index.html'
       - 'scripts/update-news.py'
   schedule:
@@ -52,12 +56,16 @@ jobs:
         run: python3 scripts/update-demos.py
       - name: Prüfe Nachrichten-Feeds und mögliche Berichtszuordnungen
         run: python3 scripts/update-news.py
+      - name: Erzeuge zweisprachige HTML-Seiten und SEO-Dateien
+        run: node scripts/build-language-pages.mjs
       - name: Prüfe Kalendercode und Datenformat
         run: |
           python3 -m py_compile scripts/update-demos.py scripts/update-news.py
           python3 scripts/test-dedupe.py
           node --check live.js
           node --check i18n.js
+          node --check scripts/build-language-pages.mjs
+          node --input-type=module -e 'import{readFileSync}from"node:fs";const de=readFileSync("index.html","utf8"),en=readFileSync("en/index.html","utf8"),sitemap=readFileSync("sitemap.xml","utf8");if(!de.includes("hreflang=\"en\"")||!en.includes("<html lang=\"en\"")||!en.includes("<link rel=\"canonical\" href=\"https://demoradar.pages.dev/en/\"")||!en.includes("What&#39;s happening in Germany?")&&!en.includes("What's happening in Germany?"))throw Error("Missing translated SEO route");if(!sitemap.includes("/en/"))throw Error("Missing sitemap translation entry");console.log("/en/ static SEO checks: OK")'
           node scripts/test-i18n.mjs
           node --input-type=module -e 'import{readFileSync}from"node:fs";const h=readFileSync("index.html","utf8");if(!h.includes("data-language=\"de\"")||!h.includes("data-language=\"en\"")||!h.includes("/i18n.js"))throw Error("Language switch missing");console.log("DE/EN switch present")'
           node --input-type=module -e 'import {readFileSync} from "node:fs"; const html=readFileSync("index.html","utf8"),js=readFileSync("live.js","utf8"); if(!html.includes("id=\"city\"")||!js.includes("function updateCityChoices()")||!js.includes("selectedCity"))throw Error("City filter wiring missing"); console.log("City filter wiring present");'
@@ -71,10 +79,10 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json index.html en/index.html sitemap.xml robots.txt)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json
+            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json index.html en/index.html sitemap.xml robots.txt
             git commit -m "data: update Berlin events"
             git push
           else
