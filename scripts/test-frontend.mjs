@@ -72,7 +72,7 @@ for(const path of ["/","/en/"]){
  assert.ok(el("calendar").innerHTML.includes("data-date="),"Calendar populated with real events");
  assert.equal(el("city").options.length,4,"Three cities plus All cities after dedupe");
  assert.equal(el("todayCount").textContent,en?"3 listings":"3 Meldungen","Official duplicate is suppressed");
- assert.ok(el("notice").innerHTML.includes("Demos Berlin"),"Community provenance displayed");
+ assert.ok(el("notice").innerHTML.includes("Demos Berlin"),"Community provenance displayed: "+path+" "+el("notice").innerHTML);
  el("region").value="Sachsen";el("region").fire("change");
  assert.equal(el("city").options.length,2,"State filter limits city choices");
  assert.equal(el("city").options[1].value,"Dresden");
