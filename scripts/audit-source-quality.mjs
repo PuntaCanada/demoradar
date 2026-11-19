@@ -12,12 +12,16 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
    last_checked:isValid?d:null,check_freshness:freshness});
  };
  const berlin=files.berlin||{};
- const berlinEvents=(berlin.events||[]).filter(e=>e.state==="Berlin");
- add("Berlin","Berlin","Polizei Berlin",berlinEvents.length?"observed_data":"unknown",berlinEvents.length,"Official city-wide reporting feed; completeness not guaranteed");
+ const berlinFeed=files.berlinStatus||{};
+ add("Berlin","Berlin","Polizei Berlin",
+  berlinFeed.status==="ok"?"observed_data":berlinFeed.status==="unavailable"?"unavailable":"unknown",
+  berlinFeed.count,"Official city-wide reporting feed; completeness not guaranteed",berlinFeed.checked_on);
  const d=files.dresden||{};
- add("Dresden","Sachsen","Stadt Dresden",d.status==="ok"?"observed_data":d.status==="unavailable"?"unavailable":"unknown",d.count,"Dresden city JSON, not all of Saxony",d.source_date);
- const r=files.rostock||{};
- add("Rostock","Mecklenburg-Vorpommern","Stadt Rostock",(r.events||[]).some(e=>String(e.id).startsWith("rostock-"))?"observed_data":"unknown",null,"Rostock-only list");
+ add("Dresden","Sachsen","Stadt Dresden",d.status==="ok"?"observed_data":d.status==="unavailable"?"unavailable":"unknown",d.count,"Dresden city JSON, not all of Saxony",d.checked_on);
+ const rostockFeed=files.rostockStatus||{};
+ add("Rostock","Mecklenburg-Vorpommern","Stadt Rostock",
+  rostockFeed.status==="ok"?"observed_data":rostockFeed.status==="unavailable"?"unavailable":"unknown",
+  rostockFeed.count,"Rostock-only list, not Mecklenburg-Vorpommern coverage",rostockFeed.checked_on);
  const col=files.cologne||{};
  add("Köln","Nordrhein-Westfalen","Stadt Köln",col.status==="ok"?"observed_data":col.status==="reachable_no_matching_detail_links"?"no_matching_items":col.status==="unavailable"?"unavailable":"unknown",col.count,"Traffic calendar only; not the assembly register");
  const notice=files.policeCologne||{};
@@ -57,8 +61,8 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
  return {version:1,method:"Observed importer outcomes only; neither state completeness nor actual number of protests can be inferred.",sources:out};
 }
 if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
- const next=sourceHealth({berlin:read("data/events.json"),dresden:read("data/dresden-source.json"),
-  rostock:read("data/events.json"),cologne:read("data/cologne-source.json"),
+ const next=sourceHealth({berlinStatus:read("data/berlin-source.json"),dresden:read("data/dresden-source.json"),
+  rostockStatus:read("data/rostock-source.json"),cologne:read("data/cologne-source.json"),
   policeCologne:read("data/police-notices-source.json"),
   nrwPolice:read("data/nrw-police-source.json"),
   policeDortmund:read("data/dortmund-police-source.json"),
