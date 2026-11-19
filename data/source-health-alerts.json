@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "scope": "non-actionable warnings only; no events are generated or removed",
+  "checked_sources": 11,
+  "alerts": [
+    {
+      "city": "Frankfurt am Main",
+      "source": "Stadt Frankfurt",
+      "condition": "unavailable",
+      "last_checked": null,
+      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur."
+    }
+  ]
+}
