@@ -22,7 +22,7 @@ PATTERN=re.compile(r"\b(demonstration|kundgebung|mahnwache|versammlung(?:\s+mit\
 DATE=re.compile(r"\b(\d{1,2})\.(\d{1,2})\.(20\d{2})\b")
 TIME=re.compile(r"\b(?:von\s+)?(\d{1,2}):(\d{2})\s*(?:bis|[-–])\s*(\d{1,2}):(\d{2})\s*Uhr\b",re.I)
 START=re.compile(r"\b(?:ab|beginn|auftakt)\s*:?\s*(\d{1,2})(?::(\d{2}))?\s*Uhr\b",re.I)
-ROUTE=re.compile(r"(?:Aufzugsstrecke|Aufzugsweg|Der Aufzugsweg führt über folgende Strecke)\s*:\s*([^\n]{10,450})",re.I)
+ROUTE=re.compile(r"(?:Aufzugstrecke|Aufzugsstrecke|Aufzugsweg|Der Aufzugsweg führt über folgende Strecke)\s*:\s*([^\n]{10,450})",re.I)
 MAX_LINKS=120
 def clean(value):return re.sub(r"\s+"," ",str(value or "")).strip()
 class Page(HTMLParser):
