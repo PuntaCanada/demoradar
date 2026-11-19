@@ -1,5 +1,5 @@
 (()=>{"use strict";
-let records=[],updated=null,officialCount=0,communityCount=0;
+let records=[],updated=null,officialCount=0,communityCount=0,loadFailed=false,selectedDay=null;
 const T=(key,args)=>window.DemoRadarI18n?.t(key,args)||key;
 const locale=()=>window.DemoRadarI18n?.locale||"de-DE";
 const formatDate=date=>new Intl.DateTimeFormat(locale(),{timeZone:"UTC",day:"2-digit",month:"2-digit",year:"numeric"}).format(new Date(date+"T12:00:00Z"));
@@ -24,7 +24,7 @@ function render(){const y=sel.getFullYear(),m=sel.getMonth(),start=(new Date(y,m
 function renderSourceInfo(){
  const notice=document.querySelector(".notice"),stats=document.querySelectorAll(".stat")[0];
  if(notice){
-  if(!records.length)notice.textContent=T("source.disclaimer");
+  if(!records.length)notice.textContent=T(loadFailed?"source.loadFailed":"source.loadingNotice");
   else if(communityCount){
    notice.innerHTML="<strong>ℹ️ "+esc(T("source.summary"))+":</strong> "+esc(T("source.officialCount",{count:officialCount}))+" · "+esc(T("source.additionalCount",{count:communityCount}))+" <a href='https://demonstrations.org/en/data' target='_blank' rel='noopener noreferrer'>Demos Berlin e. V.</a> "+esc(T("source.license"))+" "+esc(T("source.dedup"))+" "+esc(T("source.disclaimer"));
   }else{
@@ -63,11 +63,11 @@ function renderFeatured(){
  document.getElementById("weekDate").textContent=dateLabel(today)+" – "+dateLabel(offset(6))+" · "+T("feature.week");
  const crowd=e=>{const v=String(e.registered_participants||"");const m=v.replace(/\./g,"").match(/(\d[\d ]*)/);return m?Number(m[1].replace(/\s/g,"")):null};
  const score=e=>{const n=crowd(e),rec=/täglich|jeweils mo|dauerhaft|vom \d\d\.\d\d\. bis/i.test(e.title);return (n!==null?Math.min(n,100000)/10:0)+(e.route?35:0)+(e.organizer?10:0)-(rec?55:0)};
- const search=e=>{const title=e.title.replace(/\([^)]{25,}\)/g,"").replace(/\s+/g," ").slice(0,115);return "https://news.google.com/search?q="+encodeURIComponent('"'+title+'" '+e.city)+"&hl=de&gl=DE&ceid=DE%3Ade"};
+ const search=e=>{const title=e.title.replace(/\([^)]{25,}\)/g,"").replace(/\s+/g," ").slice(0,115);const lang=locale()==="de-DE"?"de":"en";return "https://news.google.com/search?q="+encodeURIComponent('"'+title+'" '+e.city)+"&hl="+lang+"&gl=DE&ceid=DE%3A"+lang};
  for(const x of selected){
   const holder=document.getElementById(x.id+"Items");if(!holder)continue;
   const selectedRegion=document.getElementById("region").value,selectedCity=document.getElementById("city").value;
-  const matching=records.filter(e=>e.date>=x.from&&e.date<=x.to&&(selectedRegion==="Alle Bundesländer"||e.state===selectedRegion)&&(!selectedCity||e.city===selectedCity));
+  const matching=records.filter(e=>e.date>=x.from&&e.date<=x.to&&matches(e));
   document.getElementById(x.id+"Count").textContent=T("feature.count",{count:matching.length});
   const unique=new Map();
   for(const e of matching){const k=(e.date+"-"+e.city+"-"+e.start+"-"+e.title).toLowerCase().replace(/\s+/g," ");if(!unique.has(k))unique.set(k,e)}
@@ -127,4 +127,4 @@ fetch("/data/demos-events.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).
  }
  records.sort((a,b)=>a.date.localeCompare(b.date)||(a.start||"").localeCompare(b.start||"")||a.id.localeCompare(b.id));
  communityCount=appended;updateCityChoices();render();renderFeatured();renderSourceInfo();
-}).catch(err=>console.warn("Optional Demos data unavailable",err));renderSourceInfo();render();renderFeatured();fetch("/data/news-matches.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(n=>{if(n&&n.matches&&typeof n.matches==="object"){articleMatches=n.matches;renderFeatured()}}).catch(()=>{})}).catch(()=>{render();renderFeatured();console.info("No live data file deployed yet")});})();
+}).catch(err=>console.warn("Optional Demos data unavailable",err));renderSourceInfo();render();renderFeatured();fetch("/data/news-matches.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(n=>{if(n&&n.matches&&typeof n.matches==="object"){articleMatches=n.matches;renderFeatured()}}).catch(()=>{})}).catch(error=>{loadFailed=true;render();renderFeatured();renderSourceInfo();console.warn("Could not load official event data",error)});})();
