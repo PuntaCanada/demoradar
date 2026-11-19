@@ -11,6 +11,10 @@ on:
       - 'scripts/test-source-coverage.mjs'
       - 'data/expansion-sources.json'
       - 'data/police-notices-source.json'
+      - 'data/leipzig-police-source.json'
+      - 'data/leipzig-archive-source.json'
+      - 'data/events.json'
+      - 'data/demos-events.json'
       - '.github/workflows/stream-discovery.yml'
       - 'data/streamer-candidates.json'
   schedule:
