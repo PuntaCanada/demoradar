@@ -10,7 +10,7 @@ const files={
  frankfurt:{status:"unavailable",count:0}
 };
 const rows=sourceHealth(files).sources;
-assert.equal(rows.length,9);
+assert.equal(rows.length,11);
 const row=name=>rows.find(s=>s.source===name);
 assert.equal(row("Polizei Berlin").status,"observed_data");
 assert.equal(row("Polizei Berlin").count,2);
@@ -18,6 +18,8 @@ assert.equal(row("Stadt Köln").status,"no_matching_items");
 assert.equal(row("Stadt Köln").count,0);
 assert.equal(row("Polizei Köln").status,"verified_one_off");
 assert.equal(row("Polizeidirektion Leipzig").status,"verified_one_off");
+assert.equal(row("Polizei Bonn").status,"unknown");
+assert.equal(row("Polizei Münster").status,"unknown");
 assert.equal(row("Polizeidirektion Leipzig (Archiv)").status,"unknown");
 assert.equal(row("Stadt Jena").status,"no_matching_items");
 assert.equal(row("Stadt Frankfurt").status,"unavailable");
@@ -37,4 +39,10 @@ assert.equal(item("Polizei Berlin").check_freshness,"unknown","do not invent a c
 const archived=sourceHealth({...files,leipzigArchive:{status:"verified_historical_notice",count:1}},{today:"2026-11-19"}).sources;
 assert.equal(archived.find(s=>s.source==="Polizeidirektion Leipzig (Archiv)").status,"verified_historical_one_off");
 assert.equal(archived.find(s=>s.source==="Polizeidirektion Leipzig (Archiv)").count,1);
-console.log("source-quality: 19 explicit data-integrity assertions passed");
+const nrw=sourceHealth({...files,nrwPolice:{sources:[
+ {city:"Bonn",status:"verified_one_off",count:1},
+ {city:"Münster",status:"not_verified_no_import",count:0}
+]}},{today:"2026-11-19"}).sources;
+assert.equal(nrw.find(s=>s.source==="Polizei Bonn").status,"verified_one_off");
+assert.equal(nrw.find(s=>s.source==="Polizei Münster").status,"no_matching_items");
+console.log("source-quality: 23 explicit data-integrity assertions passed");
