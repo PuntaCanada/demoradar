@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "policy": "Only public organizational contact URLs with event-linked source evidence. Never infer email addresses, publish private people's contacts, or scrape personal data.",
+  "contacts": []
+}
