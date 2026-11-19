@@ -122,5 +122,16 @@ const output={version:1,updated_at:now.toISOString(),mode:"suggestions_only",ver
  notes:"Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
  sources:{youtube_configured:!!api.youtube,twitch_configured:!!(api.twitchId&&api.twitchSecret)},
  candidates:[...combined.values()].slice(0,100),errors:errors.slice(0,20)};
+// Avoid 96 no-op commits per day. Only new/changed links, statuses and fresh LIVE checks
+// need to be saved. A recording remains in the queue without touching its timestamps.
+const stable=x=>JSON.stringify({
+ version:x.version,mode:x.mode,sources:x.sources,
+ candidates:(x.candidates||[]).map(item=>({
+  ...item,checked_at:item.status==="live"?item.checked_at:undefined
+ })).sort((a,b)=>(a.event_id+"|"+a.url).localeCompare(b.event_id+"|"+b.url))
+});
+if(stable(previous)===stable(output)){
+ console.log("No changed stream candidates or status.");process.exit(0);
+}
 writeFileSync(OUT,JSON.stringify(output,null,2)+"\n");
 console.log("Stream discovery candidates:",output.candidates.length,"new:",candidates.length,"errors:",errors.length);
