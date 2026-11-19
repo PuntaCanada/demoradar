@@ -21,7 +21,7 @@
     "total_event_count": "int"
   },
   "list_field": "events",
-  "list_count": 3,
+  "list_count": 5,
   "item_keys": [
     "id",
     "created",
@@ -53,7 +53,7 @@
     "slug": "str",
     "short_description": "str",
     "description": "str",
-    "url": "str",
+    "url": "NoneType",
     "start_time": "str",
     "end_time": "str",
     "timezone": "str",
@@ -68,12 +68,94 @@
     "raw_organiser": "NoneType",
     "is_march": "bool"
   },
+  "examples": [
+    {
+      "id": 29592,
+      "name": "Mahnwache Flüchtlingslager",
+      "start_time": "2052-04-05T00:00:00",
+      "location_samples": [
+        {
+          "id": 106623,
+          "city": "München",
+          "country": "Deutschland"
+        }
+      ],
+      "locations_count": 1
+    },
+    {
+      "id": 28836,
+      "name": "Grundrechte als Mangelware? Versammlungsfreiheit nach dem Zufallsprinzip?",
+      "start_time": "2052-01-13T00:00:00",
+      "location_samples": [
+        {
+          "id": 164292,
+          "city": "München",
+          "country": "Deutschland"
+        },
+        {
+          "id": 164293,
+          "city": "München",
+          "country": "Deutschland"
+        }
+      ],
+      "locations_count": 2
+    },
+    {
+      "id": 26161,
+      "name": "1. Mai Tag der Arbeit",
+      "start_time": "2050-04-01T00:00:00",
+      "location_samples": [
+        {
+          "id": 96431,
+          "city": "München",
+          "country": "Deutschland"
+        }
+      ],
+      "locations_count": 1
+    },
+    {
+      "id": 44266,
+      "name": "NS-Verherrlichung stoppen",
+      "start_time": "2034-08-17T14:00:00",
+      "location_samples": [
+        {
+          "id": 164709,
+          "city": "Berlin",
+          "country": "Deutschland"
+        },
+        {
+          "id": 164710,
+          "city": "Berlin",
+          "country": "Deutschland"
+        }
+      ],
+      "locations_count": 11
+    },
+    {
+      "id": 44265,
+      "name": "NS-Verherrlichung stoppen",
+      "start_time": "2033-08-17T14:00:00",
+      "location_samples": [
+        {
+          "id": 164697,
+          "city": "Berlin",
+          "country": "Deutschland"
+        },
+        {
+          "id": 164698,
+          "city": "Berlin",
+          "country": "Deutschland"
+        }
+      ],
+      "locations_count": 12
+    }
+  ],
   "sample_event": {
-    "id": 11960,
-    "name": "Das Heinrich-Böll-Haus als Aktionszentrum Lüneburgs ist besonders wichtig für die demokratische Teil",
-    "start_time": "1969-12-26T09:00:00",
-    "end_time": "1969-12-26T10:00:00",
-    "url": "https://www.hansestadt-lueneburg.de/rathaus/bekanntmachungen.html#versammlungen",
-    "description": "Das Heinrich-Böll-Haus als Aktionszentrum Lüneburgs ist besonders wichtig für die demokratische Teilhabe und die Politisierung der Gesellschaft von jung bis alt und muss daher erhalten bleiben."
+    "id": 29592,
+    "name": "Mahnwache Flüchtlingslager",
+    "start_time": "2052-04-05T00:00:00",
+    "end_time": "2021-07-05T14:30:00",
+    "url": null,
+    "description": "Mahnwache Flüchtlingslager"
   }
 }
