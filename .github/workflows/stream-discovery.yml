@@ -6,6 +6,7 @@ on:
       - 'scripts/update-streams.mjs'
       - 'scripts/stream-matcher.mjs'
       - 'scripts/test-stream-matcher.mjs'
+      - 'scripts/stream-coverage-audit.mjs'
       - '.github/workflows/stream-discovery.yml'
       - 'data/streamer-candidates.json'
   schedule:
@@ -37,6 +38,8 @@ jobs:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
         run: node scripts/update-streams.mjs
+      - name: Analysiere reale Titel und Abdeckung, ohne automatische Freigaben
+        run: node scripts/stream-coverage-audit.mjs
       - name: Speichere ausschließlich geänderte Treffer
         run: |
           if [ -n "$(git status --porcelain data/stream-discoveries.json)" ]; then
