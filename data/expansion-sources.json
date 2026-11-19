@@ -34,6 +34,17 @@
       "status": "reachable_unverified_event_feed"
     },
     {
+      "city": "Frankfurt am Main",
+      "state": "Hessen",
+      "type": "official_city_press",
+      "url": "https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/",
+      "parser": null,
+      "data_rights": "No verified bulk republication licence; official fact notices linked only",
+      "scope": "Detailed verified one-off municipal notice for 20 November 2026, not a rolling list",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
       "city": "Hamburg",
       "state": "Hamburg",
       "type": "official_registration_information",
