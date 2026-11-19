@@ -62,6 +62,7 @@ def main():
   "rights":"Short factual announcement, date, venue and publisher link only; no police press article reproduced"}
  found=[]
  if -90<=(today-EVENT_DATE).days<=30:
+  status["checked_on"]=today.isoformat()
   try:
    found=parse(fetch())
    status.update(status="verified_one_off" if found else "unverified_content_no_import",count=len(found))
