@@ -7,6 +7,8 @@ on:
       - 'scripts/update-events.mjs'
       - 'scripts/update-rostock.py'
       - 'scripts/update-dresden-jena.py'
+      - 'scripts/update-dresden.py'
+      - 'scripts/dedupe-events.py'
       - 'live.js'
       - 'index.html'
       - 'scripts/update-news.py'
@@ -32,6 +34,10 @@ jobs:
         run: python3 scripts/update-rostock.py
       - name: Prüfe Dresden und Jena und importiere eindeutig gekennzeichnete Jena-Versammlungen
         run: python3 scripts/update-dresden-jena.py
+      - name: Lade Dresdner Versammlungen aus der amtlichen JSON-Schnittstelle
+        run: python3 scripts/update-dresden.py
+      - name: Entferne konservativ echte Dubletten
+        run: python3 scripts/dedupe-events.py
       - name: Prüfe Nachrichten-Feeds und mögliche Berichtszuordnungen
         run: python3 scripts/update-news.py
       - name: Prüfe Kalendercode und Datenformat
@@ -47,10 +53,10 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/events.json data/source-status.json data/news-matches.json
+            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json
             git commit -m "data: update Berlin events"
             git push
           else
