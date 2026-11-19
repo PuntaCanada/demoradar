@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Transparent coverage across all 16 German federal states: which official city sources return data, which records come from individual police notices, and where are reliable regular feeds still missing?">
+<title>Official demonstration sources | DemoRadar</title>
+<link rel="canonical" href="https://demoradar.pages.dev/en/sources/">
+<link rel="alternate" hreflang="de" href="https://demoradar.pages.dev/sources/">
+<link rel="alternate" hreflang="en" href="https://demoradar.pages.dev/en/sources/">
+<link rel="alternate" hreflang="x-default" href="https://demoradar.pages.dev/sources/">
+<link rel="stylesheet" href="/sources/source-status.css">
+<script src="/sources/source-status.js" defer></script>
+</head>
+<body>
+<a class="source-skip" href="#main">Skip to content</a>
+<header class="top"><div class="container top-row">
+<a class="logo" href="/en/">DemoRadar</a>
+<nav aria-label="Main navigation" class="top-links">
+<a href="/">Calendar</a><a href="/en/sources/" aria-current="page">Sources</a>
+<a href="/sources/" hreflang="de">Deutsch</a>
+</nav></div></header>
+<main class="container" id="main" data-sources-root>
+<section class="hero" aria-labelledby="heading">
+<div class="eyebrow">Source transparency</div><h1 id="heading">Where do our demonstration dates come from?</h1>
+<p class="intro">Transparent coverage across all 16 German federal states: which official city sources return data, which records come from individual police notices, and where are reliable regular feeds still missing?</p>
+<p class="notice">Important: A missing feed or zero listed events does not mean that no demonstrations are taking place. City-level sources do not cover an entire state. Public access does not automatically grant broad reuse rights.</p>
+</section>
+<section aria-label="Sourcesübersicht">
+<div class="stats">
+<div class="stat"><strong id="partialCount">–</strong><span>States with partial source coverage</span></div>
+<div class="stat"><strong id="feedCount">–</strong><span>Monitored recurring official feeds</span></div>
+<div class="stat"><strong id="reviewedCount">–</strong><span>Individually audited import sources</span></div>
+</div><p class="fineprint" id="lastCheck" role="status">Loading evidenced source checks…</p>
+</section>
+<section aria-label="Amtliches Sourcesverzeichnis">
+<div class="controls">
+<div class="control"><label for="sourceSearch">Search state or city</label><input id="sourceSearch" type="search" autocomplete="off"></div>
+<div class="control"><label for="sourceFilter">Source coverage</label>
+<select id="sourceFilter">
+<option value="all">All states</option>
+<option value="regional_partial">Partial city sources</option>
+<option value="local_partial">Individual local sources</option>
+<option value="no_confirmed_regular_feed">No regular official feed confirmed</option>
+</select></div></div>
+<p class="results" id="sourceResults" role="status" aria-live="polite">Loading official sources…</p>
+<div class="grid" id="stateGrid"></div>
+</section>
+</main><footer class="footer"><div class="container"><a href="/">← Back to DemoRadar</a><p>Official source records, not a complete nationwide register. No endorsement of demonstrations or organisers.</p></div></footer>
+</body></html>
