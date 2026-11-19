@@ -12,10 +12,25 @@ export function cityMatches(title,city){
  if(!parts.length)return false;
  // Require contiguous word boundaries, never substring "Essen" inside "Interessen".
  const contains=needle=>titleWords.some((_,i)=>needle.every((word,j)=>titleWords[i+j]===word));
+ // If the title explicitly says the other Frankfurt, reject the conflicting district.
+ const titleParts=titleWords.join(" ");
+ const normalizedCity=parts.join(" ");
+ if(normalizedCity==="frankfurt am main"&&/\bfrankfurt oder\b/.test(titleParts))return false;
+ if(normalizedCity==="frankfurt oder"&&/\bfrankfurt am main\b/.test(titleParts))return false;
  if(contains(parts))return true;
  // Administrative city suffix: Frankfurt am Main -> Frankfurt; Halle (Saale) -> Halle.
  // Single prefix still requires at least one additional topic match below.
  return parts.length>=2&&contains([parts[0]])&&parts[0].length>=6;
+}
+export function explicitDateInTitle(title){
+ const text=String(title||"");
+ const iso=text.match(/(?:^|[^0-9])(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})(?:[^0-9]|$)/);
+ const euro=text.match(/(?:^|[^0-9])(\d{1,2})[.\-/](\d{1,2})[.\-/](20\d{2})(?:[^0-9]|$)/);
+ const candidate=iso?[iso[1],iso[2],iso[3]]:euro?[euro[3],euro[2],euro[1]]:null;
+ if(!candidate)return "";
+ const value=candidate.map((part,index)=>index===0?part:part.padStart(2,"0")).join("-");
+ const dt=new Date(value+"T12:00:00Z");
+ return Number.isFinite(dt.getTime())&&dt.toISOString().slice(0,10)===value?value:"";
 }
 export function localDay(timestamp){
  const dt=new Date(timestamp);
@@ -38,6 +53,9 @@ export function matchEvents(video,events){
  for(const event of events){
   if(!event?.id||!event?.title||!event?.city||!event?.date)continue;
   if(!cityMatches(video.title,event.city)||!nearbyDate(video.date,event.date,video.status))continue;
+  // Explicit title dates outrank timestamps. Wrong-day recordings are withheld.
+  const namedDay=explicitDateInTitle(video.title);
+  if(namedDay&&namedDay!==event.date)continue;
   const matching=topics(event.title).filter(t=>tokens.has(t));
   // Short event titles ("Gegen AfD") can match only when the stream explicitly
   // names a distinctive location as a second independent piece of evidence.
