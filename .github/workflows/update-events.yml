@@ -11,6 +11,7 @@ on:
       - 'scripts/test-frankfurt.py'
       - 'scripts/test-cologne.py'
       - 'scripts/monitor-official-sources.py'
+      - 'scripts/test-source-monitor.py'
       - 'scripts/update-dresden-jena.py'
       - 'scripts/update-dresden.py'
       - 'scripts/dedupe-events.py'
@@ -84,6 +85,7 @@ jobs:
           python3 -m py_compile scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py scripts/update-cologne.py scripts/update-frankfurt.py scripts/monitor-official-sources.py
           python3 scripts/test-cologne.py
           python3 scripts/test-frankfurt.py
+          python3 scripts/test-source-monitor.py
           node --check heatmap.js
           python3 scripts/test-dedupe.py
           python3 scripts/test-event-updates.py
