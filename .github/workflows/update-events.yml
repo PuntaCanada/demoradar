@@ -1,6 +1,10 @@
 name: Aktualisiere Berliner Demonstrationen
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/update-events.yml'
+      - 'scripts/update-events.mjs'
   schedule:
     - cron: "21 */6 * * *"
 permissions:
