@@ -6,6 +6,7 @@ on:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
       - 'scripts/update-rostock.py'
+      - 'live.js'
   schedule:
     - cron: "21 */6 * * *"
 permissions:
