@@ -78,8 +78,9 @@ def main():
                     m=re.search(r"\b(\d{2})\.(\d{2})\.(20\d{2})\b(?:\s*[-–]\s*\d{2}\.\d{2}\.\d{4})?\s*\|\s*(\d{2}:\d{2})",raw)
                     if not m:continue
                     date=f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
-                    when=datetime.date.fromisoformat(date)
-                    if not(today-datetime.timedelta(days=1)<=when<=today+datetime.timedelta(days=120)):continue
+                    try:when=datetime.date.fromisoformat(date)
+                    except ValueError:continue
+                    if not(today-datetime.timedelta(days=30)<=when<=today+datetime.timedelta(days=120)):continue
                     ident=hashlib.sha256((title+date+m.group(4)).encode()).hexdigest()[:16]
                     found.append({"id":"jena-"+ident,"country":"DE","state":"Thüringen","city":"Jena","date":date,"start":m.group(4),"end":"","title":title,"postal_code":"","location":"","route":"","source":"Stadt Jena – Auflagen aktueller Versammlungen","source_url":JENA,"source_status":"behördlich veröffentlicht"})
                 if found:
