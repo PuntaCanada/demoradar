@@ -112,6 +112,8 @@ jobs:
           python3 scripts/test-leipzig-archive.py
           node scripts/test-source-quality.mjs
           node scripts/test-source-health-alerts.mjs
+          node scripts/test-stream-matcher.mjs
+          node scripts/test-source-coverage.mjs
           python3 scripts/test-frankfurt.py
           python3 scripts/test-dortmund-police.py
           python3 scripts/test-frankfurt-police-archive.py
