@@ -1,12 +1,12 @@
 {
-  "checked_at": "2026-11-19T08:32:13.751179+00:00",
+  "checked_at": "2026-11-19T08:33:45.707290+00:00",
   "sources": [
     {
       "city": "Dresden",
-      "url": "https://www.dresden.de/versammlungen",
-      "status": "reachable_unverified_format",
-      "imported": 0,
-      "note": "Official landing page reachable; no importer until structured listing is verified."
+      "url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "status": "ok",
+      "imported": 39,
+      "note": "Amtliche Dresdner JSON-Schnittstelle; Einträge werden direkt importiert."
     },
     {
       "city": "Jena",
