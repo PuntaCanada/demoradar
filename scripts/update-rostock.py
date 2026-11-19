@@ -47,10 +47,10 @@ try:
   kind=field("Versammlungsart")
   place=route if kind.lower() not in ("aufzug","demonstrationszug") else ""
   if place:route=""
-  applicant=field("Anmeldende")
+  # Applicant names are intentionally not republished; public dates/topics remain attributable.
   status=field("Status")
   identifier=hashlib.sha256((date+match.group(4)+title).encode()).hexdigest()[:16]
-  events.append(dict(id="rostock-"+identifier,country="DE",state="Mecklenburg-Vorpommern",city="Rostock",date=date,start=match.group(4),end=(field("Versammlungsende").split(",")[-1].strip()[:5]),title=title,postal_code="",location=place,route=route,kind=kind,organizer=applicant if applicant and applicant!="Einzelanmelder" else "",registered_participants=field("Angezeigte Teilnehmerzahl"),event_status=status,source="Hanse- und Universitätsstadt Rostock",source_url=URL,source_status="behördlich veröffentlicht"))
+  events.append(dict(id="rostock-"+identifier,country="DE",state="Mecklenburg-Vorpommern",city="Rostock",date=date,start=match.group(4),end=(field("Versammlungsende").split(",")[-1].strip()[:5]),title=title,postal_code="",location=place,route=route,kind=kind,organizer="",registered_participants=field("Angezeigte Teilnehmerzahl"),event_status=status,source="Hanse- und Universitätsstadt Rostock",source_url=URL,source_status="behördlich veröffentlicht"))
  if not events:raise ValueError("Rostock source format changed; no valid titles parsed")
  data=json.loads(FILE.read_text())
  existing=[e for e in data["events"] if not e["id"].startswith("rostock-")]
