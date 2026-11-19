@@ -1,0 +1,28 @@
+name: Verify Google Search Console token deployed
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'google62b1133f7c042e9b.html'
+      - '.github/workflows/verify-google.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Cloudflare serves Google's exact HTML verification file
+        run: |
+          set -euo pipefail
+          url="https://demoradar.pages.dev/google62b1133f7c042e9b.html"
+          for i in $(seq 1 12); do
+            code=$(curl --max-time 15 -sSL -o /tmp/verification.html -w "%{http_code}" "$url") || code=000
+            echo "Attempt $i: HTTP $code"
+            if [ "$code" = 200 ] && grep -qFx 'google-site-verification: google62b1133f7c042e9b.html' /tmp/verification.html; then
+              echo "Google verification file publicly available with expected contents."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Verification file not yet served with exact expected contents"
+          exit 1
