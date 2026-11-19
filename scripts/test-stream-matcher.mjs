@@ -25,4 +25,9 @@ assert.equal(cityMatches("Demonstration Berliner Alexanderplatz","Berlin"),false
 assert.equal(localDay("invalid"),"");
 assert.equal(nearbyDate("invalid",date,"live"),false);
 assert.equal(nearbyDate("2026-11-19T23:30:00Z",date,"live"),false,"Berlin local date after midnight");
-console.log("stream-matcher: 16 safety checks passed");
+const brief=[{id:"short-afd",city:"Berlin",date,title:"Kundgebung gegen AfD",location:"Alexanderplatz"}];
+assert.equal(find("Live Demo Berlin AfD Alexanderplatz",iso,"live",brief).length,1,"short topic plus exact named venue accepted");
+assert.equal(find("Live Demo Berlin AfD",iso,"live",brief).length,0,"acronym plus city alone insufficient");
+assert.equal(find("Live Demo Berlin AfD Rathaus",iso,"live",brief).length,0,"wrong venue rejected");
+assert.equal(find("Live Demo Berlin AfD Alexanderplatz","2026-11-20T12:00:00Z","live",brief).length,0,"live date must match");
+console.log("stream-matcher: 20 safety checks passed");
