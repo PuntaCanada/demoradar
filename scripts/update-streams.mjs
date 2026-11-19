@@ -56,24 +56,33 @@ function add(video){
    note:"AUTOMATIC CANDIDATE ONLY: two distinct topic terms plus city, date and demonstration keyword. Verify before publishing."});
  }
 }
+const discoveryStats={youtube_channels_checked:0,youtube_videos_checked:0,youtube_streams_seen:0,twitch_channels_checked:0};
 async function youtube(){
  if(!api.youtube)return;
- const handles=[...new Set(channels.flatMap(c=>(c.platforms||[]).filter(p=>p.platform==="youtube").map(p=>({name:c.name,handle:new URL(p.url).pathname.split("/").filter(Boolean)[0]}))))];
- for(const entry of handles){
-  if(!entry.handle?.startsWith("@"))continue;
+ const accounts=channels.flatMap(c=>(c.platforms||[]).filter(p=>p.platform==="youtube")
+   .map(p=>({name:c.name,handle:new URL(p.url).pathname.split("/").filter(Boolean)[0]})));
+ const uniqueHandles=[...new Map(accounts.filter(x=>x.handle?.startsWith("@")).map(x=>[x.handle.toLowerCase(),x])).values()];
+ for(const entry of uniqueHandles){
   try{
-   const ch=await json("https://www.googleapis.com/youtube/v3/channels?part=id&forHandle="+encodeURIComponent(entry.handle)+"&key="+encodeURIComponent(api.youtube));
-   const id=ch.items?.[0]?.id;if(!id)continue;
-   const query="https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=date&maxResults=12&channelId="+encodeURIComponent(id)+"&key="+encodeURIComponent(api.youtube);
-   const found=await json(query);
-   const ids=(found.items||[]).map(v=>v.id?.videoId).filter(Boolean);
+   // channels.list, playlistItems.list and videos.list each use the low-cost read quota;
+   // unlike search.list, this retrieves up to 50 recent uploads from each verified channel.
+   const ch=await json("https://www.googleapis.com/youtube/v3/channels?part=id,contentDetails&forHandle="+encodeURIComponent(entry.handle)+"&key="+encodeURIComponent(api.youtube));
+   const channel=ch.items?.[0];
+   if(!channel?.id){errors.push("YouTube handle not found: "+entry.handle);continue}
+   discoveryStats.youtube_channels_checked++;
+   const playlist=channel.contentDetails?.relatedPlaylists?.uploads;
+   if(!playlist){errors.push("YouTube uploads playlist missing: "+entry.handle);continue}
+   const found=await json("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId="+encodeURIComponent(playlist)+"&key="+encodeURIComponent(api.youtube));
+   const ids=[...new Set((found.items||[]).map(v=>v.contentDetails?.videoId).filter(Boolean))];
    if(!ids.length)continue;
    const details=await json("https://www.googleapis.com/youtube/v3/videos?part=snippet,liveStreamingDetails&id="+encodeURIComponent(ids.join(","))+"&key="+encodeURIComponent(api.youtube));
    for(const v of details.items||[]){
+    discoveryStats.youtube_videos_checked++;
     const s=v.snippet||{},d=v.liveStreamingDetails||{};
     const isLive=s.liveBroadcastContent==="live"&&!!d.actualStartTime&&!d.actualEndTime;
     const recording=!!d.actualEndTime;
-    if(!isLive&&!recording)continue; // do not mistake an upcoming stream for live
+    if(!isLive&&!recording)continue;
+    discoveryStats.youtube_streams_seen++;
     add({platform:"YouTube",channel:entry.name,title:s.title,url:"https://www.youtube.com/watch?v="+v.id,
      date:isLive?d.actualStartTime:d.actualStartTime||s.publishedAt,status:isLive?"live":"recording",
      checked_at:now.toISOString(),evidence_url:"https://www.youtube.com/watch?v="+v.id});
@@ -130,6 +139,7 @@ for(const x of [...prev,...candidates]){
 const output={version:1,updated_at:now.toISOString(),mode:"suggestions_only",verified_public_live_count:0,
  notes:"Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
  sources:{youtube_configured:!!api.youtube,twitch_configured:!!(api.twitchId&&api.twitchSecret)},
+ statistics:discoveryStats,
  candidates:[...combined.values()].slice(0,100),errors:errors.slice(0,20)};
 // Avoid 96 no-op commits per day. Only new/changed links, statuses and fresh LIVE checks
 // need to be saved. A recording remains in the queue without touching its timestamps.
