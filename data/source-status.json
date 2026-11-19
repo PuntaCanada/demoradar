@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-11-19T08:06:54.211905+00:00",
+  "sources": [
+    {
+      "city": "Dresden",
+      "url": "https://www.dresden.de/versammlungen",
+      "status": "reachable_unverified_format",
+      "imported": 0,
+      "note": "Official landing page reachable; no importer until structured listing is verified."
+    },
+    {
+      "city": "Jena",
+      "url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen",
+      "status": "ok",
+      "imported": 0,
+      "note": "Only explicitly labelled assembly entries are imported; absence is not proof of no demonstrations."
+    }
+  ]
+}
