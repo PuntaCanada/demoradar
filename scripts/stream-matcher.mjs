@@ -5,7 +5,8 @@ export function normalize(value){
   .replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss").replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();
 }
 export function words(text){return normalize(text).split(" ").filter(Boolean)}
-export function topics(text){return [...new Set(words(text).filter(w=>w.length>=4&&!STOP.has(w)))]}
+const MEANINGFUL_SHORT=new Set(["afd","cdu","csu","bsw","spd","fdp","nato","nsu","g20","g7"]);
+export function topics(text){return [...new Set(words(text).filter(w=>(w.length>=4||MEANINGFUL_SHORT.has(w))&&!STOP.has(w)))]}
 export function cityMatches(title,city){
  const titleWords=words(title),parts=words(city);
  if(!parts.length)return false;
@@ -38,10 +39,14 @@ export function matchEvents(video,events){
   if(!event?.id||!event?.title||!event?.city||!event?.date)continue;
   if(!cityMatches(video.title,event.city)||!nearbyDate(video.date,event.date,video.status))continue;
   const matching=topics(event.title).filter(t=>tokens.has(t));
-  // Require two distinctive theme terms, not just words like Demo or Berlin.
-  if(matching.length<2)continue;
-  options.push({event_id:event.id,city:event.city,date:event.date,matched_terms:matching,
-   confidence_terms:matching.length});
+  // Short event titles ("Gegen AfD") can match only when the stream explicitly
+  // names a distinctive location as a second independent piece of evidence.
+  const place=topics(event.location||"").filter(t=>t.length>=6&&tokens.has(t)&&!topics(event.city).includes(t));
+  const enough=matching.length>=2||(matching.length===1&&place.length>=1);
+  if(!enough)continue;
+  const evidence=[...matching,...place.filter(t=>!matching.includes(t))];
+  options.push({event_id:event.id,city:event.city,date:event.date,matched_terms:evidence,
+   confidence_terms:matching.length*2+place.length});
  }
  // Never show one stream under multiple ambiguously similar event titles.
  const max=Math.max(0,...options.map(x=>x.confidence_terms));
