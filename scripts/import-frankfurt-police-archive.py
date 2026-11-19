@@ -55,6 +55,7 @@ def main():
   "rights":"Only date, time, location, publisher and short factual subject; article content/images not republished"}
  found=[]
  if -90<=(today-DAY).days<=30:
+  result["checked_on"]=today.isoformat()
   try:
    found=parse(fetch());result.update(status="verified_historical_notice" if found else "unverified_no_import",count=len(found))
   except Exception as e:result.update(status="unavailable_no_import",error=str(e)[:120])
