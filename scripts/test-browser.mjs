@@ -64,7 +64,7 @@ try{
  };
  await send("Page.enable");await send("Runtime.enable");
  const rootUrl="http://127.0.0.1:"+port;
- const stateCode='(()=>({language:document.documentElement.lang,cityCount:document.querySelector("#city")?.options.length||0,month:document.querySelector("#resultText")?.textContent||"",calendar:document.querySelector("#calendar")?.querySelectorAll(".day-events").length||0,width:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,bodyScrollWidth:document.body.scrollWidth,toolbar:document.querySelector(".toolbar")?.getBoundingClientRect().width,heading:document.querySelector("h1")?.textContent||"",mapStates:document.querySelectorAll("#heatmapSvg .heatmap-state").length,sourceRows:document.querySelectorAll("#heatmapRanking .heatmap-source-label").length,gapNote:!!document.querySelector(".heatmap-coverage-note"),gapStates:document.querySelectorAll("#heatmapSvg [stroke-dasharray]").length,floating:getComputedStyle(document.querySelector(".floating-calendar-link")).position}))()';
+ const stateCode='(()=>({language:document.documentElement.lang,cityCount:document.querySelector("#city")?.options.length||0,month:document.querySelector("#resultText")?.textContent||"",calendar:document.querySelector("#calendar")?.querySelectorAll(".day-events").length||0,width:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,bodyScrollWidth:document.body.scrollWidth,toolbar:document.querySelector(".toolbar")?.getBoundingClientRect().width,heading:document.querySelector("h1")?.textContent||"",mapStates:document.querySelectorAll("#heatmapSvg .heatmap-state").length,sourceRows:document.querySelectorAll("#heatmapRanking .heatmap-source-label").length,healthRows:document.querySelectorAll("#heatmapRanking .heatmap-health-label").length,gapNote:!!document.querySelector(".heatmap-coverage-note"),gapStates:document.querySelectorAll("#heatmapSvg [stroke-dasharray]").length,floating:getComputedStyle(document.querySelector(".floating-calendar-link")).position}))()';
  async function navigate(path,width){
   await send("Emulation.setDeviceMetricsOverride",{width,height:850,deviceScaleFactor:1,mobile:width<=430});
   await send("Page.navigate",{url:rootUrl+path});
@@ -76,6 +76,7 @@ try{
   assert.ok(state?.cityCount>1&&state.calendar>0&&state.mapStates===16,"Data/calendar did not render: "+path+" "+JSON.stringify(state));
   assert.equal(state.language,path.startsWith("/en/")?"en":"de","HTML route language");
   assert.equal(state.sourceRows,16,"Every state lists an auditable source coverage status");
+  assert.ok(state.healthRows>=3,"Observed importer health is visible in the state list");
   assert.equal(state.gapNote,true,"Coverage caveat rendered on desktop and mobile");
   assert.ok(state.gapStates>0,"No-source zero states shown distinctly with dashed borders");
   assert.equal(state.floating,"fixed","Floating calendar link remains visible");
