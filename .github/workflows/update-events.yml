@@ -6,6 +6,9 @@ on:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
       - 'scripts/update-rostock.py'
+      - 'scripts/update-cologne.py'
+      - 'scripts/test-cologne.py'
+      - 'scripts/monitor-official-sources.py'
       - 'scripts/update-dresden-jena.py'
       - 'scripts/update-dresden.py'
       - 'scripts/dedupe-events.py'
@@ -47,6 +50,10 @@ jobs:
         run: node scripts/update-events.mjs
       - name: Ergänze amtliche Versammlungen aus Rostock
         run: python3 scripts/update-rostock.py
+      - name: Importiere eindeutig datierte offizielle Kölner Demonstrationshinweise
+        run: python3 scripts/update-cologne.py
+      - name: Beobachte weitere amtliche Kandidatenquellen ohne erfundene Termine
+        run: python3 scripts/monitor-official-sources.py
       - name: Lade Dresdner Versammlungen aus der amtlichen JSON-Schnittstelle
         run: python3 scripts/update-dresden.py
       - name: Prüfe Dresden und Jena und importiere eindeutig gekennzeichnete Jena-Versammlungen
@@ -67,7 +74,8 @@ jobs:
         run: node scripts/build-language-pages.mjs
       - name: Prüfe Kalendercode und Datenformat
         run: |
-          python3 -m py_compile scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py
+          python3 -m py_compile scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py scripts/update-cologne.py scripts/monitor-official-sources.py
+          python3 scripts/test-cologne.py
           node --check heatmap.js
           python3 scripts/test-dedupe.py
           python3 scripts/test-event-updates.py
@@ -89,7 +97,7 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json index.html en/index.html sitemap.xml robots.txt)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json index.html en/index.html sitemap.xml robots.txt
