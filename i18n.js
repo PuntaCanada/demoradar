@@ -56,8 +56,9 @@ en:{
 "page.title":"DemoRadar — Demonstrations and protests in Germany","page.description":"DemoRadar: Browse demonstrations, rallies and protests in Germany. A source-based event calendar."
 }
 };
-let language="de";
-try{const saved=localStorage.getItem("demoradar-language");if(saved==="de"||saved==="en")language=saved;else if(!/^de\b/i.test(navigator.language||"de"))language="en"}catch{}
+// Route is the single source of truth: / is German and /en/ is English.
+const routeLanguage=()=>/^\/en(?:\/|$)/.test(window.location?.pathname||"/")?"en":"de";
+let language=routeLanguage();
 function t(key,params){let str=dictionary[language]?.[key]??dictionary.de[key]??key;for(const [k,v] of Object.entries(params||{}))str=str.replaceAll("{"+k+"}",String(v));return str}
 function apply(){
  document.documentElement.lang=language;
@@ -74,8 +75,13 @@ function apply(){
 }
 function setLanguage(code){
  if(!dictionary[code]||code===language)return;
- language=code;try{localStorage.setItem("demoradar-language",code)}catch{}
- apply();document.dispatchEvent(new CustomEvent("demoradar:languagechange",{detail:{language:code}}));
+ try{localStorage.setItem("demoradar-language",code)}catch{}
+ // Use distinct indexable addresses; keep the user's section/hash when switching.
+ const path=code==="en"?"/en/":"/";
+ const query=window.location?.search||"",hash=window.location?.hash||"";
+ if(window.location?.assign){window.location.assign(path+query+hash);return}
+ // Safety fallback for unusual embedded previews without browser navigation.
+ language=code;apply();document.dispatchEvent(new CustomEvent("demoradar:languagechange",{detail:{language:code}}));
 }
 window.DemoRadarI18n={t,setLanguage,apply,get language(){return language},get locale(){return language==="en"?"en-GB":"de-DE"}};
 document.querySelectorAll("[data-language]").forEach(el=>el.addEventListener("click",()=>setLanguage(el.dataset.language)));
