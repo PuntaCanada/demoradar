@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-19T15:56:02.774Z",
+  "updated_at": "2026-11-19T15:56:19.444Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -14,6 +14,208 @@
     "youtube_streams_seen": 222,
     "twitch_channels_checked": 0
   },
+  "diagnostic_sample": [
+    {
+      "channel": "Weichreite",
+      "title": "Veranstalter & Redner angezeigt! \"Störerin ist immer da!\" Naziaufmarsch sprengen Antifa Köln14.11.26",
+      "url": "https://www.youtube.com/watch?v=2kXbSDWTXfg",
+      "date": "2026-11-19T15:07:47Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Prozess gewonnen! Vor Gericht angegriffen von Solidaritätsbegleitung Antifa! Hamburg 17.11.26",
+      "url": "https://www.youtube.com/watch?v=pc5DqMVabnM",
+      "date": "2026-11-18T14:00:07Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"F*ck dich Mr Burns & Merz!\"/\"Wir brauchen Kommunismus!\" GenZ regelt! Phase2 Düsseldorf 14.11.26",
+      "url": "https://www.youtube.com/watch?v=yALkj5qada8",
+      "date": "2026-11-16T14:00:07Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"Naziaufmarsch sprengen!\" Antifa Gegendemo Köln 14.11.26 Anzeige von Rote Linse",
+      "url": "https://www.youtube.com/watch?v=nY5em8oUERM",
+      "date": "2026-11-15T16:00:11Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Gen Z regelt! Phase 2 Düsseldorf 14.11.26",
+      "url": "https://www.youtube.com/watch?v=mtKD7bkVgtg",
+      "date": "2026-11-15T09:10:07Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"Ich will saufen!\"/\"Köln über alles!\"/\"Oberberger ihr F*tzen!\" Kölle alaaf! Karneval Köln 11.11.26",
+      "url": "https://www.youtube.com/watch?v=JF3FZnXFdaU",
+      "date": "2026-11-14T18:01:42Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"Austausch afrikanische gegen weiße Rasse?\" \"CO₂-Politik hoch sozialistisch!\" GD Antifa Bonn 7.11.26",
+      "url": "https://www.youtube.com/watch?v=UmiTFFDb9qg",
+      "date": "2026-11-13T17:00:11Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"Deutschland gehört NICHT nur den Deutschen!\" \"CDU profitiert von Antifa!\" GD & Antifa Bonn 7.11.26",
+      "url": "https://www.youtube.com/watch?v=aslO1JI9r48",
+      "date": "2026-11-13T14:00:10Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Zutritt verweigert! AfD-Verdacht durch Panda-Apotheke Antifa Gedenken heißt kämpfen Bielefeld9.11.26",
+      "url": "https://www.youtube.com/watch?v=DYupLVrxIrY",
+      "date": "2026-11-12T14:00:10Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Weichreite am Boden/Hupen bei Antifa Rede/\"Polizei-Arbeit\" Bielefeld 9.11.26 Gedenken heißt Kämpfen!",
+      "url": "https://www.youtube.com/watch?v=-kbJ7RzbveE",
+      "date": "2026-11-10T14:00:11Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"Ich bin der Polizeiführer!\" Bonn Antifa Gegendemo - Generation Deutschland GD AfD 7.11.26",
+      "url": "https://www.youtube.com/watch?v=MxRlqAB5h-M",
+      "date": "2026-11-09T14:00:10Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Polizeimaßnahme beim Stoplersteine putzen! Bonn 8.11.26 Stadtspaziergang Stolpersteine",
+      "url": "https://www.youtube.com/watch?v=fCOHzMIjyec",
+      "date": "2026-11-08T17:00:10Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Deutschlandfahne unerwünscht! \"Das ist unsere Stadt!\" Verhaftungen \"GenZ regelt!\" Stuttgart 31.10.26",
+      "url": "https://www.youtube.com/watch?v=0WCvqZ2JZ_4",
+      "date": "2026-11-08T12:00:07Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"In Grundschulen alles im Ar*ch!\" Bluetooth-Störer? Stimmen aus Stuttgart \"Gen Z regelt!\" 31.10.26",
+      "url": "https://www.youtube.com/watch?v=o-c7yQQbTHk",
+      "date": "2026-11-07T17:00:08Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"BRD ist Vasallenstaat der USA - Sächsische Separatisten\" Björn Höcke AfD Dialog Crossen 4.11.26",
+      "url": "https://www.youtube.com/watch?v=EMYJtlH4GMY",
+      "date": "2026-11-07T10:00:06Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"... ist & bleibt Volksverräter - Direkte Demokratie\" AfD Wiebke Muhsal mit Interview Crossen4.11.26",
+      "url": "https://www.youtube.com/watch?v=jK2GO7WiHj4",
+      "date": "2026-11-06T14:02:22Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Angriff wegen Deutschlandfahne! Antifa Gegendemo - Björn Höcke AfD Bürgerdialog 4.11.26 Crossen",
+      "url": "https://www.youtube.com/watch?v=BTAE77TYFnI",
+      "date": "2026-11-05T17:00:52Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Antifa greift Björn & Dare an / TMR umgeht Blockaden / Montagsdemo & Alerta-Parade Nürnberg 2.11.26",
+      "url": "https://www.youtube.com/watch?v=6FQ8tx92Rw0",
+      "date": "2026-11-05T15:00:10Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"Hier wohnen Nationalisten! Bin gegen Genozid!\" Die Heimat Antifa Dortmund Dorstfeld 30.10.26",
+      "url": "https://www.youtube.com/watch?v=mCNVMe0lqdc",
+      "date": "2026-11-04T15:00:09Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Mann schlägt Weichreite! 1. Ausbruchs-Versuch: Demo biegt falsch ab! GenZ regelt! Stuttgart 31.10.26",
+      "url": "https://www.youtube.com/watch?v=6Lm-j54TvxY",
+      "date": "2026-11-02T14:00:08Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Flaschen- Böllerwürfe auf Polizei Berlin! Gen Z regelt das! 31.10.26 Bundesweiten Proteste",
+      "url": "https://www.youtube.com/watch?v=rBAcvluR1Ak",
+      "date": "2026-11-01T15:00:07Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "\"Das tragen wir jetzt vor Gericht aus!\" Pax≠Hass BPE Gegendemo Omas gegen Rechts Antifa Köln24.10.26",
+      "url": "https://www.youtube.com/watch?v=8oZx3_Z2Qu0",
+      "date": "2026-10-30T15:00:06Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "AfD Wiebke Muhsal in Antifa Gegendemo Jena 27.10.26 Björn Höcke Bürgerdialog",
+      "url": "https://www.youtube.com/watch?v=ncl_m9KHTaU",
+      "date": "2026-10-29T17:00:07Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Utopia TV Deutschland",
+      "title": "LIVE ❗ Gen Z Frankfurt 💥 Polizei & Läden rüsten auf! 😳 Der Tag vor den Demos Zeil & Innenstadt",
+      "url": "https://www.youtube.com/watch?v=cmgqYBwiN3A",
+      "date": "2026-11-19T15:52:28Z",
+      "status": "live",
+      "match_count": 0
+    },
+    {
+      "channel": "Utopia TV Deutschland",
+      "title": "SPD Influencer BLAMIERT sich total! 💥Hannes Kreschel von Iggy ZERLEGT! 😲 Migration & Wirtschaft",
+      "url": "https://www.youtube.com/watch?v=Sdy-xRFabh8",
+      "date": "2026-11-17T15:27:21Z",
+      "status": "recording",
+      "match_count": 0
+    }
+  ],
   "candidates": [],
   "errors": []
 }
