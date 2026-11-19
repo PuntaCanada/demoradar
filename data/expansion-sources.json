@@ -62,8 +62,7 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "unavailable",
-      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_unverified_event_feed"
     }
   ]
 }
