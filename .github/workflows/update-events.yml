@@ -1,0 +1,32 @@
+name: Aktualisiere Berliner Demonstrationen
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "21 */6 * * *"
+permissions:
+  contents: write
+concurrency:
+  group: demoradar-data-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Lade öffentliche Berliner Versammlungsdaten
+        run: node scripts/update-events.mjs
+      - name: Commit nur bei Änderungen
+        run: |
+          if [ -n "$(git status --porcelain data/events.json)" ]; then
+            git config user.name "demoradar-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/events.json
+            git commit -m "data: update Berlin events"
+            git push
+          else
+            echo "Keine Änderungen"
+          fi
