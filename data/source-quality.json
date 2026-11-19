@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "method": "Observed importer outcomes only; neither state completeness nor actual number of protests can be inferred.",
+  "sources": [
+    {
+      "city": "Berlin",
+      "state": "Berlin",
+      "source": "Polizei Berlin",
+      "status": "observed_data",
+      "count": 1294,
+      "scope": "Official city-wide reporting feed; completeness not guaranteed"
+    },
+    {
+      "city": "Dresden",
+      "state": "Sachsen",
+      "source": "Stadt Dresden",
+      "status": "observed_data",
+      "count": 42,
+      "scope": "Dresden city JSON, not all of Saxony"
+    },
+    {
+      "city": "Rostock",
+      "state": "Mecklenburg-Vorpommern",
+      "source": "Stadt Rostock",
+      "status": "observed_data",
+      "count": null,
+      "scope": "Rostock-only list"
+    },
+    {
+      "city": "Köln",
+      "state": "Nordrhein-Westfalen",
+      "source": "Stadt Köln",
+      "status": "no_matching_items",
+      "count": 0,
+      "scope": "Traffic calendar only; not the assembly register"
+    },
+    {
+      "city": "Köln",
+      "state": "Nordrhein-Westfalen",
+      "source": "Polizei Köln",
+      "status": "verified_one_off",
+      "count": 2,
+      "scope": "One dated police notice, not rolling event coverage"
+    },
+    {
+      "city": "Leipzig",
+      "state": "Sachsen",
+      "source": "Polizeidirektion Leipzig",
+      "status": "verified_one_off",
+      "count": 2,
+      "scope": "One dated police notice, not a rolling feed"
+    },
+    {
+      "city": "Jena",
+      "state": "Thüringen",
+      "source": "Stadt Jena",
+      "status": "no_matching_items",
+      "count": 0,
+      "scope": "City source, only explicitly marked assemblies"
+    },
+    {
+      "city": "Frankfurt am Main",
+      "state": "Hessen",
+      "source": "Stadt Frankfurt",
+      "status": "unavailable",
+      "count": 0,
+      "scope": "Single notice, not complete state or city coverage"
+    }
+  ]
+}

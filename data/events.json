@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T16:33:15.269Z",
-  "count": 1346,
+  "updated_at": "2026-11-19T16:40:45.333Z",
+  "count": 1348,
   "events": [
     {
       "id": "dresden-8951a73b36d21bec",
@@ -599,6 +599,21 @@
       "source_status": "behördlich veröffentlicht"
     },
     {
+      "id": "police-leipzig-d5135ce498c7dcc0",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Leipzig",
+      "date": "2026-11-20",
+      "start": "10:00",
+      "end": "16:45",
+      "title": "Internationaler Schulstreik gegen die Wehrpflicht",
+      "location": "Kleiner Wilhelm-Leuschner-Platz",
+      "route": "",
+      "source": "Polizeidirektion Leipzig – amtliche Ankündigung",
+      "source_url": "https://www.polizei.sachsen.de/de/einsatz-anlaesslich-des-schuelerstreiks-und-des-protestes-der-generation-z-am-20-november-2026-44497.html",
+      "source_status": "Bei der Versammlungsbehörde angezeigt; keine Vollständigkeitsgarantie"
+    },
+    {
       "id": "berlin-101",
       "country": "DE",
       "state": "Berlin",
@@ -1033,6 +1048,21 @@
       "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
       "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
       "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "police-leipzig-35d02c0eda686b0d",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Leipzig",
+      "date": "2026-11-20",
+      "start": "17:00",
+      "end": "21:00",
+      "title": "Gen Z regelt",
+      "location": "Kleiner Wilhelm-Leuschner-Platz",
+      "route": "",
+      "source": "Polizeidirektion Leipzig – amtliche Ankündigung",
+      "source_url": "https://www.polizei.sachsen.de/de/einsatz-anlaesslich-des-schuelerstreiks-und-des-protestes-der-generation-z-am-20-november-2026-44497.html",
+      "source_status": "Bei der Versammlungsbehörde angezeigt; keine Vollständigkeitsgarantie"
     },
     {
       "id": "rostock-8dcc085a35dd1349",
