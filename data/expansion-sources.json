@@ -63,6 +63,16 @@
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
       "status": "reachable_unverified_event_feed"
+    },
+    {
+      "city": "Dortmund",
+      "state": "Nordrhein-Westfalen",
+      "type": "official_municipal_publications",
+      "url": "https://www.dortmund.de/rathaus/publikationen/",
+      "parser": null,
+      "data_rights": "Publication of official municipal notices does not establish a reusable current assembly calendar license",
+      "scope": "Amtsblatt and municipal notices, not a systematically released protest schedule",
+      "status": "research_only_no_current_feed"
     }
   ]
 }
