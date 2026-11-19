@@ -109,7 +109,8 @@ function streamTeaser(event){
    return '<a href="'+esc(item.recording?item.playbackUrl:item.url)+'" target="_blank" rel="noopener noreferrer">'+esc(label+String(item.channel||item.label||item.platform))+'</a>';
   }).join("")+'</div>';
  }
- return '<div class="event-stream-teaser"><a href="'+esc(streamSearchUrl(event))+'" target="_blank" rel="noopener noreferrer">'+esc(german?"🎥 Streams & Aufzeichnungen suchen":"🎥 Search streams & recordings")+'</a></div>';
+ const twitch="https://www.twitch.tv/search?term="+encodeURIComponent([event.title,event.city,event.date].filter(Boolean).join(" ").slice(0,180));
+ return '<div class="event-stream-teaser"><a href="'+esc(streamSearchUrl(event))+'" target="_blank" rel="noopener noreferrer">'+esc(german?"🎥 YouTube-Streams / Aufzeichnungen suchen":"🎥 Search YouTube streams / replays")+'</a><a href="'+esc(twitch)+'" target="_blank" rel="noopener noreferrer">'+esc(german?"Twitch durchsuchen":"Search Twitch")+'</a></div>';
 }
 function communityExtra(event){
  const {streams,contacts}=reviewedLinks(event);
