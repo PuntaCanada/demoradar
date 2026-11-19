@@ -10,7 +10,7 @@
       "parser": null,
       "data_rights": "Only assemblies whose applicants consent to publication; no explicit blanket reuse licence found; monitor only",
       "scope": "Official list is conditional on publication consent and was empty in the verified 19 Nov 2026 snapshot",
-      "status": "reachable_unverified_event_feed"
+      "status": "reachable_monitor_only_not_a_feed"
     },
     {
       "city": "Köln",
@@ -41,7 +41,7 @@
       "parser": null,
       "data_rights": "No verified bulk reuse licence for press texts; monitoring and linking only",
       "scope": "Event- and operation-specific police information, not complete calendar",
-      "status": "reachable_unverified_event_feed"
+      "status": "reachable_monitor_only_not_a_feed"
     },
     {
       "city": "Frankfurt am Main",
@@ -55,14 +55,14 @@
       "error": "HTTP Error 403: Forbidden"
     },
     {
-      "city": "Hamburg",
-      "state": "Hamburg",
-      "type": "official_registration_information",
-      "url": "https://www.hamburg.de/service/info/111097758/",
+      "city": "Leipzig",
+      "state": "Sachsen",
+      "type": "official_open_data_research",
+      "url": "https://opendata.leipzig.de/showcase/rallymap",
       "parser": null,
-      "data_rights": "Not an event feed; no bulk licence applicable",
-      "scope": "Registration rules and contacts only; not a future event source",
-      "status": "reachable_unverified_event_feed"
+      "data_rights": "A 2023 hackathon showcase, not a licensed current rolling event feed; monitoring only",
+      "scope": "Project goal mentions future open data; does not establish a 2026 import source",
+      "status": "reachable_monitor_only_not_a_feed"
     },
     {
       "city": "Dortmund",
@@ -70,9 +70,19 @@
       "type": "official_municipal_publications",
       "url": "https://www.dortmund.de/rathaus/publikationen/",
       "parser": null,
-      "data_rights": "Publication of official municipal notices does not establish a reusable current assembly calendar license",
-      "scope": "Amtsblatt and municipal notices, not a systematically released protest schedule",
-      "status": "research_only_no_current_feed"
+      "data_rights": "Municipal notices are not automatically licensed as a current protest database; monitoring only",
+      "scope": "Official publications, no verified complete assembly calendar",
+      "status": "reachable_monitor_only_not_a_feed"
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "type": "official_registration_information",
+      "url": "https://www.hamburg.de/service/info/111097758/",
+      "parser": null,
+      "data_rights": "Not an event feed; no bulk licence applicable",
+      "scope": "Registration rules and contacts only; not a future event source",
+      "status": "reachable_monitor_only_not_a_feed"
     }
   ]
 }
