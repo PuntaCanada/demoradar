@@ -21,7 +21,7 @@ export function analyzeCoverage(events, samples, sources, options={}){
   byCity.set(key,item);
  }
  // Only cities present in official source research are named explicitly below.
- const studied=[...new Set(["Köln","Hamburg","Düsseldorf","Bonn","Bielefeld","Stuttgart","Jena","Nürnberg","Frankfurt am Main","Halle (Saale)","Berlin","Leipzig","Braunschweig",
+ const studied=[...new Set(["Köln","Hamburg","Düsseldorf","Bonn","Münster","Bielefeld","Stuttgart","Jena","Nürnberg","Frankfurt am Main","Halle (Saale)","Berlin","Leipzig","Braunschweig",
  ...sources.map(s=>s.city).filter(Boolean)])];
  const cities=studied.map(city=>{
   const matching=[...byCity.entries()].filter(([key])=>key.toLocaleLowerCase("de")===city.toLocaleLowerCase("de"));
