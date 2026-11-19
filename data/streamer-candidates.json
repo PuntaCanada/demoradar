@@ -114,6 +114,20 @@
       "evidence_url": "https://www.youtube.com/channel/UCRxU5NBYJ5LvsZgBm_Kz6lQ",
       "verification": "public_youtube_channel_identified",
       "monitoring": "automatic_candidate_only"
+    },
+    {
+      "id": "eskalabe",
+      "name": "Eskalabe",
+      "platforms": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@Eskalabe",
+          "status": "verified_public_channel"
+        }
+      ],
+      "evidence_url": "https://www.youtube.com/channel/UCteg8z4joUZTWTCw4QEzihQ",
+      "verification": "public_youtube_channel_identified",
+      "monitoring": "automatic_candidate_only"
     }
   ]
 }
