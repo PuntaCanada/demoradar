@@ -3,7 +3,7 @@
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
   "updated_at": "2026-11-19T07:33:35.104Z",
-  "count": 1323,
+  "count": 1331,
   "events": [
     {
       "id": "berlin-2",
@@ -486,6 +486,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "rostock-3105a037ef96230f",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-19",
+      "start": "14:00",
+      "end": "16:00",
+      "title": "Gegen Gewalt gegen Frauen",
+      "postal_code": "",
+      "location": "",
+      "route": "öffentliche Gehwegfläche des Margaretenplatzes",
+      "organizer": "",
+      "registered_participants": "ca. 10 bis 15 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-92",
       "country": "DE",
       "state": "Berlin",
@@ -902,6 +921,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "rostock-8d9fa9ccff1643ef",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-20",
+      "start": "12:00",
+      "end": "16:30",
+      "title": "Schulstreik gegen Wehrpflicht",
+      "postal_code": "",
+      "location": "",
+      "route": "öffentliche Gehwegfläche im Bereich Bahnhofvorplatz (Auftaktkundgebung) - Konrad-Adenauer-Platz - Goethestraße - Goetheplatz - Am Vögenteich - Arnold-Bernhard-Straße - Neubramowstraße – öffentliche Gehwegfläche des Margaretenplatz (Abschlusskundgebung)",
+      "organizer": "",
+      "registered_participants": "ca. 200 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-170",
       "country": "DE",
       "state": "Berlin",
@@ -982,6 +1020,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "rostock-0f1c4925a4adee71",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-20",
+      "start": "15:00",
+      "end": "17:30",
+      "title": "sichtbares Zeichen für Demokratie!",
+      "postal_code": "",
+      "location": "",
+      "route": "südseitige öffentliche Fahrbahn-Fläche der Bonhoefferstraße im Bereich der Brücke über die Bundesstraße 103",
+      "organizer": "",
+      "registered_participants": "ca. 40 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-185",
       "country": "DE",
       "state": "Berlin",
@@ -1028,6 +1085,44 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "rostock-008d6d725e74452f",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-20",
+      "start": "16:00",
+      "end": "17:30",
+      "title": "Kundgebung für bessere Bildung",
+      "postal_code": "",
+      "location": "",
+      "route": "öffentliche Gehweg-Fläche im Bereich Neuer Markt 1a",
+      "organizer": "Landesschülerrat M-V",
+      "registered_participants": "ca. 500 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "rostock-61e4ebfb31768311",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-20",
+      "start": "16:00",
+      "end": "18:00",
+      "title": "Wo ist Noah? – Anlässlich des Internationalen Tages der Kinderrechte wollen wir wieder öffentlich auf das Rostocker Kind Noah aufmerksam machen. Noah hat das Recht mit seiner Mutter zusammen zu leben.",
+      "postal_code": "",
+      "location": "",
+      "route": "öffentliche Gehwegfläche auf dem Gertrudenplatz",
+      "organizer": "",
+      "registered_participants": "ca. 40 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-194",
@@ -1092,6 +1187,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "rostock-8dcc085a35dd1349",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-20",
+      "start": "17:00",
+      "end": "18:00",
+      "title": "Trans Day of Remembrance 2026",
+      "postal_code": "",
+      "location": "",
+      "route": "öffentliche Gehwegfläche des Margaretenplatzes",
+      "organizer": "",
+      "registered_participants": "ca. 100 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-206",
@@ -1364,6 +1478,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "rostock-374452886be53a60",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-21",
+      "start": "12:00",
+      "end": "16:00",
+      "title": "Trans Day of Remembrance 2026",
+      "postal_code": "",
+      "location": "",
+      "route": "öffentliche Gehwegfläche Ecke Am Strom / Kirchenstraße / Bahnhofsbrücke vor dem Gebäude Hausnummer 59",
+      "organizer": "",
+      "registered_participants": "ca. 3 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-257",
@@ -2804,6 +2937,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "rostock-a930b866a0bc7b23",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-25",
+      "start": "17:30",
+      "end": "20:30",
+      "title": "Tag gegen Gewalt an Frauen",
+      "postal_code": "",
+      "location": "",
+      "route": "öffentliche Gehwegfläche des Gertrudenplatzes",
+      "organizer": "",
+      "registered_participants": "ca. 60 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-527",
@@ -21172,6 +21324,16 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Polizei Berlin",
+      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
+    },
+    {
+      "name": "Stadt Rostock",
+      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }
