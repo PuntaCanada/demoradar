@@ -29,6 +29,16 @@ class CologneTests(unittest.TestCase):
   p=m["Page"]()
   p.feed('<a href="/leben-in-koeln/verkehr/verkehrskalender/versammlung-mit-aufzug-innenstadt">Versammlung</a><a href="https://thirdparty.example/demo">Demonstration</a><a href="/leben-in-koeln/verkehr/verkehrskalender/baustelle">Baustelle</a>')
   self.assertEqual(m["candidate_links"](p),[url])
+ def test_recent_official_archive_is_retained_for_video_matching(self):
+  old=(dt.date.today()-dt.timedelta(days=20)).strftime("%d.%m.%Y")
+  raw=html("<p>Zeitraum: am "+old+", von 12:00 bis 17:00 Uhr</p>")
+  event=m["parse_detail"](url,raw,dt.date.today())
+  self.assertIsNotNone(event)
+  self.assertEqual(event["date"],(dt.date.today()-dt.timedelta(days=20)).isoformat())
+ def test_archive_older_than_month_is_rejected(self):
+  old=(dt.date.today()-dt.timedelta(days=40)).strftime("%d.%m.%Y")
+  raw=html("<p>Zeitraum: am "+old+", von 12:00 bis 17:00 Uhr</p>")
+  self.assertIsNone(m["parse_detail"](url,raw,dt.date.today()))
  def test_invalid_date_dropped(self):
   self.assertIsNone(m["parse_detail"](url,html("Zeitraum: 31.02.2027, von 12:00 bis 17:00 Uhr"),dt.date.today()))
 if __name__=="__main__":unittest.main()
