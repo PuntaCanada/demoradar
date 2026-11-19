@@ -7,6 +7,8 @@ on:
       - 'en/index.html'
       - 'i18n.js'
       - 'live.js'
+      - 'heatmap.js'
+      - 'data/germany-states.json'
       - 'scripts/test-frontend.mjs'
       - 'scripts/test-i18n.mjs'
       - 'scripts/test-browser.mjs'
@@ -27,6 +29,7 @@ jobs:
         run: |
           node scripts/build-language-pages.mjs
           node --check live.js
+          node --check heatmap.js
           node --check i18n.js
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
@@ -36,7 +39,7 @@ jobs:
         continue-on-error: true
         run: |
           set -eu
-          for route in / /en/ /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /i18n.js /live.js; do
+          for route in / /en/ /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
             echo "$route -> HTTP $code"
@@ -52,6 +55,9 @@ jobs:
               /data/demos-events.json) grep -q '"events"' /tmp/demoradar_response || (echo "::warning::Live community events JSON missing" && exit 1) ;;
               /robots.txt) grep -q 'sitemap.xml' /tmp/demoradar_response || (echo "::warning::Sitemap missing in robots.txt" && exit 1) ;;
               /i18n.js) grep -q 'demoradar:languagechange' /tmp/demoradar_response || (echo "::warning::Language script not deployed" && exit 1) ;;
+              /data/event-updates.json) grep -q '"statuses"' /tmp/demoradar_response || (echo "::warning::Event change statuses missing" && exit 1) ;;
+              /data/germany-states.json) grep -q '"states"' /tmp/demoradar_response || (echo "::warning::Local map geometry missing" && exit 1) ;;
+              /heatmap.js) grep -q 'heatmapSvg' /tmp/demoradar_response || (echo "::warning::Heatmap script not deployed" && exit 1) ;;
               /live.js) grep -q 'function updateCityChoices' /tmp/demoradar_response && grep -q 'function renderDetail' /tmp/demoradar_response || (echo "::warning::Deployed calendar lacks event details" && exit 1) ;;
             esac
           done
