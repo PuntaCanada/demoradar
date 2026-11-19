@@ -28,6 +28,14 @@ def main():
     item.update(kind="openapi",version=schema.get("openapi",schema.get("swagger")),path_count=len(schema["paths"]))
     # Only metadata, not payloads, stored publicly.
     item["get_paths"]=[p for p,v in schema["paths"].items() if isinstance(v,dict) and "get" in v][:100]
+    item["event_operations"]=[]
+    for path,operations in schema["paths"].items():
+     if not isinstance(operations,dict) or not (path.startswith("/v1/event") or path.startswith("/v1/export")):continue
+     for method,operation in operations.items():
+      if method.lower() not in ("get","post") or not isinstance(operation,dict):continue
+      info={"path":path,"method":method.upper(),"operation_id":operation.get("operationId"),"parameters":operation.get("parameters",[]),"request_body":operation.get("requestBody"),"responses":operation.get("responses")}
+      item["event_operations"].append(info)
+    report["api_schemas"]={k:v for k,v in schema.get("components",{}).get("schemas",{}).items() if any(word in k.lower() for word in ("eventsearch","eventresponse","eventlist","eventfilters","eventquery"))}
     report["status"]="schema_found"
     report["schema_url"]=url
    elif "text/html" in ct:
