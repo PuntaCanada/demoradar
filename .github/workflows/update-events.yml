@@ -5,7 +5,6 @@ on:
     paths:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
-      - 'scripts/update-streams.mjs'
       - 'scripts/update-rostock.py'
       - 'scripts/update-cologne.py'
       - 'scripts/update-frankfurt.py'
@@ -78,12 +77,6 @@ jobs:
         run: python3 scripts/track-event-updates.py
       - name: Prüfe Nachrichten-Feeds und mögliche Berichtszuordnungen
         run: python3 scripts/update-news.py
-      - name: Suche optionale Demo-Streams über offizielle YouTube-/Twitch-APIs
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
-          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
-        run: node scripts/update-streams.mjs
       - name: Erzeuge zweisprachige HTML-Seiten und SEO-Dateien
         run: node scripts/build-language-pages.mjs
       - name: Prüfe Kalendercode und Datenformat
@@ -114,10 +107,10 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/frankfurt-source.json data/expansion-sources.json data/stream-discoveries.json index.html en/index.html sitemap.xml robots.txt)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/frankfurt-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/frankfurt-source.json data/expansion-sources.json data/stream-discoveries.json index.html en/index.html sitemap.xml robots.txt
+            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/frankfurt-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt
             git commit -m "data: refresh demonstration sources and observed changes"
             for attempt in 1 2 3; do
               if git push; then break; fi
