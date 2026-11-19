@@ -10,6 +10,9 @@ module=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 assert any(x["city"]=="Köln" and x["parser"] for x in module.SOURCES)
 assert sum(x["city"]=="Leipzig" for x in module.SOURCES)==2
+assert any(x["city"]=="Bremen" and x["parser"] is None and x["type"]=="official_police_press_archive" for x in module.SOURCES)
+assert any(x["city"]=="Hamburg" and x["type"]=="official_police_operational_notice" and x["parser"] is None for x in module.SOURCES)
+
 assert all("url" in x and "data_rights" in x and "scope" in x for x in module.SOURCES)
 class Response:
  status=200
