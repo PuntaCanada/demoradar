@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-19T10:25:05.124231+00:00",
+  "checked_at": "2026-11-19T10:28:06.972055+00:00",
   "sources": [
     {
       "city": "Dresden",
@@ -11,9 +11,9 @@
     {
       "city": "Jena",
       "url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen",
-      "status": "ok",
+      "status": "unavailable",
       "imported": 0,
-      "note": "Only explicitly labelled assembly entries are imported; absence is not proof of no demonstrations."
+      "note": "HTTP Error 404: Not Found"
     }
   ]
 }

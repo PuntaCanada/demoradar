@@ -3,6 +3,16 @@
   "method": "read-only official-page check; reachability never establishes event coverage or reuse rights",
   "sources": [
     {
+      "city": "Braunschweig",
+      "state": "Niedersachsen",
+      "type": "official_consented_assembly_list",
+      "url": "https://www.braunschweig.de/politik_verwaltung/bekanntmachungen/versammlungen/index.php",
+      "parser": null,
+      "data_rights": "Only assemblies whose applicants consent to publication; no explicit blanket reuse licence found; monitor only",
+      "scope": "Official list is conditional on publication consent and was empty in the verified 19 Nov 2026 snapshot",
+      "status": "reachable_unverified_event_feed"
+    },
+    {
       "city": "Köln",
       "state": "Nordrhein-Westfalen",
       "type": "official_city_traffic_calendar",
