@@ -17,7 +17,7 @@ def parse_time(text):
     m=re.search(r"\b([012]?\d)[.:]([0-5]\d)",text)
     return (f"{int(m[1]):02d}:{m[2]}","") if m else ("","")
 def main():
-    report={"url":URL,"status":"unavailable","count":0}
+    report={"url":URL,"status":"unavailable","count":0,"checked_on":dt.date.today().isoformat()}
     try:
         req=urllib.request.Request(URL,headers={"User-Agent":"DemoRadar/0.1 public assembly directory (github.com/PuntaCanada/demoradar)","Accept":"application/json"})
         with urllib.request.urlopen(req,timeout=20) as resp:
@@ -34,7 +34,7 @@ def main():
             if not re.fullmatch(r"20\d\d-\d\d-\d\d",date) or len(title)<4:continue
             try:day=dt.date.fromisoformat(date)
             except ValueError:continue
-            if day<today-dt.timedelta(days=7) or day>today+dt.timedelta(days=550):continue
+            if day<today-dt.timedelta(days=30) or day>today+dt.timedelta(days=550):continue
             start,end=parse_time(clean(item.get("Zeit")))
             location=clean(item.get("Ort") or item.get("Startpunkt"))
             organizer=clean(item.get("Veranstalter"))
@@ -54,7 +54,7 @@ def main():
         if combined!=data["events"]:
             data["events"]=combined;data["count"]=len(combined)
             FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-        report.update(status="ok",count=len(by_id),source_date=raw.get("Dateidatum"))
+        report.update(status="ok",count=len(by_id),source_date=raw.get("Dateidatum"),checked_on=today.isoformat())
     except Exception as ex:
         report["error"]=str(ex)[:200]
         print("Dresden: unavailable, preserving previous data:",repr(ex))
