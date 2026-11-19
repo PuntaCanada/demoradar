@@ -29,7 +29,7 @@ def parse(html):
  if not re.search(r"Gen Z regelt! Solidarität mit den Protestierenden in Frankreich!",text):return []
  # Narrow evidence to a sentence from the original published announcement.
  evidence=re.search(r"Unter dem Motto.{0,250}?Versammlungsbehörde der Stadt Leipzig eine Versammlung.{0,180}?31\. Oktober 2026 von 14:00 Uhr bis 17:00 Uhr",text,re.I)
- if not evidence:return []
+ if not evidence or "Augustusplatz" not in text:return []
  event_id="police-leipzig-archive-"+hashlib.sha256(URL.encode()).hexdigest()[:16]
  return [{"id":event_id,"country":"DE","state":"Sachsen","city":"Leipzig","date":DAY.isoformat(),
   "start":"14:00","end":"17:00","title":"Gen Z regelt! Solidarität mit den Protestierenden in Frankreich!",
