@@ -10,6 +10,9 @@ on:
       - 'community/index.html'
       - 'en/community/index.html'
       - 'data/live-streams.json'
+      - 'data/source-coverage.json'
+      - 'scripts/source-coverage.mjs'
+      - 'scripts/test-source-coverage.mjs'
       - 'data/organizer-contacts.json'
       - '.github/ISSUE_TEMPLATE/**'
       - 'scripts/test-community.mjs'
@@ -40,13 +43,15 @@ jobs:
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
           node scripts/test-community.mjs
+          node scripts/test-source-coverage.mjs
+          node --check scripts/source-coverage.mjs
       - name: Prüfe echte Browseransicht auf Smartphone und Desktop
         run: node scripts/test-browser.mjs
       - name: Prüfe Cloudflare-HTTP-Auslieferung unabhängig von GitHub
         continue-on-error: true
         run: |
           set -eu
-          for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
+          for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
             echo "$route -> HTTP $code"
@@ -60,6 +65,7 @@ jobs:
               /community/) grep -q 'template=livestream.yml' /tmp/demoradar_response || (echo "::warning::Community and stream proposal page missing" && exit 1) ;;
               /en/community/) grep -q '<html lang="en">' /tmp/demoradar_response || (echo "::warning::English community page missing" && exit 1) ;;
               /data/live-streams.json) grep -q '"streams"' /tmp/demoradar_response || (echo "::warning::Reviewed live stream data unavailable" && exit 1) ;;
+              /data/source-coverage.json) grep -q '"cities"' /tmp/demoradar_response || (echo "::warning::City coverage diagnostic not yet published" && exit 1) ;;
               /data/organizer-contacts.json) grep -q '"contacts"' /tmp/demoradar_response || (echo "::warning::Public organizer contact data unavailable" && exit 1) ;;
               /sitemap.xml) grep -q 'demoradar.pages.dev/en/' /tmp/demoradar_response || (echo "::warning::English URL missing from live sitemap" && exit 1) ;;
               /data/events.json) grep -q '"events"' /tmp/demoradar_response || (echo "::warning::Live events JSON missing" && exit 1) ;;
