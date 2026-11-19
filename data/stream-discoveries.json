@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-19T15:35:37.476Z",
+  "mode": "suggestions_only",
+  "verified_public_live_count": 0,
+  "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
+  "sources": {
+    "youtube_configured": true,
+    "twitch_configured": false
+  },
+  "candidates": [],
+  "errors": []
+}
