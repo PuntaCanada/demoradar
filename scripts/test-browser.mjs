@@ -124,6 +124,27 @@ try{
  await evaluate('document.getElementById("eventDetailClose").click();true');
  assert.equal(await evaluate('document.getElementById("eventDetail").hidden'),true,"Detail close button hides overlay");
  assert.ok(!(await evaluate("location.search")).includes("event="),"Closing event detail removes query parameter");
+ for(const width of [320,375,1280]){
+  for(const route of ["/sources/","/en/sources/"]){
+   await send("Emulation.setDeviceMetricsOverride",{width,height:850,deviceScaleFactor:1,mobile:width<=430});
+   await send("Page.navigate",{url:rootUrl+route});
+   let dashboard;
+   for(let attempt=0;attempt<70;attempt++){
+    dashboard=await evaluate('(()=>({lang:document.documentElement.lang,states:document.querySelectorAll("#stateGrid .source-card").length,scroll:document.documentElement.scrollWidth,body:document.body.scrollWidth,feed:document.querySelector("#feedCount")?.textContent,errors:document.querySelector("#sourceResults")?.textContent}))()');
+    if(dashboard.states===16)break;
+    await delay(140);
+   }
+   assert.equal(dashboard.states,16,"All 16 source cards load in "+route+" at "+width+"px: "+JSON.stringify(dashboard));
+   assert.equal(dashboard.lang,route.startsWith("/en/")?"en":"de");
+   assert.equal(dashboard.feed,"3","Only three monitored regular official city feeds");
+   assert.ok(dashboard.scroll<=width+2&&dashboard.body<=width+2,"Source registry horizontal overflow at "+width+"px: "+JSON.stringify(dashboard));
+   const filtered=await evaluate('(()=>{const s=document.querySelector("#sourceFilter");s.value="no_confirmed_regular_feed";s.dispatchEvent(new Event("change",{bubbles:true}));return {visible:document.querySelectorAll("#stateGrid .source-card").length,badges:[...document.querySelectorAll("#stateGrid .source-chip")].map(x=>x.textContent)}})()');
+   assert.ok(filtered.visible>0&&filtered.visible<16,"Missing-source filter must narrow results");
+   const searchResult=await evaluate('(()=>{document.querySelector("#sourceFilter").value="all";const el=document.querySelector("#sourceSearch");el.value="Berlin";el.dispatchEvent(new Event("input",{bubbles:true}));return [...document.querySelectorAll("#stateGrid .source-card h2")].map(x=>x.textContent)})()');
+   assert.deepEqual(searchResult,["Berlin"],"Source search filters to a single state");
+   console.log("Source registry",route,width+"px",dashboard.states,"states; search and filter OK");
+  }
+ }
  assert.equal(exceptions.length,0,"Browser runtime exceptions: "+exceptions.join(" | "));
  console.log("Chromium mobile/desktop, language switch, filters, calendar and no horizontal overflow: OK");
 }finally{
