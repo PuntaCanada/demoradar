@@ -133,7 +133,7 @@ function streamTeaser(event){
  const provisional=provisionalEventStreams(event);
  const possible=provisional.length?'<div class="event-stream-teaser tentative">'+provisional.map(s=>{
   const status=candidateStateLabel(s,german);
-  return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer" title="'+esc(german?"Automatischer, noch ungeprüfter Veranstaltungsbezug":"Automatically matched; event association not confirmed")+'">'+esc(status+" · "+String(s.channel||s.platform))+'</a>';
+  return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer" title="'+esc(german?"Automatischer, noch ungeprüfter Veranstaltungsbezug":"Automatically matched; event association not confirmed")+'"><span>'+esc(status+" · "+String(s.channel||s.platform))+'</span><small>'+esc(String(s.title||"").slice(0,105))+'</small></a>';
  }).join("")+'</div>':"";
  return possible+'<div class="event-stream-teaser"><a href="'+esc(streamSearchUrl(event))+'" target="_blank" rel="noopener noreferrer">'+esc(german?"🎥 YouTube-Streams / Aufzeichnungen suchen":"🎥 Search YouTube streams / replays")+'</a><a href="'+esc(twitch)+'" target="_blank" rel="noopener noreferrer">'+esc(german?"Twitch durchsuchen":"Search Twitch")+'</a></div>';
 }
@@ -154,7 +154,7 @@ function communityExtra(event){
   const url=s.recording?s.playbackUrl:s.url;
   return '<li><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label+" · "+String(s.channel||s.label||s.platform))+'</a></li>';
  }).join("");
- const possible=provisionalEventStreams(event).map(s=>'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(candidateStateLabel(s,german)+" · "+String(s.channel||s.platform))+'</a></li>').join("");
+ const possible=provisionalEventStreams(event).map(s=>'<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer">'+esc(candidateStateLabel(s,german)+" · "+String(s.channel||s.platform)+" — "+String(s.title||"").slice(0,140))+'</a></li>').join("");
  const contactList=contacts.map(c=>'<li><a href="'+esc(safeSourceUrl(c.url))+'" target="_blank" rel="noopener noreferrer">'+esc(c.organizer)+'</a></li>').join("");
  return '<section class="detail-community-actions">'+
   '<h3>'+esc(T("detail.streams"))+'</h3>'+
