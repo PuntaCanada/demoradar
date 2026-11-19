@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "method": "Read-only diagnostic; only imported, attributable event IDs are counted. Title samples are not evidence of official registration.",
+  "window": {
+    "from": "2026-10-20",
+    "to": "2026-11-26"
+  },
+  "event_records": 430,
+  "diagnostic_video_samples": 23,
+  "cities": [
+    {
+      "city": "Berlin",
+      "event_count": 368,
+      "days_with_events": 9,
+      "observed_video_title_samples": 4,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Hamburg",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 3,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_registration_information",
+          "status": "reachable_unverified_event_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Düsseldorf",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Frankfurt am Main",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_press",
+          "status": "unavailable",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Köln",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_traffic_calendar",
+          "status": "reachable_parser_configured",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Leipzig",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_press",
+          "status": "reachable_unverified_event_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Bielefeld",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Bonn",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Braunschweig",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_consented_assembly_list",
+          "status": "reachable_unverified_event_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Dortmund",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_municipal_publications",
+          "status": "research_only_no_current_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Halle (Saale)",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Jena",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Stuttgart",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Nürnberg",
+      "event_count": 1,
+      "days_with_events": 1,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_press",
+          "status": "unavailable",
+          "reuse_rights_verified": false
+        }
+      ]
+    }
+  ],
+  "missing_official_feed_warning": "City count 0 does not prove no demonstrations. No stream-derived events are imported."
+}
