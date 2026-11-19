@@ -156,6 +156,20 @@
       "evidence_url": "https://www.youtube.com/watch?v=-wcutuA2NzE",
       "verification": "public_youtube_channel_identified",
       "monitoring": "automatic_candidate_only"
+    },
+    {
+      "id": "dauerwelle-demo-report",
+      "name": "DauerwelleDemoReport",
+      "platforms": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@DauerwelleDemoReport",
+          "status": "verified_public_channel"
+        }
+      ],
+      "evidence_url": "https://www.youtube.com/channel/UCEYQLAodTYaZ-AmbZEktqHw",
+      "verification": "public_youtube_channel_identified",
+      "monitoring": "automatic_candidate_only"
     }
   ]
 }
