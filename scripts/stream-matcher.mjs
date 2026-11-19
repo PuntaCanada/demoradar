@@ -53,6 +53,7 @@ export function ambiguousOrInvalidTitleDates(title){
 }
 // Only known public platform hosts; malformed or malicious account links are ignored.
 export function platformAccount(raw,platform){
+ if(/(?:^|\/)(?:\.|%2e){1,2}(?=\/|$)/i.test(String(raw||"")))return "";
  let url;
  try{url=new URL(String(raw||""))}catch{return ""}
  if(url.protocol!=="https:"||url.username||url.password||url.port)return "";
