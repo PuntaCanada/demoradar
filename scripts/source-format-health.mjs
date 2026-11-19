@@ -8,7 +8,7 @@ const FEEDS=[
  {id:"rostock",city:"Rostock",name:"Stadt Rostock",path:"data/rostock-source.json"}
 ];
 const DRIFT=/schema|format|parse|struktur|structure|unexpected|ungültig|invalid|json|empty|leer|start dates|titles/i;
-const validDay=value=>typeof value==="string"&&/^20\d\d-\d\d-\d\d$/.test(value)&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value;
+const validDay=value=>typeof value==="string"&&/^20\d\d-\d\d-\d\d$/.test(value)&&Number.isFinite(Date.parse(value+"T12:00:00Z"))&&new Date(value+"T12:00:00Z").toISOString().slice(0,10)===value;
 export function inspectFeedHealth(previous,feedStatuses,{today=new Date().toISOString().slice(0,10)}={}){
  if(!validDay(today))throw Error("Invalid inspection day");
  const existing=Object.fromEntries((previous?.feeds||[]).filter(f=>f&&FEEDS.some(x=>x.id===f.id)).map(f=>[f.id,f]));
