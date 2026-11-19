@@ -23,6 +23,16 @@ jobs:
           node-version: "22"
       - name: Lade öffentliche Berliner Versammlungsdaten
         run: node scripts/update-events.mjs
+      - name: Prüfe Kalendercode und Datenformat
+        run: |
+          node --check live.js
+          node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            const data = JSON.parse(readFileSync("data/events.json", "utf8"));
+            if (!Array.isArray(data.events) || data.events.length < 1) throw Error("Empty dataset");
+            if (!data.events.every(e => /^\\d{4}-\\d{2}-\\d{2}$/.test(e.date) && e.title && e.country === "DE")) throw Error("Invalid event");
+            console.log("Validated", data.events.length, "events");
+          '
       - name: Commit nur bei Änderungen
         run: |
           if [ -n "$(git status --porcelain data/events.json)" ]; then
