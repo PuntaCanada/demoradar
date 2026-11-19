@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize,ambiguousOrInvalidTitleDates} from "./stream-matcher.mjs";
+import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize,ambiguousOrInvalidTitleDates,platformAccount} from "./stream-matcher.mjs";
 const date="2026-11-19",iso="2026-11-19T12:00:00Z";
 const events=[
  {id:"berlin-climate",city:"Berlin",date,title:"Kundgebung Klimaschutz und Energiewende"},
@@ -50,4 +50,13 @@ assert.equal(ambiguousOrInvalidTitleDates("Demo Berlin 31.02.2026"),true,"imposs
 assert.equal(ambiguousOrInvalidTitleDates("Demo Berlin 19.11.2026"),false);
 assert.equal(find("Demo Berlin Klimaschutz Energiewende 31.02.2026",iso).length,0,"invalid title date must not fall through");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende 19.11.2026 und 20.11.2026",iso).length,0,"multiple dates must not imply one event");
-console.log("stream-matcher: 38 safety checks passed");
+assert.equal(platformAccount("https://www.youtube.com/@Eskalabe","youtube"),"@Eskalabe");
+assert.equal(platformAccount("https://www.twitch.tv/Some_Channel","twitch"),"some_channel");
+assert.equal(platformAccount("https://youtube.com.evil.example/@Eskalabe","youtube"),"");
+assert.equal(platformAccount("http://www.youtube.com/@Eskalabe","youtube"),"");
+assert.equal(platformAccount("https://www.youtube.com/@Eskalabe/extra","youtube"),"");
+assert.equal(platformAccount("https://user:pass@www.youtube.com/@Eskalabe","youtube"),"");
+assert.equal(platformAccount("not a URL","youtube"),"");
+assert.equal(platformAccount("https://www.twitch.tv/../../../foo","twitch"),"");
+assert.equal(platformAccount("https://www.youtube.com/@aa","youtube"),"");
+console.log("stream-matcher: 47 safety checks passed");
