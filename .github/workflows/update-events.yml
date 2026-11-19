@@ -14,6 +14,7 @@ on:
       - 'scripts/probe-demos-events.py'
       - 'scripts/update-demos.py'
       - 'live.js'
+      - 'i18n.js'
       - 'index.html'
       - 'scripts/update-news.py'
   schedule:
@@ -55,6 +56,8 @@ jobs:
           python3 -m py_compile scripts/update-demos.py scripts/update-news.py
           python3 scripts/test-dedupe.py
           node --check live.js
+          node --check i18n.js
+          node --input-type=module -e 'import{readFileSync}from"node:fs";const h=readFileSync("index.html","utf8");if(!h.includes("data-language=\"de\"")||!h.includes("data-language=\"en\"")||!h.includes("/i18n.js"))throw Error("Language switch missing");console.log("DE/EN switch present")'
           node --input-type=module -e 'import {readFileSync} from "node:fs"; const html=readFileSync("index.html","utf8"),js=readFileSync("live.js","utf8"); if(!html.includes("id=\"city\"")||!js.includes("function updateCityChoices()")||!js.includes("selectedCity"))throw Error("City filter wiring missing"); console.log("City filter wiring present");'
           python3 -c 'from html.parser import HTMLParser; p=open("index.html",encoding="utf8").read(); assert p.index("id=\"demo-kalender\"") < p.index("id=\"todaySection\""); assert p.count("id=\"calendar\"")==1; print("Calendar prominently positioned")'
           node --input-type=module -e '
