@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "method": "Stable official feed status and structure-drift diagnostics only; not a calendar or licence for data reuse.",
+  "feeds": [
+    {
+      "id": "berlin",
+      "city": "Berlin",
+      "source": "Polizei Berlin",
+      "status": "ok",
+      "last_checked": "2026-11-19",
+      "last_success": {
+        "count": 1351,
+        "checked_on": "2026-11-19"
+      },
+      "observed_count": 1351,
+      "issues": [],
+      "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
+    },
+    {
+      "id": "dresden",
+      "city": "Dresden",
+      "source": "Stadt Dresden",
+      "status": "ok",
+      "last_checked": "2026-11-19",
+      "last_success": {
+        "count": 42,
+        "checked_on": "2026-11-19"
+      },
+      "observed_count": 42,
+      "issues": [],
+      "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
+    },
+    {
+      "id": "rostock",
+      "city": "Rostock",
+      "source": "Stadt Rostock",
+      "status": "ok",
+      "last_checked": "2026-11-19",
+      "last_success": {
+        "count": 8,
+        "checked_on": "2026-11-19"
+      },
+      "observed_count": 8,
+      "issues": [],
+      "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
+    }
+  ],
+  "warning_count": 0
+}
