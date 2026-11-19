@@ -1,0 +1,27 @@
+name: Source transparency checks
+on:
+  pull_request:
+    paths:
+      - 'sources/**'
+      - 'data/state-source-coverage.json'
+      - 'data/source-quality.json'
+      - 'data/source-format-health.json'
+      - 'scripts/test-source-transparency.mjs'
+      - '.github/workflows/source-transparency.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check dashboard syntax and declared source evidence
+        run: |
+          node --check sources/source-status.js
+          node scripts/test-source-transparency.mjs
+          node scripts/test-stream-matcher.mjs
