@@ -10,6 +10,7 @@ on:
       - 'scripts/source-coverage.mjs'
       - 'scripts/test-source-coverage.mjs'
       - 'data/expansion-sources.json'
+      - 'data/police-notices-source.json'
       - '.github/workflows/stream-discovery.yml'
       - 'data/streamer-candidates.json'
   schedule:
