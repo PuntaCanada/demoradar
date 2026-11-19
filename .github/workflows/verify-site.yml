@@ -13,6 +13,9 @@ on:
       - 'data/source-coverage.json'
       - 'data/state-source-coverage.json'
       - 'data/source-quality.json'
+      - 'data/source-format-health.json'
+      - 'scripts/source-format-health.mjs'
+      - 'scripts/test-source-format-health.mjs'
       - 'data/berlin-source.json'
       - 'data/rostock-source.json'
       - 'scripts/test-rostock-source.py'
@@ -82,6 +85,7 @@ jobs:
           python3 scripts/test-dresden-archive.py
           python3 scripts/test-jena-archive.py
           node scripts/test-source-health-alerts.mjs
+          node scripts/test-source-format-health.mjs
           python3 scripts/test-leipzig-police.py
           python3 scripts/test-leipzig-archive.py
           python3 scripts/test-nrw-police.py
@@ -97,7 +101,7 @@ jobs:
         continue-on-error: false
         run: |
           set -eu
-          for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
+          for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
             echo "$route -> HTTP $code"
@@ -114,6 +118,7 @@ jobs:
               /data/source-coverage.json) grep -q '"cities"' /tmp/demoradar_response || (echo "::warning::City coverage diagnostic not yet published" && exit 1) ;;
               /data/state-source-coverage.json) grep -q '"states"' /tmp/demoradar_response || (echo "::warning::State source coverage not deployed" && exit 1) ;;
               /data/source-quality.json) grep -q '"sources"' /tmp/demoradar_response || (echo "::warning::Importer source quality not deployed" && exit 1) ;;
+              /data/source-format-health.json) grep -q '"feeds"' /tmp/demoradar_response || (echo "::error::Official format health report not deployed" && exit 1) ;;
               /data/berlin-source.json) grep -q '"checked_on"' /tmp/demoradar_response || (echo "::error::Berlin source fetch status not deployed" && exit 1) ;;
               /data/rostock-source.json) grep -q '"checked_on"' /tmp/demoradar_response || (echo "::error::Rostock source fetch status not deployed" && exit 1) ;;
               /data/leipzig-police-source.json) grep -q '"status"' /tmp/demoradar_response || (echo "::warning::Leipzig official notice result not deployed" && exit 1) ;;
