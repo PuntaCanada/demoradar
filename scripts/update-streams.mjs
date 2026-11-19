@@ -8,6 +8,13 @@ const read=path=>{try{return JSON.parse(readFileSync(path,"utf8"))}catch{return 
 const channels=read("data/streamer-candidates.json").channels||[];
 const events=[...(read("data/events.json").events||[]),...(read("data/demos-events.json").events||[])];
 const now=new Date();
+const now=new Date();
+// YouTube search.list costs 100 quota units per request. Check YouTube every 2h
+// (3 listed YouTube channels => ~3,600 search units/day, below default 10,000).
+// Twitch remains on the 15-minute schedule when configured.
+const youtubeWindow=now.getUTCHours()%2===0&&now.getUTCMinutes()<30;
+const force=process.env.GITHUB_EVENT_NAME==="workflow_dispatch";
+
 const day=24*3600000;
 const dayISO=d=>new Date(d).toISOString().slice(0,10);
 const recent=events.filter(e=>e&&e.id&&e.city&&e.date&&e.title&&e.date>=dayISO(now.getTime()-7*day)&&e.date<=dayISO(now.getTime()+7*day));
@@ -105,10 +112,13 @@ async function twitch(){
   }
  }catch(error){errors.push("Twitch: "+error.message)}
 }
-await youtube();await twitch();
+if(youtubeWindow||force)await youtube();
+else console.log("YouTube quota guard: next 2-hour polling window.");
+await twitch();
 const enabled=Boolean(api.youtube||(api.twitchId&&api.twitchSecret));
 if(!enabled){console.log("No YouTube/Twitch API credentials set; leaving previous discoveries unchanged.");process.exit(0)}
 const previous=read(OUT);
+const firstRun=!Object.hasOwn(previous,"version");
 const prev=(previous.candidates||[]).filter(x=>x.reviewed!==true);
 const combined=new Map();
 for(const x of [...prev,...candidates]){
@@ -130,7 +140,7 @@ const stable=x=>JSON.stringify({
   ...item,checked_at:item.status==="live"?item.checked_at:undefined
  })).sort((a,b)=>(a.event_id+"|"+a.url).localeCompare(b.event_id+"|"+b.url))
 });
-if(stable(previous)===stable(output)){
+if(!firstRun&&stable(previous)===stable(output)){
  console.log("No changed stream candidates or status.");process.exit(0);
 }
 writeFileSync(OUT,JSON.stringify(output,null,2)+"\n");
