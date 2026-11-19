@@ -7,28 +7,47 @@ const matches=e=>{let q=document.getElementById("search").value.toLocaleLowerCas
 let sel=new Date(new Date().getFullYear(),new Date().getMonth(),1), listMode=false;
 function render(){const y=sel.getFullYear(),m=sel.getMonth(),start=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();document.getElementById("monthLabel").textContent=new Intl.DateTimeFormat("de-DE",{month:"long",year:"numeric"}).format(sel);const bydate=new Map();for(const e of records.filter(matches)){if(e.date.slice(0,7)!==y+"-"+String(m+1).padStart(2,"0"))continue;const a=bydate.get(e.date)||[];a.push(e);bydate.set(e.date,a)}let html="";for(let i=0;i<42;i++){const d=i-start+1,dt=new Date(y,m,d),off=d<1||d>days,k=dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0"),a=off?[]:bydate.get(k)||[],today=dt.toDateString()===new Date().toDateString();html+='<div class="day '+(off?"muted ":"")+(today?"today":"")+'"><span class="daynum">'+dt.getDate()+'</span>'+(a.length?'<button class="day-events" data-date="'+k+'" style="display:block;border:0;background:#def7f0;color:#076957;border-radius:5px;margin-top:6px;padding:3px 5px;font-size:11px;font-weight:750;max-width:100%">'+a.length+' Demo'+(a.length!==1?"s":"")+"</button>":"")+"</div>"}document.getElementById("calendar").innerHTML=html;const filtered=records.filter(matches).filter(e=>e.date.slice(0,7)===y+"-"+String(m+1).padStart(2,"0"));document.getElementById("resultText").textContent=filtered.length+" gemeldete Veranstaltungen in diesem Monat";document.getElementById("list").innerHTML=filtered.length?'<div style="display:grid;gap:12px">'+filtered.slice(0,300).map(e=>card(e)).join("")+"</div>":'<div class="empty"><h3>Keine passenden Termine gefunden</h3><p>Suche oder Filter anpassen. Die Abdeckung ist noch unvollständig.</p></div>';}
 
+let articleMatches={};
 function renderFeatured(){
- const holder=document.getElementById("todayItems");if(!holder)return;
- const stamp=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
- // en-CA browser output varies; formatToParts avoids locale-dependent ordering.
  const parts=new Intl.DateTimeFormat("de-DE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
- const get=k=>parts.find(x=>x.type===k)?.value||"";
+ const get=k=>parts.find(p=>p.type===k)?.value||"";
  const today=get("year")+"-"+get("month")+"-"+get("day");
- const fmt=new Intl.DateTimeFormat("de-DE",{timeZone:"Europe/Berlin",weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date());
- document.getElementById("todayDate").textContent=fmt+" · Aktuelle und angekündigte Versammlungen";
- const todays=records.filter(e=>e.date===today);
- document.getElementById("todayCount").textContent=todays.length+" Meldungen heute";
- if(!todays.length){holder.className="featured-empty";holder.textContent="Für heute liegen in unseren angebundenen Quellen keine passenden Meldungen vor. Das bedeutet nicht, dass keine Demonstrationen stattfinden.";return}
- const num=e=>{const m=String(e.registered_participants||"").replace(/\./g,"").match(/(\d[\d ]*)/);return m?Number(m[1].replace(/\s/g,"")):null};
- const score=e=>{const n=num(e);const recurrent=/täglich|jeweils mo|dauerhaft|vom \d\d\.\d\d\. bis/i.test(e.title);return (n!==null?Math.min(n,100000)/10:0)+(e.route?35:0)+(e.organizer?10:0)-(recurrent?55:0)};
- const unique=new Map();for(const e of todays){const k=(e.city+"-"+e.start+"-"+e.title).toLowerCase().replace(/\s+/g," ");if(!unique.has(k))unique.set(k,e)}
- const items=[...unique.values()].sort((a,b)=>score(b)-score(a)||a.start.localeCompare(b.start)||a.title.localeCompare(b.title)).slice(0,6);
- const newsSearch=e=>{let clean=String(e.title).replace(/\([^)]{25,}\)/g,"").replace(/\s+/g," ").slice(0,115);return "https://news.google.com/search?q="+encodeURIComponent('"'+clean+'" '+e.city)+"&hl=de&gl=DE&ceid=DE%3Ade"};
- holder.className="featured-grid";
- holder.innerHTML=items.map(e=>{
- const n=num(e),crowd=n!==null?" · "+esc(e.registered_participants)+" angemeldet (nicht gezählt)":"";const org=e.organizer?" · "+esc(e.organizer):"";
- return '<article class="featured-item"><span class="featured-badge">'+esc(topic(e.title))+'</span><h3>'+esc(e.title)+'</h3><div class="featured-meta">'+esc(e.start||"Zeit offen")+" Uhr · "+esc(e.city)+ (e.location?" · "+esc(e.location):"")+org+crowd+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">Amtliche Quelle</a><a href="'+esc(newsSearch(e))+'" target="_blank" rel="noopener noreferrer" title="Nachrichten-Suche – keine verifizierten Artikel">Nachrichten suchen</a></div></article>'
- }).join("");
+ function offset(days){const d=new Date(today+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+days);return d.toISOString().slice(0,10)}
+ const dateLabel=date=>new Intl.DateTimeFormat("de-DE",{timeZone:"UTC",weekday:"long",day:"numeric",month:"long"}).format(new Date(date+"T12:00:00Z"));
+ const selected=[
+  {id:"today",from:today,to:today,max:6},
+  {id:"tomorrow",from:offset(1),to:offset(1),max:6},
+  {id:"week",from:today,to:offset(6),max:9}
+ ];
+ document.getElementById("todayDate").textContent=dateLabel(today)+" · Aktuelle und angekündigte Versammlungen";
+ document.getElementById("tomorrowDate").textContent=dateLabel(offset(1))+" · Angekündigte Versammlungen";
+ document.getElementById("weekDate").textContent=dateLabel(today)+" bis "+dateLabel(offset(6))+" · Einschließlich heute";
+ const crowd=e=>{const v=String(e.registered_participants||"");const m=v.replace(/\./g,"").match(/(\d[\d ]*)/);return m?Number(m[1].replace(/\s/g,"")):null};
+ const score=e=>{const n=crowd(e),rec=/täglich|jeweils mo|dauerhaft|vom \d\d\.\d\d\. bis/i.test(e.title);return (n!==null?Math.min(n,100000)/10:0)+(e.route?35:0)+(e.organizer?10:0)-(rec?55:0)};
+ const search=e=>{const title=e.title.replace(/\([^)]{25,}\)/g,"").replace(/\s+/g," ").slice(0,115);return "https://news.google.com/search?q="+encodeURIComponent('"'+title+'" '+e.city)+"&hl=de&gl=DE&ceid=DE%3Ade"};
+ for(const x of selected){
+  const holder=document.getElementById(x.id+"Items");if(!holder)continue;
+  const matching=records.filter(e=>e.date>=x.from&&e.date<=x.to);
+  document.getElementById(x.id+"Count").textContent=matching.length+" Meldungen";
+  const unique=new Map();
+  for(const e of matching){const k=(e.date+"-"+e.city+"-"+e.start+"-"+e.title).toLowerCase().replace(/\s+/g," ");if(!unique.has(k))unique.set(k,e)}
+  let sorted=[...unique.values()];
+  if(x.id==="week"){
+   // Balance dates: first pick up to two per day, then fill open places by score.
+   const days=new Map();for(const e of sorted){const a=days.get(e.date)||[];a.push(e);days.set(e.date,a)}
+   const chosen=[];for(const [day,items] of [...days.entries()].sort((a,b)=>a[0].localeCompare(b[0]))){items.sort((a,b)=>score(b)-score(a));chosen.push(...items.slice(0,2))}
+   sorted=chosen.slice(0,x.max);
+  }else sorted.sort((a,b)=>score(b)-score(a)||a.start.localeCompare(b.start)||a.title.localeCompare(b.title));
+  const items=sorted.slice(0,x.max);
+  if(!items.length){holder.className="featured-empty";holder.textContent="Für diesen Zeitraum liegen in unseren bislang angebundenen Quellen keine Meldungen vor. Das ist keine vollständige Übersicht aller Demonstrationen.";continue}
+  holder.className="featured-grid";
+  holder.innerHTML=items.map(e=>{
+   const articles=Array.isArray(articleMatches[e.id])?articleMatches[e.id].slice(0,2):[];
+   const links=articles.map(n=>'<a href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer" title="Automatisch zugeordneter, redaktionell nicht geprüfter Artikel">'+esc(n.source)+": "+esc(n.title)+'</a>').join("");
+   const meta=(x.id==="week"?esc(e.date.split("-").reverse().join("."))+" · ":"")+esc(e.start||"Zeit offen")+" Uhr · "+esc(e.city)+(e.location?" · "+esc(e.location):"")+(e.organizer?" · "+esc(e.organizer):"")+(e.registered_participants?" · angemeldet: "+esc(e.registered_participants):"");
+   return '<article class="featured-item"><span class="featured-badge">'+esc(topic(e.title))+'</span><h3>'+esc(e.title)+'</h3><div class="featured-meta">'+meta+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">Amtliche Quelle</a><a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="Nachrichten-Suche, keine bestätigten Berichte">Nachrichten suchen</a></div>'+(links?'<div class="featured-meta"><strong>Möglicherweise zugehörige Presseartikel (automatisch, ungeprüft):</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
+  }).join("");
+ }
 }
 
 function card(e){
@@ -39,4 +58,4 @@ document.getElementById("calendar").addEventListener("click",ev=>{let btn=ev.tar
 function toggle(l){listMode=l;document.getElementById("calendarWrap").classList.toggle("hidden",l);document.getElementById("list").classList.toggle("visible",l);document.getElementById("calendarBtn").classList.toggle("active",!l);document.getElementById("listBtn").classList.toggle("active",l);render()}
 document.getElementById("prev").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()-1,1);render()};document.getElementById("next").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()+1,1);render()};document.getElementById("calendarBtn").onclick=()=>toggle(false);document.getElementById("listBtn").onclick=()=>toggle(true);["search","region","topic","position"].forEach(id=>document.getElementById(id).addEventListener(id==="search"?"input":"change",render));
 fetch("/data/source-status.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(info=>{if(!info||!Array.isArray(info.sources))return;const note=document.createElement("p");note.className="small";note.style.margin="12px 0";note.textContent="Weitere geprüfte Quellen: "+info.sources.map(x=>x.city+" ("+(x.status==="ok"?"abrufbar":x.status==="reachable_unverified_format"?"Website erreichbar, Import ausstehend":"derzeit nicht erreichbar")+")").join(", ")+". Die Abdeckung bleibt unvollständig.";const box=document.querySelector(".notice");if(box)box.insertAdjacentElement("afterend",note)}).catch(()=>{});
-fetch("/data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{if(!Array.isArray(d.events))throw Error("Invalid data");records=d.events;updated=d.updated_at;const n=document.querySelector(".notice");if(n)n.innerHTML="<strong>ℹ️ Live-Daten:</strong> "+records.length+" behördlich veröffentlichte Veranstaltungen aus "+[...new Set(records.map(e=>e.city))].join(" und ")+". Bundesweite Abdeckung im Aufbau. Letzte Datenaktualisierung: "+esc(updated?new Date(updated).toLocaleString("de-DE"):"unbekannt")+". Nicht alle angezeigten Veranstaltungen finden tatsächlich statt.";document.querySelectorAll(".stat")[0].innerHTML="<span>VERIFIZIERTE QUELLE</span><strong>"+records.length+" Meldungen</strong><span>Amtliche Versammlungsbehörden</span>";render();renderFeatured()}).catch(()=>{render();renderFeatured();console.info("No live data file deployed yet")});})();
+fetch("/data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{if(!Array.isArray(d.events))throw Error("Invalid data");records=d.events;updated=d.updated_at;const n=document.querySelector(".notice");if(n)n.innerHTML="<strong>ℹ️ Live-Daten:</strong> "+records.length+" behördlich veröffentlichte Veranstaltungen aus "+[...new Set(records.map(e=>e.city))].join(" und ")+". Bundesweite Abdeckung im Aufbau. Letzte Datenaktualisierung: "+esc(updated?new Date(updated).toLocaleString("de-DE"):"unbekannt")+". Nicht alle angezeigten Veranstaltungen finden tatsächlich statt.";document.querySelectorAll(".stat")[0].innerHTML="<span>VERIFIZIERTE QUELLE</span><strong>"+records.length+" Meldungen</strong><span>Amtliche Versammlungsbehörden</span>";render();renderFeatured();fetch("/data/news-matches.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(n=>{if(n&&n.matches&&typeof n.matches==="object"){articleMatches=n.matches;renderFeatured()}}).catch(()=>{})}).catch(()=>{render();renderFeatured();console.info("No live data file deployed yet")});})();
