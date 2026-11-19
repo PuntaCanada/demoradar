@@ -1,0 +1,36 @@
+name: "Öffentlichen Veranstalterkontakt melden"
+description: "Offizielle Website oder öffentlich angegebenen Organisationskontakt ergänzen"
+title: "[Veranstalterkontakt] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Nur öffentlich von einer Organisation für diesen Zweck veröffentlichte Kontaktwege. Keine personenbezogenen Telefonnummern, privaten E-Mail-Adressen oder Daten von Privat-Anmeldenden eintragen.
+  - type: input
+    id: event
+    attributes:
+      label: DemoRadar-Veranstaltung
+      placeholder: "https://demoradar.pages.dev/?event=..."
+    validations:
+      required: true
+  - type: input
+    id: organizer
+    attributes:
+      label: Offizieller Organisationsname
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Öffentliche offizielle Kontakt-/Webseite
+      placeholder: "https://..."
+    validations:
+      required: true
+  - type: input
+    id: evidence
+    attributes:
+      label: Beleg, dass dieser Kontakt zur Veranstaltung gehört
+      placeholder: "https://..."
+    validations:
+      required: true
