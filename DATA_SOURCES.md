@@ -34,8 +34,16 @@ Stand: 19. November 2026
 - Für die HTML-Seiten des kommunalen Verkehrskalenders konnte **keine allgemeine offene Massendatenlizenz abschließend bestätigt werden**; daraus folgt ausdrücklich **keine** Freigabe zur Weiterverwertung kreativer Texte oder Bilder. Ein weitergehender Datenimport wäre erst nach Lizenzklärung zulässig.
 - Fehlende/mehrdeutige oder temporär nicht erreichbare Seiten werden übersprungen. Ein verschwundener Eintrag beweist keine Absage; vorhandene Einträge bleiben kurzzeitig erhalten.
 
+### Frankfurt am Main (Hessen) – begrenzter Import amtlicher Ankündigungen
+
+- Nachgewiesene amtliche Einzelmeldung: https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/ (Pressemitteilung vom 17.11.2026 über Versammlungen am 20.11.2026).
+- `scripts/update-frankfurt.py` enthält einen eng an diese Mitteilung gebundenen Parser. Nur ausdrücklich nummerierte Veranstaltungen mit Datum, Thema und Uhrzeit werden als Faktendatensatz übernommen, sofern die Stadtseite technisch zugänglich ist; eine allgemeine zukünftige Quelle ergibt sich daraus **nicht**.
+- Die URL antwortete beim Test mit dem GitHub-Runner am 19.11.2026 mit **HTTP 403**. Darum wurden dort **keine** Veranstaltungen importiert und vorhandene Daten nicht verändert. Automatische Wiederholungsversuche erfolgen während der normalen Aktualisierung.
+- Die vollständige Pressemitteilung, Bilder, Pläne und kreative Formulierungen werden nicht weiterveröffentlicht. Für den Pressetext ist keine pauschale Freilizenz belegt; Originalquelle verlinken.
+
 ### Weitere beobachtete Kandidaten (noch **keine** automatischen Kalenderimporte)
 
+- Frankfurt am Main (Hessen): städtische Einzelmeldung bereits für einen streng begrenzten Parser erfasst, aber HTTP 403 verhindert derzeit den automatischen Import.
 - Nürnberg (Bayern): Amtliche Pressemitteilungen der Stadt zu einzelnen geplanten Versammlungen; nur Link und Erreichbarkeit, keine verifizierte vollständig strukturierte Veranstaltungsliste.
 - Leipzig (Sachsen): Einsatzbezogene Polizeimeldungen, darunter teils gemeldete Routenänderungen; keine vollständige amtliche Zukunftsübersicht.
 - Hamburg: Online-Angebot zur Versammlungsanmeldung, aber **keine** bestätigte öffentliche Liste künftiger angemeldeter Versammlungen.
