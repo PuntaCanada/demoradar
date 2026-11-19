@@ -17,7 +17,7 @@ assert.equal(find("Demo Berlin Energiewende Klimaschutz","2026-11-24T12:00:00Z")
 assert.equal(find("Mein Gaming Stream Berlin Klimaschutz Energiewende").length,0,"demo context missing");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"recording").length,1);
 assert.equal(find("Demo Berlin Klimaschutz Energiewende","2026-11-21T10:00:00Z","recording").length,1);
-assert.equal(find("Demo Berlin Klimaschutz Energiewende","2026-11-25T12:00:00Z","recording").length,0);
+assert.equal(find("Demo Berlin Klimaschutz Energiewende","2026-11-25T12:00:00Z","recording",[events[0]]).length,0);
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"live",[events[0],{...events[0],id:"clone"}]).length,0,"ambiguous matches must be withheld");
 assert.equal(cityMatches("Demo Frankfurt Klimaschutz Energiewende","Frankfurt am Main"),true);
 assert.equal(cityMatches("Demo Frankfurt Klimaschutz Energiewende","Frankfurt (Oder)"),true);
