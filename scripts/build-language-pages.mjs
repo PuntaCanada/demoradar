@@ -47,6 +47,6 @@ mkdirSync("en",{recursive:true});
 writeFileSync("en/index.html",buildEnglish());
 const alternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/"/>';
 const communityAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/community/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/community/"/>';
-writeFileSync("sitemap.xml",'<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n<url><loc>'+origin+'/</loc>'+alternate+'</url>\\n<url><loc>'+origin+'/en/</loc>'+alternate+'</url>\\n<url><loc>'+origin+'/community/</loc>'+communityAlternate+'</url>\\n<url><loc>'+origin+'/en/community/</loc>'+communityAlternate+'</url>\\n</urlset>\\n'.replace(/\\\\n/g,'\\n'));
+writeFileSync("sitemap.xml",'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>'+origin+'/</loc>'+alternate+'</url>\n<url><loc>'+origin+'/en/</loc>'+alternate+'</url>\n<url><loc>'+origin+'/community/</loc>'+communityAlternate+'</url>\n<url><loc>'+origin+'/en/community/</loc>'+communityAlternate+'</url>\n</urlset>\n');
 writeFileSync("robots.txt","User-agent: *\nAllow: /\nSitemap: "+origin+"/sitemap.xml\n");
 console.log("Built German and English indexable routes and multilingual sitemap");
