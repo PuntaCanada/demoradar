@@ -5,7 +5,7 @@
     "from": "2026-10-20",
     "to": "2026-11-26"
   },
-  "event_records": 435,
+  "event_records": 438,
   "diagnostic_video_samples": 23,
   "cities": [
     {
@@ -117,15 +117,6 @@
       "source_status": []
     },
     {
-      "city": "Bonn",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 0,
-      "source_status": []
-    },
-    {
       "city": "Braunschweig",
       "event_count": 0,
       "days_with_events": 0,
@@ -192,6 +183,15 @@
       "city": "Stuttgart",
       "event_count": 0,
       "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
+      "city": "Bonn",
+      "event_count": 1,
+      "days_with_events": 1,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
