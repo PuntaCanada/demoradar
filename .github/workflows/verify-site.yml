@@ -5,6 +5,11 @@ on:
     paths:
       - 'index.html'
       - 'en/index.html'
+      - 'sources/index.html'
+      - 'en/sources/index.html'
+      - 'sources/source-status.js'
+      - 'sources/source-status.css'
+      - 'scripts/test-source-registry.mjs'
       - 'i18n.js'
       - 'live.js'
       - 'community/index.html'
@@ -79,6 +84,8 @@ jobs:
           node scripts/test-community.mjs
           node scripts/test-source-coverage.mjs
           node scripts/test-heatmap-coverage.mjs
+          node --check sources/source-status.js
+          node scripts/test-source-registry.mjs
           node scripts/test-source-quality.mjs
           node scripts/test-berlin-feed.mjs
           python3 scripts/test-rostock-source.py
@@ -101,7 +108,7 @@ jobs:
         continue-on-error: false
         run: |
           set -eu
-          for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
+          for route in / /en/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
             echo "$route -> HTTP $code"
@@ -111,6 +118,10 @@ jobs:
             fi
             case "$route" in
               /en/) grep -q '<html lang="en">' /tmp/demoradar_response && grep -q 'id="eventDetail"' /tmp/demoradar_response || (echo "::warning::English page or event details missing on Cloudflare" && exit 1) ;;
+              /sources/) grep -q 'id="stateGrid"' /tmp/demoradar_response || (echo "::error::German official source registry missing" && exit 1) ;;
+              /en/sources/) grep -q '<html lang="en">' /tmp/demoradar_response && grep -q 'id="stateGrid"' /tmp/demoradar_response || (echo "::error::English official source registry missing" && exit 1) ;;
+              /sources/source-status.js) grep -q 'sourceFilter' /tmp/demoradar_response || (echo "::error::Source registry JavaScript missing" && exit 1) ;;
+              /sources/source-status.css) grep -q 'source-card' /tmp/demoradar_response || (echo "::error::Source registry stylesheet missing" && exit 1) ;;
               /) grep -q '<html lang="de">' /tmp/demoradar_response && grep -q 'id="eventDetail"' /tmp/demoradar_response || (echo "::warning::German page or event details missing on Cloudflare" && exit 1) ;;
               /community/) grep -q 'template=livestream.yml' /tmp/demoradar_response || (echo "::warning::Community and stream proposal page missing" && exit 1) ;;
               /en/community/) grep -q '<html lang="en">' /tmp/demoradar_response || (echo "::warning::English community page missing" && exit 1) ;;
