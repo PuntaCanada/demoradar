@@ -107,7 +107,7 @@ function provisionalEventStreams(event){
   if(!s||s.event_id!==event.id||s.reviewed===true||s.auto_match!==true)return false;
   const u=trustedStreamUrl(s.url);if(!u)return false;
   const when=Date.parse(s.checked_at||"");
-  if(!Number.isFinite(when)||when>now||now-when>14*86400000)return false;
+  if(!Number.isFinite(when)||when>now||now-when>(s.status==="recording"?30:1)*86400000)return false;
   // LIVE is only labelled current when checked at the platform within 15 minutes.
   return s.status==="recording"||s.status==="live"&&now-when<15*60000;
  }).slice(0,3);
