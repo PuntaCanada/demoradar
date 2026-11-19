@@ -21,6 +21,7 @@ const seen=new Set();
 const candidates=[];
 const errors=[];
 const samples=[];
+const sampleCounts=new Map();
 async function json(url,opts={}){
  const response=await fetch(url,{...opts,headers:{"accept":"application/json",...(opts.headers||{})},signal:AbortSignal.timeout(12000)});
  if(!response.ok)throw Error("HTTP "+response.status+" at "+new URL(url).hostname);
@@ -33,7 +34,9 @@ function add(video){
  const matches=matchEvents(video,[...unique.values()]);
  // Diagnostic samples are real platform video metadata, never claimed as DemoRadar matches.
  // Only retain a small recent sample to tune false negatives safely.
- if(samples.length<25&&video.platform==="YouTube"&&video.date&&new Date(video.date)>=new Date(now.getTime()-30*day)){
+ if(video.platform==="YouTube"&&video.date&&new Date(video.date)>=new Date(now.getTime()-30*day)&&
+   (sampleCounts.get(video.channel)||0)<3){
+  sampleCounts.set(video.channel,(sampleCounts.get(video.channel)||0)+1);
   samples.push({channel:video.channel,title:video.title.slice(0,180),url:video.url,
    date:video.date,status:video.status,match_count:matches.length});
  }
