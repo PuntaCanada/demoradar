@@ -23,4 +23,14 @@ assert.equal(row("Stadt Frankfurt").status,"unavailable");
 assert.ok(rows.every(s=>s.scope&&!/complete coverage/.test(s.scope)));
 assert.equal(sourceHealth({...files,policeLeipzig:{status:"unavailable_no_import"}}).sources.find(s=>s.source==="Polizeidirektion Leipzig").status,"unavailable");
 assert.equal(sourceHealth({...files,policeCologne:{sources:[]}}).sources.find(s=>s.source==="Polizei Köln").status,"unknown");
-console.log("source-quality: 11 explicit data-integrity assertions passed");
+const freshness=sourceHealth({...files,dresden:{status:"ok",count:12,source_date:"2026-11-16"},
+ sourceStatus:{checked_at:"2026-11-19T10:00:00Z",sources:[{city:"Jena",status:"ok",imported:0}]},
+ policeCologne:{checked_at:"2026-11-10T12:00:00Z",sources:[{status:"verified_notice",count:2}]}
+},{today:"2026-11-19"}).sources;
+const item=name=>freshness.find(s=>s.source===name);
+assert.equal(item("Stadt Dresden").check_freshness,"outdated_check");
+assert.equal(item("Stadt Jena").check_freshness,"recent");
+assert.equal(item("Polizei Köln").check_freshness,"outdated_check");
+assert.equal(item("Polizei Köln").status,"verified_one_off","old check does not cancel historical notice");
+assert.equal(item("Polizei Berlin").check_freshness,"unknown","do not invent a check date from stale event records");
+console.log("source-quality: 16 explicit data-integrity assertions passed");
