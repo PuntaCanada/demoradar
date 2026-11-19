@@ -18,6 +18,7 @@ on:
       - 'scripts/test-rostock-source.py'
       - 'scripts/test-berlin-feed.mjs'
       - 'scripts/test-dresden-archive.py'
+      - 'scripts/test-jena-archive.py'
       - 'data/leipzig-police-source.json'
       - 'data/leipzig-archive-source.json'
       - 'data/nrw-police-source.json'
@@ -79,6 +80,7 @@ jobs:
           node scripts/test-berlin-feed.mjs
           python3 scripts/test-rostock-source.py
           python3 scripts/test-dresden-archive.py
+          python3 scripts/test-jena-archive.py
           node scripts/test-source-health-alerts.mjs
           python3 scripts/test-leipzig-police.py
           python3 scripts/test-leipzig-archive.py
