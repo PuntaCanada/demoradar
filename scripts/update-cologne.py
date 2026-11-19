@@ -100,7 +100,9 @@ def main():
  try:
   index=Page();index.feed(fetch(INDEX))
   links=candidate_links(index)
-  if not links:raise ValueError("No clearly labelled demonstration detail links; keeping existing data")
+  if not links:
+   status.update(status="reachable_no_matching_detail_links",count=0,links_inspected=0)
+   raise LookupError("No clearly labelled demonstrations on sampled calendar page; no import")
   now=dt.date.today()
   found=[]
   for url in links:
@@ -121,6 +123,9 @@ def main():
    data["events"]=combined;data["count"]=len(combined)
    FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
   status.update(status="ok",count=len(found),links_inspected=len(links),retained=len(existing))
+ except LookupError as ex:
+  status["note"]=str(ex)[:180]
+  print("Cologne source reachable, but no demonstration links currently matched")
  except Exception as ex:
   status["error"]=str(ex)[:180]
   print("Cologne monitor/import skipped safely:",repr(ex))
