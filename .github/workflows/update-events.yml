@@ -1,10 +1,11 @@
-name: Aktualisiere Berliner Demonstrationen
+name: Aktualisiere Demonstrationen Deutschland
 on:
   workflow_dispatch:
   push:
     paths:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
+      - 'scripts/update-rostock.py'
   schedule:
     - cron: "21 */6 * * *"
 permissions:
@@ -23,6 +24,8 @@ jobs:
           node-version: "22"
       - name: Lade öffentliche Berliner Versammlungsdaten
         run: node scripts/update-events.mjs
+      - name: Ergänze amtliche Versammlungen aus Rostock
+        run: python3 scripts/update-rostock.py
       - name: Prüfe Kalendercode und Datenformat
         run: |
           node --check live.js
