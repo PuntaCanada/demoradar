@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle} from "./stream-matcher.mjs";
+import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize} from "./stream-matcher.mjs";
 const date="2026-11-19",iso="2026-11-19T12:00:00Z";
 const events=[
  {id:"berlin-climate",city:"Berlin",date,title:"Kundgebung Klimaschutz und Energiewende"},
@@ -37,4 +37,12 @@ assert.equal(find("Demo Berlin Klimaschutz Energiewende 18.11.2026",iso,"recordi
 assert.equal(find("Demo Berlin Klimaschutz Energiewende 19.11.2026",iso,"recording").length,1,"matching explicit date accepted");
 assert.equal(cityMatches("Demo Frankfurt (Oder) Klimaschutz","Frankfurt am Main"),false);
 assert.equal(cityMatches("Demo Frankfurt am Main Klimaschutz","Frankfurt (Oder)"),false);
-console.log("stream-matcher: 27 safety checks passed");
+assert.equal(explicitDateInTitle("Antifa Gegendemo Köln14.11.26"),"2026-11-14","day.month.year shorthand");
+assert.equal(normalize("Köln14.11.26").includes("koln 14"),true,"city/date without whitespace");
+const late=[{id:"demo-k",city:"Köln",date:"2026-11-14",title:"Antifa Naziaufmarsch Gegendemonstration",location:"Neumarkt"}];
+const lateVideo={title:"Naziaufmarsch Antifa Gegendemo Köln14.11.26",status:"recording",date:"2026-11-19T10:00:00Z",published_at:"2026-11-19T10:00:00Z"};
+assert.equal(matchEvents(lateVideo,late).length,1,"late excerpt matched using explicit event date and two topic words");
+assert.equal(matchEvents({...lateVideo,title:"Naziaufmarsch Antifa Gegendemo Köln13.11.26"},late).length,0,"wrong explicit date rejected");
+assert.equal(matchEvents({...lateVideo,published_at:"2027-01-19T10:00:00Z",date:"2027-01-19T10:00:00Z"},late).length,0,"late uploads beyond thirty days rejected");
+assert.equal(matchEvents({...lateVideo,title:"Nur Antifa Gegendemo Köln14.11.26"},late).length,0,"generic demo term and city do not count twice");
+console.log("stream-matcher: 33 safety checks passed");
