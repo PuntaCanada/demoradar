@@ -24,6 +24,12 @@ def fetch(url):
 def main():
  now=dt.datetime.now(dt.timezone.utc)
  events=json.loads(EVENTS.read_text(encoding="utf-8"))["events"]
+ # Include the separately licensed, plausibility-filtered Demos event file.
+ try:
+  supplemental=json.loads(Path("data/demos-events.json").read_text(encoding="utf-8"))
+  if supplemental.get("license")=="CC BY-SA 4.0" and isinstance(supplemental.get("events"),list):
+   events.extend(supplemental["events"])
+ except (ValueError,OSError) as ex:print("Community events unavailable for news matching",str(ex)[:100])
  eligible=[e for e in events if abs((dt.date.fromisoformat(e["date"])-now.date()).days)<=3]
  found=[]
  for source,url,hostname,local_cities in FEEDS:
