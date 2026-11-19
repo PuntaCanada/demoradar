@@ -63,17 +63,23 @@ const officialCount=records.length;
 fetch("/data/demos-events.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(extra=>{
  if(!extra||!Array.isArray(extra.events)||extra.license!=="CC BY-SA 4.0")return;
  const normalized=s=>String(s||"").toLocaleLowerCase("de").normalize("NFKD").replace(/\p{M}/gu,"").replace(/[^a-z0-9]+/g," ").trim();
- const existing=new Set(records.map(e=>[e.date,normalized(e.city),normalized(e.title),e.start||""].join("|")));
+ const buckets=new Map();
+ const bucketKey=e=>[e.date,normalized(e.city),e.start||""].join("|");
+ const add=e=>{const key=bucketKey(e),a=buckets.get(key)||[];a.push(normalized(e.title));buckets.set(key,a)};
+ for(const e of records)add(e);
+ const sameTitle=(a,b)=>a===b||(Math.min(a.length,b.length)>=45&&(a.startsWith(b)||b.startsWith(a)));
+ const states={"berlin":"Berlin","dresden":"Sachsen","rostock":"Mecklenburg-Vorpommern","wur zburg":"Bayern","wurzburg":"Bayern","munster":"Nordrhein-Westfalen","bielefeld":"Nordrhein-Westfalen","weimar":"Thüringen","luneburg":"Niedersachsen","papenburg":"Niedersachsen"};
  let appended=0;
  for(const e of extra.events){
   if(!e||e.country!=="DE"||!e.date||!e.city||!e.title||!String(e.id).startsWith("demos-"))continue;
-  const key=[e.date,normalized(e.city),normalized(e.title),e.start||""].join("|");
-  if(existing.has(key))continue;
-  existing.add(key);records.push(e);appended++;
+  const key=bucketKey(e),title=normalized(e.title);
+  if((buckets.get(key)||[]).some(t=>sameTitle(t,title)))continue;
+  if(!e.state)e.state=states[normalized(e.city)]||"";
+  add(e);records.push(e);appended++;
  }
  records.sort((a,b)=>a.date.localeCompare(b.date)||(a.start||"").localeCompare(b.start||"")||a.id.localeCompare(b.id));
  const notice=document.querySelector(".notice");
- if(notice)notice.innerHTML="<strong>ℹ️ Veranstaltungsdaten:</strong> "+officialCount+" amtliche Meldungen und "+appended+" ergänzende Community-/Quellenmeldungen von <a href='https://demonstrations.org/en/data' target='_blank' rel='noopener noreferrer'>Demos Berlin e. V.</a> (CC BY-SA 4.0). Überschneidungen wurden anhand von Datum, Stadt, Titel und Beginn entfernt. Die Abdeckung bleibt unvollständig; gemeldet bedeutet nicht durchgeführt.";
+ if(notice)notice.innerHTML="<strong>ℹ️ Veranstaltungsdaten:</strong> "+officialCount+" amtliche Meldungen und "+appended+" ergänzende Community-/Quellenmeldungen von <a href='https://demonstrations.org/en/data' target='_blank' rel='noopener noreferrer'>Demos Berlin e. V.</a> (CC BY-SA 4.0). Überschneidungen wurden anhand von Datum, Stadt, Beginn und identischem bzw. eindeutig gekürztem Titel entfernt. Die Abdeckung bleibt unvollständig; gemeldet bedeutet nicht durchgeführt.";
  const stat=document.querySelectorAll(".stat")[0];
  if(stat)stat.innerHTML="<span>AKTUELLE DATENQUELLEN</span><strong>"+records.length+" Meldungen</strong><span>Amtliche Stellen + Demos Berlin e. V. (CC BY-SA 4.0)</span>";
  render();renderFeatured();
