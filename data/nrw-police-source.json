@@ -11,8 +11,8 @@
     {
       "city": "Münster",
       "source": "https://www.presseportal.de/blaulicht/pm/11187/6394182",
-      "status": "not_verified_no_import",
-      "count": 0
+      "status": "verified_one_off",
+      "count": 2
     }
   ],
   "rights": "Short factual date, subject and announced places only; original police articles/images not reproduced"

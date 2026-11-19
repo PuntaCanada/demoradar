@@ -66,8 +66,8 @@
       "city": "Münster",
       "state": "Nordrhein-Westfalen",
       "source": "Polizei Münster",
-      "status": "no_matching_items",
-      "count": 0,
+      "status": "verified_one_off",
+      "count": 2,
       "scope": "One specific police press announcement, not a regularly updated assembly feed",
       "last_checked": null,
       "check_freshness": "unknown"

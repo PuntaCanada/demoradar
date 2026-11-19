@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T17:13:34.597Z",
-  "count": 1350,
+  "updated_at": "2026-11-19T17:14:37.786Z",
+  "count": 1352,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -366,6 +366,36 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "police-nrw-00fb7ffd992b1f7d",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Münster",
+      "date": "2026-11-20",
+      "start": "",
+      "end": "",
+      "title": "Schulstreik gegen die Wehrpflicht",
+      "location": "Hauptbahnhof",
+      "route": "",
+      "source": "Polizei Münster – amtliche Pressemitteilung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/11187/6394182",
+      "source_status": "Ausdrücklich angekündigt; aktuelle Veranstaltungsdetails bei der Behörde prüfen"
+    },
+    {
+      "id": "police-nrw-a1170afcef4cd4f3",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Münster",
+      "date": "2026-11-20",
+      "start": "",
+      "end": "",
+      "title": "Nein zur Wehrpflicht",
+      "location": "Schlossplatz",
+      "route": "",
+      "source": "Polizei Münster – amtliche Pressemitteilung",
+      "source_url": "https://www.presseportal.de/blaulicht/pm/11187/6394182",
+      "source_status": "Ausdrücklich angekündigt; aktuelle Veranstaltungsdetails bei der Behörde prüfen"
     },
     {
       "id": "berlin-59",
