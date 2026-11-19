@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-19T16:59:44.361Z",
+  "updated_at": "2026-11-19T17:42:40.982Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -92,7 +92,7 @@
       "title": "🔴LIVE \"Steeler Jungs\" - Antifa \"Steele bleibt bunt!\" Gegendemo 19.11.26 Essen",
       "url": "https://www.youtube.com/watch?v=2iso4hHa6Dw",
       "date": "2026-11-19T16:58:55Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {
