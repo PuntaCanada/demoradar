@@ -66,7 +66,7 @@ const render=()=>{
    item.append(heading);
    item.append($("p","source-detail",s.city+" · "+t("Letzte belegte Prüfung: ","Last evidenced check: ")+fmt(s.last_checked)));
    item.append($("p","source-detail",freshnessDescription(s)));
-   item.append($("p","source-detail",t("Quellentyp: ","Source type: ")+(isRolling(s)?t("regelmäßig beobachteter Terminfeed","monitored recurring event feed"):s.status==="verified_historical_one_off"?t("historische Einzelmeldung (kein aktueller Feed)","historical one-off (not a current feed)"):s.status==="verified_one_off"?t("amtliche Einzelmeldung (kein regelmäßiger Feed)","official one-off notice (not a recurring feed)"):t("kein bestätigter regelmäßiger Terminfeed","no confirmed recurring event feed")));
+   item.append($("p","source-detail",t("Quellentyp: ","Source type: ")+(isRolling(s)?t("regelmäßig beobachteter Terminfeed","monitored recurring event feed"):s.status==="verified_historical_one_off"?t("historische Einzelmeldung (kein aktueller Feed)","historical one-off (not a current feed)"):s.status==="verified_one_off"?t("amtliche Einzelmeldung (kein regelmäßiger Feed)","official one-off notice (not a recurring feed)"):t("kein bestätigter regelmäßiger Terminfeed","no confirmed recurring event feed"))));
    item.append($("p","source-scope",s.scope||t("Reichweite nicht dokumentiert","Scope not documented")));
    if(s.status==="observed_data"&&Number.isInteger(s.count))item.append($("p","source-detail",t("Beim Abruf gelieferte Einträge: ","Items in last fetch: ")+s.count.toLocaleString(en?"en-GB":"de-DE")));
    const affected=health.filter(h=>h.city===s.city&&h.source===s.source);
