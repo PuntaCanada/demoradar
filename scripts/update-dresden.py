@@ -40,7 +40,8 @@ def main():
             organizer=clean(item.get("Veranstalter"))
             if organizer.lower() in ("natürliche person","privatperson"):organizer=""
             status=clean(item.get("Status"))
-            if status.casefold() in ("abgemeldet","abgesagt","zurückgezogen","zurueckgezogen","storniert"):continue
+            # Preserve explicitly cancelled/withdrawn entries to show their real status;
+            # the frontend excludes them from active counts instead of silently dropping them.
             parts=clean(item.get("Teilnehmer"))
             ident=hashlib.sha256(("|".join([date,start,title,location])).casefold().encode()).hexdigest()[:16]
             events.append({"id":"dresden-"+ident,"country":"DE","state":"Sachsen","city":"Dresden","date":date,"start":start,"end":end,"title":title,"location":location,"postal_code":"","route":"","organizer":organizer,"registered_participants":parts,"event_status":status,"source":"Landeshauptstadt Dresden – Versammlungsübersicht","source_url":URL,"source_status":"behördlich veröffentlicht"})
