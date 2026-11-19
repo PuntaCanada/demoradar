@@ -1,0 +1,68 @@
+{
+  "provider": "Demos Berlin e.V.",
+  "docs_url": "https://api.demonstrations.org/v1/docs",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "status": "schema_found",
+  "import_enabled": false,
+  "candidates": [
+    {
+      "url": "https://api.demonstrations.org/v1/docs",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "kind": "html_docs",
+      "potential_spec_links": [
+        "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css",
+        "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js",
+        "/v1/openapi.json"
+      ]
+    },
+    {
+      "url": "https://api.demonstrations.org/v1/openapi.json",
+      "http_status": 200,
+      "content_type": "application/json",
+      "kind": "openapi",
+      "version": "3.1.0",
+      "path_count": 65,
+      "get_paths": [
+        "/up",
+        "/v1/event/{event_id}",
+        "/v1/event/{event_id}/organizer",
+        "/v1/source/",
+        "/v1/source/{source_id}",
+        "/v1/source/{source_id}/internal_contact",
+        "/v1/source/{source_id}/future_events",
+        "/v1/source/{source_id}/past_events",
+        "/v1/source/{source_id}/editable_events",
+        "/v1/source/{source_id}/title-image",
+        "/v1/source_type/",
+        "/v1/source_type/{source_type_id}",
+        "/v1/topic/",
+        "/v1/topic/{topic_id}",
+        "/v1/user/refresh_token",
+        "/v1/language/supported",
+        "/v1/location/country/",
+        "/v1/location/city/suggest",
+        "/v1/document/available",
+        "/v1/document/{document_id}",
+        "/v1/admin/settings/application",
+        "/v1/admin/tag-consistency/next",
+        "/v1/admin/event-dump",
+        "/v1/admin/{default_location_id}",
+        "/v1/export/ics/event.ics",
+        "/v1/export/ics/events.ics",
+        "/v1/export/rss/feed",
+        "/v1/sitemaps/statics/index.xml",
+        "/v1/sitemaps/sources/index.xml",
+        "/v1/sitemaps/sources/{language}/{index}.xml.gz",
+        "/v1/sitemaps/events/index.xml",
+        "/v1/sitemaps/events/{language}/{index}.xml.gz"
+      ]
+    },
+    {
+      "url": "https://api.demonstrations.org/openapi.json",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ],
+  "schema_url": "https://api.demonstrations.org/v1/openapi.json"
+}
