@@ -1,0 +1,34 @@
+name: "Community: Austausch / Frage"
+description: "Öffentliche Diskussion zu einer Demonstration, Stadt oder einem Thema starten"
+title: "[Community] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Willkommen bei DemoRadar. Bitte respektvoll und sachlich bleiben. Keine privaten Daten, Telefonnummern, Adressen, Gewaltaufrufe, Doxxing oder unbelegten Behauptungen posten. Dies ist ein öffentlich sichtbarer GitHub-Beitrag.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Thema
+      options:
+        - Demonstration / Veranstaltung
+        - Stadt / Region
+        - Anreise / Barrierefreiheit
+        - Frage / Austausch
+        - Fehler / Ergänzung
+    validations:
+      required: true
+  - type: input
+    id: event
+    attributes:
+      label: Link zur Veranstaltung (optional)
+      placeholder: "https://demoradar.pages.dev/?event=..."
+  - type: textarea
+    id: message
+    attributes:
+      label: Dein öffentlicher Beitrag
+      description: "Bitte keine persönlichen oder sensiblen Angaben veröffentlichen."
+      placeholder: "Worum geht es?"
+    validations:
+      required: true
