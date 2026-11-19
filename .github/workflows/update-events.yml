@@ -24,6 +24,7 @@ on:
       - 'index.html'
       - 'scripts/update-news.py'
       - 'scripts/track-event-updates.py'
+      - 'scripts/test-event-updates.py'
       - 'heatmap.js'
       - 'data/germany-states.json'
   schedule:
@@ -69,6 +70,7 @@ jobs:
           python3 -m py_compile scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py
           node --check heatmap.js
           python3 scripts/test-dedupe.py
+          python3 scripts/test-event-updates.py
           node --check live.js
           node --check i18n.js
           node --check scripts/build-language-pages.mjs
