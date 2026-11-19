@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-19T15:59:29.387Z",
+  "updated_at": "2026-11-19T16:01:28.525Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -9,9 +9,9 @@
     "twitch_configured": false
   },
   "statistics": {
-    "youtube_channels_checked": 9,
-    "youtube_videos_checked": 450,
-    "youtube_streams_seen": 222,
+    "youtube_channels_checked": 10,
+    "youtube_videos_checked": 500,
+    "youtube_streams_seen": 228,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
@@ -172,6 +172,30 @@
       "title": "🔴 Live: Leipzig | Demo gegen Rüstungsproduktion",
       "url": "https://www.youtube.com/watch?v=mIEBEtjqifc",
       "date": "2026-10-24T10:45:54Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "DauerwelleDemoReport",
+      "title": "Erster Tag in Antananarivo - Ein Kulturschock?!? - Reise durch Madagaskar",
+      "url": "https://www.youtube.com/watch?v=5ms3AY8hRr0",
+      "date": "2026-11-18T17:00:07Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "DauerwelleDemoReport",
+      "title": "🔴 LIVE - Demo gegen den Auftritt von Nikolai Binner - Kunstfreiheit oder Zensur?",
+      "url": "https://www.youtube.com/watch?v=dUxdfPqAOR0",
+      "date": "2026-11-06T17:08:32Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "DauerwelleDemoReport",
+      "title": "🔴 LIVE - Gen Z - Kriminalisierung, mediale Hetze und Polizeigewalt? Protest gerechtfertigt?",
+      "url": "https://www.youtube.com/watch?v=_ImvifwFr3U",
+      "date": "2026-11-03T15:52:50Z",
       "status": "recording",
       "match_count": 0
     }
