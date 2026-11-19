@@ -2,6 +2,7 @@
 let records=[],updated=null,officialCount=0,communityCount=0;
 const T=(key,args)=>window.DemoRadarI18n?.t(key,args)||key;
 const locale=()=>window.DemoRadarI18n?.locale||"de-DE";
+const formatDate=date=>new Intl.DateTimeFormat(locale(),{timeZone:"UTC",day:"2-digit",month:"2-digit",year:"numeric"}).format(new Date(date+"T12:00:00Z"));
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const topic=s=>{s=s.toLowerCase();if(/klima|umwelt|fridays for future|naturschutz/.test(s))return"Klima & Umwelt";if(/krieg|frieden|waffen|wehrpflicht|nato/.test(s))return"Frieden & Krieg";if(/miete|sozial|streik|gewerkschaft|tarif|arbeit/.test(s))return"Arbeit & Soziales";if(/migration|flüchtling|asyl/.test(s))return"Migration";if(/demokratie|afd|antifa|rechtsextrem|faschis/.test(s))return"Demokratie";return"Sonstiges"};
 const localTopic=title=>{const label=topic(title);return T(({"Klima & Umwelt":"topic.climate","Frieden & Krieg":"topic.peace","Arbeit & Soziales":"topic.social","Migration":"topic.migration","Demokratie":"topic.democracy","Sonstiges":"topic.other"})[label]||"topic.other")};
@@ -33,6 +34,16 @@ function renderSourceInfo(){
  if(stats&&records.length){
   stats.innerHTML="<span>"+esc(T("stat.status"))+"</span><strong>"+records.length+" "+esc(T("feature.count",{count:""}).trim())+"</strong><span>"+esc(communityCount?T("source.mixed"):T("source.officialLabel"))+"</span>";
  }
+}
+
+let sourceStatus=null;
+function renderMonitoredSources(){
+ if(!sourceStatus||!Array.isArray(sourceStatus.sources))return;
+ const note=document.getElementById("source-status-note")||document.createElement("p");
+ note.id="source-status-note";note.className="small";note.style.margin="12px 0";
+ const sources=sourceStatus.sources.map(x=>x.city+" ("+(x.status==="ok"?T("source.available"):x.status==="reachable_unverified_format"?T("source.waiting"):T("source.unavailable"))+")").join(", ");
+ note.textContent=T("source.status",{sources});
+ if(!note.isConnected){const box=document.querySelector(".notice");if(box)box.insertAdjacentElement("afterend",note)}
 }
 
 let articleMatches={};
@@ -73,7 +84,7 @@ function renderFeatured(){
   holder.innerHTML=items.map(e=>{
    const articles=Array.isArray(articleMatches[e.id])?articleMatches[e.id].slice(0,2):[];
    const links=articles.map(n=>'<a href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.candidateTitle"))+'" >'+esc(n.source)+": "+esc(n.title)+'</a>').join("");
-   const meta=(x.id==="week"?esc(e.date.split("-").reverse().join("."))+" · ":"")+esc(e.start||T("calendar.timeUnknown"))+(e.start?" ":"")+" · "+esc(e.city)+(e.location?" · "+esc(e.location):"")+(e.organizer?" · "+esc(e.organizer):"")+(e.registered_participants?" · "+esc(T("feature.registered"))+": "+esc(e.registered_participants):"");
+   const meta=(x.id==="week"?esc(formatDate(e.date))+" · ":"")+esc(e.start||T("calendar.timeUnknown"))+(e.start?" ":"")+" · "+esc(e.city)+(e.location?" · "+esc(e.location):"")+(e.organizer?" · "+esc(e.organizer):"")+(e.registered_participants?" · "+esc(T("feature.registered"))+": "+esc(e.registered_participants):"");
    return '<article class="featured-item"><span class="featured-badge">'+esc(localTopic(e.title))+'</span><h3>'+esc(e.title)+'</h3><div class="featured-meta">'+meta+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(T("feature.source"))+'</a><a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.searchTitle"))+'" >'+esc(T("feature.newsSearch"))+'</a></div>'+(links?'<div class="featured-meta"><strong>'+esc(T("feature.candidate"))+'</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
   }).join("");
  }
@@ -81,13 +92,13 @@ function renderFeatured(){
 
 function card(e){
 const fields=[e.location,e.route?T("event.route")+": "+e.route:"",e.organizer?T("event.organizer")+": "+e.organizer:"",e.registered_participants?T("event.participants")+": "+e.registered_participants:""].filter(Boolean);
-return '<article style="padding:15px;border:1px solid #e6eaf0;border-radius:10px"><div class="small">'+esc(e.date.split("-").reverse().join("."))+" · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</div><strong>"+esc(e.title)+'</strong><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||T("calendar.officialSource"))+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div></article>';
+return '<article style="padding:15px;border:1px solid #e6eaf0;border-radius:10px"><div class="small">'+esc(formatDate(e.date))+" · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</div><strong>"+esc(e.title)+'</strong><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||T("calendar.officialSource"))+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div></article>';
 }
 document.getElementById("calendar").addEventListener("click",ev=>{let btn=ev.target.closest("[data-date]");if(!btn)return;const a=records.filter(matches).filter(e=>e.date===btn.dataset.date);document.getElementById("list").innerHTML='<button id="backToCalendar" class="secondary" style="margin-bottom:12px">'+esc(T("calendar.back"))+'</button><div style="display:grid;gap:12px">'+a.map(card).join("")+"</div>";document.getElementById("calendarWrap").classList.add("hidden");document.getElementById("list").classList.add("visible");document.getElementById("backToCalendar").onclick=()=>toggle(false)});
 function toggle(l){listMode=l;document.getElementById("calendarWrap").classList.toggle("hidden",l);document.getElementById("list").classList.toggle("visible",l);document.getElementById("calendarBtn").classList.toggle("active",!l);document.getElementById("listBtn").classList.toggle("active",l);render()}
 document.getElementById("prev").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()-1,1);render()};document.getElementById("next").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()+1,1);render()};document.getElementById("calendarBtn").onclick=()=>toggle(false);document.getElementById("listBtn").onclick=()=>toggle(true);["search","topic","position","city"].forEach(id=>document.getElementById(id).addEventListener(id==="search"?"input":"change",()=>{render();renderFeatured()}));document.getElementById("region").addEventListener("change",()=>{updateCityChoices();render();renderFeatured()});
-document.addEventListener("demoradar:languagechange",()=>{updateCityChoices();render();renderFeatured();renderSourceInfo()});
-fetch("/data/source-status.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(info=>{if(!info||!Array.isArray(info.sources))return;const note=document.createElement("p");note.className="small";note.style.margin="12px 0";note.textContent="Weitere geprüfte Quellen: "+info.sources.map(x=>x.city+" ("+(x.status==="ok"?"abrufbar":x.status==="reachable_unverified_format"?"Website erreichbar, Import ausstehend":"derzeit nicht erreichbar")+")").join(", ")+". Die Abdeckung bleibt unvollständig.";const box=document.querySelector(".notice");if(box)box.insertAdjacentElement("afterend",note)}).catch(()=>{});
+document.addEventListener("demoradar:languagechange",()=>{updateCityChoices();render();renderFeatured();renderSourceInfo();renderMonitoredSources()});
+fetch("/data/source-status.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(info=>{sourceStatus=info;renderMonitoredSources()}).catch(()=>{});
 fetch("/data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{if(!Array.isArray(d.events))throw Error("Invalid data");records=d.events;updated=d.updated_at;for(const e of records){if(!e.state&&knownStates[e.city])e.state=knownStates[e.city]}updateCityChoices();
 officialCount=records.length;
 fetch("/data/demos-events.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(extra=>{
