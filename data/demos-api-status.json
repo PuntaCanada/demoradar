@@ -57,6 +57,969 @@
         "/v1/sitemaps/sources/{language}/{index}.xml.gz",
         "/v1/sitemaps/events/index.xml",
         "/v1/sitemaps/events/{language}/{index}.xml.gz"
+      ],
+      "event_operations": [
+        {
+          "path": "/v1/event/new",
+          "method": "POST",
+          "operation_id": "new_event_v1_event_new_post",
+          "parameters": [],
+          "request_body": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventCreate"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/EventInDB"
+                    },
+                    "type": "array",
+                    "title": "Response New Event V1 Event New Post"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/all",
+          "method": "POST",
+          "operation_id": "paginated_all_v1_event_all_post",
+          "parameters": [
+            {
+              "name": "user-agent",
+              "in": "header",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "User-Agent"
+              }
+            }
+          ],
+          "request_body": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEventQuery"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ListEventResult"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/perimeter-search",
+          "method": "POST",
+          "operation_id": "search_by_perimeter_v1_event_perimeter_search_post",
+          "parameters": [
+            {
+              "name": "user-agent",
+              "in": "header",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "User-Agent"
+              }
+            }
+          ],
+          "request_body": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventPerimeterSearch"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventInDB"
+                    },
+                    "title": "Response Search By Perimeter V1 Event Perimeter Search Post"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/perimeter-search/count",
+          "method": "POST",
+          "operation_id": "search_by_perimeter_count_v1_event_perimeter_search_count_post",
+          "parameters": [],
+          "request_body": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventPerimeterSearch"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "integer",
+                    "title": "Response Search By Perimeter Count V1 Event Perimeter Search Count Post"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/address-search",
+          "method": "POST",
+          "operation_id": "search_by_address_v1_event_address_search_post",
+          "parameters": [
+            {
+              "name": "user-agent",
+              "in": "header",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "User-Agent"
+              }
+            }
+          ],
+          "request_body": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventAddressSearch"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventInDB"
+                    },
+                    "title": "Response Search By Address V1 Event Address Search Post"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/address-search/count",
+          "method": "POST",
+          "operation_id": "search_by_address_count_v1_event_address_search_count_post",
+          "parameters": [],
+          "request_body": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventAddressSearch"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "integer",
+                    "title": "Response Search By Address Count V1 Event Address Search Count Post"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/nearest/distance",
+          "method": "POST",
+          "operation_id": "nearest_event_by_distance_v1_event_nearest_distance_post",
+          "parameters": [],
+          "request_body": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NearestEventByDistanceQuery"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NearestEventByDistanceResult"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/nearest/time",
+          "method": "POST",
+          "operation_id": "nearest_event_in_time_v1_event_nearest_time_post",
+          "parameters": [],
+          "request_body": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NearestEventInTimeQuery"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NearestEventInTimeResult"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/multi",
+          "method": "POST",
+          "operation_id": "get_multiple_event_by_id_v1_event_multi_post",
+          "parameters": [],
+          "request_body": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array",
+                  "title": "Event Ids"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "items": {
+                      "$ref": "#/components/schemas/EventInDB"
+                    },
+                    "type": "array",
+                    "title": "Response Get Multiple Event By Id V1 Event Multi Post"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/{event_id}",
+          "method": "GET",
+          "operation_id": "get_event_by_id_v1_event__event_id__get",
+          "parameters": [
+            {
+              "name": "event_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "title": "Event Id"
+              }
+            }
+          ],
+          "request_body": null,
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EventInDB"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/{event_id}/organizer",
+          "method": "GET",
+          "operation_id": "get_event_organizer_v1_event__event_id__organizer_get",
+          "parameters": [
+            {
+              "name": "event_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "title": "Event Id"
+              }
+            }
+          ],
+          "request_body": null,
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SourceInDB"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/event/fetch-notifications",
+          "method": "POST",
+          "operation_id": "fetch_notifications_v1_event_fetch_notifications_post",
+          "parameters": [
+            {
+              "name": "user-agent",
+              "in": "header",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "User-Agent"
+              }
+            }
+          ],
+          "request_body": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationFetchQuery"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotificationFetchResponse"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/export/ics/event.ics",
+          "method": "GET",
+          "operation_id": "get_event_ics_v1_export_ics_event_ics_get",
+          "parameters": [
+            {
+              "name": "event_id",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "title": "Event Id"
+              }
+            }
+          ],
+          "request_body": null,
+          "responses": {
+            "200": {
+              "description": "Successful Response"
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/export/ics/events.ics",
+          "method": "GET",
+          "operation_id": "get_events_ics_v1_export_ics_events_ics_get",
+          "parameters": [
+            {
+              "name": "alert_name",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Alert Name"
+              }
+            },
+            {
+              "name": "reminder_minutes",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Reminder Minutes"
+              }
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Name"
+              }
+            },
+            {
+              "name": "country",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "default": "",
+                "title": "Country"
+              }
+            },
+            {
+              "name": "city",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "default": "",
+                "title": "City"
+              }
+            },
+            {
+              "name": "topic_ids",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Topic Ids"
+              }
+            },
+            {
+              "name": "organiser_ids",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Organiser Ids"
+              }
+            },
+            {
+              "name": "latitude",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Latitude"
+              }
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Longitude"
+              }
+            },
+            {
+              "name": "radius_km",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Radius Km"
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "maximum": 50,
+                "minimum": 1,
+                "default": 50,
+                "title": "Limit"
+              }
+            },
+            {
+              "name": "offset",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 0,
+                "title": "Offset"
+              }
+            }
+          ],
+          "request_body": null,
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "path": "/v1/export/rss/feed",
+          "method": "GET",
+          "operation_id": "get_rss_feed_v1_export_rss_feed_get",
+          "parameters": [
+            {
+              "name": "alert_name",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "title": "Alert Name"
+              }
+            },
+            {
+              "name": "language",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "$ref": "#/components/schemas/AvailableLanguages",
+                "default": "en"
+              }
+            },
+            {
+              "name": "name",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Name"
+              }
+            },
+            {
+              "name": "country",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "default": "",
+                "title": "Country"
+              }
+            },
+            {
+              "name": "city",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "default": "",
+                "title": "City"
+              }
+            },
+            {
+              "name": "topic_ids",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Topic Ids"
+              }
+            },
+            {
+              "name": "organiser_ids",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Organiser Ids"
+              }
+            },
+            {
+              "name": "latitude",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Latitude"
+              }
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Longitude"
+              }
+            },
+            {
+              "name": "radius_km",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Radius Km"
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "maximum": 50,
+                "minimum": 1,
+                "default": 50,
+                "title": "Limit"
+              }
+            },
+            {
+              "name": "offset",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 0,
+                "title": "Offset"
+              }
+            }
+          ],
+          "request_body": null,
+          "responses": {
+            "200": {
+              "description": "Successful Response"
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
       ]
     },
     {
@@ -64,5 +1027,49 @@
       "error": "HTTP Error 404: Not Found"
     }
   ],
+  "api_schemas": {
+    "ListEventQuery": {
+      "properties": {
+        "sorting_key": {
+          "type": "string",
+          "enum": [
+            "id",
+            "created",
+            "name",
+            "start_time"
+          ],
+          "title": "Sorting Key"
+        },
+        "sorting_direction": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "title": "Sorting Direction"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0.0,
+          "title": "Offset"
+        },
+        "limit": {
+          "type": "integer",
+          "maximum": 200.0,
+          "minimum": 0.0,
+          "title": "Limit"
+        }
+      },
+      "type": "object",
+      "required": [
+        "sorting_key",
+        "sorting_direction",
+        "offset",
+        "limit"
+      ],
+      "title": "ListEventQuery",
+      "description": "API return schema of an Event."
+    }
+  },
   "schema_url": "https://api.demonstrations.org/v1/openapi.json"
 }
