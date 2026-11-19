@@ -1,5 +1,5 @@
 (()=>{"use strict";
-let records=[],updated=null;
+let records=[],updated=null,officialCount=0,communityCount=0;
 const T=(key,args)=>window.DemoRadarI18n?.t(key,args)||key;
 const locale=()=>window.DemoRadarI18n?.locale||"de-DE";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -19,6 +19,21 @@ function updateCityChoices(){
 }
 let sel=new Date(new Date().getFullYear(),new Date().getMonth(),1), listMode=false;
 function render(){const y=sel.getFullYear(),m=sel.getMonth(),start=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();document.getElementById("monthLabel").textContent=new Intl.DateTimeFormat(locale(),{month:"long",year:"numeric"}).format(sel);const bydate=new Map();for(const e of records.filter(matches)){if(e.date.slice(0,7)!==y+"-"+String(m+1).padStart(2,"0"))continue;const a=bydate.get(e.date)||[];a.push(e);bydate.set(e.date,a)}let html="";for(let i=0;i<42;i++){const d=i-start+1,dt=new Date(y,m,d),off=d<1||d>days,k=dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0"),a=off?[]:bydate.get(k)||[],today=dt.toDateString()===new Date().toDateString();html+='<div class="day '+(off?"muted ":"")+(today?"today":"")+'"><span class="daynum">'+dt.getDate()+'</span>'+(a.length?'<button class="day-events" data-date="'+k+'" style="display:block;border:0;background:#def7f0;color:#076957;border-radius:5px;margin-top:6px;padding:3px 5px;font-size:11px;font-weight:750;max-width:100%">'+a.length+' Demo'+(a.length!==1?"s":"")+"</button>":"")+"</div>"}document.getElementById("calendar").innerHTML=html;const filtered=records.filter(matches).filter(e=>e.date.slice(0,7)===y+"-"+String(m+1).padStart(2,"0"));document.getElementById("resultText").textContent=T("calendar.count",{count:filtered.length});document.getElementById("list").innerHTML=filtered.length?'<div style="display:grid;gap:12px">'+filtered.slice(0,300).map(e=>card(e)).join("")+"</div>":'<div class="empty"><h3>Keine passenden Termine gefunden</h3><p>Suche oder Filter anpassen. Die Abdeckung ist noch unvollständig.</p></div>';}
+
+function renderSourceInfo(){
+ const notice=document.querySelector(".notice"),stats=document.querySelectorAll(".stat")[0];
+ if(notice){
+  if(!records.length)notice.textContent=T("source.disclaimer");
+  else if(communityCount){
+   notice.innerHTML="<strong>ℹ️ "+esc(T("source.summary"))+":</strong> "+esc(T("source.officialCount",{count:officialCount}))+" · "+esc(T("source.additionalCount",{count:communityCount}))+" <a href='https://demonstrations.org/en/data' target='_blank' rel='noopener noreferrer'>Demos Berlin e. V.</a> "+esc(T("source.license"))+" "+esc(T("source.dedup"))+" "+esc(T("source.disclaimer"));
+  }else{
+   notice.innerHTML="<strong>ℹ️ "+esc(T("source.live"))+":</strong> "+esc(T("source.official",{count:officialCount}))+" "+esc(T("source.updated",{updated:updated?new Date(updated).toLocaleString(locale()):"—"}))+" "+esc(T("source.disclaimer"));
+  }
+ }
+ if(stats&&records.length){
+  stats.innerHTML="<span>"+esc(T("stat.status"))+"</span><strong>"+records.length+" "+esc(T("feature.count",{count:""}).trim())+"</strong><span>"+esc(communityCount?T("source.mixed"):T("source.officialLabel"))+"</span>";
+ }
+}
 
 let articleMatches={};
 function renderFeatured(){
@@ -66,14 +81,15 @@ function renderFeatured(){
 
 function card(e){
 const fields=[e.location,e.route?T("event.route")+": "+e.route:"",e.organizer?T("event.organizer")+": "+e.organizer:"",e.registered_participants?T("event.participants")+": "+e.registered_participants:""].filter(Boolean);
-return '<article style="padding:15px;border:1px solid #e6eaf0;border-radius:10px"><div class="small">'+esc(e.date.split("-").reverse().join("."))+" · "+esc(e.start)+" Uhr · "+esc(e.city)+"</div><strong>"+esc(e.title)+'</strong><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||"Amtliche Quelle")+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div></article>';
+return '<article style="padding:15px;border:1px solid #e6eaf0;border-radius:10px"><div class="small">'+esc(e.date.split("-").reverse().join("."))+" · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</div><strong>"+esc(e.title)+'</strong><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||"Amtliche Quelle")+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div></article>';
 }
 document.getElementById("calendar").addEventListener("click",ev=>{let btn=ev.target.closest("[data-date]");if(!btn)return;const a=records.filter(matches).filter(e=>e.date===btn.dataset.date);document.getElementById("list").innerHTML='<button id="backToCalendar" class="secondary" style="margin-bottom:12px">'+esc(T("calendar.back"))+'</button><div style="display:grid;gap:12px">'+a.map(card).join("")+"</div>";document.getElementById("calendarWrap").classList.add("hidden");document.getElementById("list").classList.add("visible");document.getElementById("backToCalendar").onclick=()=>toggle(false)});
 function toggle(l){listMode=l;document.getElementById("calendarWrap").classList.toggle("hidden",l);document.getElementById("list").classList.toggle("visible",l);document.getElementById("calendarBtn").classList.toggle("active",!l);document.getElementById("listBtn").classList.toggle("active",l);render()}
 document.getElementById("prev").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()-1,1);render()};document.getElementById("next").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()+1,1);render()};document.getElementById("calendarBtn").onclick=()=>toggle(false);document.getElementById("listBtn").onclick=()=>toggle(true);["search","topic","position","city"].forEach(id=>document.getElementById(id).addEventListener(id==="search"?"input":"change",()=>{render();renderFeatured()}));document.getElementById("region").addEventListener("change",()=>{updateCityChoices();render();renderFeatured()});
+document.addEventListener("demoradar:languagechange",()=>{updateCityChoices();render();renderFeatured();renderSourceInfo()});
 fetch("/data/source-status.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(info=>{if(!info||!Array.isArray(info.sources))return;const note=document.createElement("p");note.className="small";note.style.margin="12px 0";note.textContent="Weitere geprüfte Quellen: "+info.sources.map(x=>x.city+" ("+(x.status==="ok"?"abrufbar":x.status==="reachable_unverified_format"?"Website erreichbar, Import ausstehend":"derzeit nicht erreichbar")+")").join(", ")+". Die Abdeckung bleibt unvollständig.";const box=document.querySelector(".notice");if(box)box.insertAdjacentElement("afterend",note)}).catch(()=>{});
 fetch("/data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{if(!Array.isArray(d.events))throw Error("Invalid data");records=d.events;updated=d.updated_at;for(const e of records){if(!e.state&&knownStates[e.city])e.state=knownStates[e.city]}updateCityChoices();
-const officialCount=records.length;
+officialCount=records.length;
 fetch("/data/demos-events.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(extra=>{
  if(!extra||!Array.isArray(extra.events)||extra.license!=="CC BY-SA 4.0")return;
  const normalized=s=>String(s||"").toLocaleLowerCase("de").normalize("NFKD").replace(/\p{M}/gu,"").replace(/[^a-z0-9]+/g," ").trim();
@@ -99,9 +115,5 @@ fetch("/data/demos-events.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).
   add(e);records.push(e);appended++;
  }
  records.sort((a,b)=>a.date.localeCompare(b.date)||(a.start||"").localeCompare(b.start||"")||a.id.localeCompare(b.id));
- const notice=document.querySelector(".notice");
- if(notice)notice.innerHTML="<strong>ℹ️ Veranstaltungsdaten:</strong> "+officialCount+" amtliche Meldungen und "+appended+" ergänzende Community-/Quellenmeldungen von <a href='https://demonstrations.org/en/data' target='_blank' rel='noopener noreferrer'>Demos Berlin e. V.</a> (CC BY-SA 4.0). Überschneidungen wurden anhand von Datum, Stadt, Beginn und identischem bzw. eindeutig gekürztem Titel entfernt. Die Abdeckung bleibt unvollständig; gemeldet bedeutet nicht durchgeführt.";
- const stat=document.querySelectorAll(".stat")[0];
- if(stat)stat.innerHTML="<span>AKTUELLE DATENQUELLEN</span><strong>"+records.length+" Meldungen</strong><span>Amtliche Stellen + Demos Berlin e. V. (CC BY-SA 4.0)</span>";
- updateCityChoices();render();renderFeatured();
-}).catch(err=>console.warn("Optional Demos data unavailable",err));const n=document.querySelector(".notice");if(n)n.innerHTML="<strong>ℹ️ Live-Daten:</strong> "+records.length+" behördlich veröffentlichte Veranstaltungen aus "+[...new Set(records.map(e=>e.city))].join(" und ")+". Bundesweite Abdeckung im Aufbau. Letzte Datenaktualisierung: "+esc(updated?new Date(updated).toLocaleString("de-DE"):"unbekannt")+". Nicht alle angezeigten Veranstaltungen finden tatsächlich statt.";document.querySelectorAll(".stat")[0].innerHTML="<span>VERIFIZIERTE QUELLE</span><strong>"+records.length+" Meldungen</strong><span>Amtliche Versammlungsbehörden</span>";render();renderFeatured();fetch("/data/news-matches.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(n=>{if(n&&n.matches&&typeof n.matches==="object"){articleMatches=n.matches;renderFeatured()}}).catch(()=>{})}).catch(()=>{render();renderFeatured();console.info("No live data file deployed yet")});})();
+ communityCount=appended;updateCityChoices();render();renderFeatured();renderSourceInfo();
+}).catch(err=>console.warn("Optional Demos data unavailable",err));renderSourceInfo();render();renderFeatured();fetch("/data/news-matches.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(n=>{if(n&&n.matches&&typeof n.matches==="object"){articleMatches=n.matches;renderFeatured()}}).catch(()=>{})}).catch(()=>{render();renderFeatured();console.info("No live data file deployed yet")});})();
