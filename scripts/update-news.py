@@ -7,8 +7,10 @@ from urllib.parse import urlparse
 EVENTS=Path("data/events.json")
 OUTPUT=Path("data/news-matches.json")
 FEEDS=[
- ("tagesschau Inland","https://www.tagesschau.de/inland/index~rss2.xml"),
- ("tagesschau Aktuell","https://www.tagesschau.de/index~rss2.xml"),
+ ("tagesschau Inland","https://www.tagesschau.de/inland/index~rss2.xml","www.tagesschau.de",None),
+ ("tagesschau Aktuell","https://www.tagesschau.de/index~rss2.xml","www.tagesschau.de",None),
+ ("MDR Sachsen","https://www.mdr.de/nachrichten/sachsen/nachrichten-mdr-120~rss2.xml","www.mdr.de",{"Dresden"}),
+ ("NDR Mecklenburg-Vorpommern","https://www.ndr.de/nachrichten/mecklenburg-vorpommern/index~rss2.xml","www.ndr.de",{"Rostock"}),
 ]
 STOP={"gegen","eine","einer","einem","einen","eines","und","oder","für","der","die","das","des","den","dem","mit","von","zum","zur","auf","bei","aus","wird","werden","nicht","mehr","heute","morgen","berlin","rostock","demo","demonstration","kundgebung","streik","protest","soll","sollen","über","alle","ein","einer","sind","dass","als","auch","in","im","am","an","ist","nach","neue","neuen","einer","menschen","recht","rechte","freiheit","tag"}
 PROTEST=re.compile(r"\b(demo(?:nstration(?:en)?)?|kundgebung|protest(?:e|ieren|aktion)?|streik(?:s|en)?|mahnwache|versammlung|aufzug|demonstrier\w*)\b",re.I)
@@ -24,19 +26,19 @@ def main():
  events=json.loads(EVENTS.read_text(encoding="utf-8"))["events"]
  eligible=[e for e in events if abs((dt.date.fromisoformat(e["date"])-now.date()).days)<=3]
  found=[]
- for source,url in FEEDS:
+ for source,url,hostname,local_cities in FEEDS:
   try:
    root=ET.fromstring(fetch(url))
    for item in root.findall(".//channel/item")[:100]:
     title=(item.findtext("title") or "").strip()
     link=(item.findtext("link") or "").strip()
     date=(item.findtext("pubDate") or "").strip()
-    if not title or not link.startswith("https://www.tagesschau.de/"):continue
+    if not title or not link.startswith("https://"+hostname+"/"):continue
     if not PROTEST.search(title):continue
     try:published=email.utils.parsedate_to_datetime(date).astimezone(dt.timezone.utc)
     except Exception:continue
     if abs((now-published).total_seconds())>6*86400:continue
-    found.append({"title":title[:220],"url":link,"source":source,"published":published.isoformat()})
+    found.append({"title":title[:220],"url":link,"source":source,"published":published.isoformat(),"local_cities":sorted(local_cities) if local_cities else None})
   except Exception as ex:print("RSS unavailable",source,str(ex)[:150])
  matches={}
  for e in eligible:
@@ -44,6 +46,7 @@ def main():
   if len(et)<2:continue
   candidates=[]
   for a in found:
+   if a["local_cities"] is not None and e["city"] not in a["local_cities"]:continue
    # City alone is not enough; match 2 topic words and a protest term in headline.
    if e["city"].lower() not in a["title"].lower():continue
    common=et & words(a["title"])
@@ -53,7 +56,7 @@ def main():
    candidates.append((len(common),a))
   if candidates:
    candidates.sort(key=lambda t:-t[0])
-   matches[e["id"]]=[dict(a,match_type="automatischer Themen-/Ortsabgleich, redaktionell ungeprüft") for _,a in candidates[:2]]
+   matches[e["id"]]=[dict({k:v for k,v in a.items() if k!="local_cities"},match_type="automatischer Themen-/Ortsabgleich, redaktionell ungeprüft") for _,a in candidates[:2]]
  OUTPUT.parent.mkdir(parents=True,exist_ok=True)
  snapshot={"checked_at":now.isoformat(),"policy":"Nur Überschriften, Quellenlinks und Veröffentlichungsdatum; mögliche Zuordnung, keine Bestätigung","feeds":[x[0] for x in FEEDS],"matches":matches}
  # Ignore check timestamp when content unchanged; prevents unnecessary redeploys.
