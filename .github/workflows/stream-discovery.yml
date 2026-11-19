@@ -7,6 +7,9 @@ on:
       - 'scripts/stream-matcher.mjs'
       - 'scripts/test-stream-matcher.mjs'
       - 'scripts/stream-coverage-audit.mjs'
+      - 'scripts/source-coverage.mjs'
+      - 'scripts/test-source-coverage.mjs'
+      - 'data/expansion-sources.json'
       - '.github/workflows/stream-discovery.yml'
       - 'data/streamer-candidates.json'
   schedule:
@@ -32,6 +35,7 @@ jobs:
           node --check scripts/update-streams.mjs
           node --check scripts/stream-matcher.mjs
           node scripts/test-stream-matcher.mjs
+          node scripts/test-source-coverage.mjs
       - name: Prüfe bekannte Streamer über offizielle APIs
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -40,12 +44,14 @@ jobs:
         run: node scripts/update-streams.mjs
       - name: Analysiere reale Titel und Abdeckung, ohne automatische Freigaben
         run: node scripts/stream-coverage-audit.mjs
+      - name: Erzeuge faktenbasierte Stadt-Abdeckungsdiagnose ohne Eventimport
+        run: node scripts/source-coverage.mjs
       - name: Speichere ausschließlich geänderte Treffer
         run: |
-          if [ -n "$(git status --porcelain data/stream-discoveries.json)" ]; then
+          if [ -n "$(git status --porcelain data/stream-discoveries.json data/source-coverage.json)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/stream-discoveries.json
+            git add data/stream-discoveries.json data/source-coverage.json
             git commit -m "data: update potential demonstration livestream matches"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then exit 0; fi
