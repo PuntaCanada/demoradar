@@ -161,11 +161,57 @@ function renderSourceInfo(){
 let sourceStatus=null;
 function renderMonitoredSources(){
  if(!sourceStatus||!Array.isArray(sourceStatus.sources))return;
- const note=document.getElementById("source-status-note")||document.createElement("p");
- note.id="source-status-note";note.className="small";note.style.margin="12px 0";
- const sources=sourceStatus.sources.map(x=>x.city+" ("+(x.status==="ok"?T("source.available"):x.status==="reachable_unverified_format"?T("source.waiting"):T("source.unavailable"))+")").join(", ");
- note.textContent=T("source.status",{sources});
- if(!note.isConnected){const box=document.querySelector(".notice");if(box)box.insertAdjacentElement("afterend",note)}
+ const isGerman=locale().startsWith("de");
+ const title=isGerman?"Amtliche Datenquellen: letzter Import":"Official data sources: last import";
+ const checked=sourceStatus.checked_at?new Date(sourceStatus.checked_at):null;
+ const checkedLabel=checked&&!Number.isNaN(checked.getTime())
+  ?new Intl.DateTimeFormat(locale(),{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Berlin"}).format(checked)
+  :(isGerman?"Zeitpunkt unbekannt":"Time unknown");
+ const container=document.getElementById("source-status-note")||document.createElement("section");
+ container.id="source-status-note";
+ container.className="source-status-note";
+ container.setAttribute("aria-label",title);
+ const heading=document.createElement("strong");heading.textContent=title;
+ const timestamp=document.createElement("p");timestamp.className="small";
+ timestamp.textContent=(isGerman?"Letzter Quellencheck: ":"Last source check: ")+checkedLabel;
+ const list=document.createElement("ul");
+ for(const entry of sourceStatus.sources){
+  const row=document.createElement("li");
+  const city=document.createElement("strong");city.textContent=String(entry.city||"—");
+  row.append(city,document.createTextNode(" · "));
+  const count=Number.isInteger(entry.imported)&&entry.imported>=0?entry.imported:null;
+  let status;
+  if(entry.status==="ok"&&count>0){
+   status=isGerman?count+" Termine importiert":count+" events imported";
+  }else if(entry.status==="ok"&&count===0){
+   status=isGerman?"Quelle erreichbar, 0 Termine importiert":"Source reachable, 0 events imported";
+  }else if(entry.status==="ok"){
+   status=isGerman?"Quelle erreichbar, Importanzahl unbekannt":"Source reachable, import count unknown";
+  }else if(entry.status==="reachable_unverified_format"){
+   status=isGerman?"Erreichbar, Format noch nicht bestätigt":"Reachable, format not yet verified";
+  }else{
+   status=isGerman?"Keine bestätigte erfolgreiche Abfrage":"No confirmed successful fetch";
+  }
+  row.append(document.createTextNode(status));
+  try{
+   const url=new URL(String(entry.url||""));
+   if(url.protocol==="https:"&&!url.username&&!url.password){
+    const anchor=document.createElement("a");anchor.href=url.href;anchor.target="_blank";anchor.rel="noopener noreferrer";
+    anchor.textContent=isGerman?"Amtliche Quelle":"Official source";
+    row.append(document.createTextNode(" · "),anchor);
+   }
+  }catch{}
+  list.append(row);
+ }
+ const caveat=document.createElement("p");caveat.className="small";
+ caveat.textContent=isGerman
+  ?"Ein erfolgreicher Abruf oder 0 importierte Einträge beweist weder Vollständigkeit noch, dass keine Demonstrationen stattfinden."
+  :"A successful fetch or zero imported entries does not establish complete coverage or the absence of demonstrations.";
+ container.replaceChildren(heading,timestamp,list,caveat);
+ if(!container.isConnected){
+  const note=document.querySelector(".notice");
+  if(note)note.insertAdjacentElement("afterend",container);
+ }
 }
 
 let articleMatches={};
