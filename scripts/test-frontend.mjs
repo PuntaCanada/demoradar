@@ -23,7 +23,12 @@ const dataMap={
  "/data/events.json":{events:official,updated_at:new Date().toISOString()},
  "/data/demos-events.json":{events:community,license:"CC BY-SA 4.0"},
  "/data/source-status.json":{sources:[{city:"Dresden",status:"ok"}]},
- "/data/news-matches.json":{matches:{}}
+ "/data/news-matches.json":{matches:{}},
+ "/data/stream-discoveries.json":{version:1,candidates:[{
+  event_id:"berlin-1",reviewed:false,auto_match:true,status:"recording",channel:"Testkanal",
+  title:"Demo Berlin Frieden <img src=x onerror=alert(1)>",url:"https://www.youtube.com/watch?v=TEST123",
+  checked_at:new Date().toISOString()
+ }]}
 };
 async function mount(path,{failed=false}={}){
  const all=new Map();
@@ -59,7 +64,7 @@ async function mount(path,{failed=false}={}){
  const localStorage={getItem(){return null},setItem(){}};
  const fetch=url=>failed&&url==="/data/events.json"?Promise.reject(new Error("network failure")):Promise.resolve({ok:dataMap[url]!==undefined,status:dataMap[url]!==undefined?200:404,json:async()=>structuredClone(dataMap[url])});
  const Option=class{constructor(text,value){this.text=text;this.value=value}};
- const ctx={window,document:doc,location,navigator:{language:path.startsWith("/en/")?"en-GB":"de-DE"},localStorage,Option,fetch,Date,Intl,console,CustomEvent:class{constructor(type,config){this.type=type;this.detail=config?.detail}}};
+ const ctx={window,document:doc,location,navigator:{language:path.startsWith("/en/")?"en-GB":"de-DE"},localStorage,Option,fetch,Date,Intl,URL,console,CustomEvent:class{constructor(type,config){this.type=type;this.detail=config?.detail}}};
  runInNewContext(i18n,ctx,{filename:"i18n.js"});
  runInNewContext(js,ctx,{filename:"live.js"});
  for(let i=0;i<12;i++)await new Promise(resolve=>setImmediate(resolve));
@@ -76,6 +81,9 @@ for(const path of ["/","/en/"]){
  assert.ok(el("todayItems").innerHTML.includes('topic-badge topic-democracy'),"Featured democracy label is visible");
  assert.ok(el("list").innerHTML.includes('topic-badge topic-peace'),"Calendar list displays a category label");
  assert.ok(el("list").innerHTML.includes('topic-badge topic-democracy'),"Calendar list uses distinct category styling");
+ assert.ok(el("list").innerHTML.includes(en?"Possible recording":"Mögliche Aufzeichnung"),"Unverified archive visible in event card");
+ assert.ok(el("list").innerHTML.includes("&lt;img"),"Archive title escaped to prevent injected HTML");
+ assert.ok(!el("list").innerHTML.includes("<img src=x"),"No untrusted HTML rendered");
  assert.ok(el("todayItems").innerHTML.includes(en?"Peace &amp; war":"Frieden &amp; Krieg"),"Topic labels are translated");
  assert.ok(el("notice").innerHTML.includes("Demos Berlin"),"Community provenance displayed: "+path+" "+el("notice").innerHTML);
  el("region").value="Sachsen";el("region").fire("change");
