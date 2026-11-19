@@ -358,6 +358,7 @@ function renderDetail(){
   const newsSearch='<a href="'+esc(newsQuery)+'" target="_blank" rel="noopener noreferrer">'+esc(T("news.find"))+'</a>';
   const source=safeSourceUrl(event.source_url);
   const license=event.license?'<p class="small">'+esc(T("detail.license"))+': '+esc(event.license)+'</p>':"";
+  const venueCaveat=officialVenueCaveat(event)?'<p class="small">'+esc(officialVenueCaveat(event))+'</p>':'';
   holder.innerHTML='<span class="topic-badge topic-'+topicSlug(event.title)+'">'+esc(localTopic(event.title))+'</span><h2 id="eventDetailTitle">'+esc(event.title)+'</h2>'+statusPills(event)+'<div class="event-detail-grid">'+metadata+'</div><p class="small">'+esc(T("calendar.source"))+': '+esc(event.source||T("calendar.officialSource"))+'</p>'+license+updates+news+newsSearch+communityExtra(event)+'<p class="small">'+esc(T("detail.note"))+'</p><div class="event-detail-actions">'+(source?'<a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.source"))+'</a>':"")+'<button id="eventShare" type="button">'+esc(T("detail.share"))+'</button><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
  }else holder.innerHTML='<h2 id="eventDetailTitle">'+esc(T("detail.title"))+'</h2><p>'+esc(T("detail.missing"))+'</p><div class="event-detail-actions"><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
  overlay.hidden=false;document.body?.classList?.add("detail-open");
@@ -388,8 +389,14 @@ document.getElementById("eventDetail")?.addEventListener("click",e=>{if(e.target
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!document.getElementById("eventDetail")?.hidden)closeDetail()});
 window.addEventListener?.("popstate",renderDetail);
 
+function officialVenueCaveat(e){
+ if(!String(e.id||"").startsWith("police-cologne-"))return "";
+ return locale().startsWith("de")?
+  "Hinweis: Treffpunkt und Route bitte anhand der aktuellen Polizeimeldung prüfen.":
+  "Note: Please verify the meeting point and route with the latest police notice.";
+}
 function card(e){
-const fields=[e.location,e.route?T("event.route")+": "+e.route:"",e.organizer?T("event.organizer")+": "+e.organizer:"",e.registered_participants?T("event.participants")+": "+e.registered_participants:""].filter(Boolean);
+const fields=[e.location,e.route?T("event.route")+": "+e.route:"",e.organizer?T("event.organizer")+": "+e.organizer:"",e.registered_participants?T("event.participants")+": "+e.registered_participants:"",officialVenueCaveat(e)].filter(Boolean);
 return '<article class="event-list-card topic-card topic-'+topicSlug(e.title)+'"><div class="event-card-top"><span class="topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><span class="small">'+esc(formatDate(e.date))+" · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</span></div>"+statusPills(e)+"<strong>"+esc(e.title)+'</strong><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(T("detail.open"))+'</a><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||T("calendar.officialSource"))+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div>'+streamTeaser(e)+'</article>';
 }
 document.getElementById("calendar").addEventListener("click",ev=>{const btn=ev.target.closest("[data-date]");if(!btn)return;selectedDay=btn.dataset.date;toggle(true)});
