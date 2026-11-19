@@ -2,7 +2,8 @@
   "source": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/index.html",
   "mode": "conservative_factual_extraction",
   "licence": "No blanket open-data licence verified for the city HTML; reuse only unprotected factual details with direct attribution.",
-  "status": "unavailable",
+  "status": "reachable_no_matching_detail_links",
   "count": 0,
-  "error": "No clearly labelled demonstration detail links; keeping existing data"
+  "links_inspected": 0,
+  "note": "No clearly labelled demonstrations on sampled calendar page; no import"
 }
