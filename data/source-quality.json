@@ -116,8 +116,8 @@
       "city": "Jena",
       "state": "Thüringen",
       "source": "Stadt Jena",
-      "status": "no_matching_items",
-      "count": 0,
+      "status": "observed_data",
+      "count": 2,
       "scope": "City source, only explicitly marked assemblies",
       "last_checked": "2026-11-19",
       "check_freshness": "recent"

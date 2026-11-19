@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T19:24:18.845Z",
-  "count": 1365,
+  "updated_at": "2026-11-19T20:42:50.033Z",
+  "count": 1367,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -979,6 +979,22 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "jena-c7699f8f6cef6278",
+      "country": "DE",
+      "state": "Thüringen",
+      "city": "Jena",
+      "date": "2026-11-20",
+      "start": "16:00",
+      "end": "",
+      "title": "„Transgender Day of Remembrance (TDoR)“ , Am Pulverturm",
+      "postal_code": "",
+      "location": "",
+      "route": "",
+      "source": "Stadt Jena – Auflagen aktueller Versammlungen",
+      "source_url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "rostock-008d6d725e74452f",
@@ -3014,6 +3030,22 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "jena-7d41234ec895dd92",
+      "country": "DE",
+      "state": "Thüringen",
+      "city": "Jena",
+      "date": "2026-11-25",
+      "start": "16:00",
+      "end": "",
+      "title": "„Internationale Tag zur Beseitigung von Gewalt gegen Frauen“, Holzmarkt",
+      "postal_code": "",
+      "location": "",
+      "route": "",
+      "source": "Stadt Jena – Auflagen aktueller Versammlungen",
+      "source_url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-482",
