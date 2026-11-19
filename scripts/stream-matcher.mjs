@@ -1,5 +1,5 @@
 // Conservative, deterministic candidate matching. Never grants human-reviewed status.
-const STOP=new Set("gegen fuer fur mit ohne die der das den dem eine einer einem aus von und zur zum pro demonstration kundgebung demo veranstaltung live livestream stream protest demonstrationen deutschland germany heute morgen bericht fuer gegen und bei für sowie oder zum fuer den deutschland aktion aktuelle aktuell demos proteste aktionstag berichterstattung".split(" "));
+const STOP=new Set("gegen fuer fur mit ohne die der das den dem eine einer einem aus von und zur zum pro demonstration kundgebung demo veranstaltung live livestream stream protest demonstrationen deutschland germany heute morgen bericht fuer gegen und bei für sowie oder zum fuer den deutschland aktion aktuelle aktuell demos proteste aktionstag berichterstattung gegendemo gegendemos montagsdemo montagsprotest livebericht".split(" "));
 export function normalize(value){
  return String(value||"").toLocaleLowerCase("de").normalize("NFKD")
   .replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss").replace(/([a-zäöü])(?=\d{1,2}[.\/-]\d{1,2})/g,"$1 ").replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();
@@ -64,7 +64,8 @@ export function matchEvents(video,events){
     Number.isFinite(posted.getTime())&&posted>=new Date(eventDay.getTime()-86400000)&&
     posted<=new Date(eventDay.getTime()+31*86400000);
   if(!retrospect&&!nearbyDate(video.date,event.date,video.status))continue;
-  const matching=topics(event.title).filter(t=>tokens.has(t));
+  const cityTerms=new Set(topics(event.city));
+  const matching=topics(event.title).filter(t=>!cityTerms.has(t)&&tokens.has(t));
   // Short event titles ("Gegen AfD") can match only when the stream explicitly
   // names a distinctive location as a second independent piece of evidence.
   const place=topics(event.location||"").filter(t=>t.length>=6&&tokens.has(t)&&!topics(event.city).includes(t));
