@@ -81,6 +81,21 @@ Quellenfrische:
 - `scripts/test-dortmund-police.py`, `scripts/test-frankfurt-police-archive.py` und `scripts/test-source-quality.mjs` schützen gegen Datums-/Ortsvermutungen und falsche Vollständigkeitsbehauptungen.
 - Streamer-Links werden vor jeder YouTube/Twitch-Abfrage gegen explizit zulässige HTTPS-Domains und Handles geprüft; Video-Event-Matches bleiben **Vorschläge**, nicht automatisch redaktionell bestätigte LIVE-Links.
 
+## Dauerhafte Datenquellen: belastbare Prüfungen vom 19.11.2026
+
+Die aktuelle Recherche hat **keine weitere flächendeckende, offen lizensierte öffentliche Versammlungs-API für Hamburg, Düsseldorf oder ganz Deutschland** ergeben. Deshalb wurde **kein vermeintlicher Komplettfeed angeschlossen**. Verbesserungen gelten den tatsächlich zugänglichen kommunalen Quellen:
+
+- **Berlin:** [Polizei Berlin – Versammlungsbehörde](https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/). Der JSON-Importer schreibt jetzt `data/berlin-source.json` mit dem Datum des tatsächlich durchgeführten erfolgreichen oder fehlgeschlagenen Abrufs und der Anzahl **dieses** gelieferten Datensatzes. Bei HTTP-Fehlern, Netzwerkproblemen, ungültigem JSON oder leerem Index bleiben vorher belegte Termine erhalten. Ein vorhandener alter Termin ist kein Nachweis eines aktuell funktionierenden Feeds.
+- **Dresden:** [Amtliche Versammlungsübersicht und JSON](https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json). Das Abrufdatum (`checked_on`) wird separat vom durch die Behörde gemeldeten `Dateidatum` geführt. Für später veröffentlichte Videoberichte bleibt eine **30-Tage-Historie** im tatsächlich verfügbaren amtlichen Datensatz zugänglich. Leere bzw. ungültige Antworten ersetzen keine älteren geprüften Veranstaltungen.
+- **Rostock:** [Amtliche Liste angezeigter Versammlungen](https://rathaus.rostock.de/de/service/aemter/stadtamt/versammlungen/343356). `data/rostock-source.json` berichtet den tatsächlichen täglichen erfolgreichen/fehlgeschlagenen Abruf, nicht lediglich die Anzahl alter Einträge in `data/events.json`. Archivfilter 30 Tage, Datum streng plausibilisiert. Antragsteller-Namen aus der Behördenliste werden **nicht** in DemoRadar erneut veröffentlicht.
+- **Jena:** [Städtische Auflagen aktueller Veranstaltungen und Versammlungen](https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen). Nur ausdrücklich als `Versammlungen`, `Aufzüge` oder `Demonstrationen` kategorisierte Einträge können übernommen werden; Märkte und gewöhnliche Veranstaltungen bleiben draußen. Der 30-Tage-Archivfilter erlaubt einen vorsichtigen Abgleich mit Aufzeichnungen. Bei Abruffehlern bleiben ältere überprüfte Datensätze bestehen.
+
+**Quellenrechte:** Es werden knappe, nachprüfbare Tatsachenfelder (Termin, Titel, Ort, Uhrzeit, Status, amtlicher Link) genutzt. Die öffentlichen Behördenwebseiten allein sind **keine** pauschale Lizenz zur Weiterveröffentlichung vollständiger Artikel, Bilder, privater Antragstellerdaten oder gesamter Feeds. Das ist keine Zusicherung einer umfassenden Nutzungsrechtseinräumung.
+
+**Monitoring und Heatmap:** Das berechnete `data/source-quality.json` verwendet für Berlin, Dresden und Rostock nur die tatsächlichen `checked_on`-Felder und den bestätigten Feedstatus. Die Heatmap kennzeichnet unzugängliche/veraltete Quellen getrennt von erfolgreich geprüften. `data/source-health-alerts.json` meldet Probleme, ohne irgendeine Demonstration als abgesagt zu erfinden. Selbst ein aktuell erreichbarer Stadtfeed beweist keine vollständige Landesabdeckung.
+
+**Regressionstests:** `scripts/test-berlin-feed.mjs` prüft die originale Berliner Importlogik mit 5 Offline-Szenarien (Erfolg, Netzwerkfehler, HTTP-Fehler, falsches JSON, leere Liste). `scripts/test-rostock-source.py`, `scripts/test-dresden-archive.py` und `scripts/test-jena-archive.py` prüfen echte Parser unter simulierten amtlichen Antworten, das historische Fenster, Datenschutz und das unveränderte Beibehalten geprüfter Daten bei Quellenausfall. Die GitHub-Websiteprüfung verlangt außerdem nachweislich erfolgreiche Cloudflare-HTTP-Abfragen; Fehler sind **keine bloßen Hinweise** mehr.
+
 ## Qualitätssicherung
 
 - `scripts/test-police-notices.py`: offizielle Fakten und Datum werden mit Offline-Prüfungen validiert; fehlende Quellen und unbestätigte Orte erzeugen keine erfundenen Termine.
