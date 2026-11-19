@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {cityMatches,localDay,nearbyDate,matchEvents} from "./stream-matcher.mjs";
+import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle} from "./stream-matcher.mjs";
 const date="2026-11-19",iso="2026-11-19T12:00:00Z";
 const events=[
  {id:"berlin-climate",city:"Berlin",date,title:"Kundgebung Klimaschutz und Energiewende"},
@@ -30,4 +30,11 @@ assert.equal(find("Live Demo Berlin AfD Alexanderplatz",iso,"live",brief).length
 assert.equal(find("Live Demo Berlin AfD",iso,"live",brief).length,0,"acronym plus city alone insufficient");
 assert.equal(find("Live Demo Berlin AfD Rathaus",iso,"live",brief).length,0,"wrong venue rejected");
 assert.equal(find("Live Demo Berlin AfD Alexanderplatz","2026-11-20T12:00:00Z","live",brief).length,0,"live date must match");
-console.log("stream-matcher: 20 safety checks passed");
+assert.equal(explicitDateInTitle("Demo am 19.11.2026"),date);
+assert.equal(explicitDateInTitle("Demo 2026-11-19 Berlin"),date);
+assert.equal(explicitDateInTitle("Demo am 31.02.2026"),"","invalid dates cannot be used");
+assert.equal(find("Demo Berlin Klimaschutz Energiewende 18.11.2026",iso,"recording").length,0,"explicit wrong date invalidates an otherwise plausible archive");
+assert.equal(find("Demo Berlin Klimaschutz Energiewende 19.11.2026",iso,"recording").length,1,"matching explicit date accepted");
+assert.equal(cityMatches("Demo Frankfurt (Oder) Klimaschutz","Frankfurt am Main"),false);
+assert.equal(cityMatches("Demo Frankfurt am Main Klimaschutz","Frankfurt (Oder)"),false);
+console.log("stream-matcher: 27 safety checks passed");
