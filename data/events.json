@@ -2,9 +2,24 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T16:52:52.521Z",
-  "count": 1348,
+  "updated_at": "2026-11-19T16:54:14.380Z",
+  "count": 1349,
   "events": [
+    {
+      "id": "police-leipzig-archive-ac018bdaf281ef71",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Leipzig",
+      "date": "2026-10-31",
+      "start": "14:00",
+      "end": "17:00",
+      "title": "Gen Z regelt! Solidarität mit den Protestierenden in Frankreich!",
+      "location": "Augustusplatz",
+      "route": "",
+      "source": "Polizeidirektion Leipzig – amtliche Ankündigung vom 26. Oktober",
+      "source_url": "https://www.polizei.sachsen.de/de/einsatz-zum-versammlungsgeschehen-am-31-oktober-in-leipzig-44215.html",
+      "source_status": "Historische, von Polizei Leipzig dokumentierte Versammlung; nicht mehr bevorstehend"
+    },
     {
       "id": "dresden-8951a73b36d21bec",
       "country": "DE",
