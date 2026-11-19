@@ -75,6 +75,26 @@
       "status": "reachable_monitor_only_not_a_feed"
     },
     {
+      "city": "Düsseldorf",
+      "state": "Nordrhein-Westfalen",
+      "type": "official_police_assembly_authority",
+      "url": "https://www.duesseldorf.de/veranstaltungsmanagement",
+      "parser": null,
+      "data_rights": "Official city states demonstration/assembly authority belongs to police; not an event feed and no blanket licence",
+      "scope": "Authority-routing reference, not a calendar; check Polizeipräsidium Düsseldorf for a publicly reusable current data feed",
+      "status": "reachable_monitor_only_not_a_feed"
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "type": "official_police_assembly_authority",
+      "url": "https://www.polizei.hamburg/versammlungsbehoerde-kontakt-791244",
+      "parser": null,
+      "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
+      "scope": "Contact route to official assembly authority; do not import registrations without permission",
+      "status": "reachable_monitor_only_not_a_feed"
+    },
+    {
       "city": "Hamburg",
       "state": "Hamburg",
       "type": "official_registration_information",
@@ -82,7 +102,8 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "reachable_monitor_only_not_a_feed"
+      "status": "unavailable",
+      "error": "<urlopen error [Errno 104] Connection reset by peer>"
     }
   ]
 }
