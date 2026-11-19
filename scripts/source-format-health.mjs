@@ -19,6 +19,12 @@ export function inspectFeedHealth(previous,feedStatuses,{today=new Date().toISOS
   const validCheck=currentDay===today;
   const imported=validCheck&&item.status==="ok"&&count!==null&&count>0;
   const lastGood=imported?{count,checked_on:today}:prior.last_success&&validDay(prior.last_success.checked_on)?prior.last_success:null;
+  // Keep the reference count until the drop recovers or is explicitly investigated.
+  // A single anomalous successful response must not silence its own warning on the next run.
+  const priorReference=Number.isInteger(prior.baseline_count)&&prior.baseline_count>0?prior.baseline_count:
+   Number.isInteger(prior.last_success?.count)&&prior.last_success.count>0?prior.last_success.count:null;
+  const dropped=imported&&priorReference>=20&&count<Math.max(3,Math.floor(priorReference*.2));
+  const baselineCount=dropped?priorReference:imported?count:priorReference;
   const issues=[];
   if(!validCheck)issues.push("not_checked_today");
   else if(item.status!=="ok"){
@@ -26,11 +32,9 @@ export function inspectFeedHealth(previous,feedStatuses,{today=new Date().toISOS
    issues.push(DRIFT.test(failure)?"format_change_suspected":"unavailable");
   }else if(count===null)issues.push("invalid_count");
   else if(count===0)issues.push("unexpected_empty");
-  if(imported&&prior.last_success?.count>=20&&count<Math.max(3,Math.floor(prior.last_success.count*.2))){
-   issues.push("large_count_drop");
-  }
+  if(dropped)issues.push("large_count_drop");
   return {id:feed.id,city:feed.city,source:feed.name,status:imported?"ok":"unverified",
-   last_checked:currentDay,last_success:lastGood,observed_count:count,issues,
+   last_checked:currentDay,last_success:lastGood,baseline_count:baselineCount,observed_count:count,issues,
    note:"Observation only. No conclusion about actual protests, cancellations or state-wide completeness."};
  });
  return {version:1,method:"Stable official feed status and structure-drift diagnostics only; not a calendar or licence for data reuse.",feeds,
