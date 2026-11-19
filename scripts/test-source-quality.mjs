@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import {sourceHealth} from "./audit-source-quality.mjs";
 const files={
- berlin:{events:[{state:"Berlin"},{state:"Berlin"},{state:"Sachsen"}]},
+ berlinStatus:{status:"ok",count:2,checked_on:"2026-11-19"},
+ rostockStatus:{status:"ok",count:3,checked_on:"2026-11-19"},
  dresden:{status:"ok",count:12},
  cologne:{status:"reachable_no_matching_detail_links",count:0},
  policeCologne:{sources:[{status:"verified_notice",count:2}]},
@@ -28,7 +29,8 @@ assert.equal(row("Stadt Frankfurt").status,"unavailable");
 assert.ok(rows.every(s=>s.scope&&!/complete coverage/.test(s.scope)));
 assert.equal(sourceHealth({...files,policeLeipzig:{status:"unavailable_no_import"}}).sources.find(s=>s.source==="Polizeidirektion Leipzig").status,"unavailable");
 assert.equal(sourceHealth({...files,policeCologne:{sources:[]}}).sources.find(s=>s.source==="Polizei Köln").status,"unknown");
-const freshness=sourceHealth({...files,dresden:{status:"ok",count:12,source_date:"2026-11-16"},
+const freshness=sourceHealth({...files,dresden:{status:"ok",count:12,checked_on:"2026-11-16"},
+ berlinStatus:{status:"ok",count:2},
  sourceStatus:{checked_at:"2026-11-19T10:00:00Z",sources:[{city:"Jena",status:"ok",imported:0}]},
  policeCologne:{checked_at:"2026-11-10T12:00:00Z",sources:[{status:"verified_notice",count:2}]}
 },{today:"2026-11-19"}).sources;
@@ -64,4 +66,10 @@ assert.equal(checked("Polizei Münster").check_freshness,"outdated_check");
 assert.equal(checked("Polizei Dortmund").last_checked,"2026-11-19");
 assert.equal(checked("Polizeipräsidium Frankfurt (Archiv)").check_freshness,"recent");
 assert.equal(checked("Polizeipräsidium Frankfurt (Archiv)").status,"verified_historical_one_off");
-console.log("source-quality: 33 explicit data-integrity assertions passed");
+const missing=sourceHealth({...files,berlinStatus:{status:"unavailable",count:null,checked_on:"2026-11-19"},
+ rostockStatus:{status:"unavailable",count:0,checked_on:"2026-11-19"}},{today:"2026-11-19"}).sources;
+assert.equal(missing.find(s=>s.source==="Polizei Berlin").status,"unavailable");
+assert.equal(missing.find(s=>s.source==="Polizei Berlin").count,null);
+assert.equal(missing.find(s=>s.source==="Stadt Rostock").status,"unavailable");
+assert.equal(sourceHealth({berlin:{events:[{state:"Berlin"}]}}).sources.find(s=>s.source==="Polizei Berlin").status,"unknown","Old events without fetch evidence cannot prove a live source");
+console.log("source-quality: 37 explicit data-integrity assertions passed");
