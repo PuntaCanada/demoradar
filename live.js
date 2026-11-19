@@ -64,16 +64,23 @@ fetch("/data/demos-events.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).
  if(!extra||!Array.isArray(extra.events)||extra.license!=="CC BY-SA 4.0")return;
  const normalized=s=>String(s||"").toLocaleLowerCase("de").normalize("NFKD").replace(/\p{M}/gu,"").replace(/[^a-z0-9]+/g," ").trim();
  const buckets=new Map();
- const bucketKey=e=>[e.date,normalized(e.city),e.start||""].join("|");
- const add=e=>{const key=bucketKey(e),a=buckets.get(key)||[];a.push(normalized(e.title));buckets.set(key,a)};
+ const bucketKey=e=>[e.date,normalized(e.city)].join("|");
+ const add=e=>{const key=bucketKey(e),a=buckets.get(key)||[];a.push(e);buckets.set(key,a)};
  for(const e of records)add(e);
  const sameTitle=(a,b)=>a===b||(Math.min(a.length,b.length)>=45&&(a.startsWith(b)||b.startsWith(a)));
+ const sameEvent=(a,b)=>{
+  const x=normalized(a.title),y=normalized(b.title);
+  if(!sameTitle(x,y))return false;
+  const la=normalized(a.location),lb=normalized(b.location);
+  if(la&&lb&&la!==lb)return false;
+  return a.start===b.start||(la&&lb&&la===lb)||Math.min(x.length,y.length)>=60;
+ };
  const states={"berlin":"Berlin","dresden":"Sachsen","rostock":"Mecklenburg-Vorpommern","wur zburg":"Bayern","wurzburg":"Bayern","munster":"Nordrhein-Westfalen","bielefeld":"Nordrhein-Westfalen","weimar":"Thüringen","luneburg":"Niedersachsen","papenburg":"Niedersachsen"};
  let appended=0;
  for(const e of extra.events){
   if(!e||e.country!=="DE"||!e.date||!e.city||!e.title||!String(e.id).startsWith("demos-"))continue;
-  const key=bucketKey(e),title=normalized(e.title);
-  if((buckets.get(key)||[]).some(t=>sameTitle(t,title)))continue;
+  const key=bucketKey(e);
+  if((buckets.get(key)||[]).some(other=>sameEvent(other,e)))continue;
   if(!e.state)e.state=states[normalized(e.city)]||"";
   add(e);records.push(e);appended++;
  }
