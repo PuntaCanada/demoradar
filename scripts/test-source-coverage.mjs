@@ -28,4 +28,11 @@ assert.equal(leipzig.observed_video_title_samples,1);
 assert.equal(leipzig.observed_city_and_date_samples,0);
 assert.equal(leipzig.source_status[0].reuse_rights_verified,false);
 assert.equal(d.cities.some(x=>"invented_events" in x),false);
-console.log("source-coverage: 10 integrity assertions passed");
+const conflicting=analyzeCoverage(events,[
+ {title:"LIVE Demo Klimastreik Berlin 19.11.26 und 20.11.26",date:"2026-11-19T15:00:00Z",status:"live"},
+ {title:"LIVE Demo Klimastreik Berlin 31.02.2026",date:"2026-11-19T15:00:00Z",status:"live"},
+ {title:"LIVE Demo Klimastreik Berlin 19.11.26",date:"2026-11-19T15:00:00Z",status:"live"}
+],sources,{now});
+assert.equal(conflicting.cities.find(x=>x.city==="Berlin").observed_city_and_date_samples,1,
+ "Only a valid, unambiguous stream title should contribute to city-and-date diagnostics");
+console.log("source-coverage: 11 integrity assertions passed");
