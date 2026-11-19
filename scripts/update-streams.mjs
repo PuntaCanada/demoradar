@@ -15,7 +15,7 @@ const force=["workflow_dispatch","push"].includes(process.env.GITHUB_EVENT_NAME)
 
 const day=24*3600000;
 const dayISO=d=>new Date(d).toISOString().slice(0,10);
-const recent=events.filter(e=>e&&e.id&&e.city&&e.date&&e.title&&e.date>=dayISO(now.getTime()-7*day)&&e.date<=dayISO(now.getTime()+7*day));
+const recent=events.filter(e=>e&&e.id&&e.city&&e.date&&e.title&&e.date>=dayISO(now.getTime()-30*day)&&e.date<=dayISO(now.getTime()+7*day));
 const unique=new Map(recent.map(e=>[e.id,e]));
 const seen=new Set();
 const candidates=[];
@@ -64,7 +64,7 @@ async function youtube(){
     if(!isLive&&!recording)continue;
     discoveryStats.youtube_streams_seen++;
     add({platform:"YouTube",channel:entry.name,title:s.title,url:"https://www.youtube.com/watch?v="+v.id,
-     date:isLive?d.actualStartTime:d.actualStartTime||s.publishedAt,status:isLive?"live":"recording",
+     date:d.actualStartTime||s.publishedAt,published_at:s.publishedAt,status:isLive?"live":"recording",
      checked_at:now.toISOString(),evidence_url:"https://www.youtube.com/watch?v="+v.id});
    }
   }catch(error){errors.push("YouTube "+entry.name+": "+error.message)}
@@ -107,12 +107,15 @@ if(!enabled){console.log("No YouTube/Twitch API credentials set; leaving previou
 const previous=read(OUT);
 const firstRun=!Object.hasOwn(previous,"version");
 const prev=(previous.candidates||[]).filter(x=>x.reviewed!==true);
+const currentEventIds=new Set(unique.keys());
 const combined=new Map();
 for(const x of [...prev,...candidates]){
  const k=x.event_id+"|"+x.url;
- if(!x.event_id||!x.url)continue;
- // Keep a candidate for fourteen days, even if the platform's newest listing has moved on.
- if(x.checked_at&&new Date(x.checked_at)<new Date(now.getTime()-14*day))continue;
+ if(!x.event_id||!x.url||!currentEventIds.has(x.event_id))continue;
+ // Never keep a stale live state merely because the original candidate was found.
+ // Recordings remain reviewable for 30 days of site history.
+ if(x.status==="live"&&x.checked_at&&now-new Date(x.checked_at)>15*60000)continue;
+ if(x.status==="recording"&&x.checked_at&&now-new Date(x.checked_at)>30*day)continue;
  combined.set(k,x);
 }
 const output={version:1,updated_at:now.toISOString(),mode:"suggestions_only",verified_public_live_count:0,
