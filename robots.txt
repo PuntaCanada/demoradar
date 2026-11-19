@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://demoradar.pages.dev/sitemap.xml
