@@ -107,7 +107,13 @@ try{
  await evaluate('document.querySelector("[data-language=en]").click();true');
  for(let i=0;i<50;i++){if(await evaluate("location.pathname")==="/en/")break;await delay(100)}
  assert.ok((await evaluate("location.search")).includes(encodeURIComponent(sample.id)),"Language switch preserves shared event ID");
- assert.ok(await evaluate('!document.getElementById("eventDetail").hidden'),"English event detail can be opened from shared link");
+ let englishDetail=false;
+ for(let i=0;i<50;i++){
+  try{englishDetail=await evaluate('!document.getElementById("eventDetail").hidden && !!document.getElementById("eventDetailTitle")?.textContent')}catch{}
+  if(englishDetail)break;
+  await delay(120);
+ }
+ assert.ok(englishDetail,"English event detail can be opened from shared link");
  await evaluate('document.getElementById("eventDetailClose").click();true');
  assert.equal(await evaluate('document.getElementById("eventDetail").hidden'),true,"Detail close button hides overlay");
  assert.ok(!(await evaluate("location.search")).includes("event="),"Closing event detail removes query parameter");
