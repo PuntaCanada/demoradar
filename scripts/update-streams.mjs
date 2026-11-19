@@ -20,6 +20,7 @@ const unique=new Map(recent.map(e=>[e.id,e]));
 const seen=new Set();
 const candidates=[];
 const errors=[];
+const samples=[];
 async function json(url,opts={}){
  const response=await fetch(url,{...opts,headers:{"accept":"application/json",...(opts.headers||{})},signal:AbortSignal.timeout(12000)});
  if(!response.ok)throw Error("HTTP "+response.status+" at "+new URL(url).hostname);
@@ -30,6 +31,12 @@ function add(video){
  const key=video.platform+"|"+video.url;
  if(seen.has(key))return;seen.add(key);
  const matches=matchEvents(video,[...unique.values()]);
+ // Diagnostic samples are real platform video metadata, never claimed as DemoRadar matches.
+ // Only retain a small recent sample to tune false negatives safely.
+ if(samples.length<25&&video.platform==="YouTube"&&video.date&&new Date(video.date)>=new Date(now.getTime()-30*day)){
+  samples.push({channel:video.channel,title:video.title.slice(0,180),url:video.url,
+   date:video.date,status:video.status,match_count:matches.length});
+ }
  if(!matches.length)return;
  for(const event of matches){
   candidates.push({...video,...event,reviewed:false,auto_match:true,
@@ -122,11 +129,13 @@ const output={version:1,updated_at:now.toISOString(),mode:"suggestions_only",ver
  notes:"Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
  sources:{youtube_configured:!!api.youtube,twitch_configured:!!(api.twitchId&&api.twitchSecret)},
  statistics:discoveryStats,
+ // Raw platform video titles, NOT necessarily connected to any demonstration.
+ diagnostic_sample:samples.slice(0,25),
  candidates:[...combined.values()].slice(0,100),errors:errors.slice(0,20)};
 // Avoid 96 no-op commits per day. Only new/changed links, statuses and fresh LIVE checks
 // need to be saved. A recording remains in the queue without touching its timestamps.
 const stable=x=>JSON.stringify({
- version:x.version,mode:x.mode,sources:x.sources,statistics:x.statistics,errors:x.errors,
+ version:x.version,mode:x.mode,sources:x.sources,statistics:x.statistics,errors:x.errors,diagnostic_sample:x.diagnostic_sample,
  candidates:(x.candidates||[]).map(item=>({
   ...item,checked_at:item.status==="live"?item.checked_at:undefined
  })).sort((a,b)=>(a.event_id+"|"+a.url).localeCompare(b.event_id+"|"+b.url))
