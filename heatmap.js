@@ -8,18 +8,22 @@ const T=(k,p)=>window.DemoRadarI18n?.t(k,p)||k;
 const palette=["#e2e8f0","#bfdbfe","#60a5fa","#2563eb","#1d4ed8","#1e3a8a"];
 const labels=["0","1","2–4","5–14","15–49","50+"];
 const tier=n=>n>=50?5:n>=15?4:n>=5?3:n>=2?2:n>=1?1:0;
-let shapes=null,records=[],coverage=null,sourceHealth=null;
+let shapes=null,records=[],coverage=null,sourceHealth=null,sourceFormat=null;
 const svgNS="http://www.w3.org/2000/svg";
 const sourceFor=state=>coverage?.states?.find(s=>s.state===state)||null;
 const sourceLabel=state=>{
  const s=sourceFor(state);
  return T(s?.status==="regional_partial"?"map.sourceRegional":s?.status==="local_partial"?"map.sourceLocal":"map.sourceMissing");
 };
+const formatIssues=state=>(sourceFormat?.feeds||[])
+ .filter(f=>(sourceHealth?.sources||[]).some(s=>s.state===state&&s.city===f.city)&&Array.isArray(f.issues))
+ .flatMap(f=>f.issues.filter(issue=>["format_change_suspected","large_count_drop","unexpected_empty","invalid_count"].includes(issue))
+  .map(issue=>f.city+": "+T(issue==="large_count_drop"?"map.feedShrink":"map.feedFormat")));
 const healthDetail=state=>{
  const entries=(sourceHealth?.sources||[]).filter(s=>s.state===state);
- if(!entries.length)return "";
- const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnavailable":"map.healthUnknown");
- return entries.map(s=>s.city+": "+label(s.status)+(s.check_freshness==="outdated_check"?" · "+T("map.checkOutdated"):s.check_freshness==="recent"?" · "+T("map.checkRecent"):"")+(s.last_checked?" ("+s.last_checked+")":"")).join(" · ");
+ const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnknown");
+ const info=entries.map(s=>s.city+": "+label(s.status)+(s.check_freshness==="outdated_check"?" · "+T("map.checkOutdated"):s.check_freshness==="recent"?" · "+T("map.checkRecent"):"")+(s.last_checked?" ("+s.last_checked+")":""));
+ return [...info,...formatIssues(state)].join(" · ");
 };
 const sourceDetails=state=>{
  const s=sourceFor(state);
@@ -98,7 +102,7 @@ function draw(){
   const detail=sourceDetails(item.state);
   const health=document.createElement("small");health.className="heatmap-health-label";
   const stateHealth=(sourceHealth?.sources||[]).filter(s=>s.state===item.state);
-  if(stateHealth.some(s=>s.status==="unavailable"||s.check_freshness==="outdated_check"))health.classList.add("is-warning");
+  if(stateHealth.some(s=>s.status==="unavailable"||s.check_freshness==="outdated_check")||formatIssues(item.state).length)health.classList.add("is-warning");
   else if(stateHealth.every(s=>s.status==="unknown"))health.classList.add("is-muted");
   health.textContent=healthDetail(item.state);
   if(health.textContent)caption.title=health.textContent;
@@ -115,12 +119,14 @@ document.addEventListener("demoradar:dataupdated",e=>{records=Array.isArray(e.de
 Promise.all([
  fetch("/data/germany-states.json",{cache:"force-cache"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}),
  fetch("/data/state-source-coverage.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(err=>{console.warn("State source coverage not available",err);return null}),
- fetch("/data/source-quality.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null)
-]).then(([data,sourceData,qualityData])=>{
+ fetch("/data/source-quality.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null),
+ fetch("/data/source-format-health.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null)
+]).then(([data,sourceData,qualityData,formatData])=>{
  if(data.states?.length!==16)throw Error("Expected sixteen federal states");
  shapes=data;
  if(sourceData?.version===1&&Array.isArray(sourceData.states)&&sourceData.states.length===16)coverage=sourceData;
  if(qualityData?.version===1&&Array.isArray(qualityData.sources))sourceHealth=qualityData;
+ if(formatData?.version===1&&Array.isArray(formatData.feeds))sourceFormat=formatData;
  draw();
 }).catch(err=>{ranking.textContent=T("map.none");console.warn("Germany map unavailable",err)});
 })();
