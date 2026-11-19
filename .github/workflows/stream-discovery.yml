@@ -14,6 +14,8 @@ on:
       - 'data/leipzig-police-source.json'
       - 'data/leipzig-archive-source.json'
       - 'data/nrw-police-source.json'
+      - 'data/dortmund-police-source.json'
+      - 'data/frankfurt-police-archive-source.json'
       - 'data/source-health-alerts.json'
       - 'scripts/test-source-health-alerts.mjs'
       - 'data/events.json'
