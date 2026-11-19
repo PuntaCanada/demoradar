@@ -27,6 +27,15 @@ const classification=s=>{
  if(s.status==="observed_data")return "good";
  return "muted";
 };
+const freshnessDescription=s=>{
+ const age=daysSince(s.last_checked);
+ if(age===null)return t("Kein überprüfbares Prüfdatum vorhanden; Status nicht als aktuell interpretieren.","No verifiable check date; do not interpret this status as current.");
+ if(age<0)return t("Prüfdatum liegt in der Zukunft; Zeitangabe prüfen.","Check date is in the future; verify the timestamp.");
+ if(age===0)return t("Heute geprüft (Kalendertag, nicht Live-Status).","Checked today (calendar day, not live status).");
+ if(age<=2)return t("Vor "+age+" Tag(en) geprüft; keine Live-Garantie.","Checked "+age+" day(s) ago; not a live guarantee.");
+ return t("Prüfung "+age+" Tage alt; Quelle erneut kontrollieren.","Check is "+age+" days old; source needs rechecking.");
+};
+const isRolling=s=>s.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(s.source);
 const filter=document.querySelector("#sourceFilter");
 const search=document.querySelector("#sourceSearch");
 let states=[],quality=[],health=[],issues=[];
@@ -56,6 +65,9 @@ const render=()=>{
    heading.append($("span","source-chip "+classification(s),statusText(s.status)));
    item.append(heading);
    item.append($("p","source-detail",s.city+" · "+t("Letzte belegte Prüfung: ","Last evidenced check: ")+fmt(s.last_checked)));
+   item.append($("p","source-detail",freshnessDescription(s)));
+   item.append($("p","source-detail",t("Quellentyp: ","Source type: ")+(isRolling(s)?t("regelmäßig beobachteter Terminfeed","monitored recurring event feed"):s.status==="verified_historical_one_off"?t("historische Einzelmeldung (kein aktueller Feed)","historical one-off (not a current feed)"):s.status==="verified_one_off"?t("amtliche Einzelmeldung (kein regelmäßiger Feed)","official one-off notice (not a recurring feed)"):t("kein bestätigter regelmäßiger Terminfeed","no confirmed recurring event feed")));
+   item.append($("p","source-scope",s.scope||t("Reichweite nicht dokumentiert","Scope not documented")));
    if(s.status==="observed_data"&&Number.isInteger(s.count))item.append($("p","source-detail",t("Beim Abruf gelieferte Einträge: ","Items in last fetch: ")+s.count.toLocaleString(en?"en-GB":"de-DE")));
    const affected=health.filter(h=>h.city===s.city&&h.source===s.source);
    for(const h of affected)for(const issue of h.issues||[]){
@@ -90,7 +102,9 @@ Promise.all([
  states=coverage.states;quality=data.sources;health=format.feeds;
  const latest=quality.map(s=>s.last_checked).filter(validDay).sort().at(-1);
  document.querySelector("#lastCheck").textContent=t("Letzte belegte Quellenprüfung: ","Last evidenced source check: ")+fmt(latest);
- document.querySelector("#feedCount").textContent=String(health.length);
+ const stale=quality.filter(s=>{const d=daysSince(s.last_checked);return d===null||d<0||d>2}).length;
+ document.querySelector("#lastCheck").textContent+=" · "+t(stale+" von "+quality.length+" Importquellen ohne Prüfung in den letzten 48–72 Stunden (Kalendertage).",stale+" of "+quality.length+" import sources without a check in the last 2 calendar days.")+" "+t("Prüfdatum ist nicht Veranstaltungsdatum und keine LIVE-Bestätigung.","Check date is not event date and not confirmation of LIVE status.");
+ document.querySelector("#feedCount").textContent=String(quality.filter(isRolling).length);
  document.querySelector("#partialCount").textContent=String(states.filter(s=>s.status!=="no_confirmed_regular_feed").length);
  document.querySelector("#reviewedCount").textContent=String(quality.length);
  initialized=true;render();
