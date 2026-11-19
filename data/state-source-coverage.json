@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-19",
+  "method": "Conservative source audit, not a measure of actual demonstrations or complete state coverage. Sources listed may cover only a municipality.",
+  "levels": {
+    "regional_partial": "A directly imported official source covers a city/territory within this state; never the whole state",
+    "local_partial": "Individual or city-specific official sources, not a complete state feed",
+    "no_confirmed_regular_feed": "No confirmed regular official event feed available to this project; events from other sources may still exist"
+  },
+  "states": [
+    {
+      "state": "Baden-Württemberg",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Bayern",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Berlin",
+      "status": "regional_partial",
+      "scope": "Berlin: amtliche Versammlungs-JSON der Polizeibehörde; keine Vollständigkeitsgarantie",
+      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
+    },
+    {
+      "state": "Brandenburg",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Bremen",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Hamburg",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Hessen",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Mecklenburg-Vorpommern",
+      "status": "local_partial",
+      "scope": "Rostock: öffentliche städtische Versammlungsliste; nicht das gesamte Bundesland",
+      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
+    },
+    {
+      "state": "Niedersachsen",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Nordrhein-Westfalen",
+      "status": "local_partial",
+      "scope": "Köln: einzelne amtliche Polizeimeldungen und Verkehrskalender; nicht ganz NRW",
+      "url": "https://www.presseportal.de/blaulicht/pm/12415/6393559"
+    },
+    {
+      "state": "Rheinland-Pfalz",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Saarland",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Sachsen",
+      "status": "regional_partial",
+      "scope": "Dresden: amtliche JSON-Daten; nicht ganz Sachsen",
+      "url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json"
+    },
+    {
+      "state": "Sachsen-Anhalt",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Schleswig-Holstein",
+      "status": "no_confirmed_regular_feed",
+      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
+      "url": null
+    },
+    {
+      "state": "Thüringen",
+      "status": "local_partial",
+      "scope": "Jena: amtliche Veröffentlichungsseite, derzeit keine umfassende Terminabdeckung",
+      "url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen"
+    }
+  ]
+}
