@@ -11,6 +11,11 @@ FEEDS=[
  ("tagesschau Aktuell","https://www.tagesschau.de/index~rss2.xml","www.tagesschau.de",None),
  ("MDR Sachsen","https://www.mdr.de/nachrichten/sachsen/nachrichten-mdr-120~rss2.xml","www.mdr.de",{"Dresden"}),
  ("NDR Mecklenburg-Vorpommern","https://www.ndr.de/nachrichten/mecklenburg-vorpommern/index~rss2.xml","www.ndr.de",{"Rostock"}),
+ ("tagesschau Regional Berlin","https://www.tagesschau.de/inland/regional/berlin/index~rss2.xml","www.tagesschau.de",{"Berlin"}),
+ ("tagesschau Regional Bayern","https://www.tagesschau.de/inland/regional/bayern/index~rss2.xml","www.tagesschau.de",{"Würzburg"}),
+ ("tagesschau Regional NRW","https://www.tagesschau.de/inland/regional/nordrheinwestfalen/index~rss2.xml","www.tagesschau.de",{"Münster","Bielefeld"}),
+ ("tagesschau Regional Niedersachsen","https://www.tagesschau.de/inland/regional/niedersachsen/index~rss2.xml","www.tagesschau.de",{"Lüneburg","Papenburg"}),
+ ("tagesschau Regional Thüringen","https://www.tagesschau.de/inland/regional/thueringen/index~rss2.xml","www.tagesschau.de",{"Weimar","Jena"}),
 ]
 STOP={"gegen","eine","einer","einem","einen","eines","und","oder","für","der","die","das","des","den","dem","mit","von","zum","zur","auf","bei","aus","wird","werden","nicht","mehr","heute","morgen","berlin","rostock","demo","demonstration","kundgebung","streik","protest","soll","sollen","über","alle","ein","einer","sind","dass","als","auch","in","im","am","an","ist","nach","neue","neuen","einer","menschen","recht","rechte","freiheit","tag"}
 PROTEST=re.compile(r"\b(demo(?:nstration(?:en)?)?|kundgebung|protest(?:e|ieren|aktion)?|streik(?:s|en)?|mahnwache|versammlung|aufzug|demonstrier\w*)\b",re.I)
