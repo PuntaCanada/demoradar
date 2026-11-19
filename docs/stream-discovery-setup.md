@@ -1,21 +1,21 @@
 # Automatische Demo-Streamer-Suche – Status und Einrichtung
 
-Stand: 19. November 2026. **Implementiert, aber mangels API-Credentials noch nicht aktiv.**
+Stand: 19. November 2026. **YouTube-API ist aktiv und im GitHub-Workflow erfolgreich getestet. Twitch benötigt noch eigene Zugangsdaten.**
 
 ## Ergebnis auf der DemoRadar-Website
 - Unter den Veranstaltungskarten und im Eventdetail erscheinen von Menschen geprüfte Streams/Aufzeichnungen aus `data/live-streams.json`.
 - Automatisch entdeckte Treffer aus `data/stream-discoveries.json` werden **nur als mögliche, unbestätigte Zuordnung** dargestellt (farblich abgesetzt).
-- Ein vorläufiger Live-Hinweis wird nur angezeigt, wenn die offizielle Plattformabfrage jünger als 15 Minuten ist. Beim Offenlassen der Seite wird er minütlich neu bewertet.
+- Ein vorläufiger Live-Hinweis wird nur angezeigt, wenn die offizielle Plattformabfrage jünger als 15 Minuten ist. Beim Offenlassen der Seite wird er minütlich neu bewertet; das ersetzt keine neue Plattformabfrage.
 - Ohne Treffer gibt es weiterhin Suchlinks zu YouTube und Twitch.
-- Die sechs vom Nutzer genannten Streamer liegen als Kandidaten in `data/streamer-candidates.json`. Einige YouTube-Kanäle sind noch nicht eindeutig bestätigt.
+- Die sechs ursprünglich genannten Streamer sowie zusätzliche öffentlich bestätigte YouTube-Kanäle liegen als Kandidaten in `data/streamer-candidates.json`. Einige YouTube-Kanäle sind noch nicht eindeutig bestätigt.
 
 ## Technischer Aufbau
 - `scripts/update-streams.mjs` liest die letzten 50 Kanal-Uploads über `channels.list`, `playlistItems.list` und `videos.list`. Es nutzt keine kostspieligen `search.list`-Anfragen; drei API-Abfragen je YouTube-Kanal und Lauf.
-- Der GitHub-Workflow `.github/workflows/stream-discovery.yml` ist auf 15-Minuten-Takt eingerichtet. Die vorhandenen drei YouTube-Kanäle verbrauchen überschlägig 9 API-Einheiten pro Lauf; API-Quoten können sich ändern.
+- Der GitHub-Workflow `.github/workflows/stream-discovery.yml` ist auf 15-Minuten-Takt eingerichtet. Die sieben eingebundenen YouTube-Kanäle verbrauchen überschlägig 21 API-Einheiten pro Lauf (etwa 2.016 pro Tag bei pünktlicher Ausführung); API-Quoten können sich ändern.
 - `scripts/stream-matcher.mjs` prüft Wortgrenzen beim Ortsnamen, Berliner Kalenderdatum statt ungeprüfter UTC-Tagesangabe, konkreten Demonstrationsbezug und mindestens zwei spezifische Themenbegriffe. Für kurze Titel sind ein Themenbegriff und ein namentlich genannter markanter Veranstaltungsort erforderlich.
 - Bei gleich guten Zuordnungen zu mehreren Demos wird **kein** automatischer Treffer angezeigt.
-- Livestreams müssen am Veranstaltungstag stattfinden. Aufzeichnungen können mit engem Zeitfenster später publiziert worden sein.
-- `scripts/test-stream-matcher.mjs` enthält 20 sicherheitsorientierte Fälle, etwa falscher Ort, falsches Datum, Gaming-Streams, Kurzthemen und mehrdeutige Doppelveranstaltungen. Die Tests laufen vor jeder API-Abfrage.
+- Livestreams müssen am Veranstaltungstag stattfinden. Aufzeichnungen können im engen Datumsfenster nachträglich veröffentlicht worden sein. Zusätzlich wird ein explizit im Videotitel genanntes Datum gegen das Veranstaltungsdatum geprüft. Die Veranstaltungsrecherche reicht bis zu 30 Tage zurück.
+- `scripts/test-stream-matcher.mjs` enthält 27 sicherheitsorientierte Fälle, etwa falscher Ort, falsches Datum, Gaming-Streams, Kurzthemen und mehrdeutige Doppelveranstaltungen. Die Tests laufen vor jeder API-Abfrage.
 - `data/stream-discoveries.json` enthält Kandidaten als `reviewed: false`, keine bestätigten Veranstaltungsstreams. Es bleibt strikt getrennt von `data/live-streams.json`.
 - Es werden maximal 20 YouTube-Kanäle und höchstens 100 mögliche Treffer verwaltet. Ein LIVE-Hinweis verfällt nach 15 Minuten.
 - Die Zahl geprüfter Kanäle, Videos, Streams und API-Fehler steht in der Ergebnisdatei.
@@ -30,6 +30,6 @@ Stand: 19. November 2026. **Implementiert, aber mangels API-Credentials noch nic
 ## Einschränkungen
 - Die 15-Minuten-Grenze ist keine Garantie für Live-Erkennung; GitHub Actions können verzögert starten und Plattformen liefern nicht alle Streams zuverlässig.
 - Eine Kanal-Live-Anzeige beweist keine konkrete Veranstaltung. Auch besonders streng gefilterte Vorschläge können falsche Treffer sein.
-- YouTube API und Twitch API haben Limits und benötigen Schlüssel; **nicht** behaupten, dass Streaming bereits überwacht wird.
+- YouTube ist als Kanalabfrage aktiv, aber **ein geprüfter Event-Match ist nicht garantiert**. Twitch ist mangels Secrets noch nicht aktiviert. Beide APIs unterliegen Kontingenten und Verfügbarkeitsgrenzen.
 - Eigene Datenschutz- und Nutzungsrechtshinweise für veröffentlichte Metadaten und Links prüfen.
 - Keine automatischen Kontosperren, keine politischen Favorisierungen, keine automatischen Video-Reuploads.
