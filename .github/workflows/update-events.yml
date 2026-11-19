@@ -25,23 +25,10 @@ on:
       - 'scripts/check-demos-api.py'
       - 'scripts/probe-demos-events.py'
       - 'scripts/update-demos.py'
-      - 'live.js'
-      - 'community/index.html'
-      - 'en/community/index.html'
-      - 'scripts/test-community.mjs'
-      - 'i18n.js'
-      - 'scripts/test-i18n.mjs'
-      - 'scripts/test-frontend.mjs'
       - 'scripts/build-language-pages.mjs'
-      - 'en/index.html'
-      - 'sitemap.xml'
-      - 'robots.txt'
-      - 'index.html'
       - 'scripts/update-news.py'
       - 'scripts/track-event-updates.py'
       - 'scripts/test-event-updates.py'
-      - 'heatmap.js'
-      - 'data/germany-states.json'
   schedule:
     - cron: "21 */6 * * *"
 permissions:
