@@ -14,6 +14,8 @@ on:
       - 'data/leipzig-police-source.json'
       - 'data/leipzig-archive-source.json'
       - 'data/nrw-police-source.json'
+      - 'data/source-health-alerts.json'
+      - 'scripts/test-source-health-alerts.mjs'
       - 'data/events.json'
       - 'data/demos-events.json'
       - '.github/workflows/stream-discovery.yml'
@@ -42,6 +44,7 @@ jobs:
           node --check scripts/stream-matcher.mjs
           node scripts/test-stream-matcher.mjs
           node scripts/test-source-coverage.mjs
+          node scripts/test-source-health-alerts.mjs
       - name: Prüfe bekannte Streamer über offizielle APIs
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
