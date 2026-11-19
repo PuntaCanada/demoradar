@@ -97,13 +97,33 @@
     {
       "city": "Hamburg",
       "state": "Hamburg",
+      "type": "official_police_operational_notice",
+      "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
+      "parser": null,
+      "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
+      "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
+      "status": "reachable_monitor_only_not_a_feed"
+    },
+    {
+      "city": "Bremen",
+      "state": "Bremen",
+      "type": "official_police_press_archive",
+      "url": "https://www.polizei.bremen.de/news/pressestelle/pressearchiv-5034",
+      "parser": null,
+      "data_rights": "Public police press archive, no verified general event-data license; link and monitor only",
+      "scope": "Occasional press notices mention assemblies, but this is not an official upcoming-assemblies feed",
+      "status": "unavailable",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
       "type": "official_registration_information",
       "url": "https://www.hamburg.de/service/info/111097758/",
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "unavailable",
-      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed"
     }
   ]
 }
