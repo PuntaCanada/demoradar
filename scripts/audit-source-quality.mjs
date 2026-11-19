@@ -31,6 +31,18 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
     item.status==="not_verified_no_import"?"no_matching_items":"unknown",
     item.count,"One specific police press announcement, not a regularly updated assembly feed");
  }
+ const dortmund=files.policeDortmund||{};
+ add("Dortmund","Nordrhein-Westfalen","Polizei Dortmund",
+  dortmund.status==="verified_one_off"?"verified_one_off":
+  dortmund.status==="unavailable_no_import"?"unavailable":
+  dortmund.status==="unverified_content_no_import"?"no_matching_items":"unknown",
+  dortmund.count,"Single dated police assembly announcement, not a rolling register");
+ const frankfurtArchive=files.policeFrankfurtArchive||{};
+ add("Frankfurt am Main","Hessen","Polizeipräsidium Frankfurt (Archiv)",
+  frankfurtArchive.status==="verified_historical_notice"?"verified_historical_one_off":
+  frankfurtArchive.status==="unavailable_no_import"?"unavailable":
+  frankfurtArchive.status==="unverified_no_import"?"no_matching_items":"unknown",
+  frankfurtArchive.count,"Two individually evidenced historical assembly records, not an ongoing feed");
  const leipzig=files.policeLeipzig||{};
  add("Leipzig","Sachsen","Polizeidirektion Leipzig",leipzig.status==="verified_notice"?"verified_one_off":leipzig.status==="unavailable_no_import"?"unavailable":"unknown",leipzig.count,"One dated police notice, not a rolling feed");
  const archive=files.leipzigArchive||{};
@@ -49,6 +61,8 @@ if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
   rostock:read("data/events.json"),cologne:read("data/cologne-source.json"),
   policeCologne:read("data/police-notices-source.json"),
   nrwPolice:read("data/nrw-police-source.json"),
+  policeDortmund:read("data/dortmund-police-source.json"),
+  policeFrankfurtArchive:read("data/frankfurt-police-archive-source.json"),
   policeLeipzig:read("data/leipzig-police-source.json"),
   leipzigArchive:read("data/leipzig-archive-source.json"),
   sourceStatus:read("data/source-status.json"),frankfurt:read("data/frankfurt-source.json")});
