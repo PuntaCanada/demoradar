@@ -21,7 +21,7 @@ const formatIssues=state=>(sourceFormat?.feeds||[])
   .map(issue=>f.city+": "+T(issue==="large_count_drop"?"map.feedShrink":"map.feedFormat")));
 const healthDetail=state=>{
  const entries=(sourceHealth?.sources||[]).filter(s=>s.state===state);
- const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnknown");
+ const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnavailable":"map.healthUnknown");
  const info=entries.map(s=>s.city+": "+label(s.status)+(s.check_freshness==="outdated_check"?" · "+T("map.checkOutdated"):s.check_freshness==="recent"?" · "+T("map.checkRecent"):"")+(s.last_checked?" ("+s.last_checked+")":""));
  return [...info,...formatIssues(state)].join(" · ");
 };
