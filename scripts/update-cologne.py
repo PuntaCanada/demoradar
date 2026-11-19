@@ -74,7 +74,7 @@ def parse_detail(url,raw,today):
  if not m:return None
  try:date=dt.date(int(m[3]),int(m[2]),int(m[1]))
  except ValueError:return None
- if not today-dt.timedelta(days=1)<=date<=today+dt.timedelta(days=90):return None
+ if not today-dt.timedelta(days=30)<=date<=today+dt.timedelta(days=90):return None
  t=TIME.search(text)
  start=f"{int(t[1]):02d}:{t[2]}" if t else ""
  end=f"{int(t[3]):02d}:{t[4]}" if t else ""
@@ -134,7 +134,7 @@ def main():
   existing={e["id"]:e for e in data["events"] if str(e.get("id","")).startswith("cologne-")}
   for event in found:existing[event["id"]]=event
   # Retain recent but no longer listed events, not proof of cancellation.
-  existing={k:e for k,e in existing.items() if e["date"]>=str(now-dt.timedelta(days=7))}
+  existing={k:e for k,e in existing.items() if e["date"]>=str(now-dt.timedelta(days=30))}
   combined=sorted(prev+list(existing.values()),key=lambda e:(e["date"],e.get("start",""),e["id"]))
   if combined!=data["events"]:
    data["events"]=combined;data["count"]=len(combined)
