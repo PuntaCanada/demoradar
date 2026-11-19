@@ -13,7 +13,7 @@ const now=new Date();
 // (3 listed YouTube channels => ~3,600 search units/day, below default 10,000).
 // Twitch remains on the 15-minute schedule when configured.
 const youtubeWindow=now.getUTCHours()%2===0&&now.getUTCMinutes()<30;
-const force=process.env.GITHUB_EVENT_NAME==="workflow_dispatch";
+const force=["workflow_dispatch","push"].includes(process.env.GITHUB_EVENT_NAME);
 
 const day=24*3600000;
 const dayISO=d=>new Date(d).toISOString().slice(0,10);
