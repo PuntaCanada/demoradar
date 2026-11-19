@@ -39,8 +39,19 @@ def snapshot():
 def changes(before,now):
  today=dt.datetime.now(dt.timezone.utc).date()
  out=[]
+ # Some official feeds generate IDs from the time/place. Match a renamed ID only
+ # when the same city/date/title appears EXACTLY once in both snapshots.
+ def key(e):return (clean(e.get("city")).casefold(),e.get("date"),clean(e.get("title")).casefold())
+ old_index={}
+ new_index={}
+ for eid,e in before.items():old_index.setdefault(key(e),[]).append(eid)
+ for eid,e in now.items():new_index.setdefault(key(e),[]).append(eid)
  for eid,cur in now.items():
   old=before.get(eid)
+  if old is None:
+   k=key(cur)
+   if len(old_index.get(k,[]))==1 and len(new_index.get(k,[]))==1:
+    old=before[old_index[k][0]]
   if not old:continue
   try:date=dt.date.fromisoformat(cur["date"])
   except ValueError:continue
