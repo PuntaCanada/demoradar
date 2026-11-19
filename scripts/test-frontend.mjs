@@ -57,7 +57,7 @@ async function mount(path,{failed=false}={}){
  const location={pathname:path,search:"",hash:"#demo-kalender",assigned:null,assign(url){this.assigned=url}};
  const window={location};
  const localStorage={getItem(){return null},setItem(){}};
- const fetch=url=>failed&&url==="/data/events.json"?Promise.reject(new Error("network failure")):Promise.resolve({ok:dataMap[url]!==undefined,status:dataMap[url]!==undefined?200:404,json:async()=>dataMap[url]});
+ const fetch=url=>failed&&url==="/data/events.json"?Promise.reject(new Error("network failure")):Promise.resolve({ok:dataMap[url]!==undefined,status:dataMap[url]!==undefined?200:404,json:async()=>structuredClone(dataMap[url])});
  const Option=class{constructor(text,value){this.text=text;this.value=value}};
  const ctx={window,document:doc,location,navigator:{language:path.startsWith("/en/")?"en-GB":"de-DE"},localStorage,Option,fetch,Date,Intl,console,CustomEvent:class{constructor(type,config){this.type=type;this.detail=config?.detail}}};
  runInNewContext(i18n,ctx,{filename:"i18n.js"});
