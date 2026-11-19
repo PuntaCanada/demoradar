@@ -11,7 +11,9 @@ const events=payload.index.map(item=>({id:"berlin-"+String(item.id),country:"DE"
 if(events.length===0)throw Error("No valid dated items");
 events.sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start)||a.id.localeCompare(b.id));
 let old;try{old=JSON.parse(await readFile(target,"utf8"))}catch{}
-const snapshot={source_url:SOURCE,source_name:"Polizei Berlin – Versammlungsbehörde",license_note:"Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",updated_at:new Date().toISOString(),count:events.length,events};
-if(old&&JSON.stringify(old.events)===JSON.stringify(events)){console.log("No changes");process.exit(0)}
+const previousOther=(old?.events||[]).filter(e=>e.country==="DE"&&e.state!=="Berlin");
+const combined=[...events,...previousOther].sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start)||a.id.localeCompare(b.id));
+const snapshot={source_url:SOURCE,source_name:"Polizei Berlin – Versammlungsbehörde",license_note:"Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",updated_at:new Date().toISOString(),count:combined.length,events:combined};
+if(old&&JSON.stringify(old.events)===JSON.stringify(combined)){console.log("No changes");process.exit(0)}
 await mkdir("data",{recursive:true});await writeFile(target,JSON.stringify(snapshot,null,2)+"\n");
 console.log("Saved "+events.length+" event records");
