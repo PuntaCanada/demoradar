@@ -8,6 +8,10 @@ on:
       - 'scripts/update-rostock.py'
       - 'scripts/update-cologne.py'
       - 'scripts/update-police-notices.py'
+      - 'scripts/update-leipzig-police.py'
+      - 'scripts/test-leipzig-police.py'
+      - 'scripts/audit-source-quality.mjs'
+      - 'scripts/test-source-quality.mjs'
       - 'scripts/test-police-notices.py'
       - 'scripts/update-frankfurt.py'
       - 'scripts/test-frankfurt.py'
@@ -62,6 +66,8 @@ jobs:
         run: python3 scripts/update-cologne.py
       - name: Ergänze zwei ausdrücklich von Polizei Köln gemeldete Versammlungen
         run: python3 scripts/update-police-notices.py
+      - name: Ergänze ausdrücklich angekündigte Leipziger Versammlungen aus der Originalmeldung
+        run: python3 scripts/update-leipzig-police.py
       - name: Erfasse explizit gemeldete Frankfurter Versammlungen aus der amtlichen Mitteilung
         run: python3 scripts/update-frankfurt.py
       - name: Beobachte weitere amtliche Kandidatenquellen ohne erfundene Termine
@@ -78,6 +84,8 @@ jobs:
         run: python3 scripts/probe-demos-events.py
       - name: Lade plausible bundesweite Demos-API-Termine mit separater CC-BY-SA-Kennzeichnung
         run: python3 scripts/update-demos.py
+      - name: Prüfe Import-Erreichbarkeit und Quellengüte ohne Vollständigkeitsbehauptung
+        run: node scripts/audit-source-quality.mjs
       - name: Vergleiche amtlich veröffentlichte Änderungen und Statusmeldungen
         run: python3 scripts/track-event-updates.py
       - name: Prüfe Nachrichten-Feeds und mögliche Berichtszuordnungen
@@ -86,9 +94,11 @@ jobs:
         run: node scripts/build-language-pages.mjs
       - name: Prüfe Kalendercode und Datenformat
         run: |
-          python3 -m py_compile scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py scripts/update-cologne.py scripts/update-police-notices.py scripts/update-frankfurt.py scripts/monitor-official-sources.py
+          python3 -m py_compile scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py scripts/update-cologne.py scripts/update-leipzig-police.py scripts/update-police-notices.py scripts/update-frankfurt.py scripts/monitor-official-sources.py
           python3 scripts/test-cologne.py
           python3 scripts/test-police-notices.py
+          python3 scripts/test-leipzig-police.py
+          node scripts/test-source-quality.mjs
           python3 scripts/test-frankfurt.py
           python3 scripts/test-source-monitor.py
           node --check heatmap.js
@@ -114,10 +124,10 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/police-notices-source.json data/frankfurt-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/leipzig-police-source.json data/source-quality.json data/police-notices-source.json data/frankfurt-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/police-notices-source.json data/frankfurt-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt
+            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/leipzig-police-source.json data/source-quality.json data/police-notices-source.json data/frankfurt-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt
             git commit -m "data: refresh demonstration sources and observed changes"
             for attempt in 1 2 3; do
               if git push; then break; fi
