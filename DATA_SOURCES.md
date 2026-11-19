@@ -23,6 +23,25 @@ Stand: 19. November 2026
 - Die API ist eine **zusätzliche Community-/Quellenübersicht** und kein amtlicher Nachweis, dass Veranstaltungen stattfinden. Die dortigen Uhrzeiten können amtlichen Angaben widersprechen; amtliche Originalquelle bevorzugen.
 - Für das weitere Veröffentlichen bzw. Bearbeiten dieser CC-BY-SA-Daten müssen attribution und ShareAlike-Bedingungen beachtet werden. Dies ist keine pauschale Freigabe der anderen amtlichen Quellendaten.
 
+## Neue Erschließung ab November 2026 – NRW und amtliche Kandidatenquellen
+
+### Köln (Nordrhein-Westfalen) – vorsichtiger Faktenimport
+
+- Amtliche Quelle: https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/index.html
+- Die Stadt veröffentlicht **ausgewählte** verkehrsrelevante Demonstrationen und Aufzüge, teilweise mit Zeit, Veranstaltungsort und Strecke. Dies ist **keine vollständige Versammlungsübersicht**.
+- `scripts/update-cologne.py` untersucht ausschließlich passende, intern verlinkte Detailseiten der offiziellen Stadt-Website; nur ein eindeutig erkennbares Veranstaltungsdatum sowie eine Beginnzeit erlauben einen Kalendereintrag. Politische Hintergründe, Routen und Veranstalter werden niemals ergänzt, wenn sie nicht unmittelbar belegt sind.
+- Der Import beschränkt sich auf einzelne sachliche Terminfakten und einen Originalquellen-Link. Es werden **keine** Artikeltexte, Bilder, Pläne oder PDFs kopiert.
+- Für die HTML-Seiten des kommunalen Verkehrskalenders konnte **keine allgemeine offene Massendatenlizenz abschließend bestätigt werden**; daraus folgt ausdrücklich **keine** Freigabe zur Weiterverwertung kreativer Texte oder Bilder. Ein weitergehender Datenimport wäre erst nach Lizenzklärung zulässig.
+- Fehlende/mehrdeutige oder temporär nicht erreichbare Seiten werden übersprungen. Ein verschwundener Eintrag beweist keine Absage; vorhandene Einträge bleiben kurzzeitig erhalten.
+
+### Weitere beobachtete Kandidaten (noch **keine** automatischen Kalenderimporte)
+
+- Nürnberg (Bayern): Amtliche Pressemitteilungen der Stadt zu einzelnen geplanten Versammlungen; nur Link und Erreichbarkeit, keine verifizierte vollständig strukturierte Veranstaltungsliste.
+- Leipzig (Sachsen): Einsatzbezogene Polizeimeldungen, darunter teils gemeldete Routenänderungen; keine vollständige amtliche Zukunftsübersicht.
+- Hamburg: Online-Angebot zur Versammlungsanmeldung, aber **keine** bestätigte öffentliche Liste künftiger angemeldeter Versammlungen.
+- `scripts/monitor-official-sources.py` prüft die amtlichen Quellenseiten in jedem regelmäßigen GitHub-Lauf und veröffentlicht `data/expansion-sources.json`. **Erreichbarkeit ≠ verifizierter Datenfeed und ≠ Wiederveröffentlichungsrecht.**
+- Alle Quellen werden ohne neue API-Abos, Datenbank oder kostenpflichtige Kartendienste geprüft.
+
 ## Qualitätsregeln
 
 1. Zeit, Titel, Stadt und Veranstaltungsdatum niemals erfinden.
