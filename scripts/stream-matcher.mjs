@@ -2,7 +2,7 @@
 const STOP=new Set("gegen fuer fur mit ohne die der das den dem eine einer einem aus von und zur zum pro demonstration kundgebung demo veranstaltung live livestream stream protest demonstrationen deutschland germany heute morgen bericht fuer gegen und bei für sowie oder zum fuer den deutschland aktion aktuelle aktuell demos proteste aktionstag berichterstattung".split(" "));
 export function normalize(value){
  return String(value||"").toLocaleLowerCase("de").normalize("NFKD")
-  .replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss").replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();
+  .replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss").replace(/([a-zäöü])(?=\d{1,2}[.\/-]\d{1,2})/g,"$1 ").replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();
 }
 export function words(text){return normalize(text).split(" ").filter(Boolean)}
 const MEANINGFUL_SHORT=new Set(["afd","cdu","csu","bsw","spd","fdp","nato","nsu","g20","g7"]);
@@ -26,7 +26,8 @@ export function explicitDateInTitle(title){
  const text=String(title||"");
  const iso=text.match(/(?:^|[^0-9])(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})(?:[^0-9]|$)/);
  const euro=text.match(/(?:^|[^0-9])(\d{1,2})[.\-/](\d{1,2})[.\-/](20\d{2})(?:[^0-9]|$)/);
- const candidate=iso?[iso[1],iso[2],iso[3]]:euro?[euro[3],euro[2],euro[1]]:null;
+ const short=text.match(/(?:^|[^0-9])(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{2})(?:[^0-9]|$)/);
+ const candidate=iso?[iso[1],iso[2],iso[3]]:euro?[euro[3],euro[2],euro[1]]:short?["20"+short[3],short[2],short[1]]:null;
  if(!candidate)return "";
  const value=candidate.map((part,index)=>index===0?part:part.padStart(2,"0")).join("-");
  const dt=new Date(value+"T12:00:00Z");
@@ -47,15 +48,22 @@ export function nearbyDate(timestamp,eventDay,status){
 }
 export function matchEvents(video,events){
  if(!video||!video.title||!video.date||!video.status)return [];
- if(!/(?:^|\W)(?:demo|demonstration|kundgebung|protest|mahnwache|streik|aufzug|versammlung|kundgebungen|demos)(?:\W|$)/i.test(video.title))return [];
+ if(!/(?:^|\W)(?:demo|demonstration|kundgebung|protest|mahnwache|streik|aufzug|versammlung|kundgebungen|demos|gegendemo|gegendemos|montagsdemo|aufmarsch|naziaufmarsch)(?:\W|$)/i.test(video.title))return [];
  const tokens=new Set(topics(video.title));
  const options=[];
  for(const event of events){
   if(!event?.id||!event?.title||!event?.city||!event?.date)continue;
-  if(!cityMatches(video.title,event.city)||!nearbyDate(video.date,event.date,video.status))continue;
-  // Explicit title dates outrank timestamps. Wrong-day recordings are withheld.
+  if(!cityMatches(video.title,event.city))continue;
+  // Explicit broadcast date in a recording title can identify the event even
+  // when an edited excerpt was uploaded days later. Keep it a proposal only.
   const namedDay=explicitDateInTitle(video.title);
   if(namedDay&&namedDay!==event.date)continue;
+  const posted=new Date(video.published_at||video.date);
+  const eventDay=new Date(event.date+"T12:00:00Z");
+  const retrospect=video.status==="recording"&&namedDay===event.date&&
+    Number.isFinite(posted.getTime())&&posted>=new Date(eventDay.getTime()-86400000)&&
+    posted<=new Date(eventDay.getTime()+31*86400000);
+  if(!retrospect&&!nearbyDate(video.date,event.date,video.status))continue;
   const matching=topics(event.title).filter(t=>tokens.has(t));
   // Short event titles ("Gegen AfD") can match only when the stream explicitly
   // names a distinctive location as a second independent piece of evidence.
