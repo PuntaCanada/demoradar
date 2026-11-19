@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'scripts/update-streams.mjs'
+      - 'scripts/stream-matcher.mjs'
+      - 'scripts/test-stream-matcher.mjs'
       - '.github/workflows/stream-discovery.yml'
       - 'data/streamer-candidates.json'
   schedule:
@@ -24,8 +26,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Syntax prüfen
-        run: node --check scripts/update-streams.mjs
+      - name: Syntax und sicheres Event-Matching prüfen
+        run: |
+          node --check scripts/update-streams.mjs
+          node --check scripts/stream-matcher.mjs
+          node scripts/test-stream-matcher.mjs
       - name: Prüfe bekannte Streamer über offizielle APIs
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
