@@ -1,0 +1,49 @@
+name: DemoRadar Stream-Suche (optional)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/update-streams.mjs'
+      - '.github/workflows/stream-discovery.yml'
+      - 'data/streamer-candidates.json'
+  schedule:
+    - cron: "*/15 * * * *"
+permissions:
+  contents: write
+concurrency:
+  group: demoradar-stream-discovery
+  cancel-in-progress: false
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax prüfen
+        run: node --check scripts/update-streams.mjs
+      - name: Prüfe bekannte Streamer über offizielle APIs
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: node scripts/update-streams.mjs
+      - name: Speichere ausschließlich geänderte Treffer
+        run: |
+          if [ -n "$(git status --porcelain data/stream-discoveries.json)" ]; then
+            git config user.name "demoradar-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/stream-discoveries.json
+            git commit -m "data: update potential demonstration livestream matches"
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then exit 0; fi
+              git fetch origin main
+              git rebase origin/main || { git rebase --abort; echo "::warning::Conflict with a concurrent update; skip this run."; exit 0; }
+            done
+            exit 1
+          fi
+          echo "Keine neuen Stream-Treffer"
