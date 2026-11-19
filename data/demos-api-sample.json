@@ -1,0 +1,79 @@
+{
+  "api_url": "https://api.demonstrations.org/v1/event/all",
+  "query": {
+    "sorting_key": "start_time",
+    "sorting_direction": "asc",
+    "offset": 0,
+    "limit": 3
+  },
+  "status": "ok",
+  "import_enabled": false,
+  "http_status": 200,
+  "root_type": "dict",
+  "root_keys": [
+    "events",
+    "query",
+    "total_event_count"
+  ],
+  "root_value_types": {
+    "events": "list",
+    "query": "dict",
+    "total_event_count": "int"
+  },
+  "list_field": "events",
+  "list_count": 3,
+  "item_keys": [
+    "id",
+    "created",
+    "updated",
+    "name",
+    "slug",
+    "short_description",
+    "description",
+    "url",
+    "start_time",
+    "end_time",
+    "timezone",
+    "locations",
+    "topics",
+    "organising_source_id",
+    "is_llm_parsed",
+    "route_geography",
+    "route_is_fallback",
+    "raw_location",
+    "raw_estimated_participants",
+    "raw_organiser",
+    "is_march"
+  ],
+  "item_types": {
+    "id": "int",
+    "created": "str",
+    "updated": "str",
+    "name": "str",
+    "slug": "str",
+    "short_description": "str",
+    "description": "str",
+    "url": "str",
+    "start_time": "str",
+    "end_time": "str",
+    "timezone": "str",
+    "locations": "list",
+    "topics": "list",
+    "organising_source_id": "int",
+    "is_llm_parsed": "bool",
+    "route_geography": "NoneType",
+    "route_is_fallback": "bool",
+    "raw_location": "str",
+    "raw_estimated_participants": "NoneType",
+    "raw_organiser": "NoneType",
+    "is_march": "bool"
+  },
+  "sample_event": {
+    "id": 11960,
+    "name": "Das Heinrich-Böll-Haus als Aktionszentrum Lüneburgs ist besonders wichtig für die demokratische Teil",
+    "start_time": "1969-12-26T09:00:00",
+    "end_time": "1969-12-26T10:00:00",
+    "url": "https://www.hansestadt-lueneburg.de/rathaus/bekanntmachungen.html#versammlungen",
+    "description": "Das Heinrich-Böll-Haus als Aktionszentrum Lüneburgs ist besonders wichtig für die demokratische Teilhabe und die Politisierung der Gesellschaft von jung bis alt und muss daher erhalten bleiben."
+  }
+}
