@@ -5,12 +5,12 @@
     "from": "2026-10-20",
     "to": "2026-11-26"
   },
-  "event_records": 441,
+  "event_records": 458,
   "diagnostic_video_samples": 23,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 368,
+      "event_count": 383,
       "days_with_events": 9,
       "observed_video_title_samples": 4,
       "observed_city_and_date_samples": 0,
@@ -37,7 +37,7 @@
         },
         {
           "type": "official_registration_information",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
