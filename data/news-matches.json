@@ -1,11 +1,16 @@
 {
-  "checked_at": "2026-11-19T08:49:27.513109+00:00",
+  "checked_at": "2026-11-19T09:52:37.668060+00:00",
   "policy": "Nur Überschriften, Quellenlinks und Veröffentlichungsdatum; mögliche Zuordnung, keine Bestätigung",
   "feeds": [
     "tagesschau Inland",
     "tagesschau Aktuell",
     "MDR Sachsen",
-    "NDR Mecklenburg-Vorpommern"
+    "NDR Mecklenburg-Vorpommern",
+    "tagesschau Regional Berlin",
+    "tagesschau Regional Bayern",
+    "tagesschau Regional NRW",
+    "tagesschau Regional Niedersachsen",
+    "tagesschau Regional Thüringen"
   ],
   "matches": {}
 }
