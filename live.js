@@ -85,6 +85,12 @@ function communityExtra(event){
  const eventLink=(window.location.origin||"https://demoradar.pages.dev")+(locale()==="de-DE"?"/":"/en/")+detailHref(event);
  const idSearch="https://github.com/PuntaCanada/demoradar/issues?q="+encodeURIComponent("is:issue "+event.id);
  const suggestionLink=(name)=>"https://github.com/PuntaCanada/demoradar/issues/new?template="+name;
+ const searchPhrase=[event.title,event.city,event.date,"Livestream"].filter(Boolean).join(" ").slice(0,220);
+ const searching=[
+  [T("detail.searchYouTube"),"https://www.youtube.com/results?search_query="+encodeURIComponent(searchPhrase)],
+  [T("detail.searchTwitch"),"https://www.twitch.tv/search?term="+encodeURIComponent(searchPhrase)],
+  [T("detail.searchTikTok"),"https://www.tiktok.com/search?q="+encodeURIComponent(searchPhrase)]
+ ].map(([label,url])=>'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>').join("");
  const streamList=streams.map(s=>{
   const u=trustedStreamUrl(s.url);
   return u?'<li><a href="'+esc(u.url)+'" target="_blank" rel="noopener noreferrer">'+esc(u.platform)+': '+esc(s.label||s.channel||T("detail.streams"))+'</a></li>':"";
@@ -95,6 +101,7 @@ function communityExtra(event){
   (streamList?'<ul>'+streamList+'</ul>':'<p>'+esc(T("detail.streamEmpty"))+'</p>')+
   '<p>'+esc(T("detail.streamNotice"))+'</p>'+
   '<a href="'+esc(suggestionLink("livestream.yml"))+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.streamSuggest"))+'</a>'+
+  '<p><strong>'+esc(T("detail.streamSearch"))+'</strong></p>'+searching+'<p>'+esc(T("detail.searchDisclaimer"))+'</p>'+
   '<h3>'+esc(T("detail.contact"))+'</h3>'+
   (contactList?'<ul>'+contactList+'</ul>':'<p>'+esc(T("detail.contactEmpty"))+'</p>')+
   '<a href="'+esc(suggestionLink("organizer.yml"))+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.contactSuggest"))+'</a>'+
