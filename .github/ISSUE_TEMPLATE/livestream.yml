@@ -1,0 +1,47 @@
+name: "Livestream-Link einreichen"
+description: "Öffentlich zugänglichen YouTube-, Twitch-, TikTok- oder Instagram-Livestream melden"
+title: "[Stream-Vorschlag] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vorschläge werden vor der Veröffentlichung geprüft. Ein Link ist kein Nachweis, dass ein Stream gerade live ist. Nur öffentliche Links einreichen, keine Zugangsdaten und keine privat gefilmten Einzelpersonen.
+  - type: input
+    id: event
+    attributes:
+      label: DemoRadar-Veranstaltungslink
+      placeholder: "https://demoradar.pages.dev/?event=..."
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Plattform
+      options:
+        - YouTube
+        - Twitch
+        - TikTok
+        - Instagram
+        - Andere öffentliche Webseite
+    validations:
+      required: true
+  - type: input
+    id: stream
+    attributes:
+      label: Öffentlicher Stream-Link
+      placeholder: "https://www.youtube.com/watch?v=..."
+    validations:
+      required: true
+  - type: input
+    id: attribution
+    attributes:
+      label: Öffentlicher Kanal / Anbieter
+      placeholder: "Kanal- oder Organisationsname, keine privaten Kontaktdaten"
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Quelle zur Zuordnung
+      description: "Woher ist erkennbar, dass dieser Stream zu der genannten Veranstaltung gehört?"
+    validations:
+      required: true
