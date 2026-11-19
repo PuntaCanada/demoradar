@@ -2,7 +2,7 @@ import {mkdir,readFile,writeFile} from "node:fs/promises";
 const SOURCE="https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=";
 const target="data/events.json";
 const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),25000);
-let response;try{response=await fetch(SOURCE,{signal:controller.signal,headers:{"User-Agent":"DemoRadar/0.1 (public source attribution; research project)","Accept":"application/json"}})}finally{clearTimeout(timer)}
+let response;try{response=await fetch(SOURCE,{signal:controller.signal,headers:{"User-Agent":"DemoRadar/0.1 (public source attribution; research project)","Accept":"application/json"}})}catch(error){let saved;try{saved=JSON.parse(await readFile(target,"utf8"))}catch{}if(Array.isArray(saved?.events)&&saved.events.length>0){console.warn("Berlin source temporarily unreachable; preserving",saved.events.length,"stored events:",String(error));process.exit(0)}throw error}finally{clearTimeout(timer)}
 if(!response.ok)throw Error("Source HTTP "+response.status);
 const payload=await response.json();
 if(!Array.isArray(payload.index)||payload.index.length===0||payload.index.length>10000)throw Error("Unexpected index / refusing empty overwrite");
