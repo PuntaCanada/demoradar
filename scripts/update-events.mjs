@@ -7,7 +7,7 @@ async function report(status,count,error=""){
   scope:"Official Berlin state assembly JSON; not a federal protest feed"};
  if(error)value.error=String(error).slice(0,150);
  let old={};try{old=JSON.parse(await readFile(STATUS,"utf8"))}catch{}
- if(JSON.stringify(old)!==JSON.stringify(value))await writeFile(STATUS,JSON.stringify(value,null,2)+"\\n");
+ if(JSON.stringify(old)!==JSON.stringify(value))await writeFile(STATUS,JSON.stringify(value,null,2)+"\n");
 }
 const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),25000);
 let response;try{response=await fetch(SOURCE,{signal:controller.signal,headers:{"User-Agent":"DemoRadar/0.1 (public source attribution; research project)","Accept":"application/json"}})}catch(error){await report("unavailable",null,error);let saved;try{saved=JSON.parse(await readFile(target,"utf8"))}catch{}if(Array.isArray(saved?.events)&&saved.events.length>0){console.warn("Berlin source temporarily unreachable; preserving",saved.events.length,"stored events:",String(error));process.exit(0)}throw error}finally{clearTimeout(timer)}
