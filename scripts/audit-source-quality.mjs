@@ -24,6 +24,11 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
  add("Köln","Nordrhein-Westfalen","Polizei Köln",notice.sources?.[0]?.status==="verified_notice"?"verified_one_off":notice.sources?.[0]?.status==="unavailable_no_import"?"unavailable":"unknown",notice.sources?.[0]?.count,"One dated police notice, not rolling event coverage",notice.checked_at);
  const leipzig=files.policeLeipzig||{};
  add("Leipzig","Sachsen","Polizeidirektion Leipzig",leipzig.status==="verified_notice"?"verified_one_off":leipzig.status==="unavailable_no_import"?"unavailable":"unknown",leipzig.count,"One dated police notice, not a rolling feed");
+ const archive=files.leipzigArchive||{};
+ add("Leipzig","Sachsen","Polizeidirektion Leipzig (Archiv)",
+  archive.status==="verified_historical_notice"?"verified_historical_one_off":
+  archive.status==="unavailable_no_import"?"unavailable":"unknown",
+  archive.count,"Archived notice for 31 Oct 2026 only; not an upcoming assembly feed");
  const jena=(files.sourceStatus?.sources||[]).find(x=>x.city==="Jena")||{};
  add("Jena","Thüringen","Stadt Jena",jena.status==="ok"?(jena.imported>0?"observed_data":"no_matching_items"):jena.status==="unavailable"?"unavailable":"unknown",jena.imported,"City source, only explicitly marked assemblies",files.sourceStatus?.checked_at);
  const frankfurt=files.frankfurt||{};
@@ -35,6 +40,7 @@ if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
   rostock:read("data/events.json"),cologne:read("data/cologne-source.json"),
   policeCologne:read("data/police-notices-source.json"),
   policeLeipzig:read("data/leipzig-police-source.json"),
+  leipzigArchive:read("data/leipzig-archive-source.json"),
   sourceStatus:read("data/source-status.json"),frankfurt:read("data/frankfurt-source.json")});
  const prev=read("data/source-quality.json");
  if(JSON.stringify(next)===JSON.stringify(prev)){console.log("Source quality unchanged");process.exit(0)}
