@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-19",
+  "purpose": "Candidate directory for potential demonstration livestream sources; never imply currently live or endorse political opinions.",
+  "publication_policy": "Only publish a particular livestream after confirming actual URL, event/date relation, and current status. A channel listing alone is not an event.",
+  "channels": [
+    {
+      "id": "weichreite",
+      "name": "Weichreite",
+      "platforms": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@weichreite",
+          "status": "reported_by_channel"
+        }
+      ],
+      "evidence_url": "https://t.me/s/WeichreiteKanal",
+      "verification": "channel_link_supported",
+      "monitoring": "not_enabled"
+    },
+    {
+      "id": "bjoern-banane",
+      "name": "Björn Banane",
+      "platforms": [],
+      "evidence_url": "https://t.me/s/bjoernbanane",
+      "verification": "identity_supported_exact_youtube_handle_pending",
+      "monitoring": "not_enabled"
+    },
+    {
+      "id": "utopia-tv-deutschland",
+      "name": "Utopia TV Deutschland",
+      "platforms": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@UtopiaDeutschland",
+          "status": "reported_by_channel"
+        }
+      ],
+      "evidence_url": "https://t.me/s/UtopiaTVDeutschlandOriginal",
+      "verification": "channel_link_supported",
+      "monitoring": "not_enabled"
+    },
+    {
+      "id": "aktivist-mann",
+      "name": "AktivistMann",
+      "platforms": [],
+      "evidence_url": "https://t.me/s/aktivistmann",
+      "verification": "identity_supported_exact_youtube_handle_pending",
+      "monitoring": "not_enabled"
+    },
+    {
+      "id": "berlin-berlin-tv",
+      "name": "Berlin Berlin TV",
+      "platforms": [
+        {
+          "platform": "twitch",
+          "url": "https://www.twitch.tv/berlin_berlin_tv",
+          "status": "cross_referenced"
+        }
+      ],
+      "evidence_url": "https://t.me/s/infowelle",
+      "verification": "twitch_link_supported_youtube_handle_pending",
+      "monitoring": "not_enabled"
+    },
+    {
+      "id": "marcant",
+      "name": "Marcant",
+      "platforms": [
+        {
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@vollmarcant",
+          "status": "verified_channel"
+        },
+        {
+          "platform": "twitch",
+          "url": "https://www.twitch.tv/vollmarcant",
+          "status": "linked_from_channel"
+        }
+      ],
+      "evidence_url": "https://linktr.ee/vollmarcant",
+      "verification": "verified_youtube_channel",
+      "monitoring": "not_enabled"
+    }
+  ]
+}
