@@ -1,0 +1,51 @@
+name: "Fehler melden – DemoRadar"
+description: "Fehlerhafte Termine, defekte Links oder technische Probleme melden"
+title: "[Fehler] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für deinen Hinweis! Die Meldung wird als **öffentliches GitHub-Issue** veröffentlicht. Bitte keine privaten Daten, Passwörter, Telefonnummern, Anschriften oder personenbezogenen Screenshots eintragen. Die Angaben werden vor einer Änderung geprüft; es erfolgt keine automatische Veröffentlichung oder Sperrung aufgrund einer bloßen Behauptung.
+  - type: dropdown
+    id: type
+    attributes:
+      label: Was ist falsch?
+      options:
+        - Falscher Demonstrationstermin
+        - Termin abgesagt oder geändert
+        - Falscher Ort oder Veranstalter
+        - Defekter Link oder Livestream
+        - Website funktioniert nicht
+        - Verdächtiger Inhalt / Spam
+        - Sonstiger Fehler
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link zur betroffenen Seite oder Veranstaltung
+      description: "Öffentlicher Link, keine personenbezogenen Daten"
+      placeholder: "https://demoradar.pages.dev/?event=..."
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Fehlerbeschreibung
+      description: "Was stimmt nicht? Was sollte stattdessen angezeigt werden?"
+      placeholder: "Beschreibe den Fehler möglichst konkret."
+    validations:
+      required: true
+  - type: input
+    id: evidence
+    attributes:
+      label: Nachweis / offizielle Quelle (wenn vorhanden)
+      placeholder: "https://..."
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Datenschutz
+      options:
+        - label: "Ich veröffentliche keine privaten oder sensiblen Daten."
+          required: true
