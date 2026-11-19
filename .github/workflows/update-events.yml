@@ -33,10 +33,10 @@ jobs:
         run: node scripts/update-events.mjs
       - name: Ergänze amtliche Versammlungen aus Rostock
         run: python3 scripts/update-rostock.py
-      - name: Prüfe Dresden und Jena und importiere eindeutig gekennzeichnete Jena-Versammlungen
-        run: python3 scripts/update-dresden-jena.py
       - name: Lade Dresdner Versammlungen aus der amtlichen JSON-Schnittstelle
         run: python3 scripts/update-dresden.py
+      - name: Prüfe Dresden und Jena und importiere eindeutig gekennzeichnete Jena-Versammlungen
+        run: python3 scripts/update-dresden-jena.py
       - name: Entferne konservativ echte Dubletten
         run: python3 scripts/dedupe-events.py
       - name: Prüfe Nachrichten-Feeds und mögliche Berichtszuordnungen
