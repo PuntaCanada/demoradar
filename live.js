@@ -62,7 +62,7 @@ fetch("/data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.st
 const officialCount=records.length;
 fetch("/data/demos-events.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(extra=>{
  if(!extra||!Array.isArray(extra.events)||extra.license!=="CC BY-SA 4.0")return;
- const normalized=s=>String(s||"").toLocaleLowerCase("de").normalize("NFKD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+ const normalized=s=>String(s||"").toLocaleLowerCase("de").normalize("NFKD").replace(/\p{M}/gu,"").replace(/[^a-z0-9]+/g," ").trim();
  const existing=new Set(records.map(e=>[e.date,normalized(e.city),normalized(e.title),e.start||""].join("|")));
  let appended=0;
  for(const e of extra.events){
