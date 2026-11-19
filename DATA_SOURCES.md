@@ -11,7 +11,17 @@ Stand: 19. November 2026
 
 ## Recherchierte, noch nicht produktiv angebundene Quelle
 
-- **Demos Berlin e. V.**: `https://demonstrations.org/en/data`, öffentliche API-Dokumentation unter `https://api.demonstrations.org/v1/docs`. Der Betreiber erklärt seine Daten als **CC BY-SA 4.0** lizenziert. Vor der produktiven Integration API-Schema, Abrufregeln, Attribution, Share-Alike und mögliche Überschneidungen anhand echter Antworten prüfen. Kein ungetesteter Abruf in der Produktivpipeline.
+- **Demos Berlin e. V.** wurde nach Prüfung des dokumentierten API-Schemas und echter Stichproben produktiv als gesondert lizenzierter Datenbestand ergänzt (Details unten).
+
+## Neu: Demos Berlin e. V. – bundesweite Ergänzung
+
+- API: `https://api.demonstrations.org/v1/event/all` (öffentliches dokumentiertes POST-Abfrageformat, OpenAPI 3.1).
+- Lizenz: **Creative Commons Namensnennung – Weitergabe unter gleichen Bedingungen 4.0 (CC BY-SA 4.0)**; Herausgeber [Demos Berlin e. V.](https://demonstrations.org/en/data); [Lizenztext](https://creativecommons.org/licenses/by-sa/4.0/).
+- Der Demos-Bestand liegt bewusst getrennt in `data/demos-events.json`; diese Datei enthält Quellennachweis, Lizenzinformationen und eine Kennzeichnung als nicht amtlich bestätigte Meldung.
+- Die Website ergänzt den amtlichen Kalender clientseitig mit den neuen Meldungen, bevorzugt bei eindeutig gleichen Veranstaltungen die amtliche Version und zeigt die Datenherkunft an.
+- Sicherheitsfilter: maximal 120 Tage Zukunft, gültiges Datum, genau eine eindeutig identifizierte deutsche Stadt, keine erfundene Bundeslandangabe; fehlende oder widersprüchliche Endzeit wird ignoriert.
+- Die API ist eine **zusätzliche Community-/Quellenübersicht** und kein amtlicher Nachweis, dass Veranstaltungen stattfinden. Die dortigen Uhrzeiten können amtlichen Angaben widersprechen; amtliche Originalquelle bevorzugen.
+- Für das weitere Veröffentlichen bzw. Bearbeiten dieser CC-BY-SA-Daten müssen attribution und ShareAlike-Bedingungen beachtet werden. Dies ist keine pauschale Freigabe der anderen amtlichen Quellendaten.
 
 ## Qualitätsregeln
 
