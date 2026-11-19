@@ -397,7 +397,7 @@ document.addEventListener("demoradar:languagechange",()=>{updateCityChoices();re
 loadCommunityLinks();
 // A LIVE suggestion must disappear when its 15-minute verification window expires,
 // even if a visitor keeps the page open.
-setInterval(()=>{if(streamCandidates.some(s=>s.status==="live")){render();renderFeatured();renderDetail()}},60000);
+if(typeof setInterval==="function")setInterval(()=>{if(streamCandidates.some(s=>s.status==="live")){render();renderFeatured();renderDetail()}},60000);
 fetch("/data/source-status.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(info=>{sourceStatus=info;renderMonitoredSources()}).catch(()=>{});
 fetch("/data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{if(!Array.isArray(d.events))throw Error("Invalid data");records=d.events;updated=d.updated_at;for(const e of records){if(!e.state&&knownStates[e.city])e.state=knownStates[e.city]}updateCityChoices();
 officialCount=records.length;notifyMap();fetchEventUpdates();
