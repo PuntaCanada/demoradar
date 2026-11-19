@@ -4,7 +4,7 @@ Stand: 19. November 2026
 
 ## Produktiv angebundene Quellen
 
-- **Berlin:** `https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=`. Amtliche Meldeliste der Versammlungsbehörde. Die Lizenz für eine über die Anzeige einzelner Fakten hinausgehende Weiterverwendung wurde nicht abschließend verifiziert. Quelle auf jedem Termin verlinken.
+- **Berlin:** `https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=`. Amtliche Meldeliste der Versammlungsbehörde. Die Lizenz für eine über die Anzeige einzelner Fakten hinausgehende Weiterverwendung wurde nicht abschließend verifiziert. Quelle auf jedem Termin verlinken. Im Berliner Open-Data-Katalog wird der Datensatz mit „Siehe Website des Datensatzes (other-closed)“ geführt; dies ist ausdrücklich **keine bestätigte offene Nachnutzungslizenz**.
 - **Rostock:** `https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink`. Amtliche HTML-Übersicht. Detailangaben und Route nur übernehmen, wenn sie zuordenbar sind. Nutzungsbedingungen zur systematischen Weiterverwendung gesondert prüfen.
 - **Dresden:** `https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json`. Strukturierte amtliche JSON-Übersicht, automatischer Import. Abgemeldete, abgesagte oder zurückgezogene Veranstaltungen werden nicht als bevorstehende Termine gezeigt. Die Tatsache, dass ein Endpoint abrufbar ist, bedeutet nicht automatisch eine unbeschränkte Datenlizenz. Herkunft pro Eintrag anzeigen.
 - **Jena:** `https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen`. Nur eindeutig als Versammlung kategorisierte Einträge, sofern Datum und Uhrzeit aus der Quelle sicher auslesbar sind.
@@ -40,6 +40,8 @@ Stand: 19. November 2026
 - `scripts/update-frankfurt.py` enthält einen eng an diese Mitteilung gebundenen Parser. Nur ausdrücklich nummerierte Veranstaltungen mit Datum, Thema und Uhrzeit werden als Faktendatensatz übernommen, sofern die Stadtseite technisch zugänglich ist; eine allgemeine zukünftige Quelle ergibt sich daraus **nicht**.
 - Die URL antwortete beim Test mit dem GitHub-Runner am 19.11.2026 mit **HTTP 403**. Darum wurden dort **keine** Veranstaltungen importiert und vorhandene Daten nicht verändert. Automatische Wiederholungsversuche erfolgen während der normalen Aktualisierung.
 - Die vollständige Pressemitteilung, Bilder, Pläne und kreative Formulierungen werden nicht weiterveröffentlicht. Für den Pressetext ist keine pauschale Freilizenz belegt; Originalquelle verlinken.
+
+- **Braunschweig (Niedersachsen):** Die Stadt veröffentlicht eine amtliche Liste nur für Versammlungen mit Einverständnis der Anmeldenden. Zum Recherchezeitpunkt kein klarer künftiger Eintrag; noch kein Parser freigeschaltet. Ursprungsseite: https://www.braunschweig.de/politik_verwaltung/bekanntmachungen/versammlungen/index.php. Eine offene Massennutzungslizenz wurde nicht nachgewiesen.
 
 ### Weitere beobachtete Kandidaten (noch **keine** automatischen Kalenderimporte)
 
