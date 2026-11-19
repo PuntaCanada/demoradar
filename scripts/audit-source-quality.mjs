@@ -22,6 +22,15 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
  add("Köln","Nordrhein-Westfalen","Stadt Köln",col.status==="ok"?"observed_data":col.status==="reachable_no_matching_detail_links"?"no_matching_items":col.status==="unavailable"?"unavailable":"unknown",col.count,"Traffic calendar only; not the assembly register");
  const notice=files.policeCologne||{};
  add("Köln","Nordrhein-Westfalen","Polizei Köln",notice.sources?.[0]?.status==="verified_notice"?"verified_one_off":notice.sources?.[0]?.status==="unavailable_no_import"?"unavailable":"unknown",notice.sources?.[0]?.count,"One dated police notice, not rolling event coverage",notice.checked_at);
+ const nrw=files.nrwPolice||{};
+ for(const city of ["Bonn","Münster"]){
+  const item=(nrw.sources||[]).find(s=>s.city===city)||{};
+  add(city,"Nordrhein-Westfalen","Polizei "+city,
+    item.status==="verified_one_off"?"verified_one_off":
+    item.status==="unavailable_no_import"?"unavailable":
+    item.status==="not_verified_no_import"?"no_matching_items":"unknown",
+    item.count,"One specific police press announcement, not a regularly updated assembly feed");
+ }
  const leipzig=files.policeLeipzig||{};
  add("Leipzig","Sachsen","Polizeidirektion Leipzig",leipzig.status==="verified_notice"?"verified_one_off":leipzig.status==="unavailable_no_import"?"unavailable":"unknown",leipzig.count,"One dated police notice, not a rolling feed");
  const archive=files.leipzigArchive||{};
@@ -39,6 +48,7 @@ if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
  const next=sourceHealth({berlin:read("data/events.json"),dresden:read("data/dresden-source.json"),
   rostock:read("data/events.json"),cologne:read("data/cologne-source.json"),
   policeCologne:read("data/police-notices-source.json"),
+  nrwPolice:read("data/nrw-police-source.json"),
   policeLeipzig:read("data/leipzig-police-source.json"),
   leipzigArchive:read("data/leipzig-archive-source.json"),
   sourceStatus:read("data/source-status.json"),frankfurt:read("data/frankfurt-source.json")});
