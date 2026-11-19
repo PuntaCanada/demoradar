@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
+      - 'scripts/test-berlin-feed.mjs'
       - 'scripts/update-rostock.py'
       - 'scripts/test-rostock-source.py'
       - 'scripts/test-dresden-archive.py'
@@ -107,6 +108,7 @@ jobs:
       - name: Prüfe Kalendercode und Datenformat
         run: |
           python3 -m py_compile scripts/update-rostock.py scripts/update-dresden.py scripts/test-rostock-source.py scripts/test-dresden-archive.py scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py scripts/update-cologne.py scripts/update-nrw-police.py scripts/update-leipzig-police.py scripts/import-leipzig-archive.py scripts/update-police-notices.py scripts/update-frankfurt.py scripts/update-dortmund-police.py scripts/import-frankfurt-police-archive.py scripts/monitor-official-sources.py
+          node scripts/test-berlin-feed.mjs
           python3 scripts/test-rostock-source.py
           python3 scripts/test-dresden-archive.py
           python3 scripts/test-cologne.py
