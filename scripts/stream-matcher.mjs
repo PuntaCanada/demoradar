@@ -33,6 +33,24 @@ export function explicitDateInTitle(title){
  const dt=new Date(value+"T12:00:00Z");
  return Number.isFinite(dt.getTime())&&dt.toISOString().slice(0,10)===value?value:"";
 }
+export function ambiguousOrInvalidTitleDates(title){
+ const text=String(title||"");
+ const matches=[
+  ...text.matchAll(/(?:^|[^0-9])(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})(?=[^0-9]|$)/g),
+  ...text.matchAll(/(?:^|[^0-9])(\d{1,2})[.\/-](\d{1,2})[.\/-](20\d{2}|\d{2})(?=[^0-9]|$)/g)
+ ];
+ const dates=new Set();
+ for(const m of matches){
+  let y,mo,day;
+  if(m[1]?.startsWith("20")&&m[1].length===4&&Number(m[2])<=12){[y,mo,day]=[m[1],m[2],m[3]]}
+  else{[day,mo,y]=[m[1],m[2],m[3]];if(y.length===2)y="20"+y}
+  const date=[y,String(mo).padStart(2,"0"),String(day).padStart(2,"0")].join("-");
+  const dt=new Date(date+"T12:00:00Z");
+  if(!Number.isFinite(dt.getTime())||dt.toISOString().slice(0,10)!==date)return true;
+  dates.add(date);
+ }
+ return dates.size>1;
+}
 export function localDay(timestamp){
  const dt=new Date(timestamp);
  if(!Number.isFinite(dt.getTime()))return "";
@@ -49,6 +67,7 @@ export function nearbyDate(timestamp,eventDay,status){
 export function matchEvents(video,events){
  if(!video||!video.title||!video.date||!video.status)return [];
  if(!/(?:^|\W)(?:demo|demonstration|kundgebung|protest|mahnwache|streik|aufzug|versammlung|kundgebungen|demos|gegendemo|gegendemos|montagsdemo|aufmarsch|naziaufmarsch)(?:\W|$)/i.test(video.title))return [];
+ if(ambiguousOrInvalidTitleDates(video.title))return [];
  const tokens=new Set(topics(video.title));
  const options=[];
  for(const event of events){
