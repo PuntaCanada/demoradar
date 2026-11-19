@@ -58,7 +58,7 @@ def changes(before,now):
   if date<today-dt.timedelta(days=7):continue
   changed=[{"field":LABELS[field],"previous":old.get(field,""),"current":cur.get(field,"")} for field in FIELDS if old.get(field,"")!=cur.get(field,"")]
   if changed:
-   out.append({"id":eid,"date":cur["date"],"city":cur["city"],"source_url":cur["source_url"],"changes":changed})
+   out.append({"id":eid,"date":cur["date"],"city":cur["city"],"source_url":cur.get("source_url",""),"changes":changed})
  return out
 def main():
  state=load(OUT)
