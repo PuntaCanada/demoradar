@@ -11,6 +11,7 @@ on:
       - 'scripts/dedupe-events.py'
       - 'scripts/test-dedupe.py'
       - 'scripts/check-demos-api.py'
+      - 'scripts/probe-demos-events.py'
       - 'live.js'
       - 'index.html'
       - 'scripts/update-news.py'
@@ -42,6 +43,8 @@ jobs:
         run: python3 scripts/dedupe-events.py
       - name: Prüfe das dokumentierte Schema der bundesweiten Demos-API
         run: python3 scripts/check-demos-api.py
+      - name: Teste kleine öffentliche Demos-Veranstaltungsabfrage
+        run: python3 scripts/probe-demos-events.py
       - name: Prüfe Nachrichten-Feeds und mögliche Berichtszuordnungen
         run: python3 scripts/update-news.py
       - name: Prüfe Kalendercode und Datenformat
@@ -58,10 +61,10 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json
+            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json
             git commit -m "data: update Berlin events"
             git push
           else
