@@ -11,10 +11,12 @@ globalThis.fetch=async()=>{
  if(scenario==="http")return {ok:false,status:503};
  if(scenario==="invalid")return {ok:true,json:async()=>{throw Error("bad JSON")}};
  if(scenario==="empty")return {ok:true,json:async()=>({index:[]})};
+ if(scenario==="schema")return {ok:true,json:async()=>({index:[{id:1,datum:"31.02.2026",thema:"Impossible date"},{id:2,datum:"21.11.2026",thema:"Valid event"}]})};
+ if(scenario==="missingid")return {ok:true,json:async()=>({index:[{datum:"21.11.2026",thema:"No identity"},{id:2,datum:"21.11.2026",thema:"Valid event"}]})};
  return {ok:true,json:async()=>({index:[{id:"valid-1",datum:"20.11.2026",von:"10:00",bis:"12:00",thema:"Amtlich angezeigte Kundgebung",plz:"10115",strasse_nr:"Beispielplatz"}]})};
 };
 `;
-for(const scenario of ["success","network","http","invalid","empty"]){
+for(const scenario of ["success","network","http","invalid","empty","schema","missingid"]){
  const folder=mkdtempSync(join(tmpdir(),"demoradar-berlin-"));
  try{
   mkdirSync(join(folder,"data"));
@@ -39,4 +41,4 @@ for(const scenario of ["success","network","http","invalid","empty"]){
   assert.match(check.checked_on,/^\d{4}-\d{2}-\d{2}$/);
  }finally{rmSync(folder,{recursive:true,force:true})}
 }
-console.log("Berlin official feed: 5 real-importer offline scenarios passed");
+console.log("Berlin official feed: 7 real-importer offline scenarios passed");
