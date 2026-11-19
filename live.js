@@ -52,6 +52,66 @@ function fetchEventUpdates(){
  }).catch(()=>{});
 }
 
+let reviewedStreams=[],reviewedContacts=[];
+const permittedStreamHost={"youtube.com":"YouTube","youtu.be":"YouTube","twitch.tv":"Twitch","tiktok.com":"TikTok","instagram.com":"Instagram"};
+function trustedStreamUrl(value){
+ try{
+  const u=new URL(value);
+  if(u.protocol!=="https:"||u.username||u.password)return null;
+  const host=u.hostname.toLowerCase().replace(/^www\./,"").replace(/^m\./,"");
+  const platform=permittedStreamHost[host];
+  if(!platform||!u.pathname||u.pathname==="/")return null;
+  return {url:u.href,platform};
+ }catch{return null}
+}
+function reviewedLinks(event){
+ const now=Date.now();
+ const streams=reviewedStreams.filter(item=>{
+  if(item.event_id!==event.id||item.reviewed!==true||!item.evidence_url||!safeSourceUrl(item.evidence_url))return false;
+  const u=trustedStreamUrl(item.url);
+  if(!u)return false;
+  const until=Date.parse(item.valid_until||"");
+  return Number.isFinite(until)&&until>now&&until<now+90*86400000;
+ }).slice(0,5);
+ const contacts=reviewedContacts.filter(item=>
+  item.event_id===event.id&&item.reviewed===true&&item.organizer&&
+  item.source_url&&safeSourceUrl(item.source_url)&&item.url&&safeSourceUrl(item.url)&&
+  /^https:\/\//i.test(item.url)
+ ).slice(0,3);
+ return {streams,contacts};
+}
+function communityExtra(event){
+ const {streams,contacts}=reviewedLinks(event);
+ const eventLink=(window.location.origin||"https://demoradar.pages.dev")+(locale()==="de-DE"?"/":"/en/")+detailHref(event);
+ const idSearch="https://github.com/PuntaCanada/demoradar/issues?q="+encodeURIComponent("is:issue "+event.id);
+ const suggestionLink=(name)=>"https://github.com/PuntaCanada/demoradar/issues/new?template="+name;
+ const streamList=streams.map(s=>{
+  const u=trustedStreamUrl(s.url);
+  return u?'<li><a href="'+esc(u.url)+'" target="_blank" rel="noopener noreferrer">'+esc(u.platform)+': '+esc(s.label||s.channel||T("detail.streams"))+'</a></li>':"";
+ }).filter(Boolean).join("");
+ const contactList=contacts.map(c=>'<li><a href="'+esc(safeSourceUrl(c.url))+'" target="_blank" rel="noopener noreferrer">'+esc(c.organizer)+'</a></li>').join("");
+ return '<section class="detail-community-actions">'+
+  '<h3>'+esc(T("detail.streams"))+'</h3>'+
+  (streamList?'<ul>'+streamList+'</ul>':'<p>'+esc(T("detail.streamEmpty"))+'</p>')+
+  '<p>'+esc(T("detail.streamNotice"))+'</p>'+
+  '<a href="'+esc(suggestionLink("livestream.yml"))+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.streamSuggest"))+'</a>'+
+  '<h3>'+esc(T("detail.contact"))+'</h3>'+
+  (contactList?'<ul>'+contactList+'</ul>':'<p>'+esc(T("detail.contactEmpty"))+'</p>')+
+  '<a href="'+esc(suggestionLink("organizer.yml"))+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.contactSuggest"))+'</a>'+
+  '<h3>'+esc(T("nav.community"))+'</h3>'+
+  '<a href="'+esc(idSearch)+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.community"))+'</a>'+
+  '</section>';
+}
+function loadCommunityLinks(){
+ Promise.all([
+  fetch("/data/live-streams.json",{cache:"no-store"}).then(r=>r.ok?r.json():null),
+  fetch("/data/organizer-contacts.json",{cache:"no-store"}).then(r=>r.ok?r.json():null)
+ ]).then(([streams,contacts])=>{
+  reviewedStreams=Array.isArray(streams?.streams)?streams.streams:[];
+  reviewedContacts=Array.isArray(contacts?.contacts)?contacts.contacts:[];
+  renderDetail();
+ }).catch(()=>{});
+}
 const detailHref=e=>"?event="+encodeURIComponent(e.id)+"#eventDetail";
 const safeSourceUrl=url=>{try{const u=new URL(String(url||""),window.location?.origin||"https://demoradar.pages.dev");return u.protocol==="https:"||u.protocol==="http:"?u.href:""}catch{return""}};
 const localTopic=title=>{const label=topic(title);return T(({"Klima & Umwelt":"topic.climate","Frieden & Krieg":"topic.peace","Arbeit & Soziales":"topic.social","Migration":"topic.migration","Demokratie":"topic.democracy","Sonstiges":"topic.other"})[label]||"topic.other")};
@@ -181,7 +241,7 @@ function renderDetail(){
   const newsSearch='<a href="'+esc(newsQuery)+'" target="_blank" rel="noopener noreferrer">'+esc(T("news.find"))+'</a>';
   const source=safeSourceUrl(event.source_url);
   const license=event.license?'<p class="small">'+esc(T("detail.license"))+': '+esc(event.license)+'</p>':"";
-  holder.innerHTML='<span class="topic-badge topic-'+topicSlug(event.title)+'">'+esc(localTopic(event.title))+'</span><h2 id="eventDetailTitle">'+esc(event.title)+'</h2>'+statusPills(event)+'<div class="event-detail-grid">'+metadata+'</div><p class="small">'+esc(T("calendar.source"))+': '+esc(event.source||T("calendar.officialSource"))+'</p>'+license+updates+news+newsSearch+'<p class="small">'+esc(T("detail.note"))+'</p><div class="event-detail-actions">'+(source?'<a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.source"))+'</a>':"")+'<button id="eventShare" type="button">'+esc(T("detail.share"))+'</button><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
+  holder.innerHTML='<span class="topic-badge topic-'+topicSlug(event.title)+'">'+esc(localTopic(event.title))+'</span><h2 id="eventDetailTitle">'+esc(event.title)+'</h2>'+statusPills(event)+'<div class="event-detail-grid">'+metadata+'</div><p class="small">'+esc(T("calendar.source"))+': '+esc(event.source||T("calendar.officialSource"))+'</p>'+license+updates+news+newsSearch+communityExtra(event)+'<p class="small">'+esc(T("detail.note"))+'</p><div class="event-detail-actions">'+(source?'<a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.source"))+'</a>':"")+'<button id="eventShare" type="button">'+esc(T("detail.share"))+'</button><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
  }else holder.innerHTML='<h2 id="eventDetailTitle">'+esc(T("detail.title"))+'</h2><p>'+esc(T("detail.missing"))+'</p><div class="event-detail-actions"><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
  overlay.hidden=false;document.body?.classList?.add("detail-open");
  const back=document.getElementById("eventBack");if(back)back.onclick=closeDetail;
@@ -219,6 +279,7 @@ document.getElementById("calendar").addEventListener("click",ev=>{const btn=ev.t
 function toggle(l){listMode=l;if(!l)selectedDay=null;document.getElementById("calendarWrap").classList.toggle("hidden",l);document.getElementById("list").classList.toggle("visible",l);document.getElementById("calendarBtn").classList.toggle("active",!l);document.getElementById("listBtn").classList.toggle("active",l);render()}
 document.getElementById("prev").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()-1,1);render()};document.getElementById("next").onclick=()=>{sel=new Date(sel.getFullYear(),sel.getMonth()+1,1);render()};document.getElementById("calendarBtn").onclick=()=>toggle(false);document.getElementById("listBtn").onclick=()=>{selectedDay=null;toggle(true)};["search","topic","position","city"].forEach(id=>document.getElementById(id).addEventListener(id==="search"?"input":"change",()=>{render();renderFeatured()}));document.getElementById("region").addEventListener("change",()=>{updateCityChoices();render();renderFeatured()});
 document.addEventListener("demoradar:languagechange",()=>{updateCityChoices();render();renderFeatured();renderSourceInfo();renderMonitoredSources();renderDetail()});
+loadCommunityLinks();
 fetch("/data/source-status.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(info=>{sourceStatus=info;renderMonitoredSources()}).catch(()=>{});
 fetch("/data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{if(!Array.isArray(d.events))throw Error("Invalid data");records=d.events;updated=d.updated_at;for(const e of records){if(!e.state&&knownStates[e.city])e.state=knownStates[e.city]}updateCityChoices();
 officialCount=records.length;notifyMap();fetchEventUpdates();
