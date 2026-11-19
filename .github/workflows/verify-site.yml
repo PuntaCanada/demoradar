@@ -11,6 +11,8 @@ on:
       - 'en/community/index.html'
       - 'data/live-streams.json'
       - 'data/source-coverage.json'
+      - 'data/state-source-coverage.json'
+      - 'scripts/test-heatmap-coverage.mjs'
       - 'data/police-notices-source.json'
       - 'scripts/test-police-notices.py'
       - 'scripts/source-coverage.mjs'
@@ -46,6 +48,7 @@ jobs:
           node scripts/test-frontend.mjs
           node scripts/test-community.mjs
           node scripts/test-source-coverage.mjs
+          node scripts/test-heatmap-coverage.mjs
           python3 scripts/test-police-notices.py
           node --check scripts/source-coverage.mjs
       - name: Prüfe echte Browseransicht auf Smartphone und Desktop
@@ -54,7 +57,7 @@ jobs:
         continue-on-error: true
         run: |
           set -eu
-          for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
+          for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/state-source-coverage.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
             echo "$route -> HTTP $code"
@@ -69,6 +72,7 @@ jobs:
               /en/community/) grep -q '<html lang="en">' /tmp/demoradar_response || (echo "::warning::English community page missing" && exit 1) ;;
               /data/live-streams.json) grep -q '"streams"' /tmp/demoradar_response || (echo "::warning::Reviewed live stream data unavailable" && exit 1) ;;
               /data/source-coverage.json) grep -q '"cities"' /tmp/demoradar_response || (echo "::warning::City coverage diagnostic not yet published" && exit 1) ;;
+              /data/state-source-coverage.json) grep -q '"states"' /tmp/demoradar_response || (echo "::warning::State source coverage not deployed" && exit 1) ;;
               /data/police-notices-source.json) grep -q '"sources"' /tmp/demoradar_response || (echo "::warning::Official police notice status not deployed" && exit 1) ;;
               /data/organizer-contacts.json) grep -q '"contacts"' /tmp/demoradar_response || (echo "::warning::Public organizer contact data unavailable" && exit 1) ;;
               /sitemap.xml) grep -q 'demoradar.pages.dev/en/' /tmp/demoradar_response || (echo "::warning::English URL missing from live sitemap" && exit 1) ;;
