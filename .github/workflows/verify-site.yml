@@ -45,14 +45,14 @@ jobs:
               exit 1
             fi
             case "$route" in
-              /en/) grep -q '<html lang="en">' /tmp/demoradar_response || (echo "::warning::Cloudflare English page not English" && exit 1) ;;
-              /) grep -q '<html lang="de">' /tmp/demoradar_response || (echo "::warning::Cloudflare German page not German" && exit 1) ;;
+              /en/) grep -q '<html lang="en">' /tmp/demoradar_response && grep -q 'id="eventDetail"' /tmp/demoradar_response || (echo "::warning::English page or event details missing on Cloudflare" && exit 1) ;;
+              /) grep -q '<html lang="de">' /tmp/demoradar_response && grep -q 'id="eventDetail"' /tmp/demoradar_response || (echo "::warning::German page or event details missing on Cloudflare" && exit 1) ;;
               /sitemap.xml) grep -q 'demoradar.pages.dev/en/' /tmp/demoradar_response || (echo "::warning::English URL missing from live sitemap" && exit 1) ;;
               /data/events.json) grep -q '"events"' /tmp/demoradar_response || (echo "::warning::Live events JSON missing" && exit 1) ;;
               /data/demos-events.json) grep -q '"events"' /tmp/demoradar_response || (echo "::warning::Live community events JSON missing" && exit 1) ;;
               /robots.txt) grep -q 'sitemap.xml' /tmp/demoradar_response || (echo "::warning::Sitemap missing in robots.txt" && exit 1) ;;
               /i18n.js) grep -q 'demoradar:languagechange' /tmp/demoradar_response || (echo "::warning::Language script not deployed" && exit 1) ;;
-              /live.js) grep -q 'function updateCityChoices' /tmp/demoradar_response || (echo "::warning::Calendar script missing city filters" && exit 1) ;;
+              /live.js) grep -q 'function updateCityChoices' /tmp/demoradar_response && grep -q 'function renderDetail' /tmp/demoradar_response || (echo "::warning::Deployed calendar lacks event details" && exit 1) ;;
             esac
           done
           echo "Cloudflare endpoints are reachable and include expected data."
