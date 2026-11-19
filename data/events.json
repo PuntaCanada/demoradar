@@ -3,7 +3,7 @@
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
   "updated_at": "2026-11-19T07:33:35.104Z",
-  "count": 1331,
+  "count": 1317,
   "events": [
     {
       "id": "berlin-2",
@@ -310,6 +310,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-8951a73b36d21bec",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-19",
+      "start": "",
+      "end": "",
+      "title": "Gegen Zwangsräumung in RM16",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "20-30",
+      "event_status": "abgemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-59",
       "country": "DE",
       "state": "Berlin",
@@ -371,23 +390,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-71",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2026-11-19",
-      "start": "09:00",
-      "end": "10:00",
-      "title": "Aufklärung rechter Straftaten und rechter Strukturen in den Sicherheitsbehörden",
-      "postal_code": "12101",
-      "location": "Tempelhofer Damm 12",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-74",
@@ -552,6 +556,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-7e5891fb5f45b9f9",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-19",
+      "start": "16:00",
+      "end": "18:00",
+      "title": "Mahnwache der OMAS GEGEN RECHTS.DRESDEN für Frieden - gegen Krieg und Gewalt überall",
+      "location": "Kleine Kirchgasse",
+      "postal_code": "",
+      "route": "",
+      "organizer": "OMAS GEGEN RECHTS.DRESDEN",
+      "registered_participants": "8",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-101",
@@ -824,6 +847,44 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-2d10a1b4e56b8dda",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-20",
+      "start": "10:00",
+      "end": "15:00",
+      "title": "Schulstreik gegen Wehrpflicht - Internationaler Jugendstreik",
+      "location": "Postplatz",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Schulstreik gegen Wehrpflicht Dresden",
+      "registered_participants": "1000",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-9b4a1413188db58b",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-20",
+      "start": "10:00",
+      "end": "14:00",
+      "title": "Naturschutz - Eine Stimme für die Natur",
+      "location": "Wilhelm-Buck-Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Stiftung Erdheilungsplätze",
+      "registered_participants": "2",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-152",
@@ -1130,6 +1191,25 @@
       "source_status": "behördlich veröffentlicht"
     },
     {
+      "id": "dresden-e483f3bfcda5a5f2",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-20",
+      "start": "16:30",
+      "end": "18:30",
+      "title": "Mahnwache zum Gedenktag an die Opfer von Transfeindlichkeit",
+      "location": "Martin-Luther-Platz",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-194",
       "country": "DE",
       "state": "Berlin",
@@ -1192,6 +1272,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-b46c28c103a86534",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-20",
+      "start": "17:00",
+      "end": "19:00",
+      "title": "GenZ regelt das | Akt II",
+      "location": "Theaterplatz",
+      "postal_code": "",
+      "route": "",
+      "organizer": "GenZ regelt Dresden",
+      "registered_participants": "1000",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "rostock-8dcc085a35dd1349",
@@ -1586,6 +1685,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-07844c4e063d132c",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-21",
+      "start": "13:30",
+      "end": "18:30",
+      "title": "Stoppt den Organraub an lebenden Falun Gong Praktizierenden in China! Der Kommunistischen Partei Chinas ein Ende setzen (END CCP)!",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Deutscher Falun Dafa Verein e. V.",
+      "registered_participants": "12",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-272",
       "country": "DE",
       "state": "Berlin",
@@ -1664,6 +1782,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-462019870944e473",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-21",
+      "start": "14:00",
+      "end": "17:00",
+      "title": "3 Minute Movie Challenge",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Activists for the Victims e.V.",
+      "registered_participants": "10",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-287",
@@ -2322,6 +2459,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-2db5f7a6cd16a2e4",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-23",
+      "start": "18:00",
+      "end": "20:30",
+      "title": "Nett Hier, aber waren Sie schon mal in einer Stadt ohne Faschos?",
+      "location": "Neustädter Markt",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "ca. 150",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-410",
       "country": "DE",
       "state": "Berlin",
@@ -2336,6 +2492,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-3c6a401a741eff12",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-23",
+      "start": "19:00",
+      "end": "21:00",
+      "title": "Mahnwache für Frieden Dresden",
+      "location": "Jorge-Gomondai-Platz",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-413",
@@ -2575,23 +2750,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-458",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2026-11-24",
-      "start": "18:00",
-      "end": "19:30",
-      "title": "Tag gegen Gewalt an Frauen Collien, Claudia, Gisele, Jane Doe - Gewalt an Frauen hat System",
-      "postal_code": "10365",
-      "location": "Stefan-Heym-Platz 1",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-461",
@@ -2914,6 +3074,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-021a793cff86c294",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-25",
+      "start": "17:00",
+      "end": "22:00",
+      "title": "'Wir wollen uns lebend - Kampf gegen patriarchale Gewalt'",
+      "location": "Marwa Al-Sherbini-Park",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "300",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-521",
       "country": "DE",
       "state": "Berlin",
@@ -3012,6 +3191,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-8367f0795bac9d92",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-26",
+      "start": "",
+      "end": "",
+      "title": "'Männer gegen Gewalt'",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Männernetzwerk Dresden e. V.",
+      "registered_participants": "20 - 40",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-536",
@@ -3190,6 +3388,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-5260531fb7701a84",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-26",
+      "start": "16:30",
+      "end": "18:30",
+      "title": "Kahlschlagshaushalt verhindern – Kürzungen? Nicht mit uns!",
+      "location": "Schnurbaum-Allee",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Bündnis gegen Kürzungen",
+      "registered_participants": "200",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-569",
       "country": "DE",
       "state": "Berlin",
@@ -3236,6 +3453,63 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-81f035c2b3c202ee",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-27",
+      "start": "",
+      "end": "",
+      "title": "'Ein Dach für alle Kinder' - Mahnwache für die obdachlosen Kinder der Welt",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Jugendverein Roter Baum e.V.",
+      "registered_participants": "30",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-9ddc2b67a79d072c",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-27",
+      "start": "",
+      "end": "",
+      "title": "Für ein demokratisches Sachsen-Anhalt!",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "1000",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-fcef69bd03bbca98",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-27",
+      "start": "",
+      "end": "",
+      "title": "Für ein eigenständiges BSW - klare Kante gegen Rechts, auch ohne Brandmauer",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "10 max",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-578",
@@ -3462,6 +3736,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-d17eda15f73e259f",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-27",
+      "start": "18:00",
+      "end": "22:00",
+      "title": "Solidarität mit der Ukraine: Der Krieg geht weiter",
+      "location": "An der Schleife",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "4",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-620",
       "country": "DE",
       "state": "Berlin",
@@ -3476,6 +3769,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-372783e14f2cdc5a",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-28",
+      "start": "",
+      "end": "",
+      "title": "#TeamNutznießerSachsen",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "200",
+      "event_status": "abgemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-623",
@@ -3652,6 +3964,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-9bd91deb19b3c218",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-28",
+      "start": "13:30",
+      "end": "18:30",
+      "title": "Stoppt den Organraub an lebenden Falun Gong Praktizierenden in China! Der Kommunistischen Partei Chinas ein Ende setzen (END CCP)!",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Deutscher Falun Dafa Verein e. V.",
+      "registered_participants": "12",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-656",
@@ -3894,6 +4225,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-aebb8bb9edd844ef",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-30",
+      "start": "",
+      "end": "",
+      "title": "Mahnwache für Frieden Dresden",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-701",
       "country": "DE",
       "state": "Berlin",
@@ -3972,6 +4322,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-1c4d683110fb09ca",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-30",
+      "start": "13:30",
+      "end": "16:30",
+      "title": "Gemeinsam gegen das PNOG (Pflegeneuordnungsgesetz), bundesweite Protesttour durch die Landeshauptstädte. Auch in Sachsen wollen wir ein starkes und unübersehbares Signal an Politik",
+      "location": "Pieschner Allee",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Bundesverband privater Anbieter sozialer Dienste - bpa e.V.",
+      "registered_participants": "1500",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-716",
@@ -4148,6 +4517,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-6a5376d6a0e11d4e",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-30",
+      "start": "18:00",
+      "end": "19:00",
+      "title": "Widerstand gegen Generalangriff von Regierung und Monopolen! Kampf gegen jede Art von Faschismus und imperialistischen Kriegen weltweit. Verteidigung erkämpfter Arbeiterrechte",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Demokratische Montagsaktion/Montag Tag des Widerstands/Dresden",
+      "registered_participants": "30",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-749",
@@ -4966,6 +5354,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-d78c7b4daf759e5a",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-05",
+      "start": "13:30",
+      "end": "18:30",
+      "title": "Stoppt den Organraub an lebenden Falun Gong Praktizierenden in China! Der Kommunistischen Partei Chinas ein Ende setzen (END CCP)!",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Deutscher Falun Dafa Verein e. V.",
+      "registered_participants": "12",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-902",
       "country": "DE",
       "state": "Berlin",
@@ -5254,6 +5661,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-0f88636abade8319",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-07",
+      "start": "",
+      "end": "",
+      "title": "Mahnwache für Frieden Dresden",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-956",
       "country": "DE",
       "state": "Berlin",
@@ -5395,23 +5821,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-983",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2026-12-07",
-      "start": "15:00",
-      "end": "16:00",
-      "title": "Mahnwache",
-      "postal_code": "12587",
-      "location": "Bölschestr. 126",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-986",
@@ -5715,23 +6126,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-1043",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2026-12-08",
-      "start": "17:00",
-      "end": "18:30",
-      "title": "Demonstration OMAS GEGEN RECHTS Süd/West gegen Querdenker, Verschwörungstheoretiker und rechte Populisten auf dem Mittelstreifen der Schlossstraße",
-      "postal_code": "12163",
-      "location": "Schloßstr.",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-1046",
@@ -5892,6 +6288,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-8ae36dc29edd077f",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-10",
+      "start": "",
+      "end": "",
+      "title": "Kundgebung gegen Tierausbeutung im DWC",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Anima e. V.",
+      "registered_participants": "40",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-1076",
@@ -6198,6 +6613,63 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-063a1ab6f8ddc8e6",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-12",
+      "start": "",
+      "end": "",
+      "title": "Dresden für die Prüfung der rechtsextremen Parteien",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Prüfung Rettet Übringens Freiheit (PRÜF) - Sachsen",
+      "registered_participants": "500",
+      "event_status": "abgemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-388b48332e6c2995",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-12",
+      "start": "",
+      "end": "",
+      "title": "PRÜF",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "500",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-e24b35a8e6005692",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-12",
+      "start": "",
+      "end": "",
+      "title": "Tiere raus aus dem Zirkus",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-1133",
       "country": "DE",
       "state": "Berlin",
@@ -6388,6 +6860,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-59a424c172949921",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-12",
+      "start": "13:30",
+      "end": "18:30",
+      "title": "Stoppt den Organraub an lebenden Falun Gong Praktizierenden in China! Der Kommunistischen Partei Chinas ein Ende setzen (END CCP)!",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Deutscher Falun Dafa Verein e. V.",
+      "registered_participants": "12",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-1169",
@@ -6612,6 +7103,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-8925f5f2ef1c9d8a",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-14",
+      "start": "",
+      "end": "",
+      "title": "Mahnwache für Frieden Dresden",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-1211",
@@ -7078,6 +7588,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-013a7f8dc29672be",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-17",
+      "start": "",
+      "end": "",
+      "title": "Die Schulden von heute sind die Steuern von morgen!",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Jungliberale Aktion Sachsen",
+      "registered_participants": "30",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-1298",
       "country": "DE",
       "state": "Berlin",
@@ -7107,23 +7636,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-1304",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2026-12-17",
-      "start": "09:00",
-      "end": "10:00",
-      "title": "Aufklärung rechter Straftaten und rechter Strukturen in den Sicherheitsbehörden",
-      "postal_code": "12101",
-      "location": "Tempelhofer Damm 12",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-1307",
@@ -7558,6 +8072,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-f0685d9cfc7d8534",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-19",
+      "start": "13:30",
+      "end": "18:30",
+      "title": "Stoppt den Organraub an lebenden Falun Gong Praktizierenden in China! Der Kommunistischen Partei Chinas ein Ende setzen (END CCP)!",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Deutscher Falun Dafa Verein e. V.",
+      "registered_participants": "12",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-1388",
       "country": "DE",
       "state": "Berlin",
@@ -7748,6 +8281,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-8d1e12d6c07ccfe2",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-21",
+      "start": "",
+      "end": "",
+      "title": "Mahnwache für Frieden Dresden",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-1424",
@@ -7988,6 +8540,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-13584cd845a4ed24",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-21",
+      "start": "18:00",
+      "end": "19:00",
+      "title": "Widerstand gegen Generalangriff von Regierung und Monopolen! Kampf gegen jede Art von Faschismus und imperialistischen Kriegen weltweit. Verteidigung erkämpfter Arbeiterrechte",
+      "location": "Prager Straße",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Demokratische Montagsaktion/Montag Tag des Widerstands/Dresden",
+      "registered_participants": "30",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-1469",
@@ -8708,6 +9279,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-4c21d1f47ad55c5a",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-12-28",
+      "start": "",
+      "end": "",
+      "title": "Mahnwache für Frieden Dresden",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-1604",
@@ -9923,23 +10513,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-1832",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-01-16",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-1835",
@@ -10259,23 +10834,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-1895",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-01-23",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-1898",
@@ -10531,23 +11091,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-1946",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-01-30",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-1949",
@@ -10790,6 +11335,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-4e365fe45a74cf38",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2027-02-06",
+      "start": "",
+      "end": "",
+      "title": "Erhalt von Meinungs- und Versammlungsfreiheit in der Landeshauptstadt Dresden",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "10",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-1994",
       "country": "DE",
       "state": "Berlin",
@@ -10867,23 +11431,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2009",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-02-06",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2012",
@@ -11110,6 +11659,120 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-14ccb56ba007bdaf",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2027-02-13",
+      "start": "",
+      "end": "",
+      "title": "Menschenkette zum 13. Februar",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "10.000",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-18e132f2951b050b",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2027-02-13",
+      "start": "",
+      "end": "",
+      "title": "Mahnwache für die Opfer der Flächenbombardierung Dresdens 1945",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-516cf002632792a8",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2027-02-13",
+      "start": "",
+      "end": "",
+      "title": "Stilles Ge(h)denken Dresden",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Wellenlänge",
+      "registered_participants": "unbekannt",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-691c139d3be6446e",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2027-02-13",
+      "start": "",
+      "end": "",
+      "title": "Tu was gegen rechts - Demokratie stärken",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Bündnis 90 / Die Grünen, Stadtverband Dresden",
+      "registered_participants": "50",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-c32f04ccdf83b4d2",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2027-02-13",
+      "start": "",
+      "end": "",
+      "title": "'Stilles Gedenken vor der Frauenkirche Dresden'",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Gesellschaft zur Förderung der Frauenkirche Dresden e. V., Herrn Prof. Ludwig Güttler",
+      "registered_participants": "1.000",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-da4a0d68374eb3c0",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2027-02-13",
+      "start": "",
+      "end": "",
+      "title": "Dresden ist kein Ort für Nazis",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "1000",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-2054",
       "country": "DE",
       "state": "Berlin",
@@ -11139,23 +11802,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2060",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-02-13",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2063",
@@ -11427,23 +12075,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2114",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-02-20",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2117",
@@ -11667,23 +12300,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2159",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-02-27",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2162",
@@ -11971,23 +12589,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2216",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-03-06",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2219",
@@ -12259,23 +12862,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2270",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-03-13",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2273",
@@ -12531,23 +13119,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2321",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-03-20",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2324",
@@ -12755,23 +13328,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2363",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-03-27",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2366",
@@ -13011,23 +13569,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2411",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-04-03",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2414",
@@ -13235,23 +13778,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2453",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-04-10",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2456",
@@ -13475,23 +14003,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2498",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-04-17",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2501",
@@ -13683,23 +14196,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2537",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-04-24",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2540",
@@ -13891,23 +14389,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2576",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-05-01",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2579",
@@ -14275,23 +14758,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2648",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-05-08",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2651",
@@ -14579,23 +15047,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2705",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-05-15",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2708",
@@ -14803,23 +15256,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2747",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-05-22",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2750",
@@ -15011,23 +15449,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2786",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-05-29",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2789",
@@ -15251,23 +15674,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2831",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-06-05",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2834",
@@ -15475,23 +15883,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2873",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-06-12",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2876",
@@ -15715,23 +16108,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2918",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-06-19",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2921",
@@ -15907,23 +16285,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2954",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-06-26",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2957",
@@ -16131,23 +16494,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-2996",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-07-03",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-2999",
@@ -16307,23 +16655,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3029",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-07-10",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3032",
@@ -16531,23 +16864,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3071",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-07-17",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3074",
@@ -16739,23 +17057,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3110",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-07-24",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3113",
@@ -16915,23 +17218,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3143",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-07-31",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3146",
@@ -17155,23 +17443,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3188",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-08-07",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3191",
@@ -17347,23 +17620,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3224",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-08-14",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3227",
@@ -17603,23 +17861,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3272",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-08-21",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3275",
@@ -17779,23 +18022,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3305",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-08-28",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3308",
@@ -17987,23 +18215,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3344",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-09-04",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3347",
@@ -18051,23 +18264,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3356",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-09-06",
-      "start": "12:00",
-      "end": "14:00",
-      "title": "Mahnwache vor dem RKI. Kritisiert wird die Rolle des RKI im Zusammenhang mit der Corona-Hysterie und den dadurch begründeten Menschenrechtsverletzungen. (vom 07.09.2026 bis 27.09.2027 - jeweils Mo.)",
-      "postal_code": "13353",
-      "location": "Nordufer 20",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3359",
@@ -18179,23 +18377,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3380",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-09-11",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3383",
@@ -18403,23 +18586,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3422",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-09-18",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3425",
@@ -18595,23 +18763,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3458",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-09-25",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3461",
@@ -18771,23 +18924,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3491",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-10-02",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3494",
@@ -18931,23 +19069,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3521",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-10-09",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3524",
@@ -19091,23 +19214,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3551",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-10-16",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3554",
@@ -19251,23 +19359,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3581",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-10-23",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3584",
@@ -19395,23 +19488,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3608",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-10-30",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3611",
@@ -19555,23 +19633,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3638",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-11-06",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3641",
@@ -19747,23 +19810,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3674",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-11-13",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3677",
@@ -19907,23 +19955,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3704",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-11-20",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3707",
@@ -20051,23 +20084,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3731",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-11-27",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3734",
@@ -20227,23 +20245,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3764",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-12-04",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3767",
@@ -20371,23 +20374,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3791",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-12-11",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3794",
@@ -20547,23 +20535,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3824",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-12-18",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3827",
@@ -20691,23 +20664,8 @@
       "route": "",
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "berlin-3851",
-      "country": "DE",
-      "state": "Berlin",
-      "city": "Berlin",
-      "date": "2027-12-25",
-      "start": "12:00",
-      "end": "15:00",
-      "title": "Ohne JESUS kein Frieden (vom 16.01. bis 31.12.2027 - jeweils Sa.)",
-      "postal_code": "",
-      "location": "",
-      "route": "",
-      "source": "Polizei Berlin – Versammlungsbehörde",
-      "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
-      "source_status": "behördlich angezeigt"
+      "source_status": "behördlich angezeigt",
+      "additional_sources": []
     },
     {
       "id": "berlin-3854",
