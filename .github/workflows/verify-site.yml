@@ -16,6 +16,7 @@ on:
       - 'data/berlin-source.json'
       - 'data/rostock-source.json'
       - 'scripts/test-rostock-source.py'
+      - 'scripts/test-berlin-feed.mjs'
       - 'scripts/test-dresden-archive.py'
       - 'data/leipzig-police-source.json'
       - 'data/leipzig-archive-source.json'
@@ -75,6 +76,7 @@ jobs:
           node scripts/test-source-coverage.mjs
           node scripts/test-heatmap-coverage.mjs
           node scripts/test-source-quality.mjs
+          node scripts/test-berlin-feed.mjs
           python3 scripts/test-rostock-source.py
           python3 scripts/test-dresden-archive.py
           node scripts/test-source-health-alerts.mjs
@@ -89,7 +91,8 @@ jobs:
       - name: Prüfe echte Browseransicht auf Smartphone und Desktop
         run: node scripts/test-browser.mjs
       - name: Prüfe Cloudflare-HTTP-Auslieferung unabhängig von GitHub
-        continue-on-error: true
+        # Required, not informational: never claim a passing website deployment on HTTP failure.
+        continue-on-error: false
         run: |
           set -eu
           for route in / /en/ /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
