@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T07:33:35.104Z",
-  "count": 1317,
+  "updated_at": "2026-11-19T08:31:15.806Z",
+  "count": 1314,
   "events": [
     {
       "id": "berlin-2",
@@ -308,25 +308,6 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "dresden-8951a73b36d21bec",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-19",
-      "start": "",
-      "end": "",
-      "title": "Gegen Zwangsräumung in RM16",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "",
-      "registered_participants": "20-30",
-      "event_status": "abgemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
-      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-59",
@@ -3771,25 +3752,6 @@
       "source_status": "behördlich angezeigt"
     },
     {
-      "id": "dresden-372783e14f2cdc5a",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-28",
-      "start": "",
-      "end": "",
-      "title": "#TeamNutznießerSachsen",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "",
-      "registered_participants": "200",
-      "event_status": "abgemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
       "id": "berlin-623",
       "country": "DE",
       "state": "Berlin",
@@ -6611,25 +6573,6 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "dresden-063a1ab6f8ddc8e6",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-12-12",
-      "start": "",
-      "end": "",
-      "title": "Dresden für die Prüfung der rechtsextremen Parteien",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "Prüfung Rettet Übringens Freiheit (PRÜF) - Sachsen",
-      "registered_participants": "500",
-      "event_status": "abgemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
-      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "dresden-388b48332e6c2995",
@@ -21290,16 +21233,6 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
-    }
-  ],
-  "sources": [
-    {
-      "name": "Polizei Berlin",
-      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
-    },
-    {
-      "name": "Stadt Rostock",
-      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }
