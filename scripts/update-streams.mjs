@@ -8,10 +8,8 @@ const read=path=>{try{return JSON.parse(readFileSync(path,"utf8"))}catch{return 
 const channels=read("data/streamer-candidates.json").channels||[];
 const events=[...(read("data/events.json").events||[]),...(read("data/demos-events.json").events||[])];
 const now=new Date();
-// YouTube search.list costs 100 quota units per request. Check YouTube every 2h
-// (3 listed YouTube channels => ~3,600 search units/day, below default 10,000).
-// Twitch remains on the 15-minute schedule when configured.
-const youtubeWindow=now.getUTCHours()%2===0&&now.getUTCMinutes()<30;
+// Read-only YouTube endpoints cost one unit each per page. At most 20 channels,
+// three API requests per channel, 96 runs/day = at most 5,760 units/day.
 const force=["workflow_dispatch","push"].includes(process.env.GITHUB_EVENT_NAME);
 
 const day=24*3600000;
@@ -61,7 +59,7 @@ async function youtube(){
  if(!api.youtube)return;
  const accounts=channels.flatMap(c=>(c.platforms||[]).filter(p=>p.platform==="youtube")
    .map(p=>({name:c.name,handle:new URL(p.url).pathname.split("/").filter(Boolean)[0]})));
- const uniqueHandles=[...new Map(accounts.filter(x=>x.handle?.startsWith("@")).map(x=>[x.handle.toLowerCase(),x])).values()];
+ const uniqueHandles=[...new Map(accounts.filter(x=>x.handle?.startsWith("@")).map(x=>[x.handle.toLowerCase(),x])).values()].slice(0,20);
  for(const entry of uniqueHandles){
   try{
    // channels.list, playlistItems.list and videos.list each use the low-cost read quota;
@@ -120,8 +118,7 @@ async function twitch(){
   }
  }catch(error){errors.push("Twitch: "+error.message)}
 }
-if(youtubeWindow||force)await youtube();
-else console.log("YouTube quota guard: next 2-hour polling window.");
+await youtube();
 await twitch();
 const enabled=Boolean(api.youtube||(api.twitchId&&api.twitchSecret));
 if(!enabled){console.log("No YouTube/Twitch API credentials set; leaving previous discoveries unchanged.");process.exit(0)}
@@ -144,13 +141,16 @@ const output={version:1,updated_at:now.toISOString(),mode:"suggestions_only",ver
 // Avoid 96 no-op commits per day. Only new/changed links, statuses and fresh LIVE checks
 // need to be saved. A recording remains in the queue without touching its timestamps.
 const stable=x=>JSON.stringify({
- version:x.version,mode:x.mode,sources:x.sources,
+ version:x.version,mode:x.mode,sources:x.sources,statistics:x.statistics,errors:x.errors,
  candidates:(x.candidates||[]).map(item=>({
   ...item,checked_at:item.status==="live"?item.checked_at:undefined
  })).sort((a,b)=>(a.event_id+"|"+a.url).localeCompare(b.event_id+"|"+b.url))
 });
 if(!firstRun&&stable(previous)===stable(output)){
- console.log("No changed stream candidates or status.");process.exit(0);
+ console.log("No changed stream candidates or status.");
+ console.log("Stream discovery stats:",JSON.stringify(discoveryStats),"API errors:",JSON.stringify(errors.slice(0,12)));
+ process.exit(0);
 }
 writeFileSync(OUT,JSON.stringify(output,null,2)+"\n");
 console.log("Stream discovery candidates:",output.candidates.length,"new:",candidates.length,"errors:",errors.length);
+console.log("Stream discovery stats:",JSON.stringify(discoveryStats),"API errors:",JSON.stringify(errors.slice(0,12)));
