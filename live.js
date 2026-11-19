@@ -110,7 +110,7 @@ function renderDetail(){
  const holder=document.getElementById("eventDetailContent");
  if(!overlay||!holder)return;
  const id=requestedEventId();
- if(!id){overlay.hidden=true;document.body.classList.remove("detail-open");return}
+ if(!id){overlay.hidden=true;document.body?.classList?.remove("detail-open");return}
  const event=records.find(e=>String(e.id)===id);
  // Community records load after official records. Avoid a premature "not found".
  if(!event&&!communityReady&&!loadFailed)return;
@@ -131,7 +131,7 @@ function renderDetail(){
   const license=event.license?'<p class="small">'+esc(T("detail.license"))+': '+esc(event.license)+'</p>':"";
   holder.innerHTML='<span class="topic-badge topic-'+topicSlug(event.title)+'">'+esc(localTopic(event.title))+'</span><h2 id="eventDetailTitle">'+esc(event.title)+'</h2><div class="event-detail-grid">'+metadata+'</div><p class="small">'+esc(T("calendar.source"))+': '+esc(event.source||T("calendar.officialSource"))+'</p>'+license+'<p class="small">'+esc(T("detail.note"))+'</p><div class="event-detail-actions">'+(source?'<a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.source"))+'</a>':"")+'<button id="eventShare" type="button">'+esc(T("detail.share"))+'</button><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
  }else holder.innerHTML='<h2 id="eventDetailTitle">'+esc(T("detail.title"))+'</h2><p>'+esc(T("detail.missing"))+'</p><div class="event-detail-actions"><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
- overlay.hidden=false;document.body.classList.add("detail-open");
+ overlay.hidden=false;document.body?.classList?.add("detail-open");
  const back=document.getElementById("eventBack");if(back)back.onclick=closeDetail;
  const share=document.getElementById("eventShare");
  if(share)share.onclick=async()=>{
