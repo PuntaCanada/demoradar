@@ -63,6 +63,16 @@
       "check_freshness": "unknown"
     },
     {
+      "city": "Leipzig",
+      "state": "Sachsen",
+      "source": "Polizeidirektion Leipzig (Archiv)",
+      "status": "verified_historical_one_off",
+      "count": 1,
+      "scope": "Archived notice for 31 Oct 2026 only; not an upcoming assembly feed",
+      "last_checked": null,
+      "check_freshness": "unknown"
+    },
+    {
       "city": "Jena",
       "state": "Thüringen",
       "source": "Stadt Jena",
