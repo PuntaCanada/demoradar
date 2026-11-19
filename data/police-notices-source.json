@@ -1,0 +1,13 @@
+{
+  "mode": "allowlisted_police_press_facts_only",
+  "checked_at": "2026-11-19T16:23:23.394109+00:00",
+  "sources": [
+    {
+      "url": "https://www.presseportal.de/blaulicht/pm/12415/6393559",
+      "status": "verified_notice",
+      "count": 2
+    }
+  ],
+  "imported": 2,
+  "rights": "Only unprotected factual title/date/time/attribution extracted; no article text/images reused"
+}
