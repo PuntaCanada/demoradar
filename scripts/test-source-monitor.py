@@ -8,6 +8,8 @@ from unittest.mock import patch
 spec=importlib.util.spec_from_file_location("official_sources","scripts/monitor-official-sources.py")
 module=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
+assert {x["city"] for x in module.SOURCES if x["type"]=="official_police_historical_notice"}=={"Magdeburg","Halle (Saale)"}
+assert all(x["parser"] is None and x["state"]=="Sachsen-Anhalt" for x in module.SOURCES if x["type"]=="official_police_historical_notice")
 assert any(x["city"]=="Köln" and x["parser"] for x in module.SOURCES)
 assert any(x["city"]=="Landsberg am Lech" and x["state"]=="Bayern" and x["type"]=="official_assembly_list_html" and x["parser"] is None for x in module.SOURCES)
 assert any(x["state"]=="Rheinland-Pfalz" and x["parser"] is None for x in module.SOURCES)
@@ -29,7 +31,7 @@ class Response:
 with patch.object(module.urllib.request,"urlopen",return_value=Response()):
  for item in module.SOURCES:
   checked=module.inspect(item)
-  assert checked["status"]==("reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed")
+  assert checked["status"]==("reachable_archive_only" if item["type"]=="official_police_historical_notice" else ("reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed"))
   assert "events" not in checked
   assert len(checked["checked_on"])==10 and checked["checked_on"].count("-")==2
 class ReplacedPage(Response):

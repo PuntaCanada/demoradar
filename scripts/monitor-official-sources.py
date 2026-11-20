@@ -11,6 +11,8 @@ from pathlib import Path
 
 OUTPUT=Path("data/expansion-sources.json")
 SOURCES=[
+ {"city":"Magdeburg","state":"Sachsen-Anhalt","type":"official_police_historical_notice","url":"https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821","parser":None,"data_rights":"Single police after-action report, no verified open event-data reuse licence; retain as original link only","scope":"Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed"},
+ {"city":"Halle (Saale)","state":"Sachsen-Anhalt","type":"official_police_historical_notice","url":"https://polizei.sachsen-anhalt.de/bs/pressemitteilungen/polizei?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=695807","parser":None,"data_rights":"Single police after-action report, no verified open event-data reuse licence; retain as original link only","scope":"Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming"},
  {"city":"Schwerin","state":"Mecklenburg-Vorpommern","type":"official_assembly_authority_guidance","url":"https://www.schwerin.de/mein-schwerin/leben/ordnung-sicherheit-verkehr/ordnung-sicherheit/Versammlungsbehoerde/index.html","parser":None,"data_rights":"Official registration and authority information, not a public event calendar or a licence for event data reuse; monitor only","scope":"Schwerin municipal assembly registration service; no recurring event list or licensed data format confirmed"},
  {"city":"Kreis Unna","state":"Nordrhein-Westfalen","type":"official_assembly_authority_guidance","url":"https://www.kreis-unna.de/Serviceportal/Dienstleistungen/Darstellung-Dienstleistungen/Versammlungen.php?FID=3674.777.1&ModID=10&k_sub=1&kat=3674.43.1","parser":None,"data_rights":"Authority guidance only, no licensed machine-readable demonstration data feed; monitor only","scope":"Kreis Unna police jurisdiction and registration details, not a published event register"},
  {"city":"Rheinland-Pfalz","state":"Rheinland-Pfalz","type":"official_police_assembly_guidance","url":"https://www.polizei.rlp.de/service/gesetze-und-regelungen/demofibel","parser":None,"data_rights":"Official police explanatory material; no upcoming event data and no reuse permission for a database; link only","scope":"State police practical information on demonstration law; no confirmed regular assembly calendar"},
@@ -43,7 +45,7 @@ def inspect(item):
     decoded=payload.decode("utf-8",errors="replace").lower()
     if "versammlungen" not in decoded or "thema der versammlung" not in decoded:
      raise ValueError("Assembly-list content marker missing; page may have changed")
-   output["status"]="reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed"
+   output["status"]="reachable_archive_only" if item["type"]=="official_police_historical_notice" else ("reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed")
  except Exception as exc:output["error"]=str(exc)[:125]
  return output
 def main():
