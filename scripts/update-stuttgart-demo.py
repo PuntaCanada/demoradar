@@ -66,6 +66,16 @@ def parse(html):
  if not all([list(checks.values())[0],list(checks.values())[1],list(checks.values())[3],list(checks.values())[4]]):return []
  # A generic event search result or software demo cannot impersonate this
  # precise calendar entry, whose place and organizing group are individually known.
+ # If a specific newer date/time is actually visible beside this event
+ # heading, do not preserve a stale manual-reviewed fixed time against it.
+ heading="Demo zum Internationaler Tag gegen Gewalt an Frauen"
+ idx=body.find(heading)
+ if idx<0:return []
+ window=body[idx+len(heading):idx+len(heading)+260]
+ observed_day=re.search(r"\b(\d{1,2})\.\s*November\s+2026\b",window)
+ if observed_day and int(observed_day.group(1))!=25:return []
+ observed_time=re.search(r"\b(\d{1,2}):(\d{2})\s*Uhr\b",window)
+ if observed_time and (int(observed_time.group(1)),int(observed_time.group(2)))!=(18,0):return []
  # Calendar date/time is a separately manually verified one-off fact; no
  # claim that the machine-rendered HTML exposes the event time.
  ident=hashlib.sha256((URL+"|"+DAY.isoformat()).encode()).hexdigest()[:16]
