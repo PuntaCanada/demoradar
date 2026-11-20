@@ -56,6 +56,13 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
   archive.count,"Archived notice for 31 Oct 2026 only; not an upcoming assembly feed");
  const jena=(files.sourceStatus?.sources||[]).find(x=>x.city==="Jena")||{};
  add("Jena","Thüringen","Stadt Jena",jena.status==="ok"?(jena.imported>0?"observed_data":"no_matching_items"):jena.status==="unavailable"?"unavailable":"unknown",jena.imported,"City source, only explicitly marked assemblies",files.sourceStatus?.checked_at);
+ const freiburg=files.freiburg||{};
+ add("Freiburg im Breisgau","Baden-Württemberg","Stadt Freiburg",
+  freiburg.status==="verified_one_off"?"verified_one_off":
+  freiburg.status==="source_unavailable_no_new_import"?"unavailable":
+  freiburg.status==="incomplete_notice_no_new_import"?"no_matching_items":"unknown",
+  freiburg.count,"Single city announcement about three dated assemblies on 20 Nov 2026; not a recurring feed",
+  freiburg.checked_on);
  const frankfurt=files.frankfurt||{};
  add("Frankfurt am Main","Hessen","Stadt Frankfurt",frankfurt.status==="ok"?"verified_one_off":frankfurt.status==="unavailable"?"unavailable":"unknown",frankfurt.count,"Single notice, not complete state or city coverage");
  return {version:1,method:"Observed importer outcomes only; neither state completeness nor actual number of protests can be inferred.",sources:out};
@@ -69,7 +76,7 @@ if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
   policeFrankfurtArchive:read("data/frankfurt-police-archive-source.json"),
   policeLeipzig:read("data/leipzig-police-source.json"),
   leipzigArchive:read("data/leipzig-archive-source.json"),
-  sourceStatus:read("data/source-status.json"),frankfurt:read("data/frankfurt-source.json")});
+  sourceStatus:read("data/source-status.json"),freiburg:read("data/freiburg-source.json"),frankfurt:read("data/frankfurt-source.json")});
  const prev=read("data/source-quality.json");
  if(JSON.stringify(next)===JSON.stringify(prev)){console.log("Source quality unchanged");process.exit(0)}
  writeFileSync("data/source-quality.json",JSON.stringify(next,null,2)+"\n");
