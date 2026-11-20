@@ -5,7 +5,7 @@
     "from": "2026-10-21",
     "to": "2026-11-27"
   },
-  "event_records": 480,
+  "event_records": 470,
   "diagnostic_video_samples": 23,
   "cities": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "city": "Berlin",
-      "event_count": 394,
+      "event_count": 384,
       "days_with_events": 9,
       "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 0,
