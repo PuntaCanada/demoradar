@@ -1,5 +1,6 @@
 import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
 import vm from "node:vm";
+import {selectTodayEntries} from "./today-selection.mjs";
 const origin="https://demoradar.pages.dev";
 const original=readFileSync("index.html","utf8");
 const file=readFileSync("i18n.js","utf8");
@@ -77,8 +78,8 @@ function buildTodayPages(){
   const key=[e.date,e.city,e.start||"",e.title].map(norm).join("|");
   if(!unique.has(key))unique.set(key,e);
  }
- const items=[...unique.values()].sort((a,b)=>String(a.city).localeCompare(String(b.city),"de")||
-  String(a.start||"").localeCompare(String(b.start||""))||String(a.title).localeCompare(String(b.title),"de")).slice(0,60);
+ const items=selectTodayEntries([...unique.values()],60);
+ const representedCities=new Set(items.map(e=>e.city)).size;
  const timeText=(e,en)=>{
   const value=String(e.start||"");
   if(value==="00:00"&&String(e.end||"")==="23:59")return en?"All-day data entry; actual start unconfirmed":"Ganztägiger Zeiteintrag; tatsächlicher Beginn unbestätigt";
@@ -115,7 +116,8 @@ function buildTodayPages(){
    '<p><strong>'+(en?"Date (Europe/Berlin): ":"Datum (Europe/Berlin): ")+current+'</strong></p><p class="notice">'+caveat+'</p>'+
    '<p class="notice" id="staleNotice" hidden role="status">'+(en?"This listing was generated for an earlier Berlin calendar day. Open the interactive calendar for current records.":"Diese Liste stammt von einem früheren Berliner Kalendertag. Für aktuelle Meldungen bitte den interaktiven Kalender öffnen.")+'</p>'+
    '<h2>'+(en?"Reported entries: ":"Gemeldete Einträge: ")+items.length+'</h2>'+
-   (unique.size>items.length?'<p class="notice">'+(en?"At most 60 unique entries shown; open the interactive calendar for more.":"Höchstens 60 unterschiedliche Einträge angezeigt. Weitere stehen möglicherweise im interaktiven Kalender.")+'</p>':"")+
+   '<p>'+(en?"Cities represented in these source records: ":"Städte mit Einträgen in diesen Quellen: ")+representedCities+'</p>'+
+   (unique.size>items.length?'<p class="notice">'+(en?"Only 60 of "+unique.size+" distinct source records are shown; cities are sampled in balanced rounds. Open the interactive calendar for the full data.":"Nur 60 von "+unique.size+" verschiedenen Quelleneinträgen werden dargestellt; vertretene Städte werden bei der Auswahl ausgewogen berücksichtigt. Der interaktive Kalender enthält den gesamten Datenstand.")+'</p>':"")+
    (items.length?'<ul>'+nodes+'</ul>':'<p>'+empty+'</p>')+
    '<p class="bottom"><a href="'+(en?"/en/":"/")+'">'+(en?"Open interactive calendar and filters":"Interaktiven Kalender und Filter öffnen")+'</a></p>'+
    '<p><a href="'+(en?"/en/sources/":"/sources/")+'">'+(en?"Review source coverage for all 16 states":"Quellenabdeckung aller 16 Bundesländer prüfen")+'</a></p>'+
@@ -127,10 +129,10 @@ function buildTodayPages(){
 }
 const todayPageDate=buildTodayPages();
 
-const alternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/"/>';
-const sourceAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/sources/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/sources/"/>';
-const communityAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/community/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/community/"/>';
-const todayAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/heute/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/today/"/>';
+const alternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/"/>';
+const sourceAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/sources/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/sources/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/sources/"/>';
+const communityAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/community/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/community/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/community/"/>';
+const todayAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/heute/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/today/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/heute/"/>';
 const sourceUrls=[
  ["/",alternate],["/en/",alternate],["/community/",communityAlternate],["/en/community/",communityAlternate],
  ["/sources/",sourceAlternate],["/en/sources/",sourceAlternate],
