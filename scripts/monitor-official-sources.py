@@ -119,14 +119,14 @@ def inspect(item):
     except (OSError,KeyError,ValueError,StopIteration):record=None
     if record:
      published=date.fromisoformat(record["published_date"])
-     if GERMAN_WEEKDAYS[published.weekday()] == "Mi" or record["published_weekday"]!="Mittwoch":
+     if GERMAN_WEEKDAYS[published.weekday()] == "Mi" or record["published_weekday"]!="Mittwoch" or record["actual_weekday"]!="Montag":
       raise ValueError("Official weekday/date evidence is internally inconsistent")
      output["documented_date_discrepancy"]={
       "observed_on":record["observed_on"],
       "published_date":record["published_date"],
       "published_weekday":record["published_weekday"],
       "actual_weekday":record["actual_weekday"],
-      "reproduced_in_latest_fetch":any(record["published_date"] in x for x in output["date_conflicts"])
+      "reproduced_in_latest_fetch":any(published.strftime("%d.%m.%Y") in x for x in output["date_conflicts"])
      }
    # A generic HTTP 200 is not enough to claim a working assembly register.
    if item["type"]=="official_assembly_list_html":
