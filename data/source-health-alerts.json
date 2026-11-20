@@ -29,12 +29,12 @@
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
-      "city": "Weimar",
-      "state": "Thüringen",
+      "city": "Halle (Saale)",
+      "state": "Sachsen-Anhalt",
       "source": "Research-only official page",
-      "condition": "monitor_content_unverified",
+      "condition": "monitor_transport_unverified",
       "last_checked": "2026-11-20",
-      "url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
+      "url": "https://polizei.sachsen-anhalt.de/bs/pressemitteilungen/polizei?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=695807",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {
