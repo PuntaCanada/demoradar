@@ -60,7 +60,7 @@ const render=()=>{
   const kind=sourceKind.value;
   const hasFeed=entries.some(isRolling);
   const hasOneOff=entries.some(s=>s.status==="verified_one_off");
-  const hasArchive=entries.some(s=>s.status==="verified_historical_one_off");
+  const hasArchive=entries.some(s=>s.status==="verified_historical_one_off")||candidateSources.some(s=>s.type==="official_police_historical_notice");
   const hasWarnings=warningCount(state)>0;
   const kindMatches=kind==="all"||
    kind==="feed"&&hasFeed||
