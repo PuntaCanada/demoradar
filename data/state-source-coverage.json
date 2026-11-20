@@ -101,8 +101,8 @@
     {
       "state": "Thüringen",
       "status": "local_partial",
-      "scope": "Jena: amtliche Veröffentlichungsseite, derzeit keine umfassende Terminabdeckung",
-      "url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen"
+      "scope": "Jena: einzelne Veröffentlichungen; Weimar: vier für 22.–25.11.2026 einzeln prüfbare amtliche Versammlungsanmeldungen. Kein landesweiter Terminfeed; sonstige Weimarer Listeneinträge nicht generell zum Import freigegeben",
+      "url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html"
     }
   ]
 }
