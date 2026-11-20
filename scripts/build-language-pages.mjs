@@ -72,6 +72,13 @@ function buildTodayPages(){
  if(!isRealDate(current))throw Error("Invalid current Europe/Berlin day");
  const official=JSON.parse(readFileSync("data/events.json","utf8"));
  if(!Array.isArray(official.events))throw Error("Missing official event records for today page");
+ const coverage=JSON.parse(readFileSync("data/state-source-coverage.json","utf8"));
+ if(coverage.version!==1||!Array.isArray(coverage.states)||coverage.states.length!==16||
+    new Set(coverage.states.map(x=>x.state)).size!==16)
+  throw Error("The 16-state official-source coverage inventory is incomplete");
+ const allowedCoverage=new Set(["regional_partial","local_partial","no_confirmed_regular_feed"]);
+ if(!coverage.states.every(x=>typeof x.state==="string"&&allowedCoverage.has(x.status)))
+  throw Error("Invalid 16-state source coverage classification");
  const unique=new Map();
  for(const e of official.events.filter(e=>safeRecord(e,current))){
   const norm=value=>String(value||"").normalize("NFKC").toLocaleLowerCase("de").replace(/\s+/g," ").trim();
@@ -101,6 +108,22 @@ function buildTodayPages(){
    return '<li class="item"><a class="event" href="'+escapeAttr(href)+'">'+title+'</a><p>'+city+' · '+timeText(e,en)+'</p><p class="evidence">'+(en?"Source listing: ":"Quelleneintrag: ")+reference+'</p></li>';
   }).join("\n");
   const empty=en?"No confirmed source listing for today is available here. That does not mean no demonstrations are taking place.":"Für heute liegt hier kein passender Quelleneintrag vor. Das bedeutet nicht, dass keine Demonstrationen stattfinden.";
+  const coverageStatus=(state)=>{
+   if(state.status==="regional_partial")return en?"Official city/territory feed only; not statewide coverage":"Amtlicher Stadt-/Gebietsfeed; keine landesweite Abdeckung";
+   if(state.status==="local_partial")return en?"Only local sources or individual notices; not statewide coverage":"Nur lokale Quellen oder Einzelmeldungen; keine landesweite Abdeckung";
+   return en?"No recurring official event feed confirmed for this project":"Kein regelmäßiger amtlicher Terminfeed für dieses Projekt bestätigt";
+  };
+  const stateItems=[...coverage.states].sort((a,b)=>a.state.localeCompare(b.state,"de")).map(state=>
+   '<li><span class="state-name">'+escapeHTML(state.state)+'</span><span class="state-scope">'+escapeHTML(coverageStatus(state))+'</span></li>'
+  ).join("");
+  const sourceReview=typeof coverage.reviewed_on==="string"&&isRealDate(coverage.reviewed_on)?
+   coverage.reviewed_on:(en?"date not documented":"Datum nicht dokumentiert");
+  const stateDisclosure='<section aria-labelledby="stateCoverageHead" class="coverage">'+
+   '<h2 id="stateCoverageHead">'+(en?"Coverage of the 16 German states":"Quellenabdeckung der 16 Bundesländer")+'</h2>'+
+   '<p>'+(en?"The inventory summarizes sources available to DemoRadar, NOT the number of demonstrations. An unlisted state may still have protests. Source inventory last reviewed: ":"Die Übersicht beschreibt die für DemoRadar erfassten Quellen, NICHT die Anzahl stattfindender Demonstrationen. Auch in nicht abgedeckten Bundesländern können Proteste stattfinden. Letzte Quelleninventur: ")+escapeHTML(sourceReview)+'</p>'+
+   '<details><summary>'+(en?"Show all 16 source-coverage assessments":"Alle 16 Bewertungen der Quellenlage anzeigen")+'</summary>'+
+   '<ul class="state-list">'+stateItems+'</ul></details>'+
+   '<p><a href="'+(en?"/en/sources/":"/sources/")+'">'+(en?"Read the full audit, freshness warnings and source links":"Vollständige Quellenprüfung, Frischewarnungen und Originalverweise")+'</a></p></section>';
   const canonical=origin+route,other=origin+(en?"/heute/":"/en/today/");
   const links=en?
    '<a href="/en/">Calendar</a><a href="/en/sources/">Official sources</a><a href="/en/community/">Community</a><a href="/heute/" hreflang="de">Deutsch</a>':
@@ -110,7 +133,7 @@ function buildTodayPages(){
    '<meta name="robots" content="index,follow"><link rel="canonical" href="'+canonical+'">'+
    '<link rel="alternate" hreflang="'+lang+'" href="'+canonical+'"><link rel="alternate" hreflang="'+(en?"de":"en")+'" href="'+other+'">'+
    '<link rel="alternate" hreflang="x-default" href="'+origin+'/heute/">'+
-   '<style>:root{font-family:system-ui,sans-serif;color:#192942;background:#f5f8fc}*{box-sizing:border-box}body{margin:0}header{background:#111e30;padding:16px max(20px,calc((100vw - 1050px)/2))}nav{display:flex;flex-wrap:wrap;gap:14px}nav a{color:white}main{max-width:980px;margin:auto;padding:26px 20px 70px}h1{font-size:clamp(27px,5vw,42px);line-height:1.2}p{line-height:1.55}.notice{border-left:4px solid #126b8a;background:white;padding:14px;border-radius:8px}ul{padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px}.item{border:1px solid #d9e2eb;background:white;border-radius:12px;padding:16px;min-width:0;overflow-wrap:anywhere}.event{font-weight:700;color:#115890;display:inline-block;padding:7px 0;min-height:44px}.item p{color:#526276;margin:4px 0}.evidence{font-size:14px;border-top:1px solid #e3eaf2;padding-top:8px;overflow-wrap:anywhere}.evidence a{color:#115890;display:inline-block;min-height:34px;padding:5px 0}.notice[hidden]{display:none}a:focus-visible{outline:3px solid #db9f19;outline-offset:3px}.bottom{margin-top:24px}</style></head>'+
+   '<style>:root{font-family:system-ui,sans-serif;color:#192942;background:#f5f8fc}*{box-sizing:border-box}body{margin:0}header{background:#111e30;padding:16px max(20px,calc((100vw - 1050px)/2))}nav{display:flex;flex-wrap:wrap;gap:14px}nav a{color:white}main{max-width:980px;margin:auto;padding:26px 20px 70px}h1{font-size:clamp(27px,5vw,42px);line-height:1.2}p{line-height:1.55}.notice{border-left:4px solid #126b8a;background:white;padding:14px;border-radius:8px}ul{padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px}.item{border:1px solid #d9e2eb;background:white;border-radius:12px;padding:16px;min-width:0;overflow-wrap:anywhere}.event{font-weight:700;color:#115890;display:inline-block;padding:7px 0;min-height:44px}.item p{color:#526276;margin:4px 0}.evidence{font-size:14px;border-top:1px solid #e3eaf2;padding-top:8px;overflow-wrap:anywhere}.evidence a{color:#115890;display:inline-block;min-height:34px;padding:5px 0}.notice[hidden]{display:none}.coverage{background:#fff;border:1px solid #d9e2eb;border-radius:12px;padding:18px;margin:28px 0}.coverage h2{margin-top:0}.coverage summary{cursor:pointer;min-height:44px;padding:12px 4px;font-weight:750;color:#115890}.coverage summary:focus-visible{outline:3px solid #db9f19;outline-offset:3px}.state-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:8px}.state-list li{padding:12px;border:1px solid #e3eaf2;border-radius:8px;display:flex;flex-direction:column;gap:5px}.state-name{font-weight:700}.state-scope{color:#526276;font-size:14px}a:focus-visible{outline:3px solid #db9f19;outline-offset:3px}.bottom{margin-top:24px}</style></head>'+
    '<body><header><nav aria-label="'+(en?"Navigation":"Navigation")+'">'+links+'</nav></header><main>'+
    '<h1>'+(en?"Demonstrations today":"Demonstrationen heute")+'</h1>'+
    '<p><strong>'+(en?"Date (Europe/Berlin): ":"Datum (Europe/Berlin): ")+current+'</strong></p><p class="notice">'+caveat+'</p>'+
@@ -119,6 +142,7 @@ function buildTodayPages(){
    '<p>'+(en?"Cities represented in these source records: ":"Städte mit Einträgen in diesen Quellen: ")+representedCities+'</p>'+
    (unique.size>items.length?'<p class="notice">'+(en?"Only 60 of "+unique.size+" distinct source records are shown; cities are sampled in balanced rounds. Open the interactive calendar for the full data.":"Nur 60 von "+unique.size+" verschiedenen Quelleneinträgen werden dargestellt; vertretene Städte werden bei der Auswahl ausgewogen berücksichtigt. Der interaktive Kalender enthält den gesamten Datenstand.")+'</p>':"")+
    (items.length?'<ul>'+nodes+'</ul>':'<p>'+empty+'</p>')+
+   stateDisclosure+
    '<p class="bottom"><a href="'+(en?"/en/":"/")+'">'+(en?"Open interactive calendar and filters":"Interaktiven Kalender und Filter öffnen")+'</a></p>'+
    '<p><a href="'+(en?"/en/sources/":"/sources/")+'">'+(en?"Review source coverage for all 16 states":"Quellenabdeckung aller 16 Bundesländer prüfen")+'</a></p>'+
    '</main><script>(function(){const day=new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());if(day!=='+JSON.stringify(current)+')document.getElementById("staleNotice").hidden=false;})();</script></body></html>';
