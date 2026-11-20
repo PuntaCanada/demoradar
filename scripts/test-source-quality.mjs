@@ -31,6 +31,10 @@ assert.equal(row("Landeshauptstadt Stuttgart (Einzeltermin)").status,"unknown");
 const stuttgart=sourceHealth({...files,stuttgart:{status:"verified_city_event_one_off",count:1,checked_on:"2026-11-20"}},{today:"2026-11-20"}).sources.find(s=>s.city==="Stuttgart");
 assert.equal(stuttgart.status,"verified_one_off");
 assert.equal(stuttgart.count,1);
+const manuallyReviewed=sourceHealth({...files,stuttgart:{status:"verified_manual_one_off_time_not_machine_confirmed",count:1,checked_on:"2026-11-20"}},{today:"2026-11-20"}).sources.find(s=>s.city==="Stuttgart");
+assert.equal(manuallyReviewed.status,"verified_one_off");
+assert.equal(manuallyReviewed.count,1);
+
 assert.equal(stuttgart.check_freshness,"recent");
 assert.equal(sourceHealth({...files,stuttgart:{status:"original_unavailable_no_new_import",count:0}}).sources.find(s=>s.city==="Stuttgart").status,"unavailable");
 
