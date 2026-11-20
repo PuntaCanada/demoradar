@@ -60,6 +60,14 @@ const render=()=>{
   const pill=$("span","source-chip "+(state.status==="no_confirmed_regular_feed"?"muted":"partial"),coverageText(state.status));
   top.append(pill);article.append(top);
   article.append($("p","source-scope",state.scope));
+  const recent=new Set(entries.filter(x=>x.status==="observed_data"&&daysSince(x.last_checked)!==null&&daysSince(x.last_checked)>=0&&daysSince(x.last_checked)<=2).map(x=>x.city));
+  const oneOff=new Set(entries.filter(x=>["verified_one_off","verified_historical_one_off"].includes(x.status)).map(x=>x.city));
+  const outdated=entries.filter(x=>x.status==="unavailable"||daysSince(x.last_checked)===null||daysSince(x.last_checked)<0||daysSince(x.last_checked)>2).length;
+  article.append($("p","source-detail",t("Aktuell geprüfte amtliche Ortsquellen: ","Recently checked official local-source cities: ")+recent.size+
+   t(" · Orte mit Einzel-/Archivmeldungen: "," · Cities with one-off/historical notices: ")+oneOff.size+
+   (outdated?t(" · Ausgefallene/veraltete Prüfungen: "," · Unavailable/outdated checks: ")+outdated:"")+
+   t(" · keine landesweite Vollständigkeit"," · no full statewide coverage")));
+
   if(stateAlerts.length){
    const incidentCount=stateAlerts.filter(x=>x.condition==="unavailable"||x.condition==="monitor_unavailable").length;
    const researchCount=stateAlerts.filter(x=>x.condition.startsWith("monitor_")).length;
