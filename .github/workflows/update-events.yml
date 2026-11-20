@@ -5,6 +5,11 @@ on:
     paths:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
+      - 'scripts/check-source-admission.mjs'
+      - 'scripts/test-source-reuse-audit.mjs'
+      - 'scripts/test-rejected-candidates.mjs'
+      - 'data/source-reuse-audit.json'
+      - 'data/source-format-health.json'
       - 'scripts/test-berlin-feed.mjs'
       - 'scripts/update-rostock.py'
       - 'scripts/test-rostock-source.py'
@@ -64,6 +69,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Prüfe Lizenz-Freigaben vor jedem automatischen Import
+        run: |
+          node scripts/check-source-admission.mjs
+          node scripts/test-source-reuse-audit.mjs
+          node scripts/test-rejected-candidates.mjs
       - name: Lade öffentliche Berliner Versammlungsdaten
         run: node scripts/update-events.mjs
       - name: Ergänze amtliche Versammlungen aus Rostock
@@ -126,6 +136,8 @@ jobs:
           node scripts/test-source-health-alerts.mjs
           node scripts/test-source-format-health.mjs
           node scripts/test-stream-matcher.mjs
+          node scripts/check-source-admission.mjs
+          node scripts/test-rejected-candidates.mjs
           node scripts/test-source-coverage.mjs
           python3 scripts/test-frankfurt.py
           python3 scripts/test-dortmund-police.py
