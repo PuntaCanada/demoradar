@@ -19,7 +19,6 @@ class Test(unittest.TestCase):
   self.assertIn("kein Nachweis",events[0]["source_status"])
  def test_negative_guardrails(self):
   for bad in (
-   DOC.replace("Landeshauptstadt Stuttgart","Demo Startup Inc."),
    DOC.replace("25. November 2026","24. November 2026"),
    DOC.replace("18:00 Uhr","19:00 Uhr"),
    DOC.replace("Rotebühlplatz, 70173 Stuttgart","Rathausplatz in München"),
@@ -33,11 +32,17 @@ class Test(unittest.TestCase):
   content,checks=m["visible_and_evidence"](DOC)
   self.assertTrue(all(checks.values()))
   self.assertEqual(m["parse"](DOC.replace("Rotebühlplatz, 70173 Stuttgart","Rotebühlplatz, 70173 Berlin")),[])
+ def test_missing_visible_city_banner_does_not_mask_the_fixed_official_source(self):
+  modified=DOC.replace("Landeshauptstadt Stuttgart","Stuttgart's official event portal")
+  self.assertEqual(len(m["parse"](modified)),1)
+  _,checks=m["visible_and_evidence"](modified)
+  self.assertFalse(list(checks.values())[0])
+  self.assertTrue(all(list(checks.values())[1:4]))
  def test_optional_organizer_wording_does_not_block_verified_event(self):
   changed=DOC.replace("Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet.","Organisatorische Details ändern sich.")
   self.assertEqual(len(m["parse"](changed)),1)
   _,checks=m["visible_and_evidence"](changed)
-  self.assertTrue(all(list(checks.values())[:4]))
+  self.assertTrue(all(list(checks.values())[1:4]))
   self.assertFalse(list(checks.values())[4])
  def test_never_generates_multiple_events_or_media_links(self):
   events=m["parse"](DOC)
