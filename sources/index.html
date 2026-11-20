@@ -44,7 +44,19 @@
 <option value="regional_partial">Teilweise lokale Quellen</option>
 <option value="local_partial">Einzelne Orts-/Einzelquellen</option>
 <option value="no_confirmed_regular_feed">Kein regelmäßiger amtlicher Feed bestätigt</option>
-</select></div></div>
+</select></div>
+<div class="control"><label for="sourceKind">Quellenart</label>
+<select id="sourceKind">
+<option value="all">Alle Quellenarten</option>
+<option value="feed">Regelmäßige amtliche Feeds</option>
+<option value="oneoff">Amtliche Einzelmeldungen</option>
+<option value="archive">Historische Archive</option>
+<option value="warnings">Veraltete / ausgefallene Prüfungen</option>
+<option value="unverified">Ohne bestätigten regelmäßigen Feed</option>
+</select></div>
+<div class="control control-sort"><label for="sourceSort">Sortierung</label>
+<select id="sourceSort"><option value="name">Bundesland (A–Z)</option><option value="warnings">Quellenwarnungen zuerst</option></select></div>
+<button type="button" id="sourceReset" class="source-reset">Filter zurücksetzen</button></div>
 <p class="results" id="sourceResults" role="status" aria-live="polite">Lade amtliche Quellen …</p>
 <div class="grid" id="stateGrid"></div>
 </section>
