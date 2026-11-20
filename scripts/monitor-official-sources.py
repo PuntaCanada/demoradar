@@ -96,7 +96,12 @@ def inspect(item):
  req=urllib.request.Request(item["url"],headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
  try:
   with urllib.request.urlopen(req,timeout=12) as response:
-   payload=response.read(160_000)
+   # Municipal CMS pages can place the event list after extensive navigation.
+   # Bound the read but do not assume the relevant content is inside 160 kB.
+   max_bytes=900_000 if item["type"] in ("official_assembly_upcoming_html","official_assembly_list_html") else 160_000
+   payload=response.read(max_bytes)
+   if item["type"] in ("official_assembly_upcoming_html","official_assembly_list_html"):
+    output["bytes_checked"]=len(payload)
    if response.status!=200 or len(payload)<400:raise ValueError("Empty or non-200 page")
    if item["type"]=="official_assembly_upcoming_html":
     dates,conflicts=verify_weimar_dates(payload)
