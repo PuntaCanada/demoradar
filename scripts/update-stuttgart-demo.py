@@ -38,11 +38,11 @@ def visible_and_evidence(html):
   "Rotebühlplatz, 70173 Stuttgart",
   "Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet."
  ]
- checks={key:re.search(r"\\s+".join(map(re.escape,key.split())),body,re.I) is not None for key in required}
+ checks={key:re.search(r"\s+".join(map(re.escape,key.split())),body,re.I) is not None for key in required}
  # Municipal calendars may separate the printed day and hour with commas,
  # line breaks or inline "Uhrzeit:" labels. Verify both exact values together
  # within a short bounded span, not an arbitrary date elsewhere on the page.
- day_and_time=bool(re.search(r"25\\.\\s*November\\s+2026.{0,110}?18:00\\s*Uhr",body,re.I))
+ day_and_time=bool(re.search(r"25\.\s*November\s+2026.{0,110}?18:00\s*Uhr",body,re.I))
  checks[required[2]]=day_and_time
  return body,checks
 
