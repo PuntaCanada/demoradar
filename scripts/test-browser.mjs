@@ -105,6 +105,11 @@ try{
    assert.ok(info.robots.includes("index"),"Crawlable today page");
    assert.ok(info.canonical.endsWith(route),"Canonical route must match");
    assert.ok(info.scroll<=width+2,"No horizontal overflow on daily page");
+   const provenance=await evaluate('(()=>({cards:document.querySelectorAll("li.item").length,sourceLabels:document.querySelectorAll("li.item .evidence").length,staleHidden:document.querySelector("#staleNotice")?.hidden===true,firstLinkHeight:document.querySelector("li.item a.event")?.getBoundingClientRect().height||0,badSourceLinks:[...document.querySelectorAll("li.item .evidence a")].filter(a=>a.protocol!=="https:"||a.rel!=="noopener noreferrer").length}))()');
+   assert.equal(provenance.sourceLabels,provenance.cards,"Every reported demonstration needs a readable publisher name");
+   assert.ok(provenance.firstLinkHeight>=43||provenance.cards===0,"Event links need a readable mobile tap target");
+   assert.equal(provenance.badSourceLinks,0,"Do not expose unsafe original-source URLs");
+   assert.equal(provenance.staleHidden,true,"Today's current generated page must not show a stale-date warning");
    console.log(route,width+"px today landing page; scrollWidth "+info.scroll);
   }
  }

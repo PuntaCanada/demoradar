@@ -28,7 +28,16 @@ for(const [route,file,lang,heading] of [
   assert.ok(e&&e.date===day&&e.country==="DE","Only today's actual recorded official-source events may be linked");
   assert.ok(!["cancelled","withdrawn","stopped"].includes(e.status_code));
  }
- assert.ok(ids.length<=60,"Mobile and crawler page bounded");
+ assert.ok(page.includes('id="staleNotice" hidden role="status"'),"Must warn about old day after midnight without claiming freshness");
+ assert.ok(page.includes('timeZone:"Europe/Berlin"'),"Dynamic staleness check must use local calendar day");
+ assert.ok(page.includes('class="evidence"'),"Each listing must identify its actual recorded publisher");
+ assert.ok(page.includes('rel="noopener noreferrer"'),"Original source URLs must use safe external links");
+ assert.ok(page.includes(lang==="de"?"Quelleneintrag: ":"Source listing: "),"Source references are localized");
+ const allDay=events.some(e=>e.date===day&&e.country==="DE"&&e.start==="00:00"&&e.end==="23:59"&&ids.includes(e.id));
+ if(allDay)assert.ok(page.includes(lang==="de"?"tatsächlicher Beginn unbestätigt":"actual start unconfirmed"),
+  "All-day feed placeholders cannot claim confirmed midnight starts");
+ assert.ok(!page.includes("LIVE NOW"),"Source listings cannot imply platform-live confirmation");
+  assert.ok(ids.length<=60,"Mobile and crawler page bounded");
  assert.equal(new Set(ids).size,ids.length,"Do not duplicate event links");
 }
 const de=read("index.html"),en=read("en/index.html");
