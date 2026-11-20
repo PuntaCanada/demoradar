@@ -49,4 +49,12 @@ assert.deepEqual(provenance.alerts.map(x=>x.condition),[
 assert.ok(provenance.alerts.every(x=>x.state),"Every automatic alert should carry the matching state for accurate coverage");
 assert.ok(provenance.alerts.every(x=>!Object.hasOwn(x,"events")),"Source warnings may never invent events");
 assert.equal(provenance.alerts.filter(x=>x.city==="Archivstadt").length,0,"Archive is not an automatically fresh-updating source");
+const transport=alertsFromReport({sources:[]},{},{sources:[
+ {city:"Magdeburg",state:"Sachsen-Anhalt",url:"https://polizei.sachsen-anhalt.de/",status:"transport_unverified",checked_on:"2026-11-20"},
+ {city:"Halle",state:"Sachsen-Anhalt",url:"https://polizei.sachsen-anhalt.de/",status:"http_restricted",checked_on:"2026-11-20"},
+ {city:"Dresden",state:"Sachsen",url:"https://www.dresden.de/",status:"content_unverified",checked_on:"2026-11-20"},
+ {city:"Kiel",state:"Schleswig-Holstein",url:"https://www.kiel.de/",status:"unavailable",checked_on:"2026-11-20"}
+]},{today:"2026-11-20"});
+assert.deepEqual(transport.alerts.map(a=>a.condition),["monitor_transport_unverified","monitor_http_restricted","monitor_content_unverified","monitor_unavailable"]);
+assert.ok(transport.alerts.every(a=>!Object.hasOwn(a,"events")));
 console.log("source health alerts: invalid/missing/future check dates, historical exclusions, state attribution and existing checks passed");
