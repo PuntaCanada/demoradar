@@ -13,6 +13,7 @@ for(const [path,lang] of [["sources/index.html","de"],["en/sources/index.html","
  assert.ok(html.includes('id="stateGrid"'));
  assert.ok(html.includes('id="sourceSearch"'));
  assert.ok(html.includes('id="sourceFilter"'));
+ for(const id of ["sourceKind","sourceSort","sourceReset"])assert.ok(html.includes('id="'+id+'"'),"Missing navigable source dashboard control "+id);
  assert.ok(html.includes('rel="canonical" href="https://demoradar.pages.dev/'+(lang==="en"?"en/":"")+'sources/"'));
  assert.ok(html.includes('href="/sources/source-status.css"'));
  assert.ok(html.includes('src="/sources/source-status.js"'));
@@ -31,6 +32,7 @@ assert.ok(!script.includes(".innerHTML"),"Never inject untrusted source names as
 assert.ok(script.includes('rel="noopener noreferrer"')||script.includes('link.rel="noopener noreferrer"'));
 assert.ok(script.includes('Promise.all('));
 assert.ok(script.includes('data/source-format-health.json'));
+for(const key of ['kind==="feed"','kind==="oneoff"','kind==="archive"','kind==="warnings"','kind==="unverified"','sourceReset.addEventListener','sourceSort.addEventListener'])assert.ok(script.includes(key),"Missing category or reset behavior: "+key);
 const de=readFileSync("index.html","utf8"),en=readFileSync("en/index.html","utf8");
 assert.ok(de.includes('href="/sources/"'));
 assert.ok(en.includes('href="/en/sources/"'));
