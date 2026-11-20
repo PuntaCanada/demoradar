@@ -1,13 +1,24 @@
 // Monitoring only. Never invent event records, page reachability, or cancellations.
 import {readFileSync,writeFileSync} from "node:fs";
 const read=p=>{try{return JSON.parse(readFileSync(p,"utf8"))}catch{return {}}};
-export function alertsFromReport(report,formatHealth={},monitorReport={},{today=new Date().toISOString().slice(0,10)}={}){
+const berlinDay=()=>new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+export function alertsFromReport(report,formatHealth={},monitorReport={},{today=berlinDay()}={}){
  const rows=Array.isArray(report?.sources)?report.sources:[];
  const alerts=rows.flatMap(s=>{
   if(!s||!s.city||!s.source)return [];
-  const severity=s.status==="unavailable"?"unavailable":s.check_freshness==="outdated_check"?"outdated_check":null;
-  return severity?[{city:s.city,source:s.source,condition:severity,last_checked:s.last_checked||null,
-   note:"This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur."}]:[];
+  // Data quality can say "unknown" while an automatic check actually has no
+  // valid date. Do not silently treat undated imported/one-off observations as
+  // fresh simply because the importer emitted an event.
+  const requiresCheck=["observed_data","verified_one_off","no_matching_items"].includes(s.status);
+  const stamp=typeof s.last_checked==="string"&&/^20\d{2}-\d{2}-\d{2}$/.test(s.last_checked)?s.last_checked:null;
+  const date=stamp?new Date(stamp+"T12:00:00Z"):null;
+  const valid=!!date&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===stamp;
+  const age=valid?Math.round((Date.parse(today+"T12:00:00Z")-date.getTime())/86400000):null;
+  const severity=s.status==="unavailable"?"unavailable":
+   s.check_freshness==="outdated_check"||requiresCheck&&age!==null&&(age<0||age>2)?"outdated_check":
+   requiresCheck&&age===null?"missing_check_date":null;
+  return severity?[{city:s.city,state:s.state||null,source:s.source,condition:severity,last_checked:valid?stamp:null,
+   note:"This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."}]:[];
  });
  const issues=(formatHealth?.feeds||[]).flatMap(feed=>{
   if(!feed?.id||!Array.isArray(feed.issues))return [];
