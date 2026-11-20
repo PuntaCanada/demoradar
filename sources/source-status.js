@@ -224,6 +224,44 @@ Promise.all([
  document.querySelector("#stateGrid").replaceChildren($("p","source-warning",t("Die amtlichen Daten können vorübergehend nicht geladen werden. Ausfall der Anzeige bedeutet nicht, dass keine Versammlungen stattfinden.","The source report could not be loaded. This does not imply there are no demonstrations.")));
  console.warn("Official source dashboard unavailable",err);
 });
+// Channel discovery is a read-only directory. Never merge a channel identity
+// or platform-level LIVE state into the public event-stream approval registry.
+Promise.all([load("/data/streamer-candidates.json"),load("/data/stream-discoveries.json"),load("/data/live-streams.json")])
+ .then(([directory,discoveries,approved])=>{
+  if(directory.schema_version!==1||!Array.isArray(directory.channels)||!Array.isArray(discoveries.candidates)||!Array.isArray(approved.streams))throw Error("Invalid streamer directory schema");
+  const list=document.querySelector("#streamDirectory");
+  const known=directory.channels.filter(c=>c&&typeof c.name==="string"&&Array.isArray(c.platforms));
+  const monitored=known.filter(c=>c.monitoring==="automatic_candidate_only").length;
+  const approvedEvents=approved.streams.filter(s=>s.reviewed===true&&s.event_id&&s.evidence_url).length;
+  document.querySelector("#streamSummary").textContent=t(
+   known.length+" Kanalkandidaten · "+monitored+" zur automatischen Kandidatensuche vorgesehen · "+approvedEvents+" gesondert geprüfte Event-Verweise im Register. Keine LIVE-Behauptung.",
+   known.length+" channel candidates · "+monitored+" enabled for automatic candidate discovery · "+approvedEvents+" separately reviewed event links in the registry. No LIVE claim."
+  );
+  list.replaceChildren();
+  for(const channel of known){
+   const card=$("article","source-card stream-directory-card");
+   card.append($("h3","",channel.name));
+   card.append($("p","source-detail",channel.monitoring==="automatic_candidate_only"?
+    t("Automatische Kandidatensuche (keine Eventfreigabe)","Automated candidate discovery (not event approval)"):
+    t("Keine automatische Kanalüberwachung","Channel monitoring not enabled")));
+   const links=$("div","stream-directory-links");
+   for(const platform of channel.platforms){
+    let url;try{url=new URL(platform.url)}catch{continue}
+    const hostname=url.hostname.toLowerCase();
+    const allowed=platform.platform==="youtube"&&["youtube.com","www.youtube.com"].includes(hostname)||
+     platform.platform==="twitch"&&["twitch.tv","www.twitch.tv"].includes(hostname);
+    if(!allowed||url.protocol!=="https:"||url.username||url.password||url.port||url.search||url.hash)continue;
+    const link=$("a","source-link",platform.platform==="youtube"?"YouTube":"Twitch");
+    link.href=url.href;link.target="_blank";link.rel="noopener noreferrer";links.append(link);
+   }
+   if(!links.childElementCount)card.append($("p","source-empty",t("Kein bestätigter YouTube-/Twitch-Kanal-Link hinterlegt.","No supported YouTube/Twitch channel URL on record.")));
+   else card.append(links);
+   list.append(card);
+  }
+ }).catch(()=>{
+  document.querySelector("#streamSummary").textContent=t("Kanaldaten derzeit nicht abrufbar; keine LIVE-Aussage.","Channel directory unavailable; no LIVE status implied.");
+ });
+
 filter.addEventListener("change",render);search.addEventListener("input",render);
 sourceKind.addEventListener("change",render);sourceSort.addEventListener("change",render);
 sourceReset.addEventListener("click",()=>{search.value="";filter.value="all";sourceKind.value="all";sourceSort.value="name";render();search.focus()});
