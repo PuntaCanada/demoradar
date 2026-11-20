@@ -15,6 +15,8 @@ on:
       - 'data/source-quality.json'
       - 'data/source-format-health.json'
       - 'data/source-reuse-audit.json'
+      - 'data/rejected-official-candidates.json'
+      - 'scripts/test-rejected-candidates.mjs'
       - 'scripts/test-source-reuse-audit.mjs'
       - 'scripts/check-source-admission.mjs'
       - 'scripts/test-source-transparency.mjs'
@@ -37,6 +39,7 @@ jobs:
           node scripts/test-source-transparency.mjs
           node scripts/test-source-reuse-audit.mjs
           node scripts/check-source-admission.mjs
+          node scripts/test-rejected-candidates.mjs
           node scripts/test-heatmap-freshness.mjs
           node scripts/test-source-registry.mjs
           node scripts/test-heatmap-coverage.mjs

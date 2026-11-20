@@ -8,9 +8,10 @@ const T=(k,p)=>window.DemoRadarI18n?.t(k,p)||k;
 const palette=["#e2e8f0","#bfdbfe","#60a5fa","#2563eb","#1d4ed8","#1e3a8a"];
 const labels=["0","1","2–4","5–14","15–49","50+"];
 const tier=n=>n>=50?5:n>=15?4:n>=5?3:n>=2?2:n>=1?1:0;
-let shapes=null,records=[],coverage=null,sourceHealth=null,sourceFormat=null,monitoredSources=[],reuseAudits=[];
+let shapes=null,records=[],coverage=null,sourceHealth=null,sourceFormat=null,monitoredSources=[],reuseAudits=[],excludedOfficial=[];
 const svgNS="http://www.w3.org/2000/svg";
 const sourceFor=state=>coverage?.states?.find(s=>s.state===state)||null;
+const excludedInfo=state=>{const n=excludedOfficial.filter(x=>x.state===state).length;return n?(document.documentElement.lang==="en"?"Excluded irrelevant official datasets: ":"Ausgeschlossene, fachlich ungeeignete Amtsdatensätze: ")+n:""};
 const reuseInfo=state=>{const items=reuseAudits.filter(x=>x.state===state&&!x.reuse_confirmed);return items.length?(document.documentElement.lang==="en"?"Reuse rights not confirmed: ":"Nachnutzungsrechte nicht abschließend geklärt: ")+items.map(x=>x.city).join(", "):""};
 const monitorInfo=state=>{const entries=monitoredSources.filter(s=>s.state===state);const n=entries.length;if(!n)return "";const bad=entries.filter(s=>{const age=checkAge(s.checked_on);return s.status==="unavailable"||age===null||age<0||age>2}).length;return (document.documentElement.lang==="en"?"Official research pages (not feeds): ":"Amtliche Recherche-Seiten (keine Feeds): ")+n+(bad?(document.documentElement.lang==="en"?" · outdated/unreachable: ":" · veraltet/nicht erreichbar: ")+bad:"")};
 const checkAge=checked=>{if(!/^20\d{2}-\d{2}-\d{2}$/.test(String(checked||"")))return null;const date=new Date(checked+"T12:00:00Z");if(!Number.isFinite(date.getTime())||date.toISOString().slice(0,10)!==checked)return null;return Math.floor((Date.parse(todayBerlin()+"T12:00:00Z")-date.getTime())/86400000)};
@@ -27,7 +28,7 @@ const healthDetail=state=>{
  const entries=(sourceHealth?.sources||[]).filter(s=>s.state===state);
  const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnavailable":"map.healthUnknown");
  const info=entries.map(s=>s.city+": "+label(s.status)+(checkIsStale(s)?" · "+T("map.checkOutdated"):" · "+T("map.checkRecent"))+(s.last_checked?" ("+s.last_checked+")":""));
- return [...info,...formatIssues(state),monitorInfo(state),reuseInfo(state)].filter(Boolean).join(" · ");
+ return [...info,...formatIssues(state),monitorInfo(state),reuseInfo(state),excludedInfo(state)].filter(Boolean).join(" · ");
 };
 const sourceDetails=state=>{
  const s=sourceFor(state);
@@ -127,8 +128,9 @@ Promise.all([
  fetch("/data/source-quality.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null),
  fetch("/data/source-format-health.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null),
  fetch("/data/expansion-sources.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null),
- fetch("/data/source-reuse-audit.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null)
-]).then(([data,sourceData,qualityData,formatData,expansionData,reuseData])=>{
+ fetch("/data/source-reuse-audit.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null),
+ fetch("/data/rejected-official-candidates.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).catch(()=>null)
+]).then(([data,sourceData,qualityData,formatData,expansionData,reuseData,excludedData])=>{
  if(data.states?.length!==16)throw Error("Expected sixteen federal states");
  shapes=data;
  if(sourceData?.version===1&&Array.isArray(sourceData.states)&&sourceData.states.length===16)coverage=sourceData;
@@ -136,6 +138,7 @@ Promise.all([
  if(formatData?.version===1&&Array.isArray(formatData.feeds))sourceFormat=formatData;
  if(expansionData?.version===1&&Array.isArray(expansionData.sources))monitoredSources=expansionData.sources.filter(s=>typeof s.state==="string");
  if(reuseData?.version===1&&Array.isArray(reuseData.feeds))reuseAudits=reuseData.feeds;
+ if(excludedData?.version===1&&Array.isArray(excludedData.candidates))excludedOfficial=excludedData.candidates.filter(x=>x.recurring_demo_dates===false);
  draw();
 }).catch(err=>{ranking.textContent=T("map.none");console.warn("Germany map unavailable",err)});
 })();

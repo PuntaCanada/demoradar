@@ -38,7 +38,7 @@ const freshnessDescription=s=>{
 const isRolling=s=>s.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(s.source);
 const filter=document.querySelector("#sourceFilter");
 const search=document.querySelector("#sourceSearch");
-let states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[];
+let states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[],rejectedCandidates=[];
 let initialized=false;
 const render=()=>{
  if(!initialized)return;
@@ -48,7 +48,8 @@ const render=()=>{
  for(const state of states){
   const entries=quality.filter(s=>s.state===state.state);
   const candidateSources=monitors.filter(s=>s.state===state.state);
-  const text=[state.state,state.scope,...entries.map(e=>[e.city,e.source,e.scope].join(" ")),...candidateSources.map(s=>[s.city,s.scope,s.type].join(" "))].join(" ").toLocaleLowerCase(en?"en":"de");
+  const rejected=rejectedCandidates.filter(s=>s.state===state.state);
+  const text=[state.state,state.scope,...entries.map(e=>[e.city,e.source,e.scope].join(" ")),...candidateSources.map(s=>[s.city,s.scope,s.type].join(" ")) ,...rejected.map(s=>[s.city,s.title,s.reason].join(" "))].join(" ").toLocaleLowerCase(en?"en":"de");
   if((choice!=="all"&&state.status!==choice)||(phrase&&!text.includes(phrase)))continue;
   visible++;
   const article=$("article","source-card");
@@ -114,6 +115,22 @@ const render=()=>{
    }
    article.append(details);
   }
+  if(rejected.length){
+   const details=$("details","source-candidates");
+   details.append($("summary","",t("Geprüfte, ausgeschlossene amtliche Datensätze ("+rejected.length+")","Audited official datasets excluded from imports ("+rejected.length+")")));
+   details.append($("p","source-empty",t("Offene Lizenz allein reicht nicht: Diese Datensätze enthalten keine nachweislichen Demotermine.","An open licence alone is insufficient: these datasets do not provide evidenced protest dates.")));
+   for(const record of rejected){
+    const el=$("div","source-item");
+    el.append($("strong","",record.title));
+    el.append($("p","source-detail",t("Format: ","Format: ")+record.format+" · "+t("Lizenz: ","Licence: ")+record.rights));
+    el.append($("p","source-warning",t("Kein Import: ","Not imported: ")+record.reason));
+    if(/^https:\/\//.test(record.url||"")){
+     const a=$("a","source-link",t("Amtlichen Datensatz ansehen","View official dataset"));a.href=record.url;a.target="_blank";a.rel="noopener noreferrer";el.append(a);
+    }
+    details.append(el);
+   }
+   article.append(details);
+  }
   if(state.url&&/^https:\/\//.test(state.url)){
    const link=$("a","source-link",t("Offizielle Quelle öffnen","Open official source"));link.href=state.url;link.target="_blank";link.rel="noopener noreferrer";article.append(link);
   }
@@ -132,12 +149,15 @@ Promise.all([
  load("/data/source-quality.json"),
  load("/data/source-format-health.json"),
  load("/data/expansion-sources.json").catch(()=>({sources:[]})),
- load("/data/source-reuse-audit.json")
-]).then(([coverage,data,format,expansion,reuse])=>{
+ load("/data/source-reuse-audit.json"),
+ load("/data/rejected-official-candidates.json")
+]).then(([coverage,data,format,expansion,reuse,rejections])=>{
  if(coverage.version!==1||coverage.states?.length!==16||!Array.isArray(data.sources)||!Array.isArray(format.feeds))throw Error("Unexpected source schema");
  const keys=new Set(coverage.states.map(s=>s.state));
  if(keys.size!==16)throw Error("Duplicate or incomplete state coverage");
  if(reuse.version!==1||!Array.isArray(reuse.feeds))throw Error("Unexpected source reuse audit schema");
+ if(rejections.version!==1||!Array.isArray(rejections.candidates))throw Error("Unexpected official candidate assessment schema");
+ rejectedCandidates=rejections.candidates.filter(x=>x.recurring_demo_dates===false&&x.decision?.startsWith("rejected_"));
  reuseAudits=reuse.feeds;
  states=coverage.states;quality=data.sources;health=format.feeds;monitors=Array.isArray(expansion.sources)?expansion.sources.filter(s=>coverage.states.some(x=>x.state===s.state)&&typeof s.url==="string"):[];
  const latest=quality.map(s=>s.last_checked).filter(validDay).sort().at(-1);
