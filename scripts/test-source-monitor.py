@@ -9,6 +9,7 @@ from unittest.mock import patch
 spec=importlib.util.spec_from_file_location("official_sources","scripts/monitor-official-sources.py")
 module=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
+assert any(s["city"]=="Weimar" and s["type"]=="official_assembly_upcoming_html" and s["parser"] is None for s in module.SOURCES)
 assert {x["city"] for x in module.SOURCES if x["type"]=="official_police_historical_notice"}=={"Magdeburg","Halle (Saale)"}
 assert all(x["parser"] is None and x["state"]=="Sachsen-Anhalt" for x in module.SOURCES if x["type"]=="official_police_historical_notice")
 assert any(x["city"]=="Köln" and x["parser"] for x in module.SOURCES)
@@ -32,9 +33,34 @@ class Response:
 with patch.object(module.urllib.request,"urlopen",return_value=Response()):
  for item in module.SOURCES:
   checked=module.inspect(item)
-  assert checked["status"]==("reachable_archive_only" if item["type"]=="official_police_historical_notice" else ("reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed"))
+  assert checked["status"]==("content_unverified" if item["type"]=="official_assembly_upcoming_html" else ("reachable_archive_only" if item["type"]=="official_police_historical_notice" else ("reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed")))
   assert "events" not in checked
   assert len(checked["checked_on"])==10 and checked["checked_on"].count("-")==2
+# The official Weimar calendar really contains future dated registrations, not just a generic URL.
+weimar_html=b"""<html><body><h1>Versammlungsanmeldungen</h1><p>Best\xc3\xa4tigte Versammlungsanmeldungen in Weimar</p>
+<div>So, 22.11.26 15:00 bis 18:00 Uhr</div>
+<div>Mo, 23.11.26 19:00 bis 21:00 Uhr</div><div>Di, 24.11.26</div><div>Mi, 25.11.26</div>
+<div>Mi, 16.11.26 contradiction</div></body></html>"""
+dates,conflicts=module.verify_weimar_dates(weimar_html,module.date(2026,11,20))
+assert dates==["2026-11-22","2026-11-23","2026-11-24","2026-11-25"]
+assert len(conflicts)==1 and "weekday mismatch" in conflicts[0]
+# A weekday inconsistency must fail closed rather than entering a calendar.
+class WeimarResponse(Response):
+ def read(self,_):return weimar_html
+with patch.object(module.urllib.request,"urlopen",return_value=WeimarResponse()):
+ checked=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
+ assert checked["status"]=="content_unverified" and checked["future_date_count"]==4
+good_html=weimar_html.replace(b"<div>Mi, 16.11.26 contradiction</div>",b"")
+class ValidWeimar(Response):
+ def read(self,_):return good_html
+with patch.object(module.urllib.request,"urlopen",return_value=ValidWeimar()):
+ checked=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
+ assert checked["status"]=="reachable_upcoming_list_research_only"
+ assert checked["future_date_count"]==4 and checked["future_dates_verified"][0]=="2026-11-22"
+ assert "events" not in checked
+land_html=b"<h1>Versammlungen</h1><div>Mittwoch, 16.11.2026</div><div>Freitag, 13.11.2026</div>"
+assert len(module.verify_landsberg_weekdays(land_html))==1
+assert "weekday contradicts Mittwoch" in module.verify_landsberg_weekdays(land_html)[0]
 class ReplacedPage(Response):
  def read(self,_):return b"<html>Login page instead of the actual assembly register</html>"*20
 with patch.object(module.urllib.request,"urlopen",return_value=ReplacedPage()):
