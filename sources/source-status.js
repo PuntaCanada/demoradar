@@ -76,6 +76,8 @@ const render=()=>{
       t("Nachnutzung laut amtlichem Metadatensatz eingeschränkt oder nicht offen bestätigt.","Official metadata marks reuse as restricted or not confirmed open."):
       t("Keine eindeutige offene Nachnutzungslizenz für diese Quelle bestätigt.","No unambiguous open reuse licence confirmed for this source.")));
     item.append($("p","source-detail",t("Beleg: ","Evidence: ")+reuse.evidence));
+    item.append($("p","source-warning",reuse.new_automated_import_allowed?t("Neue automatisierte Nutzung gesondert freigegeben.","New automated use separately approved."):t("Kein neuer automatischer Import freigegeben – Rechte und Format vor Aktivierung einzeln prüfen.","No new automated import approved – verify reuse rights and format before activation.")));
+    item.append($("p","source-detail",t("Freigabeprüfung: ","Admission review: ")+fmt(reuse.reviewed_on)));
     const link=$("a","source-link",t("Amtliche Lizenz-/Quellenangaben prüfen","Review official licence/source details"));
     link.href=reuse.source_url;link.target="_blank";link.rel="noopener noreferrer";item.append(link);
    }
