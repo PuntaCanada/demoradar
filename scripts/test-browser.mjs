@@ -161,7 +161,8 @@ try{
    }
    assert.equal(dashboard.states,16,"All 16 source cards load in "+route+" at "+width+"px: "+JSON.stringify(dashboard));
    assert.equal(dashboard.lang,route.startsWith("/en/")?"en":"de");
-   assert.equal(dashboard.feed,"3","Only three monitored regular official city feeds");
+   const expectedObserved=JSON.parse(readFileSync("data/source-quality.json","utf8")).sources.filter(x=>x.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(x.source)).length;
+   assert.equal(Number(dashboard.feed),expectedObserved,"Display only actually observed recurring city feeds; outages must not be disguised");
    assert.ok(dashboard.scroll<=width+2&&dashboard.body<=width+2,"Source registry horizontal overflow at "+width+"px: "+JSON.stringify(dashboard));
    const filtered=await evaluate('(()=>{const s=document.querySelector("#sourceFilter");s.value="no_confirmed_regular_feed";s.dispatchEvent(new Event("change",{bubbles:true}));return {visible:document.querySelectorAll("#stateGrid .source-card").length,badges:[...document.querySelectorAll("#stateGrid .source-chip")].map(x=>x.textContent)}})()');
    assert.ok(filtered.visible>0&&filtered.visible<16,"Missing-source filter must narrow results");
