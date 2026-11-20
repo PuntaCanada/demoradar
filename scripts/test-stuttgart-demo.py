@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
   self.assertEqual(events[0]["source_url"],m["URL"])
   self.assertEqual(events[0]["end"],"")
   self.assertEqual(events[0]["route"],"")
-  self.assertIn("kein Nachweis",events[0]["source_status"])
+  self.assertIn("nicht nachgewiesen",events[0]["source_status"])
  def test_negative_guardrails(self):
   for bad in (
    DOC.replace("Rotebühlplatz, 70173 Stuttgart","Rathausplatz in München"),
