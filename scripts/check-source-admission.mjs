@@ -53,7 +53,7 @@ if(directRun){
  // An unfamiliar one-line import step is not permitted to bypass the source registry.
  const approvedSteps=new Set([
   "update-events.mjs","update-rostock.py","update-cologne.py","update-nrw-police.py",
-  "update-police-notices.py","update-leipzig-police.py","import-leipzig-archive.py",
+  "update-police-notices.py","update-leipzig-police.py","update-weimar-oneoffs.py","import-leipzig-archive.py",
   "update-frankfurt.py","update-freiburg.py","update-dortmund-police.py","import-frankfurt-police-archive.py",
   "monitor-official-sources.py","update-dresden.py","update-dresden-jena.py",
   "dedupe-events.py","check-demos-api.py","probe-demos-events.py","update-demos.py",
