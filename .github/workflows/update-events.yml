@@ -49,6 +49,7 @@ on:
       - 'scripts/build-language-pages.mjs'
       - 'scripts/update-news.py'
       - 'scripts/test-editorial-links.py'
+      - 'scripts/test-editorial-frontend.mjs'
       - 'data/editorial-link-candidates.json'
       - 'scripts/track-event-updates.py'
       - 'scripts/test-event-updates.py'
@@ -149,6 +150,7 @@ jobs:
           python3 scripts/test-dedupe.py
           python3 scripts/test-event-updates.py
           python3 scripts/test-editorial-links.py
+          node scripts/test-editorial-frontend.mjs
           node --check live.js
           node --check scripts/update-streams.mjs
           node --check i18n.js
