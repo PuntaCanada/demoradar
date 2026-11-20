@@ -11,7 +11,12 @@ assert.ok(quality.sources.every(x=>coverage.states.some(y=>y.state===x.state)));
 const rolling=new Set(["Polizei Berlin","Stadt Dresden","Stadt Rostock"]);
 assert.equal(format.feeds.length,3,"Changes to recurring feed inventory need explicit review");
 assert.deepEqual(new Set(format.feeds.map(x=>x.source)),rolling);
-assert.ok(quality.sources.filter(x=>rolling.has(x.source)).every(x=>x.status==="observed_data"));
+const feedObservations=quality.sources.filter(x=>rolling.has(x.source));
+assert.equal(feedObservations.length,3,"All three monitored authority feeds must remain visible, even during outages");
+assert.ok(feedObservations.every(x=>["observed_data","unavailable","no_matching_items","unknown"].includes(x.status)),
+ "A temporary missing feed is a source warning, never a fake successful import");
+assert.ok(feedObservations.every(x=>x.status==="observed_data"||x.check_freshness!=="recent"||x.status==="unavailable"),
+ "A failed importer must not be presented as successfully returned data");
 assert.ok(quality.sources.filter(x=>x.status==="verified_one_off"||x.status==="verified_historical_one_off").every(x=>!rolling.has(x.source)));
 const js=read("sources/source-status.js");
 assert.ok(js.includes("daysSince(s.last_checked)")&&js.includes("freshnessDescription(s)"));
