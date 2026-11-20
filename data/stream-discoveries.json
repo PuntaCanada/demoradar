@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-20T08:51:55.825Z",
+  "updated_at": "2026-11-20T09:29:08.964Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -11,7 +11,7 @@
   "statistics": {
     "youtube_channels_checked": 10,
     "youtube_videos_checked": 500,
-    "youtube_streams_seen": 227,
+    "youtube_streams_seen": 228,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
@@ -137,6 +137,14 @@
     },
     {
       "channel": "Schmidtkes Welt",
+      "title": "❗LIVE❗ in Frankfurt | GenZ REGELT + Schulstreik | 20.11.2026",
+      "url": "https://www.youtube.com/watch?v=_bwV3lqYOZI",
+      "date": "2026-11-20T09:26:01Z",
+      "status": "live",
+      "match_count": 0
+    },
+    {
+      "channel": "Schmidtkes Welt",
       "title": "\"Ehre, Freiheit, Vaterland\" Gespräch mit Kevin Dorow - Deutsche Burschenschaft | Seitenwechsel 2026",
       "url": "https://www.youtube.com/watch?v=GXjsFT8GWCk",
       "date": "2026-11-18T19:00:06Z",
@@ -148,14 +156,6 @@
       "title": "„Gottlose Schei*e“ Gespräch mit Alexander Malenki @DieFiedel | Büchermesse Seitenwechsel 2026",
       "url": "https://www.youtube.com/watch?v=Cm1wW5jlepI",
       "date": "2026-11-15T19:00:06Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Schmidtkes Welt",
-      "title": "Pyrotechnik, Rangeleien, Sozialismus - GenZ Demo in Berlin | 14.11.2026",
-      "url": "https://www.youtube.com/watch?v=lsLAj-044Ek",
-      "date": "2026-11-15T13:30:08Z",
       "status": "recording",
       "match_count": 0
     },

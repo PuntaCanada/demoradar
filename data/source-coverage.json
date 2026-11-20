@@ -9,10 +9,25 @@
   "diagnostic_video_samples": 23,
   "cities": [
     {
+      "city": "Frankfurt am Main",
+      "event_count": 2,
+      "days_with_events": 1,
+      "observed_video_title_samples": 3,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_press",
+          "status": "unavailable",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
       "city": "Berlin",
       "event_count": 395,
       "days_with_events": 9,
-      "observed_video_title_samples": 4,
+      "observed_video_title_samples": 3,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
@@ -27,7 +42,7 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
@@ -38,21 +53,6 @@
         {
           "type": "official_registration_information",
           "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
-      "city": "Frankfurt am Main",
-      "event_count": 2,
-      "days_with_events": 1,
-      "observed_video_title_samples": 2,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_city_press",
-          "status": "unavailable",
           "reuse_rights_verified": false
         }
       ]
@@ -165,7 +165,7 @@
       "source_status": [
         {
           "type": "official_city_press",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
