@@ -156,8 +156,8 @@
       "city": "Stuttgart",
       "state": "Baden-Württemberg",
       "source": "Landeshauptstadt Stuttgart (Einzeltermin)",
-      "status": "no_matching_items",
-      "count": 0,
+      "status": "verified_one_off",
+      "count": 1,
       "scope": "Specific city-calendar demonstration on 25 November; not a licensed assembly feed or official registration confirmation",
       "last_checked": "2026-11-20",
       "check_freshness": "recent"

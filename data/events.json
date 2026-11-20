@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-20T16:38:00.065Z",
-  "count": 1373,
+  "updated_at": "2026-11-20T16:45:44.035Z",
+  "count": 1374,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -3178,6 +3178,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "stuttgart-oneoff-e65ae70f4b53026a",
+      "country": "DE",
+      "state": "Baden-Württemberg",
+      "city": "Stuttgart",
+      "date": "2026-11-25",
+      "start": "18:00",
+      "end": "",
+      "title": "Demonstration zum Internationalen Tag gegen Gewalt an Frauen",
+      "location": "Rotebühlplatz, 70173 Stuttgart",
+      "route": "",
+      "source": "Landeshauptstadt Stuttgart – städtischer Veranstaltungskalender",
+      "source_url": "https://www.stuttgart.de/veranstaltungskalender/veranstaltungen/demo-zum-internationaler-tag-gegen-gewalt-an-frauen-536688",
+      "source_status": "Einzeln anhand der amtlichen Veranstaltungsseite am 20.11.2026 manuell geprüfter Termin; derzeitiges Roh-HTML bestätigt Datum/Uhrzeit nicht maschinenlesbar; behördliche Versammlungsanmeldung nicht nachgewiesen"
     },
     {
       "id": "berlin-455",
