@@ -144,13 +144,14 @@ const render=()=>{
    details.append($("p","source-empty",t("Nur Recherche: erreichbar bedeutet weder Terminfeed noch Nachnutzungserlaubnis. Hieraus werden keine Termine erzeugt.","Research only: reachability proves neither an event feed nor a reuse licence. No events are generated from these links.")));
    for(const candidate of candidateSources){
     const el=$("div","source-item");
-    el.append($("strong","",candidate.city+" · "+t("Nur Beobachtung","Monitoring only")));
+    el.append($("strong","",candidate.city+" · "+(candidate.type==="official_police_historical_notice"?t("Historischer Polizeibericht · kein Zukunftstermin","Historical police notice · not an upcoming event"):t("Nur Beobachtung","Monitoring only"))));
     el.append($("p","source-detail",candidate.scope||""));
     const checkAge=daysSince(candidate.checked_on);
     const checked=checkAge===null?t("Letzte Prüfung nicht dokumentiert","Last check not documented"):checkAge<0?t("Ungültiges Prüfdatum","Invalid check date"):t("Zuletzt geprüft: ","Last checked: ")+fmt(candidate.checked_on)+(checkAge>2?t(" · Prüfung veraltet"," · check is outdated"):"");
     el.append($("p","source-detail",checked));
     if(checkAge===null||checkAge<0||checkAge>2)el.append($("p","source-warning",t("Erreichbarkeitsstatus nicht aktuell bestätigt","Reachability status not recently confirmed")));
     el.append($("p","source-detail",t("Nachnutzungsstatus: ","Reuse assessment: ")+(candidate.data_rights||t("Nicht bestätigt","Not verified"))));
+    if(candidate.type==="official_police_historical_notice")el.append($("p","source-warning",t("Archivbeleg: keine automatische Terminübernahme und keine Aussage über zukünftige Demos.","Archive evidence: no automatic import and no statement about upcoming demonstrations.")));
     if(candidate.status==="unavailable")el.append($("p","source-warning",t("Bei der letzten automatischen Prüfung nicht erreichbar","Unavailable during last automated check")));
     if(/^https:\/\//.test(candidate.url||"")){
      const a=$("a","source-link",t("Amtliche Recherchequelle öffnen","Open official research source"));
