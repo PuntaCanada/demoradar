@@ -12,6 +12,7 @@ for(const [path,lang] of [["sources/index.html","de"],["en/sources/index.html","
  assert.ok(html.includes('<html lang="'+lang+'">'));
  assert.ok(html.includes('id="stateGrid"'));
  assert.ok(html.includes('id="sourceSearch"'));
+ for(const id of ["streamDirectory","streamDirectoryHead","streamSummary"])assert.ok(html.includes('id="'+id+'"'),"Missing streamer directory landmark "+id);
  assert.ok(html.includes('id="sourceFilter"'));
  for(const id of ["sourceKind","sourceSort","sourceReset"])assert.ok(html.includes('id="'+id+'"'),"Missing navigable source dashboard control "+id);
  assert.ok(html.includes('rel="canonical" href="https://demoradar.pages.dev/'+(lang==="en"?"en/":"")+'sources/"'));
@@ -33,6 +34,9 @@ assert.ok(script.includes('rel="noopener noreferrer"')||script.includes('link.re
 assert.ok(script.includes('Promise.all('));
 assert.ok(script.includes('candidate.type==="official_police_historical_notice"'),"Historical police notices must be labelled as archive-only");
 assert.ok(script.includes('data/source-format-health.json'));
+for(const path of ["data/streamer-candidates.json","data/stream-discoveries.json","data/live-streams.json"])assert.ok(script.includes(path),"Missing source data "+path);
+assert.ok(script.includes('approved.streams.filter(s=>s.reviewed===true&&s.event_id&&s.evidence_url)'),"Only independently reviewed event links may be counted");
+assert.ok(script.includes('url.protocol!=="https:"')&&script.includes('noopener noreferrer'),"Unsafe outbound channel links");
 for(const key of ['kind==="feed"','kind==="oneoff"','kind==="archive"','kind==="warnings"','kind==="unverified"','sourceReset.addEventListener','sourceSort.addEventListener'])assert.ok(script.includes(key),"Missing category or reset behavior: "+key);
 const de=readFileSync("index.html","utf8"),en=readFileSync("en/index.html","utf8");
 assert.ok(de.includes('href="/sources/"'));
