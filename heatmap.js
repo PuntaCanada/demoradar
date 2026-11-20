@@ -30,10 +30,15 @@ const healthDetail=state=>{
  const info=entries.map(s=>s.city+": "+label(s.status)+(checkIsStale(s)?" · "+T("map.checkOutdated"):" · "+T("map.checkRecent"))+(s.last_checked?" ("+s.last_checked+")":""));
  return [...info,...formatIssues(state),monitorInfo(state),reuseInfo(state),excludedInfo(state)].filter(Boolean).join(" · ");
 };
+const coverageReviewWarning=()=>{
+ const age=checkAge(coverage?.reviewed_on);
+ if(age!==null&&age>=0&&age<=30)return "";
+ return document.documentElement.lang==="en"?"State coverage review missing or over 30 days old":"Bundesweite Quelleninventur ohne aktuelles Prüfdatum (über 30 Tage)";
+};
 const sourceDetails=state=>{
  const s=sourceFor(state);
  if(!s)return T("map.sourceUnknown");
- return (s.scope||"")+" · "+T("map.sourceReviewed")+" "+(coverage.reviewed_on||"")+(healthDetail(state)?" · "+healthDetail(state):"");
+ return [s.scope||"",T("map.sourceReviewed")+" "+(coverage.reviewed_on||""),coverageReviewWarning(),healthDetail(state)].filter(Boolean).join(" · ");
 };
 const zeroLabel=(state,count)=>count>0?String(count):T(sourceFor(state)?.status==="no_confirmed_regular_feed"||!sourceFor(state)?"map.zeroGap":"map.zeroReported");
 
@@ -108,7 +113,7 @@ function draw(){
   const detail=sourceDetails(item.state);
   const health=document.createElement("small");health.className="heatmap-health-label";
   const stateHealth=(sourceHealth?.sources||[]).filter(s=>s.state===item.state);
-  if(stateHealth.some(s=>s.status==="unavailable"||checkIsStale(s))||monitoredSources.some(s=>{const age=checkAge(s.checked_on);return s.state===item.state&&(s.status==="unavailable"||age===null||age<0||age>2)})||formatIssues(item.state).length||reuseAudits.some(x=>x.state===item.state&&!x.reuse_confirmed))health.classList.add("is-warning");
+  if(coverageReviewWarning()||stateHealth.some(s=>s.status==="unavailable"||checkIsStale(s))||monitoredSources.some(s=>{const age=checkAge(s.checked_on);return s.state===item.state&&(s.status==="unavailable"||age===null||age<0||age>2)})||formatIssues(item.state).length||reuseAudits.some(x=>x.state===item.state&&!x.reuse_confirmed))health.classList.add("is-warning");
   else if(stateHealth.length===0||stateHealth.every(s=>s.status==="unknown"))health.classList.add("is-muted");
   health.textContent=healthDetail(item.state);
   if(health.textContent)caption.title=health.textContent;
