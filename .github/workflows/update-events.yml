@@ -47,6 +47,9 @@ on:
       - 'scripts/probe-demos-events.py'
       - 'scripts/update-demos.py'
       - 'scripts/build-language-pages.mjs'
+      - 'scripts/test-today-pages.mjs'
+      - 'heute/index.html'
+      - 'en/today/index.html'
       - 'scripts/update-news.py'
       - 'scripts/test-editorial-links.py'
       - 'scripts/test-editorial-frontend.mjs'
@@ -156,6 +159,7 @@ jobs:
           node --check i18n.js
           node --check scripts/build-language-pages.mjs
           node --input-type=module -e 'import{readFileSync}from"node:fs";const de=readFileSync("index.html","utf8"),en=readFileSync("en/index.html","utf8"),sitemap=readFileSync("sitemap.xml","utf8");if(!de.includes("hreflang=\"en\"")||!en.includes("<html lang=\"en\"")||!en.includes("<link rel=\"canonical\" href=\"https://demoradar.pages.dev/en/\"")||!en.includes("Important today"))throw Error("Missing translated SEO route");if(!sitemap.includes("/en/"))throw Error("Missing sitemap translation entry");console.log("/en/ static SEO checks: OK")'
+          node scripts/test-today-pages.mjs
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
           node scripts/test-community.mjs
@@ -171,10 +175,10 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/dortmund-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/dortmund-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html heute/index.html en/today/index.html sitemap.xml robots.txt)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/dortmund-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html sitemap.xml robots.txt
+            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/dortmund-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html heute/index.html en/today/index.html sitemap.xml robots.txt
             git commit -m "data: refresh demonstration sources and observed changes"
             for attempt in 1 2 3; do
               if git push; then break; fi
