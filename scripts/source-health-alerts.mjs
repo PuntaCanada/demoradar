@@ -34,6 +34,9 @@ export function alertsFromReport(report,formatHealth={},monitorReport={},{today=
   const valid=date&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===checked;
   const age=valid?Math.round((Date.parse(today+"T12:00:00Z")-date.getTime())/86400000):null;
   const condition=item.status==="unavailable"?"monitor_unavailable":
+   item.status==="transport_unverified"?"monitor_transport_unverified":
+   item.status==="http_restricted"?"monitor_http_restricted":
+   item.status==="content_unverified"?"monitor_content_unverified":
    age===null||age<0||age>2?"monitor_outdated":null;
   return condition?[{city:item.city,state:item.state,source:"Research-only official page",condition,last_checked:checked||null,
    url:item.url,note:"Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."}]:[];
