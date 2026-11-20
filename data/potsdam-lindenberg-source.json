@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "checks": [
+    {
+      "city": "Potsdam",
+      "state": "Brandenburg",
+      "source": "https://www.nbfev.de/event/demonstration/",
+      "status": "verified_organizer_one_off",
+      "count": 1,
+      "checked_on": "2026-11-20",
+      "source_type": "independent_organizer_or_specialist_original_one_off",
+      "rights": "Individual short factual event fields with a link to original. No blanket bulk reuse or official assembly registration claimed."
+    },
+    {
+      "city": "Lindenberg im Allgäu",
+      "state": "Bayern",
+      "source": "https://gruene.li/termine/termin/alice-weidel-raus-aus-lindenberg",
+      "status": "verified_organizer_one_off",
+      "count": 1,
+      "checked_on": "2026-11-20",
+      "source_type": "independent_organizer_or_specialist_original_one_off",
+      "rights": "Individual short factual event fields with a link to original. No blanket bulk reuse or official assembly registration claimed."
+    }
+  ]
+}

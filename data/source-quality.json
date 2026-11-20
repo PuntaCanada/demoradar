@@ -163,6 +163,26 @@
       "check_freshness": "recent"
     },
     {
+      "city": "Potsdam",
+      "state": "Brandenburg",
+      "source": "Netzwerk der brandenburgischen Frauenhäuser (Einzelankündigung)",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "One non-government original event notice, no police registration confirmed and no licensed machine-readable feed",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
+      "city": "Lindenberg im Allgäu",
+      "state": "Bayern",
+      "source": "Grüne Landkreis Lindau (Einzelankündigung)",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "One non-government original event notice, no police registration confirmed and no licensed machine-readable feed",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
       "city": "Frankfurt am Main",
       "state": "Hessen",
       "source": "Stadt Frankfurt",

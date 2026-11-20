@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-20T16:45:44.035Z",
-  "count": 1374,
+  "updated_at": "2026-11-20T17:22:54.023Z",
+  "count": 1376,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -2966,6 +2966,21 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "organizer-potsdam-fb8b7420b4f088dd",
+      "country": "DE",
+      "state": "Brandenburg",
+      "city": "Potsdam",
+      "date": "2026-11-25",
+      "start": "15:00",
+      "end": "18:00",
+      "title": "Demonstration gegen Gewalt an Frauen – Nauener Tor bis Landtag",
+      "location": "Nauener Tor, Potsdam",
+      "route": "",
+      "source": "Netzwerk der brandenburgischen Frauenhäuser e. V. – Veranstaltungshinweis",
+      "source_url": "https://www.nbfev.de/event/demonstration/",
+      "source_status": "Von Fachverband veröffentlichte Demonstration; städtische Gleichstellungsbeauftragte als Mitinitiatorin genannt. Keine amtliche Polizeianmeldung oder lizenzierter Demo-Feed nachgewiesen."
+    },
+    {
       "id": "weimar-oneoff-095530b56f615872",
       "country": "DE",
       "state": "Thüringen",
@@ -4225,6 +4240,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "organizer-lindenberg-520b97882380d626",
+      "country": "DE",
+      "state": "Bayern",
+      "city": "Lindenberg im Allgäu",
+      "date": "2026-11-29",
+      "start": "11:00",
+      "end": "",
+      "title": "Alice Weidel raus aus Lindenberg! – Gegenkundgebung",
+      "location": "Stadtplatz, Lindenberg im Allgäu",
+      "route": "",
+      "source": "BÜNDNIS 90/DIE GRÜNEN Landkreis Lindau – Veranstaltungsankündigung",
+      "source_url": "https://gruene.li/termine/termin/alice-weidel-raus-aus-lindenberg",
+      "source_status": "Von regionalem politischem Kreisverband angekündigte öffentliche Kundgebung; keine amtliche Versammlungsanmeldung oder lizenzierter behördlicher Terminfeed nachgewiesen."
     },
     {
       "id": "berlin-620",
