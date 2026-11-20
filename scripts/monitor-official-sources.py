@@ -64,6 +64,7 @@ def verify_weimar_dates(raw,today=None):
  # Page uses 'So, 22.11.26' before each row; count only calendar-valid weekday matches.
  hits=re.findall(r"\b(Mo|Di|Mi|Do|Fr|Sa|So),\s*(\d{1,2})\.(\d{1,2})\.(20\d{2}|\d{2})\b",text)
  valid=set()
+ valid_rows=0
  inconsistent=[]
  for wd,day,month,year in hits:
   year=int(year) if len(year)==4 else 2000+int(year)
@@ -74,8 +75,10 @@ def verify_weimar_dates(raw,today=None):
   if GERMAN_WEEKDAYS[d.weekday()]!=wd:
    inconsistent.append(f"{day}.{month}.{year} weekday mismatch")
    continue
-  if d>=today:valid.add(d.isoformat())
- return sorted(valid),inconsistent
+  if d>=today:
+   valid.add(d.isoformat())
+   valid_rows+=1
+ return sorted(valid),inconsistent,valid_rows
 
 def verify_landsberg_weekdays(raw):
  """Report contradictions, never silently invent a corrected date."""
@@ -105,7 +108,8 @@ def inspect(item):
     output["bytes_checked"]=len(payload)
    if response.status!=200 or len(payload)<400:raise ValueError("Empty or non-200 page")
    if item["type"]=="official_assembly_upcoming_html":
-    dates,conflicts=verify_weimar_dates(payload)
+    dates,conflicts,rows=verify_weimar_dates(payload)
+    output["future_announcement_rows_verified"]=rows
     output["future_dates_verified"]=dates
     output["future_date_count"]=len(dates)
     output["date_conflicts"]=conflicts
