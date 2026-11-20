@@ -26,8 +26,8 @@
       "city": "Rostock",
       "state": "Mecklenburg-Vorpommern",
       "source": "Stadt Rostock",
-      "status": "unavailable",
-      "count": 0,
+      "status": "observed_data",
+      "count": 9,
       "scope": "Rostock-only list, not Mecklenburg-Vorpommern coverage",
       "last_checked": "2026-11-20",
       "check_freshness": "recent"
@@ -37,7 +37,7 @@
       "state": "Nordrhein-Westfalen",
       "source": "Stadt Köln",
       "status": "observed_data",
-      "count": 3,
+      "count": 2,
       "scope": "Traffic calendar only; not the assembly register",
       "last_checked": null,
       "check_freshness": "unknown"

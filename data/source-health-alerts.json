@@ -5,13 +5,6 @@
   "checked_research_pages": 19,
   "alerts": [
     {
-      "city": "Rostock",
-      "source": "Stadt Rostock",
-      "condition": "unavailable",
-      "last_checked": "2026-11-20",
-      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur."
-    },
-    {
       "city": "Frankfurt am Main",
       "source": "Stadt Frankfurt",
       "condition": "unavailable",
@@ -34,15 +27,6 @@
       "condition": "monitor_unavailable",
       "last_checked": "2026-11-20",
       "url": "https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
-      "city": "Hamburg",
-      "state": "Hamburg",
-      "source": "Research-only official page",
-      "condition": "monitor_unavailable",
-      "last_checked": "2026-11-20",
-      "url": "https://www.polizei.hamburg/versammlungsbehoerde-kontakt-791244",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {

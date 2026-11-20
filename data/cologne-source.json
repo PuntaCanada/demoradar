@@ -3,8 +3,8 @@
   "mode": "conservative_factual_extraction",
   "licence": "No blanket open-data licence verified for the city HTML; reuse only unprotected factual details with direct attribution.",
   "status": "ok",
-  "count": 3,
-  "links_inspected": 3,
+  "count": 2,
+  "links_inspected": 2,
   "retained": 3,
-  "pages_checked": 12
+  "pages_checked": 4
 }

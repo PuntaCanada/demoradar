@@ -1,8 +1,7 @@
 {
   "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
-  "status": "unavailable",
+  "status": "ok",
+  "count": 9,
   "checked_on": "2026-11-20",
-  "error": "<urlopen error timed out>",
-  "count": 0,
-  "coverage": "Rostock city only; previous verified events preserved"
+  "coverage": "Rostock municipal public list only; not Mecklenburg-Vorpommern"
 }

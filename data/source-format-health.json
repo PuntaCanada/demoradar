@@ -36,19 +36,17 @@
       "id": "rostock",
       "city": "Rostock",
       "source": "Stadt Rostock",
-      "status": "unverified",
+      "status": "ok",
       "last_checked": "2026-11-20",
       "last_success": {
         "count": 9,
         "checked_on": "2026-11-20"
       },
       "baseline_count": 9,
-      "observed_count": 0,
-      "issues": [
-        "unavailable"
-      ],
+      "observed_count": 9,
+      "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
     }
   ],
-  "warning_count": 1
+  "warning_count": 0
 }
