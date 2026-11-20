@@ -25,6 +25,18 @@ DOMAINS={
  "BR24":{"www.br.de"}
 }
 FORBIDDEN={"cancelled","canceled","withdrawn","stopped","abgesagt","zurueckgezogen","zurückgezogen"}
+EDITORIAL_MAX_AGE_DAYS=7 # A curated story can provide context briefly, never perpetual "today" coverage.
+def berlin_day():
+ return dt.datetime.now(__import__("zoneinfo").ZoneInfo("Europe/Berlin")).date()
+def link_is_fresh(link,review_date,today):
+ if not is_allowed_link(link):return False
+ published=parse_day(link["published_on"])
+ reviewed=parse_day(review_date)
+ event=parse_day(link["event_day"])
+ if not reviewed or reviewed<published or reviewed>today:return False
+ # Never transform a dated media article into a reference for another protest day.
+ return (today-event).days>=-3 and (today-event).days<=3 and (today-reviewed).days<=EDITORIAL_MAX_AGE_DAYS
+
 
 def parse_day(s):
  if not isinstance(s,str) or not re.fullmatch(r"20\d{2}-\d{2}-\d{2}",s):
@@ -60,15 +72,15 @@ def is_allowed_link(link):
  label=link.get("label")
  return isinstance(label,str) and 10<=len(label)<=110 and "<" not in label and ">" not in label
 
-def match_links(events,links,today=None):
- today=today or dt.datetime.now(dt.timezone.utc).date()
+def match_links(events,links,today=None,reviewed_on=None):
+ today=today or berlin_day()
+ reviewed_on=reviewed_on or today.isoformat()
  eligible=[e for e in events if isinstance(e,dict) and parse_day(e.get("date")) and
   abs((parse_day(e["date"])-today).days)<=3 and e.get("id") and e.get("city") and e.get("title") and
   str(e.get("status_code","")).casefold() not in FORBIDDEN]
  results={}
  for link in links:
-  if not is_allowed_link(link):continue
-  if abs((parse_day(link["event_day"])-today).days)>3:continue
+  if not link_is_fresh(link,reviewed_on,today):continue
   matching=[e for e in eligible if e["date"]==link["event_day"] and e["city"].casefold()==link["city"].casefold() and
    all(has_phrase(e["title"],phrase) for phrase in link["match_phrases"])]
   # Reject ambiguous articles that could refer to different same-city demonstrations.
@@ -76,13 +88,13 @@ def match_links(events,links,today=None):
   e=matching[0]
   item={"url":link["url"],"source":link["publisher"],"title":link["label"],
    "published":link["published_on"],"match_type":"independently linked editorial context; not event confirmation",
-   "reviewed_on":today.isoformat()}
+   "reviewed_on":reviewed_on}
   bucket=results.setdefault(str(e["id"]),[])
   if not any(x["url"]==item["url"] for x in bucket):bucket.append(item)
  return {key:rows[:3] for key,rows in results.items()}
 
 def main():
- today=dt.datetime.now(dt.timezone.utc).date()
+ today=berlin_day()
  events=json.loads(EVENTS.read_text(encoding="utf-8")).get("events",[])
  try:
   supplemental=json.loads((ROOT/"demos-events.json").read_text(encoding="utf-8"))
@@ -91,7 +103,7 @@ def main():
  except (OSError,ValueError) as ex:print("Community event file unavailable",str(ex)[:100])
  manual=json.loads(EDITORIAL.read_text(encoding="utf-8"))
  if manual.get("version")!=1 or not isinstance(manual.get("links"),list):raise ValueError("Invalid editorial link registry")
- matches=match_links(events,manual["links"],today)
+ matches=match_links(events,manual["links"],today,manual.get("reviewed_on"))
  snapshot={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),
   "policy":"Only independently authored labels and verified source URLs; manually reviewed link candidates, automatic event association is NOT event verification. No RSS syndication.",
   "feeds":[],"editorial_sources":sorted({x["publisher"] for x in manual["links"]}),
