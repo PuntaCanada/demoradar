@@ -32,6 +32,9 @@ function buildEnglish(){
  html=html.replace(/(<[^>]*data-i18n-aria="([^"]+)"[^>]*\baria-label=")[^"]*(")/g,
   (_,prefix,key,end)=>prefix+escapeAttr(translations.en[key]||key)+end);
  html=html.replace("Diese Website befindet sich im Aufbau. Es sind noch keine Live-Daten verbunden. Das Fehlen eines Termins bedeutet nicht, dass keine Demonstration stattfindet.","This website is in beta. An event missing from our sources does not mean it will not take place.");
+ html=html.replace('content="DemoRadar – Demonstrationen in Deutschland finden"','content="DemoRadar – Demonstrations in Germany"');
+ html=html.replace('content="Heutige und kommende Demonstrationen nach Stadt und Bundesland entdecken – mit Quellen, Datenstand und Hinweisen zu Abdeckungslücken."','content="Find recorded demonstrations today and in the coming days by city and state, with source dates and transparent coverage gaps."');
+ html=html.replace('content="https://demoradar.pages.dev/"','content="https://demoradar.pages.dev/en/"');
  html=html.replace("🚧 Vorschau:","🚧 Preview:");
  html=html.replace("Keine verifizierten Termine eingetragen","No verified events listed yet");
  html=html.replace("Live-Daten werden vorbereitet","Loading live event data");
