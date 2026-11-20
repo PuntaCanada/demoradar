@@ -16,7 +16,7 @@ for(const item of audit.feeds){
  assert.ok(["restricted_metadata","rights_not_verified","open_verified"].includes(item.classification));
  assert.equal(item.reuse_confirmed,item.classification==="open_verified");
  assert.equal(typeof item.new_automated_import_allowed,"boolean");
- assert.match(item.reviewed_on,/^20\\d\\d-\\d\\d-\\d\\d$/);
+ assert.match(item.reviewed_on,/^20\d\d-\d\d-\d\d$/);
  assert.ok(item.approval_reason.length>30);
  if(!item.reuse_confirmed)assert.equal(item.new_automated_import_allowed,false,"No import admission on uncertain rights");
  const id=item.state+"/"+item.source;assert.ok(!names.has(id),"Duplicate licence claims");names.add(id);
