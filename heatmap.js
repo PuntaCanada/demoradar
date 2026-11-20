@@ -21,6 +21,17 @@ const reuseInfo=state=>{const items=reuseAudits.filter(x=>x.state===state&&!x.re
 const monitorInfo=state=>{const entries=monitoredSources.filter(s=>s.state===state);const n=entries.length;if(!n)return "";const bad=entries.filter(s=>{const age=checkAge(s.checked_on);return s.status==="unavailable"||age===null||age<0||age>2}).length;return (document.documentElement.lang==="en"?"Official research pages (not feeds): ":"Amtliche Recherche-Seiten (keine Feeds): ")+n+(bad?(document.documentElement.lang==="en"?" · outdated/unreachable: ":" · veraltet/nicht erreichbar: ")+bad:"")};
 const checkAge=checked=>{if(!/^20\d{2}-\d{2}-\d{2}$/.test(String(checked||"")))return null;const date=new Date(checked+"T12:00:00Z");if(!Number.isFinite(date.getTime())||date.toISOString().slice(0,10)!==checked)return null;return Math.floor((Date.parse(todayBerlin()+"T12:00:00Z")-date.getTime())/86400000)};
 const checkIsStale=entry=>{const age=checkAge(entry.last_checked);return age===null||age<0||age>2};
+const coverageEvidence=state=>{
+ const rows=(sourceHealth?.sources||[]).filter(s=>s.state===state);
+ const observed=new Set(rows.filter(s=>s.status==="observed_data"&&!checkIsStale(s)).map(s=>s.city));
+ const individual=new Set(rows.filter(s=>["verified_one_off","verified_historical_one_off"].includes(s.status)).map(s=>s.city));
+ const failed=rows.filter(s=>s.status==="unavailable"||checkIsStale(s)).length;
+ const en=document.documentElement.lang==="en";
+ return (en?"Current local official-source cities: ":"Aktuell belegte amtliche Ortsquellen: ")+observed.size+
+ (en?" · Cities with one-off/historical notices: ":" · Orte mit Einzel-/Archivmeldungen: ")+individual.size+
+ (failed?(en?" · Unavailable/outdated checks: ":" · Fehlende/veraltete Prüfungen: ")+failed:"")+
+ (en?" · Not complete statewide coverage":" · Keine landesweite Vollständigkeit");
+};
 const sourceLabel=state=>{
  const s=sourceFor(state);
  return T(s?.status==="regional_partial"?"map.sourceRegional":s?.status==="local_partial"?"map.sourceLocal":"map.sourceMissing");
@@ -33,7 +44,7 @@ const healthDetail=state=>{
  const entries=(sourceHealth?.sources||[]).filter(s=>s.state===state);
  const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnavailable":"map.healthUnknown");
  const info=entries.map(s=>s.city+": "+label(s.status)+(checkIsStale(s)?" · "+T("map.checkOutdated"):" · "+T("map.checkRecent"))+(s.last_checked?" ("+s.last_checked+")":""));
- return [...info,...formatIssues(state),monitorInfo(state),reuseInfo(state),excludedInfo(state),warningInfo(state)].filter(Boolean).join(" · ");
+ return [coverageEvidence(state),...info,...formatIssues(state),monitorInfo(state),reuseInfo(state),excludedInfo(state),warningInfo(state)].filter(Boolean).join(" · ");
 };
 const coverageReviewWarning=()=>{
  const age=checkAge(coverage?.reviewed_on);
