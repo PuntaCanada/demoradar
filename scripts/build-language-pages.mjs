@@ -57,7 +57,8 @@ const dayInBerlin=()=>new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",
 const safeRecord=(e,today)=>e&&e.country==="DE"&&e.date===today&&
  typeof e.id==="string"&&e.id.length>0&&typeof e.title==="string"&&e.title.trim().length>0&&
  typeof e.city==="string"&&e.city.trim().length>0&&
- !["cancelled","canceled","withdrawn","stopped","abgesagt","zurückgezogen"].includes(String(e.status_code||"").toLocaleLowerCase("de"));
+ !["cancelled","canceled","withdrawn","stopped","abgesagt","zurückgezogen"].includes(String(e.status_code||"").toLocaleLowerCase("de"))&&
+ !/abgesagt|zurückgezogen|zurueckgezogen|abgebrochen|cancelled/i.test(String(e.event_status||""));
 const isRealDate=date=>/^20\d{2}-\d{2}-\d{2}$/.test(String(date||""))&&
  Number.isFinite(Date.parse(date+"T12:00:00Z"))&&new Date(date+"T12:00:00Z").toISOString().slice(0,10)===date;
 function buildTodayPages(){
