@@ -38,7 +38,7 @@ const freshnessDescription=s=>{
 const isRolling=s=>s.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(s.source);
 const filter=document.querySelector("#sourceFilter");
 const search=document.querySelector("#sourceSearch");
-let states=[],quality=[],health=[],issues=[];
+let states=[],quality=[],health=[],issues=[],monitors=[];
 let initialized=false;
 const render=()=>{
  if(!initialized)return;
@@ -47,7 +47,8 @@ const render=()=>{
  let visible=0;
  for(const state of states){
   const entries=quality.filter(s=>s.state===state.state);
-  const text=[state.state,state.scope,...entries.map(e=>[e.city,e.source,e.scope].join(" "))].join(" ").toLocaleLowerCase(en?"en":"de");
+  const candidateSources=monitors.filter(s=>s.state===state.state);
+  const text=[state.state,state.scope,...entries.map(e=>[e.city,e.source,e.scope].join(" ")),...candidateSources.map(s=>[s.city,s.scope,s.type].join(" "))].join(" ").toLocaleLowerCase(en?"en":"de");
   if((choice!=="all"&&state.status!==choice)||(phrase&&!text.includes(phrase)))continue;
   visible++;
   const article=$("article","source-card");
@@ -78,6 +79,25 @@ const render=()=>{
    list.append(item);
   }
   article.append(list);
+  if(candidateSources.length){
+   const details=$("details","source-candidates");
+   const summary=$("summary","",t("Weitere amtliche Seiten in Beobachtung ("+candidateSources.length+")","Additional official pages under review ("+candidateSources.length+")"));
+   details.append(summary);
+   details.append($("p","source-empty",t("Nur Recherche: erreichbar bedeutet weder Terminfeed noch Nachnutzungserlaubnis. Hieraus werden keine Termine erzeugt.","Research only: reachability proves neither an event feed nor a reuse licence. No events are generated from these links.")));
+   for(const candidate of candidateSources){
+    const el=$("div","source-item");
+    el.append($("strong","",candidate.city+" · "+t("Nur Beobachtung","Monitoring only")));
+    el.append($("p","source-detail",candidate.scope||""));
+    el.append($("p","source-detail",t("Nachnutzungsstatus: ","Reuse assessment: ")+(candidate.data_rights||t("Nicht bestätigt","Not verified"))));
+    if(candidate.status==="unavailable")el.append($("p","source-warning",t("Bei der letzten automatischen Prüfung nicht erreichbar","Unavailable during last automated check")));
+    if(/^https:\/\//.test(candidate.url||"")){
+     const a=$("a","source-link",t("Amtliche Recherchequelle öffnen","Open official research source"));
+     a.href=candidate.url;a.target="_blank";a.rel="noopener noreferrer";el.append(a);
+    }
+    details.append(el);
+   }
+   article.append(details);
+  }
   if(state.url&&/^https:\/\//.test(state.url)){
    const link=$("a","source-link",t("Offizielle Quelle öffnen","Open official source"));link.href=state.url;link.target="_blank";link.rel="noopener noreferrer";article.append(link);
   }
@@ -94,12 +114,13 @@ const load=async path=>{
 Promise.all([
  load("/data/state-source-coverage.json"),
  load("/data/source-quality.json"),
- load("/data/source-format-health.json")
-]).then(([coverage,data,format])=>{
+ load("/data/source-format-health.json"),
+ load("/data/expansion-sources.json").catch(()=>({sources:[]}))
+]).then(([coverage,data,format,expansion])=>{
  if(coverage.version!==1||coverage.states?.length!==16||!Array.isArray(data.sources)||!Array.isArray(format.feeds))throw Error("Unexpected source schema");
  const keys=new Set(coverage.states.map(s=>s.state));
  if(keys.size!==16)throw Error("Duplicate or incomplete state coverage");
- states=coverage.states;quality=data.sources;health=format.feeds;
+ states=coverage.states;quality=data.sources;health=format.feeds;monitors=Array.isArray(expansion.sources)?expansion.sources.filter(s=>coverage.states.some(x=>x.state===s.state)&&typeof s.url==="string"):[];
  const latest=quality.map(s=>s.last_checked).filter(validDay).sort().at(-1);
  document.querySelector("#lastCheck").textContent=t("Letzte belegte Quellenprüfung: ","Last evidenced source check: ")+fmt(latest);
  const stale=quality.filter(s=>{const d=daysSince(s.last_checked);return d===null||d<0||d>2}).length;
