@@ -41,6 +41,7 @@ weimar_html=b"""<html><body><h1>Versammlungsanmeldungen</h1><p>Best\xc3\xa4tigte
 <div>So, 22.11.26 15:00 bis 18:00 Uhr</div>
 <div>Mo, 23.11.26 19:00 bis 21:00 Uhr</div><div>Di, 24.11.26</div><div>Mi, 25.11.26</div>
 <div>Mi, 16.11.26 contradiction</div></body></html>"""
+weimar_html+=b"<p>Official city assembly calendar page content, not an event record.</p>"*8
 dates,conflicts=module.verify_weimar_dates(weimar_html,module.date(2026,11,20))
 assert dates==["2026-11-22","2026-11-23","2026-11-24","2026-11-25"]
 assert len(conflicts)==1 and "weekday mismatch" in conflicts[0]
