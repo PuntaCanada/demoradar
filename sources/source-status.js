@@ -88,6 +88,10 @@ const render=()=>{
     const el=$("div","source-item");
     el.append($("strong","",candidate.city+" · "+t("Nur Beobachtung","Monitoring only")));
     el.append($("p","source-detail",candidate.scope||""));
+    const checkAge=daysSince(candidate.checked_on);
+    const checked=checkAge===null?t("Letzte Prüfung nicht dokumentiert","Last check not documented"):checkAge<0?t("Ungültiges Prüfdatum","Invalid check date"):t("Zuletzt geprüft: ","Last checked: ")+fmt(candidate.checked_on)+(checkAge>2?t(" · Prüfung veraltet"," · check is outdated"):"");
+    el.append($("p","source-detail",checked));
+    if(checkAge===null||checkAge<0||checkAge>2)el.append($("p","source-warning",t("Erreichbarkeitsstatus nicht aktuell bestätigt","Reachability status not recently confirmed")));
     el.append($("p","source-detail",t("Nachnutzungsstatus: ","Reuse assessment: ")+(candidate.data_rights||t("Nicht bestätigt","Not verified"))));
     if(candidate.status==="unavailable")el.append($("p","source-warning",t("Bei der letzten automatischen Prüfung nicht erreichbar","Unavailable during last automated check")));
     if(/^https:\/\//.test(candidate.url||"")){
