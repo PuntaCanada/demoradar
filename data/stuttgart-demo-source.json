@@ -9,6 +9,9 @@
   "source_bytes_checked": 69470,
   "evidence_fields_found": 4,
   "evidence_fields_total": 5,
+  "evidence_fields_missing": [
+    "event_day_time"
+  ],
   "essential_fields_verified": false,
   "municipal_heading_verified": true,
   "organizer_text_verified": true
