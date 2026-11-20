@@ -15,10 +15,10 @@ export function alertsFromReport(report,formatHealth={},monitorReport={},{today=
    .map(issue=>({city:feed.city,source:feed.source,condition:issue,last_checked:feed.last_checked||null,
     note:"Potential source format/data issue only. No assertion of cancellation, missing demonstrations or complete geographical coverage."}));
  });
- if(!/^20\\d{2}-\\d{2}-\\d{2}$/.test(today)||new Date(today+"T12:00:00Z").toISOString().slice(0,10)!==today)throw Error("Invalid audit day");
+ if(!/^20\d{2}-\d{2}-\d{2}$/.test(today)||new Date(today+"T12:00:00Z").toISOString().slice(0,10)!==today)throw Error("Invalid audit day");
  const monitored=(Array.isArray(monitorReport?.sources)?monitorReport.sources:[]).flatMap(item=>{
   if(!item||!item.city||!item.state||!item.url)return [];
-  const checked=typeof item.checked_on==="string"&&/^20\\d{2}-\\d{2}-\\d{2}$/.test(item.checked_on)?item.checked_on:"";
+  const checked=typeof item.checked_on==="string"&&/^20\d{2}-\d{2}-\d{2}$/.test(item.checked_on)?item.checked_on:"";
   const date=checked?new Date(checked+"T12:00:00Z"):null;
   const valid=date&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===checked;
   const age=valid?Math.round((Date.parse(today+"T12:00:00Z")-date.getTime())/86400000):null;
