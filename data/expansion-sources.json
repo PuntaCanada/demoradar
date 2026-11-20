@@ -10,9 +10,8 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
-      "status": "unavailable",
-      "checked_on": "2026-11-20",
-      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_archive_only",
+      "checked_on": "2026-11-20"
     },
     {
       "city": "Halle (Saale)",
@@ -132,9 +131,9 @@
       "parser": null,
       "data_rights": "Press release reuse permission not verified; monitoring and linking only",
       "scope": "Occasional ahead-of-time official protest notices, no complete public assembly list",
-      "status": "unavailable",
+      "status": "http_restricted",
       "checked_on": "2026-11-20",
-      "error": "HTTP Error 403: Forbidden"
+      "error": "HTTP 403"
     },
     {
       "city": "Leipzig",
@@ -155,9 +154,9 @@
       "parser": null,
       "data_rights": "No verified bulk republication licence; official fact notices linked only",
       "scope": "Detailed verified one-off municipal notice for 20 November 2026, not a rolling list",
-      "status": "unavailable",
+      "status": "http_restricted",
       "checked_on": "2026-11-20",
-      "error": "HTTP Error 403: Forbidden"
+      "error": "HTTP 403"
     },
     {
       "city": "Leipzig",
@@ -200,9 +199,8 @@
       "parser": null,
       "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
       "scope": "Contact route to official assembly authority; do not import registrations without permission",
-      "status": "unavailable",
-      "checked_on": "2026-11-20",
-      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-20"
     },
     {
       "city": "Hamburg",
@@ -212,9 +210,8 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "unavailable",
-      "checked_on": "2026-11-20",
-      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-20"
     },
     {
       "city": "Bremen",
@@ -224,9 +221,9 @@
       "parser": null,
       "data_rights": "Public police press archive, no verified general event-data license; link and monitor only",
       "scope": "Occasional press notices mention assemblies, but this is not an official upcoming-assemblies feed",
-      "status": "unavailable",
+      "status": "http_restricted",
       "checked_on": "2026-11-20",
-      "error": "HTTP Error 403: Forbidden"
+      "error": "HTTP 403"
     },
     {
       "city": "Hamburg",
