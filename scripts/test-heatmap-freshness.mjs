@@ -10,7 +10,7 @@ assert.ok(registry.includes("const oneOff=new Set(entries.filter("),"Public regi
 assert.ok(registry.includes("const archive=new Set(entries.filter("),"Public registry must count historical notices separately");
 assert.ok(source.includes("const historical=new Set(rows.filter("),"Heatmap must separate historical notices from fresh one-offs");
 assert.ok(source.includes("const currentNotices=new Set(rows.filter("),"Heatmap must distinguish fresh one-off notices");
-assert.ok(source.includes("keine landesweite Vollständigkeit"),"Neither category establishes full state coverage");
+assert.ok(source.includes("Keine landesweite Vollständigkeit")&&registry.includes("keine landesweite Vollständigkeit"),"Neither category establishes full state coverage");
 assert.ok(registry.includes("keine landesweite Vollständigkeit"),"Explain that observation is not complete state coverage");
 
 const monitored=JSON.parse(readFileSync("data/expansion-sources.json","utf8")).sources;
