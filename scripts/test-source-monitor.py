@@ -60,6 +60,21 @@ with patch.object(module.urllib.request,"urlopen",return_value=ValidWeimar()):
  assert checked["future_date_count"]==4 and checked["future_dates_verified"][0]=="2026-11-22"
  assert "events" not in checked
 land_html=b"<h1>Versammlungen</h1><div>Mittwoch, 16.11.2026</div><div>Freitag, 13.11.2026</div>"
+# Long municipal CMS navigation may put actual dates beyond the first 160 kB.
+class LongWeimar(Response):
+ def read(self,n):
+  assert n>=300_000
+  return b"<nav>"+b"Navigation links and official site sections. "*5000+b"</nav>"+good_html
+with patch.object(module.urllib.request,"urlopen",return_value=LongWeimar()):
+ long_check=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
+ assert long_check["future_date_count"]==4 and long_check["status"]=="reachable_upcoming_list_research_only"
+class LongLandsberg(Response):
+ def read(self,n):
+  assert n>=300_000
+  return b"<nav>"+b"County navigation and headers "*9000+b"</nav>"+land_html+b"<p>Thema der Versammlung</p>"
+with patch.object(module.urllib.request,"urlopen",return_value=LongLandsberg()):
+ lands=module.inspect(next(s for s in module.SOURCES if s["city"]=="Landsberg am Lech"))
+ assert lands["date_conflicts"] and lands["status"]=="reachable_monitor_only_not_a_feed"
 assert len(module.verify_landsberg_weekdays(land_html))==1
 assert "weekday contradicts Mittwoch" in module.verify_landsberg_weekdays(land_html)[0]
 class ReplacedPage(Response):
