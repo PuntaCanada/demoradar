@@ -29,7 +29,7 @@ export function checkAdmissions(health,licences){
   // An auditor's approval alone is not proof that a current, machine-readable
   // list of future assemblies exists. Require independent, dated verification.
   const v=a.verification;
-  const isDate=d=>typeof d==="string"&&/^20\\d{2}-\\d{2}-\\d{2}$/.test(d)&&!Number.isNaN(Date.parse(d))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
+  const isDate=d=>typeof d==="string"&&/^20\d{2}-\d{2}-\d{2}$/.test(d)&&!Number.isNaN(Date.parse(d))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
   const allowedFormat=new Set(["json","csv","rss","api-json","api-csv","api-rss"]);
   if(!v||!allowedFormat.has(v.format)||!/^https:\/\//.test(v.endpoint_url||"")||
      v.reachable!==true||v.schema_valid!==true||v.has_future_event_dates!==true||
