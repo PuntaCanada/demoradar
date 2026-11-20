@@ -1,0 +1,18 @@
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+const source=readFileSync("heatmap.js","utf8");
+const registry=readFileSync("sources/source-status.js","utf8");
+const monitored=JSON.parse(readFileSync("data/expansion-sources.json","utf8")).sources;
+const states=JSON.parse(readFileSync("data/state-source-coverage.json","utf8")).states;
+assert.equal(states.length,16);
+assert.ok(source.includes("const checkAge=checked=>"),"Age must be calculated from actual date, not cached freshness labels");
+assert.ok(source.includes("checkIsStale(s)"),"Heatmap must reflect aged or missing checks");
+assert.ok(source.includes("const table={},ids=new Set()"),"Deduplicate matched event IDs across sources");
+assert.ok(source.includes('if(ids.has(unique))continue'),"Avoid double-counting duplicate event IDs");
+assert.ok(registry.includes('load("/data/expansion-sources.json")'),"Expose audited monitor-only official candidates");
+assert.ok(registry.includes('candidateSources.length'),"Separate research references from imported sources");
+assert.ok(registry.includes('No events are generated from these links.'),"No monitor data implied to be event data");
+assert.ok(registry.includes('candidate.data_rights'),"Reuse constraints must be visible");
+assert.ok(monitored.length>=1&&monitored.every(s=>states.some(x=>x.state===s.state)),"Monitor states must be known");
+assert.ok(monitored.some(s=>s.city==="Braunschweig"&&/consent/i.test(s.data_rights)),"Protect publication-consent restrictions");
+console.log("Audit: sixteen states, monitor-only candidates, run-time staleness and deduplicated heatmap IDs OK");

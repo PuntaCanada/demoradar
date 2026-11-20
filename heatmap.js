@@ -11,6 +11,8 @@ const tier=n=>n>=50?5:n>=15?4:n>=5?3:n>=2?2:n>=1?1:0;
 let shapes=null,records=[],coverage=null,sourceHealth=null,sourceFormat=null;
 const svgNS="http://www.w3.org/2000/svg";
 const sourceFor=state=>coverage?.states?.find(s=>s.state===state)||null;
+const checkAge=checked=>{if(!/^20\d{2}-\d{2}-\d{2}$/.test(String(checked||"")))return null;const date=new Date(checked+"T12:00:00Z");if(!Number.isFinite(date.getTime())||date.toISOString().slice(0,10)!==checked)return null;return Math.floor((Date.parse(todayBerlin()+"T12:00:00Z")-date.getTime())/86400000)};
+const checkIsStale=entry=>{const age=checkAge(entry.last_checked);return age===null||age<0||age>2};
 const sourceLabel=state=>{
  const s=sourceFor(state);
  return T(s?.status==="regional_partial"?"map.sourceRegional":s?.status==="local_partial"?"map.sourceLocal":"map.sourceMissing");
@@ -22,7 +24,7 @@ const formatIssues=state=>(sourceFormat?.feeds||[])
 const healthDetail=state=>{
  const entries=(sourceHealth?.sources||[]).filter(s=>s.state===state);
  const label=status=>T(status==="observed_data"?"map.healthActive":status==="verified_one_off"?"map.healthOneOff":status==="verified_historical_one_off"?"map.healthArchive":status==="no_matching_items"?"map.healthEmpty":status==="unavailable"?"map.healthUnavailable":"map.healthUnknown");
- const info=entries.map(s=>s.city+": "+label(s.status)+(s.check_freshness==="outdated_check"?" · "+T("map.checkOutdated"):s.check_freshness==="recent"?" · "+T("map.checkRecent"):"")+(s.last_checked?" ("+s.last_checked+")":""));
+ const info=entries.map(s=>s.city+": "+label(s.status)+(checkIsStale(s)?" · "+T("map.checkOutdated"):" · "+T("map.checkRecent"))+(s.last_checked?" ("+s.last_checked+")":""));
  return [...info,...formatIssues(state)].join(" · ");
 };
 const sourceDetails=state=>{
@@ -39,10 +41,11 @@ function endDate(days){
 }
 function counts(){
  const min=todayBerlin(),max=endDate(Number(range.value)||7);
- const table={};
+ const table={},ids=new Set();
  for(const e of records){
   if(!e||!e.state||!e.date||e.date<min||e.date>=max)continue;
   if(["cancelled","withdrawn","stopped"].includes(e.status_code))continue;
+  const unique=String(e.id||"");if(unique){if(ids.has(unique))continue;ids.add(unique)}
   table[e.state]=(table[e.state]||0)+1;
  }
  return table
@@ -102,8 +105,8 @@ function draw(){
   const detail=sourceDetails(item.state);
   const health=document.createElement("small");health.className="heatmap-health-label";
   const stateHealth=(sourceHealth?.sources||[]).filter(s=>s.state===item.state);
-  if(stateHealth.some(s=>s.status==="unavailable"||s.check_freshness==="outdated_check")||formatIssues(item.state).length)health.classList.add("is-warning");
-  else if(stateHealth.every(s=>s.status==="unknown"))health.classList.add("is-muted");
+  if(stateHealth.some(s=>s.status==="unavailable"||checkIsStale(s))||formatIssues(item.state).length)health.classList.add("is-warning");
+  else if(stateHealth.length===0||stateHealth.every(s=>s.status==="unknown"))health.classList.add("is-muted");
   health.textContent=healthDetail(item.state);
   if(health.textContent)caption.title=health.textContent;
   btn.title=detail;
