@@ -69,6 +69,13 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
   weimar.status==="source_unavailable_no_new_import"?"unavailable":
   weimar.status==="incomplete_original_no_new_import"?"no_matching_items":"unknown",
   weimar.count,"Four individually reviewed factual assembly notices on 22-25 Nov; no recurring import licence",weimar.checked_on);
+ const oldesloe=files.badOldesloe||{};
+ add("Bad Oldesloe","Schleswig-Holstein","Polizeidirektion Ratzeburg",
+  oldesloe.status==="verified_one_off"?"verified_one_off":
+  oldesloe.status==="source_unavailable_no_import"?"unavailable":
+  oldesloe.status==="unverified_original_no_import"?"no_matching_items":"unknown",
+  oldesloe.count,"Single police-announced assembly on 21 November 2026; time and exact venue unconfirmed; not a recurring source",
+  oldesloe.checked_on);
  const frankfurt=files.frankfurt||{};
  add("Frankfurt am Main","Hessen","Stadt Frankfurt",frankfurt.status==="ok"?"verified_one_off":frankfurt.status==="unavailable"?"unavailable":"unknown",frankfurt.count,"Single notice, not complete state or city coverage");
  return {version:1,method:"Observed importer outcomes only; neither state completeness nor actual number of protests can be inferred.",sources:out};
@@ -82,7 +89,7 @@ if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
   policeFrankfurtArchive:read("data/frankfurt-police-archive-source.json"),
   policeLeipzig:read("data/leipzig-police-source.json"),
   leipzigArchive:read("data/leipzig-archive-source.json"),
-  sourceStatus:read("data/source-status.json"),freiburg:read("data/freiburg-source.json"),weimarOneoffs:read("data/weimar-oneoffs-source.json"),frankfurt:read("data/frankfurt-source.json")});
+  sourceStatus:read("data/source-status.json"),freiburg:read("data/freiburg-source.json"),badOldesloe:read("data/bad-oldesloe-police-source.json"),weimarOneoffs:read("data/weimar-oneoffs-source.json"),frankfurt:read("data/frankfurt-source.json")});
  const prev=read("data/source-quality.json");
  if(JSON.stringify(next)===JSON.stringify(prev)){console.log("Source quality unchanged");process.exit(0)}
  writeFileSync("data/source-quality.json",JSON.stringify(next,null,2)+"\n");
