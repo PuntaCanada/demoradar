@@ -15,6 +15,10 @@ for(const item of audit.feeds){
  assert.ok(/^https:\/\//.test(item.source_url),"Evidence must have official https source");
  assert.ok(["restricted_metadata","rights_not_verified","open_verified"].includes(item.classification));
  assert.equal(item.reuse_confirmed,item.classification==="open_verified");
+ assert.equal(typeof item.new_automated_import_allowed,"boolean");
+ assert.match(item.reviewed_on,/^20\d\d-\d\d-\d\d$/);
+ assert.ok(item.approval_reason.length>30);
+ if(!item.reuse_confirmed)assert.equal(item.new_automated_import_allowed,false,"No import admission on uncertain rights");
  const id=item.state+"/"+item.source;assert.ok(!names.has(id),"Duplicate licence claims");names.add(id);
 }
 assert.equal(audit.feeds.find(x=>x.source==="Polizei Berlin").classification,"restricted_metadata");
@@ -22,6 +26,7 @@ assert.ok(audit.feeds.find(x=>x.source==="Polizei Berlin").source_url.includes("
 const registry=read("sources/source-status.js"),map=read("heatmap.js");
 assert.ok(registry.includes('load("/data/source-reuse-audit.json")'));
 assert.ok(registry.includes("reuseAudits.find("));
+assert.ok(registry.includes("reuse.new_automated_import_allowed"),"Show explicit new importer admission decision");
 assert.ok(registry.includes('No unambiguous open reuse licence confirmed'));
 assert.ok(map.includes('fetch("/data/source-reuse-audit.json"'));
 assert.ok(map.includes("reuseInfo(state)")&&map.includes("reuseAudits.some("));

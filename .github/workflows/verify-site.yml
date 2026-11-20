@@ -21,6 +21,7 @@ on:
       - 'data/source-format-health.json'
       - 'data/source-reuse-audit.json'
       - 'scripts/test-source-reuse-audit.mjs'
+      - 'scripts/check-source-admission.mjs'
       - 'scripts/source-format-health.mjs'
       - 'scripts/test-source-format-health.mjs'
       - 'data/berlin-source.json'
@@ -90,6 +91,7 @@ jobs:
           node scripts/test-source-registry.mjs
           node scripts/test-source-quality.mjs
           node scripts/test-source-reuse-audit.mjs
+          node scripts/check-source-admission.mjs
           node scripts/test-berlin-feed.mjs
           python3 scripts/test-rostock-source.py
           python3 scripts/test-dresden-archive.py

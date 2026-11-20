@@ -16,6 +16,7 @@ assert.equal(find("LIVE Demo Berlin Klimaschutz").length,0,"one theme word is no
 assert.equal(find("Demo Berlin Energiewende Klimaschutz","2026-11-24T12:00:00Z").length,0,"wrong date");
 assert.equal(find("Mein Gaming Stream Berlin Klimaschutz Energiewende").length,0,"demo context missing");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"recording").length,1);
+for(const code of ["cancelled","withdrawn","stopped"])assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"recording",[{...events[0],status_code:code}]).length,0,"Blocked archive match to "+code+" assembly");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"premiere").length,0,"premiere status is not automatically an archive or live event");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"unknown").length,0,"unknown platform status cannot match");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende","2026-11-21T10:00:00Z","recording").length,1);
