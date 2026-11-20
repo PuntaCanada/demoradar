@@ -133,6 +133,16 @@
       "check_freshness": "recent"
     },
     {
+      "city": "Weimar",
+      "state": "Thüringen",
+      "source": "Stadt Weimar (vier Einzelanmeldungen)",
+      "status": "verified_one_off",
+      "count": 4,
+      "scope": "Four individually reviewed factual assembly notices on 22-25 Nov; no recurring import licence",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
       "city": "Frankfurt am Main",
       "state": "Hessen",
       "source": "Stadt Frankfurt",

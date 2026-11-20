@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-20T14:46:20.890Z",
-  "count": 1368,
+  "updated_at": "2026-11-20T14:55:20.502Z",
+  "count": 1372,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -1797,6 +1797,21 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "weimar-oneoff-6ae6b6ac3decce82",
+      "country": "DE",
+      "state": "Thüringen",
+      "city": "Weimar",
+      "date": "2026-11-22",
+      "start": "15:00",
+      "end": "18:00",
+      "title": "Für Frieden und Solidarität mit der Ukraine",
+      "location": "Goetheplatz",
+      "route": "",
+      "source": "Stadt Weimar – einzeln geprüfte Versammlungsanmeldung",
+      "source_url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
+      "source_status": "Amtlich bestätigte Einzelanmeldung; keine automatische Übernahme aller Termine oder Nachnutzungslizenz für Bulk-Daten behauptet"
+    },
+    {
       "id": "berlin-239",
       "country": "DE",
       "state": "Berlin",
@@ -2329,6 +2344,21 @@
       "source_status": "behördlich veröffentlicht"
     },
     {
+      "id": "weimar-oneoff-d562b0e2e5c4ea72",
+      "country": "DE",
+      "state": "Thüringen",
+      "city": "Weimar",
+      "date": "2026-11-23",
+      "start": "19:00",
+      "end": "21:00",
+      "title": "Bunte Begegnung - Für Demokratie und Toleranz, Mit-Menschlichkeit gegen faschistische Rhetorik und Faschismus",
+      "location": "Goetheplatz",
+      "route": "",
+      "source": "Stadt Weimar – einzeln geprüfte Versammlungsanmeldung",
+      "source_url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
+      "source_status": "Amtlich bestätigte Einzelanmeldung; keine automatische Übernahme aller Termine oder Nachnutzungslizenz für Bulk-Daten behauptet"
+    },
+    {
       "id": "berlin-317",
       "country": "DE",
       "state": "Berlin",
@@ -2503,6 +2533,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "weimar-oneoff-39144b262b4666a4",
+      "country": "DE",
+      "state": "Thüringen",
+      "city": "Weimar",
+      "date": "2026-11-24",
+      "start": "16:00",
+      "end": "17:00",
+      "title": "Frieden schaffen ohne Waffen",
+      "location": "Goetheplatz",
+      "route": "",
+      "source": "Stadt Weimar – einzeln geprüfte Versammlungsanmeldung",
+      "source_url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
+      "source_status": "Amtlich bestätigte Einzelanmeldung; keine automatische Übernahme aller Termine oder Nachnutzungslizenz für Bulk-Daten behauptet"
     },
     {
       "id": "berlin-350",
@@ -2904,6 +2949,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "weimar-oneoff-095530b56f615872",
+      "country": "DE",
+      "state": "Thüringen",
+      "city": "Weimar",
+      "date": "2026-11-25",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Bürgerinitiative: Friedenspreis für Kinder und Jugendliche",
+      "location": "Goetheplatz",
+      "route": "",
+      "source": "Stadt Weimar – einzeln geprüfte Versammlungsanmeldung",
+      "source_url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
+      "source_status": "Amtlich bestätigte Einzelanmeldung; keine automatische Übernahme aller Termine oder Nachnutzungslizenz für Bulk-Daten behauptet"
     },
     {
       "id": "berlin-428",
