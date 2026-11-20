@@ -31,6 +31,7 @@ assert.ok(script.includes('textContent=txt'),"All source descriptions must be pl
 assert.ok(!script.includes(".innerHTML"),"Never inject untrusted source names as HTML");
 assert.ok(script.includes('rel="noopener noreferrer"')||script.includes('link.rel="noopener noreferrer"'));
 assert.ok(script.includes('Promise.all('));
+assert.ok(script.includes('candidate.type==="official_police_historical_notice"'),"Historical police notices must be labelled as archive-only");
 assert.ok(script.includes('data/source-format-health.json'));
 for(const key of ['kind==="feed"','kind==="oneoff"','kind==="archive"','kind==="warnings"','kind==="unverified"','sourceReset.addEventListener','sourceSort.addEventListener'])assert.ok(script.includes(key),"Missing category or reset behavior: "+key);
 const de=readFileSync("index.html","utf8"),en=readFileSync("en/index.html","utf8");
