@@ -10,6 +10,7 @@ on:
       - 'scripts/test-source-monitor.py'
       - 'scripts/stream-matcher.mjs'
       - 'scripts/test-stream-matcher.mjs'
+      - 'scripts/update-streams.mjs'
       - 'data/state-source-coverage.json'
       - 'data/source-quality.json'
       - 'data/source-format-health.json'
@@ -35,6 +36,7 @@ jobs:
           node scripts/test-source-registry.mjs
           node scripts/test-heatmap-coverage.mjs
           node scripts/test-stream-matcher.mjs
+          node --check scripts/update-streams.mjs
           python3 scripts/test-source-monitor.py
       - name: Verify Chromium available and run real browser regression
         run: |
