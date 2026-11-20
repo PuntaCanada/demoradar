@@ -88,8 +88,8 @@ export function nearbyDate(timestamp,eventDay,status){
 // A generic "Frankfurt" recording can otherwise falsely attach to Frankfurt (Oder) or Main.
 export function unambiguousCity(title,city){
  const c=normalize(city),v=normalize(title);
- if(c==="frankfurt am main")return /\\bfrankfurt (?:am )?main\\b/.test(v);
- if(c==="frankfurt oder")return /\\bfrankfurt (?:an der )?oder\\b/.test(v);
+ if(c==="frankfurt am main")return /\bfrankfurt (?:am )?main\b/.test(v);
+ if(c==="frankfurt oder")return /\bfrankfurt (?:an der )?oder\b/.test(v);
  return true;
 }
 export function matchEvents(video,events){
