@@ -11,6 +11,8 @@ on:
       - 'scripts/today-selection.mjs'
       - 'scripts/test-today-selection.mjs'
       - 'scripts/test-seo-reciprocity.mjs'
+      - 'scripts/verify-public-crawlability.mjs'
+      - 'scripts/test-public-crawlability.mjs'
       - 'scripts/build-language-pages.mjs'
       - 'sources/index.html'
       - 'en/sources/index.html'
@@ -96,6 +98,7 @@ jobs:
           node scripts/test-today-pages.mjs
           node scripts/test-today-selection.mjs
           node scripts/test-seo-reciprocity.mjs
+          node scripts/test-public-crawlability.mjs
           node --check live.js
           node --check heatmap.js
           node --check i18n.js
@@ -194,3 +197,5 @@ jobs:
             esac
           done
           echo "Cloudflare endpoints are reachable and include expected data."
+      - name: Prüfe echte Google-Crawlability aller acht öffentlichen Seiten
+        run: node scripts/verify-public-crawlability.mjs --live

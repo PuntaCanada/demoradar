@@ -26,6 +26,8 @@ on:
       - 'scripts/today-selection.mjs'
       - 'scripts/test-today-selection.mjs'
       - 'scripts/test-seo-reciprocity.mjs'
+      - 'scripts/verify-public-crawlability.mjs'
+      - 'scripts/test-public-crawlability.mjs'
       - 'heute/**'
       - 'en/today/**'
       - 'scripts/test-browser.mjs'
@@ -72,6 +74,7 @@ jobs:
           node scripts/test-today-pages.mjs
           node scripts/test-today-selection.mjs
           node scripts/test-seo-reciprocity.mjs
+          node scripts/test-public-crawlability.mjs
           node scripts/test-frontend.mjs
           node --check scripts/update-streams.mjs
           python3 scripts/test-source-monitor.py

@@ -2,6 +2,7 @@ name: Aktualisiere Demonstrationen Deutschland
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
@@ -51,6 +52,8 @@ on:
       - 'scripts/today-selection.mjs'
       - 'scripts/test-today-selection.mjs'
       - 'scripts/test-seo-reciprocity.mjs'
+      - 'scripts/verify-public-crawlability.mjs'
+      - 'scripts/test-public-crawlability.mjs'
       - 'heute/index.html'
       - 'en/today/index.html'
       - 'scripts/update-news.py'
@@ -165,6 +168,8 @@ jobs:
           node scripts/test-today-pages.mjs
           node scripts/test-today-selection.mjs
           node scripts/test-seo-reciprocity.mjs
+          # Run only against checked-out files; a previously queued run may predate new test files.
+          node scripts/test-public-crawlability.mjs
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
           node scripts/test-community.mjs
