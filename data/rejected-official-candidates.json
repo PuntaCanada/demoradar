@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-20",
+  "method": "Negative findings from official catalogue entries; open licence of an unrelated dataset never qualifies it as a demonstration calendar. Candidates are research only; never imported.",
+  "candidates": [
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "title": "Eventlotse Daten Hamburg",
+      "url": "https://suche.transparenz.hamburg.de/dataset/eventlotse-daten-hamburg19",
+      "format": "official geospatial event-space dataset",
+      "rights": "Datenlizenz Deutschland Namensnennung 2.0",
+      "recurring_demo_dates": false,
+      "decision": "rejected_not_an_assembly_calendar",
+      "reason": "This dataset describes potential municipal event sites and their geometries, not scheduled political assemblies. An open licence and structured content cannot establish relevant upcoming demonstrations."
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "title": "Hamburg multi-purpose sports hall building record",
+      "url": "https://suche.transparenz.hamburg.de/dataset/erweiterung-der-zuschauerzahl-der-sporthalle-als-mehrzweckhalle-von-1573-auf-3400-fuer-spo-20113",
+      "format": "official administrative building application record",
+      "rights": "Datenlizenz Deutschland Namensnennung 2.0",
+      "recurring_demo_dates": false,
+      "decision": "rejected_keyword_false_positive",
+      "reason": "Keyword 'Versammlungen' refers to the permitted audience count at a building, not assembly dates. Must not be imported as demonstrations."
+    }
+  ]
+}
