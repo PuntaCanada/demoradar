@@ -43,9 +43,9 @@ function buildEnglish(){
  html=html.replace(/href="\/community\/"/g,'href="/en/community/"');
  html=html.replace(/href="\/sources\/"/g,'href="/en/sources/"');
  html=html.replace('<a href="/heute/" aria-label="Heute gemeldete Demonstrationen als eigene Seite">Alle heutigen Meldungen</a>',
-  '<a href="/en/today/" aria-label="Today\\'s source-listed demonstrations on a separate page">All today\\'s reports</a>');
+  '<a href="/en/today/" aria-label="Today\'s source-listed demonstrations on a separate page">All today\'s reports</a>');
  html=html.replace('<a class="quick-link" href="/heute/"><span aria-hidden="true">↗</span> <span>Alle heutigen Meldungen</span></a>',
-  '<a class="quick-link" href="/en/today/"><span aria-hidden="true">↗</span> <span>All today\\'s reports</span></a>');
+  '<a class="quick-link" href="/en/today/"><span aria-hidden="true">↗</span> <span>All today\'s reports</span></a>');
 
  html=html.replace('data-language="de" aria-pressed="true"','data-language="de" aria-pressed="false"').replace('data-language="en" aria-pressed="false"','data-language="en" aria-pressed="true"');
  return html;
