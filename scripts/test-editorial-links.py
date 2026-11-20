@@ -43,7 +43,7 @@ class EditorialSafetyTests(unittest.TestCase):
   self.assertEqual(match_links([dict(event,date="2026-11-22")],[link],TODAY,"2026-11-20"),{})
   self.assertEqual(match_links([dict(event,title="Kundgebung für andere Anliegen")],[link],TODAY,"2026-11-20"),{})
   self.assertEqual(match_links([event,dict(event,id="duplicate-assembly")],[link],TODAY,"2026-11-20"),{})
-  self.assertFalse(is_allowed_link(dict(link,published_on="2026-11-12")),"Nine days in advance is too long for automatic event association")
+  self.assertEqual(match_links([event],[dict(link,published_on="2026-11-12")],TODAY,"2026-11-20"),{},"Nine days in advance is too long for automatic event association")
  def test_old_article_no_future_link(self):
   self.assertEqual(match_links([EVENT],[dict(BASE,published_on="2026-11-08")],TODAY),{})
  def test_checked_and_access_blocked_links_remain_context_only(self):
