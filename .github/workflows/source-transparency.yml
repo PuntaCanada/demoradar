@@ -3,6 +3,9 @@ on:
   pull_request:
     paths:
       - 'sources/**'
+      - 'heatmap.js'
+      - 'data/expansion-sources.json'
+      - 'scripts/test-heatmap-freshness.mjs'
       - 'data/state-source-coverage.json'
       - 'data/source-quality.json'
       - 'data/source-format-health.json'
@@ -24,6 +27,9 @@ jobs:
         run: |
           node --check sources/source-status.js
           node scripts/test-source-transparency.mjs
+          node scripts/test-heatmap-freshness.mjs
+          node scripts/test-source-registry.mjs
+          node scripts/test-heatmap-coverage.mjs
           node scripts/test-stream-matcher.mjs
       - name: Verify Chromium available and run real browser regression
         run: |
