@@ -4,6 +4,9 @@ Reachability is NOT event availability, licensing permission, or completeness.
 No speculative events are generated and no page text is republished.
 """
 import json
+import re
+from html.parser import HTMLParser
+from datetime import date
 import socket
 from datetime import datetime, timezone
 import urllib.error
@@ -12,6 +15,7 @@ from pathlib import Path
 
 OUTPUT=Path("data/expansion-sources.json")
 SOURCES=[
+ {"city":"Weimar","state":"Thüringen","type":"official_assembly_upcoming_html","url":"https://stadt.weimar.de/de/versammlungsanmeldungen.html","parser":None,"data_rights":"Official listing of confirmed upcoming assembly registrations; no source-specific open machine reuse licence or structured JSON/CSV/RSS endpoint verified. Research and link only, never automated import.","scope":"Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register."},
  {"city":"Magdeburg","state":"Sachsen-Anhalt","type":"official_police_historical_notice","url":"https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821","parser":None,"data_rights":"Single police after-action report, no verified open event-data reuse licence; retain as original link only","scope":"Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed"},
  {"city":"Halle (Saale)","state":"Sachsen-Anhalt","type":"official_police_historical_notice","url":"https://polizei.sachsen-anhalt.de/bs/pressemitteilungen/polizei?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=695807","parser":None,"data_rights":"Single police after-action report, no verified open event-data reuse licence; retain as original link only","scope":"Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming"},
  {"city":"Schwerin","state":"Mecklenburg-Vorpommern","type":"official_assembly_authority_guidance","url":"https://www.schwerin.de/mein-schwerin/leben/ordnung-sicherheit-verkehr/ordnung-sicherheit/Versammlungsbehoerde/index.html","parser":None,"data_rights":"Official registration and authority information, not a public event calendar or a licence for event data reuse; monitor only","scope":"Schwerin municipal assembly registration service; no recurring event list or licensed data format confirmed"},
@@ -34,6 +38,59 @@ SOURCES=[
  {"city":"Bremen","state":"Bremen","type":"official_police_press_archive","url":"https://www.polizei.bremen.de/news/pressestelle/pressearchiv-5034","parser":None,"data_rights":"Public police press archive, no verified general event-data license; link and monitor only","scope":"Occasional press notices mention assemblies, but this is not an official upcoming-assemblies feed"},
  {"city":"Hamburg","state":"Hamburg","type":"official_registration_information","url":"https://www.hamburg.de/service/info/111097758/","parser":None,"data_rights":"Not an event feed; no bulk licence applicable","scope":"Registration rules and contacts only; not a future event source"},
 ]
+
+class BodyText(HTMLParser):
+ def __init__(self):
+  super().__init__()
+  self.parts=[]
+  self.skip=0
+ def handle_starttag(self,tag,attrs):
+  if tag in ("script","style"):self.skip+=1
+ def handle_endtag(self,tag):
+  if tag in ("script","style") and self.skip:self.skip-=1
+ def handle_data(self,data):
+  if not self.skip:self.parts.append(data)
+
+GERMAN_WEEKDAYS=("Mo","Di","Mi","Do","Fr","Sa","So")
+def verify_weimar_dates(raw,today=None):
+ """Validate genuine dated rows in a visible official list; no title/content import."""
+ today=today or datetime.now(timezone.utc).date()
+ parser=BodyText()
+ parser.feed(raw.decode("utf-8",errors="replace"))
+ text=" ".join(parser.parts)
+ if "Bestätigte Versammlungsanmeldungen in Weimar" not in text:
+  raise ValueError("Weimar confirmed-assembly heading missing")
+ # Page uses 'So, 22.11.26' before each row; count only calendar-valid weekday matches.
+ hits=re.findall(r"\b(Mo|Di|Mi|Do|Fr|Sa|So),\s*(\d{1,2})\.(\d{1,2})\.(20\d{2}|\d{2})\b",text)
+ valid=set()
+ inconsistent=[]
+ for wd,day,month,year in hits:
+  year=int(year) if len(year)==4 else 2000+int(year)
+  try:d=date(year,int(month),int(day))
+  except ValueError:
+   inconsistent.append(f"{day}.{month}.{year} invalid")
+   continue
+  if GERMAN_WEEKDAYS[d.weekday()]!=wd:
+   inconsistent.append(f"{day}.{month}.{year} weekday mismatch")
+   continue
+  if d>=today:valid.add(d.isoformat())
+ return sorted(valid),inconsistent
+
+def verify_landsberg_weekdays(raw):
+ """Report contradictions, never silently invent a corrected date."""
+ parser=BodyText()
+ parser.feed(raw.decode("utf-8",errors="replace"))
+ text=" ".join(parser.parts)
+ names={"Montag":0,"Dienstag":1,"Mittwoch":2,"Donnerstag":3,"Freitag":4,"Samstag":5,"Sonntag":6}
+ issues=[]
+ for name,day,month,year in re.findall(r"\b(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag),?\s*(\d{1,2})\.(\d{1,2})\.(20\d{2})\b",text):
+  try:d=date(int(year),int(month),int(day))
+  except ValueError:
+   issues.append(f"{day}.{month}.{year}: invalid date")
+   continue
+  if d.weekday()!=names[name]:issues.append(f"{day}.{month}.{year}: weekday contradicts {name}")
+ return issues
+
 def inspect(item):
  output={**item,"status":"unavailable","checked_on":datetime.now(timezone.utc).date().isoformat()}
  req=urllib.request.Request(item["url"],headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
@@ -41,6 +98,15 @@ def inspect(item):
   with urllib.request.urlopen(req,timeout=12) as response:
    payload=response.read(160_000)
    if response.status!=200 or len(payload)<400:raise ValueError("Empty or non-200 page")
+   if item["type"]=="official_assembly_upcoming_html":
+    dates,conflicts=verify_weimar_dates(payload)
+    output["future_dates_verified"]=dates
+    output["future_date_count"]=len(dates)
+    output["date_conflicts"]=conflicts
+    output["status"]="reachable_upcoming_list_research_only" if dates and not conflicts else ("content_unverified" if conflicts else "reachable_without_upcoming_dates")
+    return output
+   if item["type"]=="official_assembly_list_html":
+    output["date_conflicts"]=verify_landsberg_weekdays(payload)
    # A generic HTTP 200 is not enough to claim a working assembly register.
    if item["type"]=="official_assembly_list_html":
     decoded=payload.decode("utf-8",errors="replace").lower()
