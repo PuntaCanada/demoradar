@@ -97,6 +97,8 @@ export function matchEvents(video,events){
  // Historical uploads and live broadcasts are proposals only; unknown platform status must never be paired.
  if(!/(?:^|\W)(?:demo|demonstration|kundgebung|protest|mahnwache|streik|aufzug|versammlung|kundgebungen|demos|gegendemo|gegendemos|montagsdemo|aufmarsch|naziaufmarsch)(?:\W|$)/i.test(video.title))return [];
  if(ambiguousOrInvalidTitleDates(video.title))return [];
+ // If the platform supplies the actual broadcast start, do not override that evidence with a title date or later upload date.
+ if(video.broadcast_started_at&&!localDay(video.broadcast_started_at))return [];
  const tokens=new Set(topics(video.title));
  const options=[];
  for(const event of events){
@@ -107,6 +109,7 @@ export function matchEvents(video,events){
   // when an edited excerpt was uploaded days later. Keep it a proposal only.
   const namedDay=explicitDateInTitle(video.title);
   if(namedDay&&namedDay!==event.date)continue;
+  if(video.broadcast_started_at&&localDay(video.broadcast_started_at)!==event.date)continue;
   const posted=new Date(video.published_at||video.date);
   const eventDay=new Date(event.date+"T12:00:00Z");
   const retrospect=video.status==="recording"&&namedDay===event.date&&
