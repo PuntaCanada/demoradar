@@ -62,6 +62,10 @@ def is_allowed_link(link):
  except ValueError:return False
  if parts.scheme!="https" or parts.hostname not in DOMAINS[publisher] or parts.username or parts.password or parts.port or not parts.path.startswith("/"):return False
  if parts.fragment:return False
+ verification=link.get("url_check_status")
+ if verification not in (None,"content_verified","access_inconclusive"):return False
+ if verification is not None and not parse_day(link.get("url_check_date")):return False
+
  if not parse_day(link.get("event_day")) or not parse_day(link.get("published_on")):return False
  if abs((parse_day(link["published_on"])-parse_day(link["event_day"])).days)>2:return False
  phrases=link.get("match_phrases")
@@ -88,7 +92,7 @@ def match_links(events,links,today=None,reviewed_on=None):
   e=matching[0]
   item={"url":link["url"],"source":link["publisher"],"title":link["label"],
    "published":link["published_on"],"match_type":"independently linked editorial context; not event confirmation",
-   "reviewed_on":reviewed_on}
+   "reviewed_on":reviewed_on,"url_check_status":link.get("url_check_status","access_inconclusive")}
   bucket=results.setdefault(str(e["id"]),[])
   if not any(x["url"]==item["url"] for x in bucket):bucket.append(item)
  return {key:rows[:3] for key,rows in results.items()}
