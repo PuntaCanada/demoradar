@@ -157,10 +157,17 @@ const render=()=>{
     if(candidate.type==="official_assembly_upcoming_html"){
      const verified=Array.isArray(candidate.future_dates_verified)?candidate.future_dates_verified.filter(validDay):[];
      el.append($("p","source-detail",t("Amtliche Zukunftsterminliste · belegte Veranstaltungstage: ","Official upcoming-assembly list · evidenced event dates: ")+verified.length));
+     if(Number.isInteger(candidate.future_announcement_rows_verified))el.append($("p","source-detail",t("Geprüfte datierte Bekanntmachungszeilen: ","Audited dated notice rows: ")+candidate.future_announcement_rows_verified));
      if(verified.length)el.append($("p","source-detail",verified.map(fmt).join(" · ")));
      el.append($("p","source-warning",t("Keine bestätigte offene Bulk-Nachnutzungslizenz: Originaltermine bitte beim Amt nachsehen; kein automatischer Eventimport.","No verified open bulk reuse licence: consult the original schedule; no automatic event import.")));
     }
     if(Array.isArray(candidate.date_conflicts)&&candidate.date_conflicts.length)el.append($("p","source-warning",t("Datum/Wochentag-Konflikte: ","Date/weekday inconsistencies: ")+candidate.date_conflicts.join("; ")+t(" · keine automatische Korrektur."," · no automatic correction.")));
+    if(candidate.documented_date_discrepancy){
+     const d=candidate.documented_date_discrepancy;
+     el.append($("p","source-warning",t("Amtlich dokumentierter Datumswiderspruch (belegt am ","Official documented date discrepancy (evidenced on ")+fmt(d.observed_on)+"): "+d.published_weekday+", "+fmt(d.published_date)+" ≠ "+d.actual_weekday+
+      (d.reproduced_in_latest_fetch?t(" · beim letzten Abruf erneut erkannt."," · reproduced in latest fetch."):t(" · beim letzten Abruf nicht erneut erkannt; historischer Beleg bleibt bestehen."," · not reproduced in latest fetch; past evidence retained."))));
+    }
+
 
     const monitoringMessage={
       unavailable:t("HTTP 404/410 oder bestätigter Ausfall beim letzten Abruf – kein Beweis für abgesagte Demos.","HTTP 404/410 or observed retrieval failure – not evidence of cancellations."),

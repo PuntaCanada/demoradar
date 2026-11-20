@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "purpose": "Manually evidenced contradictions in official future assembly notices; not event ingestion and not a claim of current reachability.",
+  "records": [
+    {
+      "city": "Landsberg am Lech",
+      "state": "Bayern",
+      "source_url": "https://www.landkreis-landsberg.de/versammlungen/",
+      "observed_on": "2026-11-20",
+      "published_weekday": "Mittwoch",
+      "published_date": "2026-11-16",
+      "actual_weekday": "Montag",
+      "evidence": "Official district assembly listing showed 'Mittwoch, 16.11.2026' on 20 November 2026; date was already past. Keep as historical source quality evidence until explicitly corrected or superseded.",
+      "permission": "read-only factual discrepancy and original link; no licence for bulk event import verified"
+    }
+  ]
+}
