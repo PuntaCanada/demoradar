@@ -17,6 +17,9 @@ for(const [path,lang] of [["sources/index.html","de"],["en/sources/index.html","
  assert.ok(html.includes('href="/sources/source-status.css"'));
  assert.ok(html.includes('src="/sources/source-status.js"'));
  assert.ok(html.includes('aria-live="polite"'));
+ assert.ok(html.includes('id="broadcastHead"'),"Source page must distinguish media links from official event sources");
+ for(const host of ["rbb24.de","mdr.de","ndr.de","wdr.de","br.de","tagesschau.de"])assert.ok(html.includes("https://www."+host)||html.includes("https://www1."+host),"Missing original broadcaster link: "+host);
+ assert.ok(html.includes("noopener noreferrer"),"External editorial sources must use safe links");
  assert.ok(html.includes('hreflang="'+(lang==="en"?"de":"en")+'"'));
 }
 const sitemap=readFileSync("sitemap.xml","utf8");
