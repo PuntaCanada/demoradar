@@ -38,7 +38,12 @@ def visible_and_evidence(html):
   "Rotebühlplatz, 70173 Stuttgart",
   "Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet."
  ]
- checks={key:re.search(r"\s+".join(map(re.escape,key.split())),body,re.I) is not None for key in required}
+ checks={key:re.search(r"\\s+".join(map(re.escape,key.split())),body,re.I) is not None for key in required}
+ # Municipal calendars may separate the printed day and hour with commas,
+ # line breaks or inline "Uhrzeit:" labels. Verify both exact values together
+ # within a short bounded span, not an arbitrary date elsewhere on the page.
+ day_and_time=bool(re.search(r"25\\.\\s*November\\s+2026.{0,110}?18:00\\s*Uhr",body,re.I))
+ checks[required[2]]=day_and_time
  return body,checks
 
 def parse(html):
@@ -53,7 +58,7 @@ def parse(html):
  if not all(list(checks.values())[1:4]):return []
  # A generic event search result or software demo cannot impersonate this
  # precise calendar entry, whose place and organizing group are individually known.
- if not re.search(r"Demo zum Internationaler Tag gegen Gewalt an Frauen\s+25\. November 2026\s+18:00 Uhr",body):return []
+ if not re.search(r"Demo zum Internationaler Tag gegen Gewalt an Frauen.{0,220}?25\.\s*November\s+2026.{0,110}?18:00\s*Uhr",body,re.I):return []
  ident=hashlib.sha256((URL+"|"+DAY.isoformat()).encode()).hexdigest()[:16]
  return [{"id":"stuttgart-oneoff-"+ident,"country":"DE","state":"Baden-Württemberg",
   "city":"Stuttgart","date":DAY.isoformat(),"start":"18:00","end":"",
