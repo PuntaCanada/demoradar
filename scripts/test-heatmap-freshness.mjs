@@ -12,6 +12,11 @@ assert.ok(registry.includes("coverageReviewDay=coverage.reviewed_on"),"Show actu
 assert.ok(registry.includes("assessmentAge>30"),"Warn for outdated federal-state audit even when individual imports succeeded");
 assert.ok(source.includes('fetch("/data/expansion-sources.json"'),"Heatmap must display research-only state coverage separately");
 assert.ok(source.includes("monitorInfo(state)"),"Heatmap must label monitored pages as non-feeds");
+assert.ok(source.includes("warningInfo(state)"),"Heatmap must show authoritative warning totals separately from event counts");
+assert.ok(source.includes('fetch("/data/source-health-alerts.json"'),"Heatmap must read same warning registry as official source page");
+assert.ok(registry.includes('load("/data/source-health-alerts.json")'),"Source page must report stale/unavailable monitored sources");
+assert.ok(registry.includes("sourceAlerts.filter("),"State cards must group warnings by official source and state");
+
 assert.ok(source.includes('s.status==="unavailable"')&&source.includes('checkAge(s.checked_on)'),"Unreachable and stale monitor status must warn on heatmap");
 assert.ok(source.includes("const table={},ids=new Set()"),"Deduplicate matched event IDs across sources");
 assert.ok(source.includes('if(ids.has(unique))continue'),"Avoid double-counting duplicate event IDs");
