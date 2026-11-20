@@ -1,7 +1,8 @@
 // Monitoring only. Never invent event records, page reachability, or cancellations.
 import {readFileSync,writeFileSync} from "node:fs";
 const read=p=>{try{return JSON.parse(readFileSync(p,"utf8"))}catch{return {}}};
-export function alertsFromReport(report,formatHealth={},monitorReport={},{today=new Date().toISOString().slice(0,10)}={}){
+const berlinDay=()=>new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+export function alertsFromReport(report,formatHealth={},monitorReport={},{today=berlinDay()}={}){
  const rows=Array.isArray(report?.sources)?report.sources:[];
  const alerts=rows.flatMap(s=>{
   if(!s||!s.city||!s.source)return [];
