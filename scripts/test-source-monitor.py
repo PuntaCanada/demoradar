@@ -38,7 +38,17 @@ class ReplacedPage(Response):
  def read(self,_):return b"<html>Login page instead of the actual assembly register</html>"*20
 with patch.object(module.urllib.request,"urlopen",return_value=ReplacedPage()):
  broken=module.inspect(next(x for x in module.SOURCES if x["city"]=="Landsberg am Lech"))
- assert broken["status"]=="unavailable" and "marker" in broken["error"],"Content changes must not count as verified source reachability"
+ assert broken["status"]=="content_unverified" and "marker" in broken["error"],"Content changes must not count as verified source reachability"
+# A reset, 403, 404 and replaced contents have different meanings.
+with patch.object(module.urllib.request,"urlopen",side_effect=urllib.error.URLError(ConnectionResetError(104,"Connection reset"))):
+ reset=module.inspect(next(x for x in module.SOURCES if x["city"]=="Magdeburg"))
+ assert reset["status"]=="transport_unverified"
+with patch.object(module.urllib.request,"urlopen",side_effect=urllib.error.HTTPError("https://example.org",403,"Forbidden",{},None)):
+ blocked=module.inspect(module.SOURCES[0])
+ assert blocked["status"]=="http_restricted"
+with patch.object(module.urllib.request,"urlopen",side_effect=urllib.error.HTTPError("https://example.org",404,"Not Found",{},None)):
+ missing=module.inspect(module.SOURCES[0])
+ assert missing["status"]=="unavailable"
 with tempfile.TemporaryDirectory() as tmp:
  p=Path(tmp)/"sources.json"
  with patch.object(module,"OUTPUT",p),patch.object(module.urllib.request,"urlopen",return_value=Response()):
