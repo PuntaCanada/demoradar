@@ -76,8 +76,9 @@
       "parser": null,
       "data_rights": "Individual city press notice, no recurring feed or blanket reuse permission; link only",
       "scope": "Historical official notice from 2026; do not infer future scheduled assemblies",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-20"
+      "status": "unavailable",
+      "checked_on": "2026-11-20",
+      "error": "The read operation timed out"
     },
     {
       "city": "Braunschweig",
