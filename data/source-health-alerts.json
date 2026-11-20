@@ -30,15 +30,6 @@
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {
-      "city": "Hamburg",
-      "state": "Hamburg",
-      "source": "Research-only official page",
-      "condition": "monitor_unavailable",
-      "last_checked": "2026-11-20",
-      "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
       "city": "Bremen",
       "state": "Bremen",
       "source": "Research-only official page",

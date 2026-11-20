@@ -24,11 +24,11 @@
       "status": "ok",
       "last_checked": "2026-11-20",
       "last_success": {
-        "count": 42,
+        "count": 43,
         "checked_on": "2026-11-20"
       },
-      "baseline_count": 42,
-      "observed_count": 42,
+      "baseline_count": 43,
+      "observed_count": 43,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
     },
