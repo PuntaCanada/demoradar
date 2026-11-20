@@ -27,7 +27,7 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         },
         {
@@ -37,7 +37,7 @@
         },
         {
           "type": "official_registration_information",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
@@ -165,7 +165,7 @@
       "source_status": [
         {
           "type": "official_city_press",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         }
       ]
