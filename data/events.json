@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-20T14:37:14.724Z",
-  "count": 1365,
+  "updated_at": "2026-11-20T14:46:20.890Z",
+  "count": 1368,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -342,6 +342,21 @@
       "source_status": "behördlich veröffentlicht"
     },
     {
+      "id": "freiburg-33499fbe14df0fa7",
+      "country": "DE",
+      "state": "Baden-Württemberg",
+      "city": "Freiburg im Breisgau",
+      "date": "2026-11-20",
+      "start": "10:00",
+      "end": "13:45",
+      "title": "Schulstreik gegen Wehrpflicht",
+      "location": "Platz der Universität",
+      "route": "",
+      "source": "Stadt Freiburg – amtliche Einzelmitteilung",
+      "source_url": "https://www.freiburg.de/pb/2670264.html",
+      "source_status": "Amtlich angekündigte Einzelversammlung; keine vollständige Stadt- oder Landesübersicht"
+    },
+    {
       "id": "police-leipzig-d5135ce498c7dcc0",
       "country": "DE",
       "state": "Sachsen",
@@ -466,6 +481,21 @@
       "source": "Stadt Köln – Verkehrskalender",
       "source_url": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/demonstration-muelheim",
       "source_status": "amtliche Verkehrsinformation (keine vollständige Versammlungsliste)"
+    },
+    {
+      "id": "freiburg-16f54721a883b7fb",
+      "country": "DE",
+      "state": "Baden-Württemberg",
+      "city": "Freiburg im Breisgau",
+      "date": "2026-11-20",
+      "start": "11:00",
+      "end": "14:30",
+      "title": "Jugenddemo gegen Krieg",
+      "location": "Platz der Alten Synagoge",
+      "route": "",
+      "source": "Stadt Freiburg – amtliche Einzelmitteilung",
+      "source_url": "https://www.freiburg.de/pb/2670264.html",
+      "source_status": "Amtlich angekündigte Einzelversammlung; keine vollständige Stadt- oder Landesübersicht"
     },
     {
       "id": "police-cologne-f0738361372a71b2",
@@ -940,6 +970,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "freiburg-65a95c33a35a1162",
+      "country": "DE",
+      "state": "Baden-Württemberg",
+      "city": "Freiburg im Breisgau",
+      "date": "2026-11-20",
+      "start": "19:00",
+      "end": "21:00",
+      "title": "GenZ regelt das!",
+      "location": "Platz der Alten Synagoge",
+      "route": "",
+      "source": "Stadt Freiburg – amtliche Einzelmitteilung",
+      "source_url": "https://www.freiburg.de/pb/2670264.html",
+      "source_status": "Amtlich angekündigte Einzelversammlung; keine vollständige Stadt- oder Landesübersicht"
     },
     {
       "id": "berlin-101",

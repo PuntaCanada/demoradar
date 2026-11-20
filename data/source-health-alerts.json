@@ -1,7 +1,7 @@
 {
   "version": 1,
   "scope": "non-actionable warnings only; no events are generated or removed",
-  "checked_sources": 13,
+  "checked_sources": 14,
   "checked_research_pages": 22,
   "alerts": [
     {
@@ -52,7 +52,7 @@
       "source": "Research-only official page",
       "condition": "monitor_transport_unverified",
       "last_checked": "2026-11-20",
-      "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
+      "url": "https://www.polizei.hamburg/versammlungsbehoerde-kontakt-791244",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {

@@ -123,6 +123,16 @@
       "check_freshness": "recent"
     },
     {
+      "city": "Freiburg im Breisgau",
+      "state": "Baden-Württemberg",
+      "source": "Stadt Freiburg",
+      "status": "verified_one_off",
+      "count": 3,
+      "scope": "Single city announcement about three dated assemblies on 20 Nov 2026; not a recurring feed",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
       "city": "Frankfurt am Main",
       "state": "Hessen",
       "source": "Stadt Frankfurt",
