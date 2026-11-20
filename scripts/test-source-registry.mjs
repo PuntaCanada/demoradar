@@ -34,6 +34,7 @@ assert.ok(script.includes('rel="noopener noreferrer"')||script.includes('link.re
 assert.ok(script.includes('Promise.all('));
 assert.ok(script.includes('candidate.type==="official_police_historical_notice"'),"Historical police notices must be labelled as archive-only");
 assert.ok(script.includes('data/source-format-health.json'));
+assert.ok(script.includes('kind==="upcoming"')&&script.includes('hasUpcomingList'),"Missing official upcoming source filtering");
 assert.ok(script.includes('candidate.future_dates_verified')&&script.includes('candidate.date_conflicts'),"Future list and date conflict evidence must be visible without event import");
 for(const path of ["data/streamer-candidates.json","data/stream-discoveries.json","data/live-streams.json"])assert.ok(script.includes(path),"Missing source data "+path);
 assert.ok(script.includes('approved.streams.filter(s=>s.reviewed===true&&s.event_id&&s.evidence_url)'),"Only independently reviewed event links may be counted");
