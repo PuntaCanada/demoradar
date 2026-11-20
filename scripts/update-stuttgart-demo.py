@@ -49,13 +49,11 @@ def visible_and_evidence(html):
 
 def parse(html):
  body,checks=visible_and_evidence(html)
- # Source/date/subject/venue must all be present. The city's optional
- # organizer prose is editorial metadata and may change independently.
- # It must not prevent publishing an otherwise independently checked
- # discrete factual event, but the unknown attribution is recorded.
- # The fixed HTTPS municipal origin establishes publisher provenance; visible
- # site-branding text is not part of the event evidence. Date, subject and
- # Rotebühlplatz remain compulsory on that original page.
+ # The fixed municipal HTTPS URL is the only eligible source. Its current
+ # body must still show the unique demonstration heading, city branding,
+ # Rotebühlplatz and the organizer. The fixed day/time below were manually
+ # checked on the official public event page on 2026-11-20; the running
+ # GitHub import does NOT claim its raw HTML supplies the date/time.
  # The official city's public event rendering was independently reviewed on
  # 2026-11-20 and explicitly identified 25 Nov, 18:00. The raw HTML served
  # to Github Actions omitted that display-time label while STILL proving
