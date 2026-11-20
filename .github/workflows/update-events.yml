@@ -167,6 +167,7 @@ jobs:
           node scripts/test-today-pages.mjs
           node scripts/test-today-selection.mjs
           node scripts/test-seo-reciprocity.mjs
+          # Run only against checked-out files; a previously queued run may predate new test files.
           node scripts/test-public-crawlability.mjs
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
