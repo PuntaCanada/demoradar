@@ -1,6 +1,6 @@
 import unittest
 import datetime as dt
-from scripts.update_news import match_links,is_allowed_link,has_phrase
+from update_news import match_links,is_allowed_link,has_phrase
 TODAY=dt.date(2026,11,20)
 BASE={"publisher":"tagesschau / rbb","url":"https://www.tagesschau.de/inland/regional/berlin/rbb-nicht-nur-gen-z-regelt-neue-jugendproteste-am-freitag-in-berlin-100.html",
  "city":"Berlin","event_day":"2026-11-20","published_on":"2026-11-20",
