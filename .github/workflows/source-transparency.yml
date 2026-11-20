@@ -8,6 +8,8 @@ on:
       - 'scripts/test-heatmap-freshness.mjs'
       - 'scripts/monitor-official-sources.py'
       - 'scripts/test-source-monitor.py'
+      - 'scripts/source-health-alerts.mjs'
+      - 'scripts/test-source-health-alerts.mjs'
       - 'scripts/stream-matcher.mjs'
       - 'scripts/test-stream-matcher.mjs'
       - 'scripts/update-streams.mjs'
@@ -44,6 +46,7 @@ jobs:
           node scripts/check-source-admission.mjs
           node scripts/test-rejected-candidates.mjs
           node scripts/test-heatmap-freshness.mjs
+          node scripts/test-source-health-alerts.mjs
           node scripts/test-source-registry.mjs
           node scripts/test-heatmap-coverage.mjs
           node scripts/test-stream-matcher.mjs
