@@ -5,20 +5,45 @@
     "from": "2026-10-21",
     "to": "2026-11-27"
   },
-  "event_records": 470,
+  "event_records": 482,
   "diagnostic_video_samples": 23,
   "cities": [
     {
       "city": "Frankfurt am Main",
       "event_count": 2,
       "days_with_events": 1,
-      "observed_video_title_samples": 5,
+      "observed_video_title_samples": 6,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
         {
           "type": "official_city_press",
-          "status": "unavailable",
+          "status": "http_restricted",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Hamburg",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 2,
+      "observed_city_and_date_samples": 0,
+      "source_count": 3,
+      "source_status": [
+        {
+          "type": "official_police_assembly_authority",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        },
+        {
+          "type": "official_police_operational_notice",
+          "status": "transport_unverified",
+          "reuse_rights_verified": false
+        },
+        {
+          "type": "official_registration_information",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
@@ -31,46 +56,6 @@
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
-    },
-    {
-      "city": "Düsseldorf",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
-      "city": "Hamburg",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
-      "source_count": 3,
-      "source_status": [
-        {
-          "type": "official_police_assembly_authority",
-          "status": "unavailable",
-          "reuse_rights_verified": false
-        },
-        {
-          "type": "official_police_operational_notice",
-          "status": "unavailable",
-          "reuse_rights_verified": false
-        },
-        {
-          "type": "official_registration_information",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
     },
     {
       "city": "Leipzig",
@@ -141,7 +126,22 @@
       "source_status": [
         {
           "type": "official_police_press_archive",
-          "status": "unavailable",
+          "status": "http_restricted",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Düsseldorf",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_assembly_authority",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
@@ -216,22 +216,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "unavailable",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
-      "city": "Potsdam",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_assembly_guidance",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
         }
       ]
@@ -282,15 +267,6 @@
       ]
     },
     {
-      "city": "Stuttgart",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 0,
-      "source_status": []
-    },
-    {
       "city": "Bonn",
       "event_count": 1,
       "days_with_events": 1,
@@ -324,10 +300,34 @@
       "source_status": [
         {
           "type": "official_city_press",
-          "status": "unavailable",
+          "status": "http_restricted",
           "reuse_rights_verified": false
         }
       ]
+    },
+    {
+      "city": "Potsdam",
+      "event_count": 1,
+      "days_with_events": 1,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_assembly_guidance",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Stuttgart",
+      "event_count": 1,
+      "days_with_events": 1,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
     },
     {
       "city": "Jena",
@@ -346,6 +346,21 @@
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
+    },
+    {
+      "city": "Weimar",
+      "event_count": 10,
+      "days_with_events": 5,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_assembly_upcoming_html",
+          "status": "reachable_upcoming_list_research_only",
+          "reuse_rights_verified": false
+        }
+      ]
     }
   ],
   "missing_official_feed_warning": "City count 0 does not prove no demonstrations. No stream-derived events are imported."
