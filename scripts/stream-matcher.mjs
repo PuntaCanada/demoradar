@@ -85,7 +85,8 @@ export function nearbyDate(timestamp,eventDay,status){
  return status==="recording"?delta>=-1&&delta<=2:delta===0;
 }
 export function matchEvents(video,events){
- if(!video||!video.title||!video.date||!video.status)return [];
+ if(!video||!video.title||!video.date||!["live","recording"].includes(video.status))return [];
+ // Historical uploads and live broadcasts are proposals only; unknown platform status must never be paired.
  if(!/(?:^|\W)(?:demo|demonstration|kundgebung|protest|mahnwache|streik|aufzug|versammlung|kundgebungen|demos|gegendemo|gegendemos|montagsdemo|aufmarsch|naziaufmarsch)(?:\W|$)/i.test(video.title))return [];
  if(ambiguousOrInvalidTitleDates(video.title))return [];
  const tokens=new Set(topics(video.title));
