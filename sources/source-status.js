@@ -38,7 +38,7 @@ const freshnessDescription=s=>{
 const isRolling=s=>s.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(s.source);
 const filter=document.querySelector("#sourceFilter");
 const search=document.querySelector("#sourceSearch");
-let coverageReviewDay=null,states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[],rejectedCandidates=[];
+let coverageReviewDay=null,states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[],rejectedCandidates=[],sourceAlerts=[];
 let initialized=false;
 const render=()=>{
  if(!initialized)return;
@@ -48,6 +48,7 @@ const render=()=>{
  for(const state of states){
   const entries=quality.filter(s=>s.state===state.state);
   const candidateSources=monitors.filter(s=>s.state===state.state);
+  const stateAlerts=sourceAlerts.filter(a=>a.state===state.state||entries.some(s=>s.city===a.city&&s.source===a.source));
   const rejected=rejectedCandidates.filter(s=>s.state===state.state);
   const text=[state.state,state.scope,...entries.map(e=>[e.city,e.source,e.scope].join(" ")),...candidateSources.map(s=>[s.city,s.scope,s.type].join(" ")) ,...rejected.map(s=>[s.city,s.title,s.reason].join(" "))].join(" ").toLocaleLowerCase(en?"en":"de");
   if((choice!=="all"&&state.status!==choice)||(phrase&&!text.includes(phrase)))continue;
@@ -59,6 +60,16 @@ const render=()=>{
   const pill=$("span","source-chip "+(state.status==="no_confirmed_regular_feed"?"muted":"partial"),coverageText(state.status));
   top.append(pill);article.append(top);
   article.append($("p","source-scope",state.scope));
+  if(stateAlerts.length){
+   const incidentCount=stateAlerts.filter(x=>x.condition==="unavailable"||x.condition==="monitor_unavailable").length;
+   const researchCount=stateAlerts.filter(x=>x.condition.startsWith("monitor_")).length;
+   article.append($("p","source-warning",
+    t("Quellenhinweise: ","Source warnings: ")+stateAlerts.length+
+    (incidentCount?t(" · nicht erreichbar: "," · unavailable: ")+incidentCount:"")+
+    (researchCount?t(" · davon reine Recherche-Seiten: "," · research-only pages: ")+researchCount:"")+
+    t(". Kein Nachweis über Absagen oder fehlende Demos.",". Not evidence of cancelled or missing demonstrations.")));
+  }
+
   const assessmentAge=daysSince(coverageReviewDay);
   const assessmentDescription=assessmentAge===null||assessmentAge<0?
     t("Bundesweite Quelleninventur ohne gültiges Prüfdatum.","State source coverage audit has no valid review date."):
@@ -157,13 +168,16 @@ Promise.all([
  load("/data/source-format-health.json"),
  load("/data/expansion-sources.json").catch(()=>({sources:[]})),
  load("/data/source-reuse-audit.json"),
- load("/data/rejected-official-candidates.json")
-]).then(([coverage,data,format,expansion,reuse,rejections])=>{
+ load("/data/rejected-official-candidates.json"),
+ load("/data/source-health-alerts.json")
+]).then(([coverage,data,format,expansion,reuse,rejections,alertReport])=>{
  if(coverage.version!==1||coverage.states?.length!==16||!Array.isArray(data.sources)||!Array.isArray(format.feeds))throw Error("Unexpected source schema");
  const keys=new Set(coverage.states.map(s=>s.state));
  if(keys.size!==16)throw Error("Duplicate or incomplete state coverage");
  if(reuse.version!==1||!Array.isArray(reuse.feeds))throw Error("Unexpected source reuse audit schema");
  if(rejections.version!==1||!Array.isArray(rejections.candidates))throw Error("Unexpected official candidate assessment schema");
+ if(alertReport.version!==1||!Array.isArray(alertReport.alerts))throw Error("Unexpected official source alerts schema");
+ sourceAlerts=alertReport.alerts.filter(a=>typeof a.condition==="string"&&typeof a.city==="string");
  rejectedCandidates=rejections.candidates.filter(x=>x.recurring_demo_dates===false&&x.decision?.startsWith("rejected_"));
  reuseAudits=reuse.feeds;
  coverageReviewDay=coverage.reviewed_on;
