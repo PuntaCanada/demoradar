@@ -5,6 +5,10 @@ on:
     paths:
       - 'index.html'
       - 'en/index.html'
+      - 'heute/index.html'
+      - 'en/today/index.html'
+      - 'scripts/test-today-pages.mjs'
+      - 'scripts/build-language-pages.mjs'
       - 'sources/index.html'
       - 'en/sources/index.html'
       - 'sources/source-status.js'
@@ -77,7 +81,7 @@ permissions:
 jobs:
   frontend:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -86,6 +90,7 @@ jobs:
       - name: Prüfe DE und EN HTML, Übersetzungen, Kalender und Filter
         run: |
           node scripts/build-language-pages.mjs
+          node scripts/test-today-pages.mjs
           node --check live.js
           node --check heatmap.js
           node --check i18n.js
@@ -123,9 +128,20 @@ jobs:
         continue-on-error: false
         run: |
           set -eu
-          for route in / /en/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/news-matches.json /data/editorial-link-candidates.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/source-reuse-audit.json /data/rejected-official-candidates.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
+          for route in / /en/ /heute/ /en/today/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/news-matches.json /data/editorial-link-candidates.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/source-reuse-audit.json /data/rejected-official-candidates.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
+            # On first release, the scheduled data refresh must write the two
+            # newly generated HTML routes before Cloudflare can serve them.
+            # Wait for the actual deployed page; do not report success on a 404.
+            if [ "$route" = "/heute/" ] || [ "$route" = "/en/today/" ]; then
+              for retry in $(seq 1 18); do
+                if [ "$code" = "200" ]; then break; fi
+                echo "::notice::Waiting for generated $route publication (attempt $retry)"
+                sleep 8
+                code=$(curl -L -sS --connect-timeout 7 --max-time 12 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
+              done
+            fi
             echo "$route -> HTTP $code"
             if [ "$code" != "200" ]; then
               echo "::warning::Cloudflare route $route returned HTTP $code"
@@ -159,7 +175,9 @@ jobs:
               /data/source-health-alerts.json) grep -q '"alerts"' /tmp/demoradar_response || (echo "::warning::Official source health warnings not deployed" && exit 1) ;;
               /data/police-notices-source.json) grep -q '"sources"' /tmp/demoradar_response || (echo "::warning::Official police notice status not deployed" && exit 1) ;;
               /data/organizer-contacts.json) grep -q '"contacts"' /tmp/demoradar_response || (echo "::warning::Public organizer contact data unavailable" && exit 1) ;;
-              /sitemap.xml) grep -q 'demoradar.pages.dev/en/' /tmp/demoradar_response || (echo "::warning::English URL missing from live sitemap" && exit 1) ;;
+              /sitemap.xml) grep -q 'demoradar.pages.dev/en/' /tmp/demoradar_response && grep -q 'demoradar.pages.dev/heute/' /tmp/demoradar_response && grep -q 'demoradar.pages.dev/en/today/' /tmp/demoradar_response || (echo "::error::Bilingual today pages missing from deployed sitemap" && exit 1) ;;
+              /heute/) grep -q 'Demonstrationen heute' /tmp/demoradar_response || (echo "::error::German today page not deployed" && exit 1) ;;
+              /en/today/) grep -q 'Demonstrations today' /tmp/demoradar_response || (echo "::error::English today page not deployed" && exit 1) ;;
               /data/events.json) grep -q '"events"' /tmp/demoradar_response || (echo "::warning::Live events JSON missing" && exit 1) ;;
               /data/demos-events.json) grep -q '"events"' /tmp/demoradar_response || (echo "::warning::Live community events JSON missing" && exit 1) ;;
               /robots.txt) grep -q 'sitemap.xml' /tmp/demoradar_response || (echo "::warning::Sitemap missing in robots.txt" && exit 1) ;;

@@ -90,6 +90,24 @@ try{
    console.log(path,width+"px",state.calendar+" day markers; scrollWidth "+state.scrollWidth);
   }
  }
+ // Real Chromium navigation of crawlable pages in both languages and breakpoints.
+ for(const [route,lang] of [["/heute/","de"],["/en/today/","en"]]){
+  for(const width of [320,1280]){
+   await send("Emulation.setDeviceMetricsOverride",{width,height:850,deviceScaleFactor:1,mobile:width<=430});
+   await send("Page.navigate",{url:rootUrl+route});
+   let info;
+   for(let attempt=0;attempt<60;attempt++){
+    try{info=await evaluate('(()=>({lang:document.documentElement.lang,heading:document.querySelector("h1")?.textContent||"",robots:document.querySelector("meta[name=robots]")?.content||"",canonical:document.querySelector("link[rel=canonical]")?.href||"",scroll:document.documentElement.scrollWidth}))()');if(info?.heading)break}catch{}
+    await delay(120);
+   }
+   assert.equal(info?.lang,lang,"Today's route must have matching document language");
+   assert.ok(info.heading.includes(lang==="de"?"Demonstrationen heute":"Demonstrations today"),"Localized heading");
+   assert.ok(info.robots.includes("index"),"Crawlable today page");
+   assert.ok(info.canonical.endsWith(route),"Canonical route must match");
+   assert.ok(info.scroll<=width+2,"No horizontal overflow on daily page");
+   console.log(route,width+"px today landing page; scrollWidth "+info.scroll);
+  }
+ }
  for(const languageRoute of ["/","/en/"]){
   await navigate(languageRoute,320);
   const tap=await evaluate('(()=>{const host=document.createElement("div");host.className="detail-press";const a=document.createElement("a");a.className="editorial-link";a.textContent="MDR: Weiterführender redaktioneller Medienbericht zum Demo-Termin";a.href="https://www.mdr.de/";host.append(a);document.querySelector("main").append(host);const h=a.getBoundingClientRect().height;const w=document.documentElement.scrollWidth;host.remove();return {h,w}})()');
@@ -143,7 +161,8 @@ try{
    }
    assert.equal(dashboard.states,16,"All 16 source cards load in "+route+" at "+width+"px: "+JSON.stringify(dashboard));
    assert.equal(dashboard.lang,route.startsWith("/en/")?"en":"de");
-   assert.equal(dashboard.feed,"3","Only three monitored regular official city feeds");
+   const expectedObserved=JSON.parse(readFileSync("data/source-quality.json","utf8")).sources.filter(x=>x.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(x.source)).length;
+   assert.equal(Number(dashboard.feed),expectedObserved,"Display only actually observed recurring city feeds; outages must not be disguised");
    assert.ok(dashboard.scroll<=width+2&&dashboard.body<=width+2,"Source registry horizontal overflow at "+width+"px: "+JSON.stringify(dashboard));
    const filtered=await evaluate('(()=>{const s=document.querySelector("#sourceFilter");s.value="no_confirmed_regular_feed";s.dispatchEvent(new Event("change",{bubbles:true}));return {visible:document.querySelectorAll("#stateGrid .source-card").length,badges:[...document.querySelectorAll("#stateGrid .source-chip")].map(x=>x.textContent)}})()');
    assert.ok(filtered.visible>0&&filtered.visible<16,"Missing-source filter must narrow results");
