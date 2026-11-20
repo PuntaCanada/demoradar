@@ -5,13 +5,13 @@
     "from": "2026-10-21",
     "to": "2026-11-27"
   },
-  "event_records": 498,
+  "event_records": 477,
   "diagnostic_video_samples": 23,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 415,
-      "days_with_events": 10,
+      "event_count": 395,
+      "days_with_events": 9,
       "observed_video_title_samples": 4,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
@@ -27,7 +27,7 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         },
         {
@@ -37,7 +37,7 @@
         },
         {
           "type": "official_registration_information",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         }
       ]
@@ -73,21 +73,6 @@
       ]
     },
     {
-      "city": "Köln",
-      "event_count": 2,
-      "days_with_events": 1,
-      "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_city_traffic_calendar",
-          "status": "reachable_parser_configured",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
       "city": "Leipzig",
       "event_count": 3,
       "days_with_events": 2,
@@ -103,6 +88,21 @@
         {
           "type": "official_open_data_research",
           "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Köln",
+      "event_count": 5,
+      "days_with_events": 1,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_traffic_calendar",
+          "status": "reachable_parser_configured",
           "reuse_rights_verified": false
         }
       ]
@@ -154,6 +154,36 @@
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
+    },
+    {
+      "city": "Karlsruhe",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_press",
+          "status": "unavailable",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Potsdam",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_assembly_guidance",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
     },
     {
       "city": "Stuttgart",
