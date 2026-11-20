@@ -6,7 +6,11 @@ assert.ok(source.includes("const coverageEvidence=state=>"),"Heatmap must explai
 assert.ok(source.includes('new Set(rows.filter(s=>s.status==="observed_data"'),"Count distinct recently observed local source cities only");
 assert.ok(source.includes("coverageEvidence(state)"),"Show evidence in heatmap rank and accessible state descriptions");
 assert.ok(registry.includes("const recent=new Set(entries.filter("),"Public registry must separately count currently checked local sources");
-assert.ok(registry.includes("const oneOff=new Set(entries.filter("),"Public registry must differentiate isolated and historical notices");
+assert.ok(registry.includes("const oneOff=new Set(entries.filter("),"Public registry must count only recently checked one-off notices");
+assert.ok(registry.includes("const archive=new Set(entries.filter("),"Public registry must count historical notices separately");
+assert.ok(source.includes("const historical=new Set(rows.filter("),"Heatmap must separate historical notices from fresh one-offs");
+assert.ok(source.includes("const currentNotices=new Set(rows.filter("),"Heatmap must distinguish fresh one-off notices");
+assert.ok(source.includes("keine landesweite Vollständigkeit"),"Neither category establishes full state coverage");
 assert.ok(registry.includes("keine landesweite Vollständigkeit"),"Explain that observation is not complete state coverage");
 
 const monitored=JSON.parse(readFileSync("data/expansion-sources.json","utf8")).sources;
