@@ -2,6 +2,7 @@
 """No network: source monitoring is observation-only and never imports an event."""
 import importlib.util
 import json
+import urllib.error
 import tempfile
 from pathlib import Path
 from unittest.mock import patch
