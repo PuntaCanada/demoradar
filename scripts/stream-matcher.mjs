@@ -144,3 +144,13 @@ export function candidateStillMatches(candidate,currentEvents){
  const matches=matchEvents(candidate,currentEvents);
  return matches.length===1&&matches[0].event_id===candidate.event_id;
 }
+
+/** Previously cached video suggestions are review-only and never remain LIVE
+ * merely because a check timestamp was missing or malformed. */
+export function candidateObservationFresh(candidate,now=new Date()){
+ if(!candidate||!["live","recording"].includes(candidate.status)||typeof candidate.checked_at!=="string")return false;
+ const check=new Date(candidate.checked_at),nowDate=new Date(now);
+ const age=nowDate.getTime()-check.getTime();
+ if(!Number.isFinite(age)||age< -5*60*1000)return false;
+ return age<=(candidate.status==="live"?15*60*1000:30*86400000);
+}
