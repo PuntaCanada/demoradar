@@ -7,6 +7,8 @@ const states=JSON.parse(readFileSync("data/state-source-coverage.json","utf8")).
 assert.equal(states.length,16);
 assert.ok(source.includes("const checkAge=checked=>"),"Age must be calculated from actual date, not cached freshness labels");
 assert.ok(source.includes("checkIsStale(s)"),"Heatmap must reflect aged or missing checks");
+assert.ok(source.includes('fetch("/data/expansion-sources.json"'),"Heatmap must display research-only state coverage separately");
+assert.ok(source.includes("monitorInfo(state)"),"Heatmap must label monitored pages as non-feeds");
 assert.ok(source.includes("const table={},ids=new Set()"),"Deduplicate matched event IDs across sources");
 assert.ok(source.includes('if(ids.has(unique))continue'),"Avoid double-counting duplicate event IDs");
 assert.ok(registry.includes('load("/data/expansion-sources.json")'),"Expose audited monitor-only official candidates");
