@@ -48,6 +48,8 @@ on:
       - 'scripts/update-demos.py'
       - 'scripts/build-language-pages.mjs'
       - 'scripts/update-news.py'
+      - 'scripts/test-editorial-links.py'
+      - 'data/editorial-link-candidates.json'
       - 'scripts/track-event-updates.py'
       - 'scripts/test-event-updates.py'
   schedule:
@@ -146,6 +148,7 @@ jobs:
           node --check heatmap.js
           python3 scripts/test-dedupe.py
           python3 scripts/test-event-updates.py
+          python3 scripts/test-editorial-links.py
           node --check live.js
           node --check scripts/update-streams.mjs
           node --check i18n.js
