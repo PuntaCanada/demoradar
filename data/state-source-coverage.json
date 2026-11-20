@@ -1,7 +1,7 @@
 {
   "version": 1,
   "reviewed_on": "2026-11-20",
-  "method": "Conservative source audit, not a measure of actual demonstrations or complete state coverage. Sources listed may cover only a municipality.",
+  "method": "Konservative Quellenprüfung: Teilabdeckung umfasst auch ausdrücklich als nichtamtlich gekennzeichnete Originalankündigungen; kein Maß für Vollständigkeit oder amtliche Versammlungsregistrierung.",
   "levels": {
     "regional_partial": "A directly imported official source covers a city/territory within this state; never the whole state",
     "local_partial": "Individual or city-specific official sources, not a complete state feed",
@@ -16,9 +16,9 @@
     },
     {
       "state": "Bayern",
-      "status": "no_confirmed_regular_feed",
-      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
-      "url": null
+      "status": "local_partial",
+      "scope": "Lindenberg im Allgäu: einzelne Gegenkundgebung am 29.11.2026, 11 Uhr am Stadtplatz vom regionalen Kreisverband BÜNDNIS 90/DIE GRÜNEN angekündigt; keine Polizeianmeldung oder landesweiter Feed nachgewiesen.",
+      "url": "https://gruene.li/termine/termin/alice-weidel-raus-aus-lindenberg"
     },
     {
       "state": "Berlin",
@@ -28,9 +28,9 @@
     },
     {
       "state": "Brandenburg",
-      "status": "no_confirmed_regular_feed",
-      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
-      "url": null
+      "status": "local_partial",
+      "scope": "Potsdam: einzeln datierte Demonstration am 25.11.2026 ab Nauener Tor durch das Netzwerk der brandenburgischen Frauenhäuser und die städtische Gleichstellungsbeauftragte veröffentlicht; Fachverbandsquelle, keine amtliche Polizeianmeldung oder landesweiter Feed.",
+      "url": "https://www.nbfev.de/event/demonstration/"
     },
     {
       "state": "Bremen",
