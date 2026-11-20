@@ -11,7 +11,7 @@ const files={
  frankfurt:{status:"unavailable",count:0}
 };
 const rows=sourceHealth(files).sources;
-assert.equal(rows.length,15);
+assert.equal(rows.length,16);
 const row=name=>rows.find(s=>s.source===name);
 assert.equal(row("Polizei Berlin").status,"observed_data");
 assert.equal(row("Polizei Berlin").count,2);
@@ -27,6 +27,13 @@ assert.equal(row("Polizeidirektion Leipzig (Archiv)").status,"unknown");
 assert.equal(row("Stadt Jena").status,"no_matching_items");
 assert.equal(row("Stadt Frankfurt").status,"unavailable");
 assert.equal(row("Stadt Freiburg").status,"unknown");
+assert.equal(row("Polizeidirektion Ratzeburg").status,"unknown");
+const badOldesloe=sourceHealth({...files,badOldesloe:{status:"verified_one_off",count:1,checked_on:"2026-11-20"}},{today:"2026-11-20"}).sources.find(x=>x.source==="Polizeidirektion Ratzeburg");
+assert.equal(badOldesloe.status,"verified_one_off");
+assert.equal(badOldesloe.count,1);
+assert.equal(badOldesloe.check_freshness,"recent");
+assert.equal(sourceHealth({...files,badOldesloe:{status:"unverified_original_no_import",count:0}},{today:"2026-11-20"}).sources.find(x=>x.source==="Polizeidirektion Ratzeburg").status,"no_matching_items");
+
 assert.equal(row("Stadt Weimar (vier Einzelanmeldungen)").status,"unknown");
 const weimar=sourceHealth({...files,weimarOneoffs:{status:"verified_individual_oneoffs",count:4,checked_on:"2026-11-20"}},{today:"2026-11-20"}).sources.find(x=>x.source==="Stadt Weimar (vier Einzelanmeldungen)");
 assert.equal(weimar.status,"verified_one_off");

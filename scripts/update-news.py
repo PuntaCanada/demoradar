@@ -16,6 +16,7 @@ OUTPUT=ROOT/"news-matches.json"
 EDITORIAL=ROOT/"editorial-link-candidates.json"
 DOMAINS={
  "tagesschau / rbb":{"www.tagesschau.de"},
+ "tagesschau / NDR":{"www.tagesschau.de"},
  "tagesschau / WDR":{"www.tagesschau.de"},
  "tagesschau":{"www.tagesschau.de"},
  "rbb24":{"www.rbb24.de"},
@@ -67,7 +68,10 @@ def is_allowed_link(link):
  if verification is not None and not parse_day(link.get("url_check_date")):return False
 
  if not parse_day(link.get("event_day")) or not parse_day(link.get("published_on")):return False
- if abs((parse_day(link["published_on"])-parse_day(link["event_day"])).days)>2:return False
+ # Contemporary advance reporting may precede a documented event by up to seven days.
+ # Never extend backward lookups for an article more than two days AFTER the event.
+ gap=(parse_day(link["event_day"])-parse_day(link["published_on"])).days
+ if gap>7 or gap< -2:return False
  phrases=link.get("match_phrases")
  if not isinstance(phrases,list) or len(phrases)<2 or len(phrases)>4:return False
  if not all(isinstance(x,str) and len(x.strip())>=3 for x in phrases):return False

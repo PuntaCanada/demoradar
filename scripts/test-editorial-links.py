@@ -27,6 +27,23 @@ class EditorialSafetyTests(unittest.TestCase):
   self.assertEqual(match_links([dict(EVENT,title="Mahnwache für den Frieden")],[BASE],TODAY),{})
  def test_only_one_event(self):
   self.assertEqual(match_links([EVENT,dict(EVENT,id="another-protest")],[BASE],TODAY),{})
+ def test_strict_advance_event_context_from_original_ndr_report(self):
+  link={"publisher":"tagesschau / NDR",
+    "url":"https://www.tagesschau.de/inland/regional/schleswigholstein/vor-afd-landesparteitag-in-bad-oldesloe-politik-mit-gespraechsbedarf%2Cregionnorderstedtnews-4212.html",
+    "city":"Bad Oldesloe","event_day":"2026-11-21","published_on":"2026-11-16",
+    "match_phrases":["Demonstration","AfD"],
+    "label":"NDR-Bericht zur angemeldeten Gegendemonstration in Bad Oldesloe",
+    "url_check_status":"content_verified","url_check_date":"2026-11-20"}
+  event={"id":"police-actual-1","city":"Bad Oldesloe","date":"2026-11-21",
+    "title":"Angemeldete Demonstration im Umfeld des AfD-Parteitags"}
+  matched=match_links([event],[link],TODAY,reviewed_on="2026-11-20")
+  self.assertEqual(list(matched),["police-actual-1"])
+  self.assertEqual(matched["police-actual-1"][0]["source"],"tagesschau / NDR")
+  self.assertEqual(match_links([dict(event,city="Lübeck")],[link],TODAY,"2026-11-20"),{})
+  self.assertEqual(match_links([dict(event,date="2026-11-22")],[link],TODAY,"2026-11-20"),{})
+  self.assertEqual(match_links([dict(event,title="Kundgebung für andere Anliegen")],[link],TODAY,"2026-11-20"),{})
+  self.assertEqual(match_links([event,dict(event,id="duplicate-assembly")],[link],TODAY,"2026-11-20"),{})
+  self.assertEqual(match_links([event],[dict(link,published_on="2026-11-12")],TODAY,"2026-11-20"),{},"Nine days in advance is too long for automatic event association")
  def test_old_article_no_future_link(self):
   self.assertEqual(match_links([EVENT],[dict(BASE,published_on="2026-11-08")],TODAY),{})
  def test_checked_and_access_blocked_links_remain_context_only(self):

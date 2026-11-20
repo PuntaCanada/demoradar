@@ -94,9 +94,9 @@
     },
     {
       "state": "Schleswig-Holstein",
-      "status": "no_confirmed_regular_feed",
-      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
-      "url": null
+      "status": "local_partial",
+      "scope": "Bad Oldesloe: einzelne Polizeimitteilung zur angemeldeten Demonstration vom 21.11.2026. Die Polizei bestätigt weder exakte Uhrzeit noch eindeutigen Versammlungsort; kein landesweiter Kalender oder regelmäßig lizenzierter Terminfeed.",
+      "url": "https://www.presseportal.de/blaulicht/pm/43735/6394590"
     },
     {
       "state": "Thüringen",
