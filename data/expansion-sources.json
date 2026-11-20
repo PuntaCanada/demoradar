@@ -3,6 +3,17 @@
   "method": "read-only official-page check; reachability never establishes event coverage or reuse rights",
   "sources": [
     {
+      "city": "Landsberg am Lech",
+      "state": "Bayern",
+      "type": "official_assembly_list_html",
+      "url": "https://www.landkreis-landsberg.de/versammlungen/",
+      "parser": null,
+      "data_rights": "Published under Art. 13 BayVersG; factual listings are public but no verified open bulk reuse licence or maintained structured API; monitor and link only until rights and individual-date validation are confirmed",
+      "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-20"
+    },
+    {
       "city": "Potsdam",
       "state": "Brandenburg",
       "type": "official_assembly_guidance",
@@ -21,9 +32,8 @@
       "parser": null,
       "data_rights": "Individual city press notice, no recurring feed or blanket reuse permission; link only",
       "scope": "Historical official notice from 2026; do not infer future scheduled assemblies",
-      "status": "unavailable",
-      "checked_on": "2026-11-20",
-      "error": "The read operation timed out"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-20"
     },
     {
       "city": "Braunschweig",
@@ -123,9 +133,8 @@
       "parser": null,
       "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
       "scope": "Contact route to official assembly authority; do not import registrations without permission",
-      "status": "unavailable",
-      "checked_on": "2026-11-20",
-      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-20"
     },
     {
       "city": "Hamburg",
@@ -158,9 +167,8 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "unavailable",
-      "checked_on": "2026-11-20",
-      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-20"
     }
   ]
 }
