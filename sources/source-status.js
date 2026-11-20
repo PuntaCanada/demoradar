@@ -61,10 +61,12 @@ const render=()=>{
   top.append(pill);article.append(top);
   article.append($("p","source-scope",state.scope));
   const recent=new Set(entries.filter(x=>x.status==="observed_data"&&daysSince(x.last_checked)!==null&&daysSince(x.last_checked)>=0&&daysSince(x.last_checked)<=2).map(x=>x.city));
-  const oneOff=new Set(entries.filter(x=>["verified_one_off","verified_historical_one_off"].includes(x.status)).map(x=>x.city));
+  const oneOff=new Set(entries.filter(x=>x.status==="verified_one_off"&&daysSince(x.last_checked)!==null&&daysSince(x.last_checked)>=0&&daysSince(x.last_checked)<=2).map(x=>x.city));
+  const archive=new Set(entries.filter(x=>x.status==="verified_historical_one_off").map(x=>x.city));
   const outdated=entries.filter(x=>x.status==="unavailable"||daysSince(x.last_checked)===null||daysSince(x.last_checked)<0||daysSince(x.last_checked)>2).length;
   article.append($("p","source-detail",t("Aktuell geprüfte amtliche Ortsquellen: ","Recently checked official local-source cities: ")+recent.size+
-   t(" · Orte mit Einzel-/Archivmeldungen: "," · Cities with one-off/historical notices: ")+oneOff.size+
+   t(" · Orte mit aktuell geprüften Einzelmeldungen: "," · Cities with recently checked one-off notices: ")+oneOff.size+
+   t(" · Orte mit Archivmeldungen: "," · Cities with historical notices: ")+archive.size+
    (outdated?t(" · Ausgefallene/veraltete Prüfungen: "," · Unavailable/outdated checks: ")+outdated:"")+
    t(" · keine landesweite Vollständigkeit"," · no full statewide coverage")));
 
