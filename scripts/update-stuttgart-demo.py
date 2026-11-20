@@ -102,6 +102,9 @@ def main():
    status["source_bytes_checked"]=len(html.encode("utf-8","replace"))
    status["evidence_fields_found"]=sum(checks.values())
    status["evidence_fields_total"]=len(checks)
+   status["evidence_fields_missing"]=[name for name,ok in zip(
+    ("municipal_banner","demonstration_title","event_day_time","event_location","organizer_attribution"),
+    checks.values()) if not ok]
    status["essential_fields_verified"]=all(list(checks.values())[1:4])
    status["municipal_heading_verified"]=list(checks.values())[0]
    status["organizer_text_verified"]=list(checks.values())[4]
