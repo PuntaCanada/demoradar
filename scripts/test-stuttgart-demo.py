@@ -30,6 +30,7 @@ class Test(unittest.TestCase):
   wrapped=DOC.replace("25. November 2026 18:00 Uhr","25.\n November 2026   18:00  Uhr")
   self.assertEqual(len(m["parse"](wrapped)),1)
   content,checks=m["visible_and_evidence"](DOC)
+  self.assertEqual(len(checks),5)
   self.assertTrue(all(checks.values()))
   self.assertEqual(m["parse"](DOC.replace("Rotebühlplatz, 70173 Stuttgart","Rotebühlplatz, 70173 Berlin")),[])
  def test_missing_visible_city_banner_does_not_mask_the_fixed_official_source(self):
