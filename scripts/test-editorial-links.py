@@ -1,6 +1,13 @@
 import unittest
 import datetime as dt
-from update_news import match_links,is_allowed_link,has_phrase
+import importlib.util
+from pathlib import Path
+spec=importlib.util.spec_from_file_location("editorial_links",Path(__file__).with_name("update-news.py"))
+module=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+match_links=module.match_links
+is_allowed_link=module.is_allowed_link
+has_phrase=module.has_phrase
 TODAY=dt.date(2026,11,20)
 BASE={"publisher":"tagesschau / rbb","url":"https://www.tagesschau.de/inland/regional/berlin/rbb-nicht-nur-gen-z-regelt-neue-jugendproteste-am-freitag-in-berlin-100.html",
  "city":"Berlin","event_day":"2026-11-20","published_on":"2026-11-20",
