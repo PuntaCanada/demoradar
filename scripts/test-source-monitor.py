@@ -42,9 +42,10 @@ weimar_html=b"""<html><body><h1>Versammlungsanmeldungen</h1><p>Best\xc3\xa4tigte
 <div>Mo, 23.11.26 19:00 bis 21:00 Uhr</div><div>Di, 24.11.26</div><div>Mi, 25.11.26</div>
 <div>Mi, 16.11.26 contradiction</div></body></html>"""
 weimar_html+=b"<p>Official city assembly calendar page content, not an event record.</p>"*8
-dates,conflicts=module.verify_weimar_dates(weimar_html,module.date(2026,11,20))
+dates,conflicts,rows=module.verify_weimar_dates(weimar_html,module.date(2026,11,20))
 assert dates==["2026-11-22","2026-11-23","2026-11-24","2026-11-25"]
 assert len(conflicts)==1 and "weekday mismatch" in conflicts[0]
+assert rows==4
 # A weekday inconsistency must fail closed rather than entering a calendar.
 class WeimarResponse(Response):
  def read(self,_):return weimar_html
@@ -57,8 +58,12 @@ class ValidWeimar(Response):
 with patch.object(module.urllib.request,"urlopen",return_value=ValidWeimar()):
  checked=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
  assert checked["status"]=="reachable_upcoming_list_research_only"
- assert checked["future_date_count"]==4 and checked["future_dates_verified"][0]=="2026-11-22"
+ assert checked["future_date_count"]==4 and checked["future_announcement_rows_verified"]==4 and checked["future_dates_verified"][0]=="2026-11-22"
  assert "events" not in checked
+# Two independent assembly notices on one date remain two notices but one day.
+duplicate=good_html.replace(b"<div>Mo, 23.11.26",b"<div>So, 22.11.26 17:00 bis 19:00</div><div>Mo, 23.11.26")
+duplicate_days,duplicate_errors,duplicate_rows=module.verify_weimar_dates(duplicate,module.date(2026,11,20))
+assert len(duplicate_days)==4 and duplicate_rows==5 and duplicate_errors==[]
 land_html=b"<h1>Versammlungen</h1><div>Mittwoch, 16.11.2026</div><div>Freitag, 13.11.2026</div>"
 # Long municipal CMS navigation may put actual dates beyond the first 160 kB.
 class LongWeimar(Response):
@@ -67,7 +72,7 @@ class LongWeimar(Response):
   return b"<nav>"+b"Navigation links and official site sections. "*5000+b"</nav>"+good_html
 with patch.object(module.urllib.request,"urlopen",return_value=LongWeimar()):
  long_check=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
- assert long_check["future_date_count"]==4 and long_check["status"]=="reachable_upcoming_list_research_only"
+ assert long_check["future_date_count"]==4 and long_check["future_announcement_rows_verified"]==4 and long_check["status"]=="reachable_upcoming_list_research_only"
 class LongLandsberg(Response):
  def read(self,n):
   assert n>=300_000
