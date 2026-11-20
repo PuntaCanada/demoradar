@@ -12,7 +12,7 @@ export function checkAdmissions(health,licences){
  if(new Set((licences.feeds||[]).map(x=>x.source)).size!==(licences.feeds||[]).length)problems.push("Duplicate source rights record");
  for(const x of health.feeds||[]){
   if(!x.source||!x.id){problems.push("Invalid feed identity");continue}
-  if(identities.has(x.id)||[...identities].includes(x.source+"/"+x.id)){problems.push("Duplicate feed identity: "+x.id);continue}
+  if(identities.has(x.id)){problems.push("Duplicate feed identity: "+x.id);continue}
   identities.add(x.id);
   if(historical.get(x.id)===x.source)continue;
   if(historical.has(x.id)&&historical.get(x.id)!==x.source)problems.push("Original feed ID changed owner: "+x.id);
