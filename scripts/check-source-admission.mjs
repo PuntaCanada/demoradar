@@ -35,6 +35,19 @@ if(directRun){
  assert.equal(health.version,1);assert.equal(audit.version,1);
  // The six-hour production job must call this gate before any official fetch.
  const workflow=readFileSync(".github/workflows/update-events.yml","utf8");
+ // An unfamiliar one-line import step is not permitted to bypass the source registry.
+ const approvedSteps=new Set([
+  "update-events.mjs","update-rostock.py","update-cologne.py","update-nrw-police.py",
+  "update-police-notices.py","update-leipzig-police.py","import-leipzig-archive.py",
+  "update-frankfurt.py","update-dortmund-police.py","import-frankfurt-police-archive.py",
+  "monitor-official-sources.py","update-dresden.py","update-dresden-jena.py",
+  "dedupe-events.py","check-demos-api.py","probe-demos-events.py","update-demos.py",
+  "source-format-health.mjs","audit-source-quality.mjs","source-health-alerts.mjs",
+  "track-event-updates.py","update-news.py","build-language-pages.mjs"
+ ]);
+ const declared=[...workflow.matchAll(/^        run: (?:python3|node) scripts\/([a-zA-Z0-9_.-]+)\s*$/gm)].map(m=>m[1]);
+ assert.ok(declared.includes("update-events.mjs")&&declared.includes("update-dresden.py"),"Known official import steps missing from approved scheduler");
+ assert.deepEqual(declared.filter(name=>!approvedSteps.has(name)),[],"Unexpected import script: independently review rights, scope and parser before adding an updater");
  const gate=workflow.indexOf("node scripts/check-source-admission.mjs");
  const firstImport=workflow.indexOf("run: node scripts/update-events.mjs");
  assert.ok(gate>=0&&firstImport>gate,"Scheduled official imports must run admission checks first");
