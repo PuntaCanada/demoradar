@@ -15,6 +15,11 @@ on:
       - 'community/index.html'
       - 'en/community/index.html'
       - 'data/live-streams.json'
+      - 'data/news-matches.json'
+      - 'data/editorial-link-candidates.json'
+      - 'scripts/test-editorial-links.py'
+      - 'scripts/test-editorial-frontend.mjs'
+      - 'scripts/update-news.py'
       - 'data/source-coverage.json'
       - 'data/state-source-coverage.json'
       - 'data/source-quality.json'
@@ -93,6 +98,8 @@ jobs:
           node scripts/test-source-registry.mjs
           node scripts/test-source-quality.mjs
           node scripts/test-source-reuse-audit.mjs
+          python3 scripts/test-editorial-links.py
+          node scripts/test-editorial-frontend.mjs
           node scripts/check-source-admission.mjs
           node scripts/test-rejected-candidates.mjs
           node scripts/test-berlin-feed.mjs
@@ -116,7 +123,7 @@ jobs:
         continue-on-error: false
         run: |
           set -eu
-          for route in / /en/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/source-reuse-audit.json /data/rejected-official-candidates.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
+          for route in / /en/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/news-matches.json /data/editorial-link-candidates.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/source-reuse-audit.json /data/rejected-official-candidates.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
             echo "$route -> HTTP $code"
@@ -134,6 +141,8 @@ jobs:
               /community/) grep -q 'template=livestream.yml' /tmp/demoradar_response || (echo "::warning::Community and stream proposal page missing" && exit 1) ;;
               /en/community/) grep -q '<html lang="en">' /tmp/demoradar_response || (echo "::warning::English community page missing" && exit 1) ;;
               /data/live-streams.json) grep -q '"streams"' /tmp/demoradar_response || (echo "::warning::Reviewed live stream data unavailable" && exit 1) ;;
+              /data/news-matches.json) grep -q '"matches"' /tmp/demoradar_response || (echo "::error::Editorial links not deployed" && exit 1) ;;
+              /data/editorial-link-candidates.json) grep -q '"reviewed_on"' /tmp/demoradar_response || (echo "::error::Editorial source evidence not deployed" && exit 1) ;;
               /data/source-coverage.json) grep -q '"cities"' /tmp/demoradar_response || (echo "::warning::City coverage diagnostic not yet published" && exit 1) ;;
               /data/state-source-coverage.json) grep -q '"states"' /tmp/demoradar_response || (echo "::warning::State source coverage not deployed" && exit 1) ;;
               /data/source-quality.json) grep -q '"sources"' /tmp/demoradar_response || (echo "::warning::Importer source quality not deployed" && exit 1) ;;

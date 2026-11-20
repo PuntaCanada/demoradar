@@ -185,6 +185,12 @@ function loadCommunityLinks(){
 }
 const detailHref=e=>"?event="+encodeURIComponent(e.id)+"#eventDetail";
 const safeSourceUrl=url=>{try{const u=new URL(String(url||""),window.location?.origin||"https://demoradar.pages.dev");return u.protocol==="https:"||u.protocol==="http:"?u.href:""}catch{return""}};
+const editorialHosts=new Set(["www.tagesschau.de","www.rbb24.de","www.mdr.de","www.ndr.de","www1.wdr.de","www.br.de"]);
+const safeNewsUrl=url=>{try{
+ const u=new URL(String(url||""));
+ return u.protocol==="https:"&&!u.username&&!u.password&&!u.port&&editorialHosts.has(u.hostname.toLowerCase())?u.href:"";
+}catch{return""}};
+
 const localTopic=title=>{const label=topic(title);return T(({"Klima & Umwelt":"topic.climate","Frieden & Krieg":"topic.peace","Arbeit & Soziales":"topic.social","Migration":"topic.migration","Demokratie":"topic.democracy","Sonstiges":"topic.other"})[label]||"topic.other")};
 function political(s){s=s.toLowerCase();if(/(gegen.{0,55}(afd|alternative für deutschland)|kein.{0,30}afd|stoppt.{0,30}afd)/.test(s))return"Gegen AfD";if(/antifa|antifaschis/.test(s))return"Antifaschistisch";return"Andere / unbekannt"}
 const matches=e=>{let q=document.getElementById("search").value.toLocaleLowerCase("de"),r=document.getElementById("region").value,c=document.getElementById("city").value,t=document.getElementById("topic").value,p=document.getElementById("position").value;if(r!=="Alle Bundesländer"&&e.state!==r)return false;if(c&&e.city!==c)return false;if(t!=="Alle Themen"&&topic(e.title)!==t)return false;if(p!=="Alle Positionen"){const org=(e.organizer||"").toLowerCase();const isAfD=/\bafd\b|alternative für deutschland/.test(org);const isCDU=/\bcdu\b|christlich demokratische union/.test(org);const label=political(e.title);if(p==="AfD organisiert"&&!isAfD)return false;if(p==="CDU organisiert"&&!isCDU)return false;if(p==="Gegen AfD"&&label!=="Gegen AfD")return false;if(p==="Antifaschistisch"&&label!=="Antifaschistisch")return false;if(p==="Gegen CDU"&&!/gegen.{0,55}\bcdu\b/i.test(e.title))return false;if(p==="Andere / unbekannt"&&(isAfD||isCDU||label!=="Andere / unbekannt"))return false;}return (e.title+" "+e.city+" "+e.state+" "+(e.organizer||"")+" "+e.location+" "+e.route).toLocaleLowerCase("de").includes(q)};
@@ -314,8 +320,8 @@ function renderFeatured(){
   if(!items.length){holder.className="featured-empty";holder.textContent=T("feature.empty");continue}
   holder.className="featured-grid";
   holder.innerHTML=items.map(e=>{
-   const articles=Array.isArray(articleMatches[e.id])?articleMatches[e.id].slice(0,2):[];
-   const links=articles.map(n=>'<a href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.candidateTitle"))+'" >'+esc(n.source)+": "+esc(n.title)+'</a>').join("");
+   const articles=Array.isArray(articleMatches[e.id])?articleMatches[e.id].filter(n=>safeNewsUrl(n.url)).slice(0,2):[];
+   const links=articles.map(n=>'<a href="'+esc(safeNewsUrl(n.url))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.candidateTitle"))+'" >'+esc(n.source)+": "+esc(n.title)+'</a>').join("");
    const meta=(x.id==="week"?esc(formatDate(e.date))+" · ":"")+esc(e.start||T("calendar.timeUnknown"))+(e.start?" ":"")+" · "+esc(e.city)+(e.location?" · "+esc(e.location):"")+(e.organizer?" · "+esc(e.organizer):"")+(e.registered_participants?" · "+esc(T("feature.registered"))+": "+esc(e.registered_participants):"");
    return '<article class="featured-item topic-card topic-'+topicSlug(e.title)+'"><span class="featured-badge topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><h3><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(e.title)+'</a></h3>'+statusPills(e)+'<div class="featured-meta">'+meta+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(T("feature.source"))+'</a><a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.searchTitle"))+'" >'+esc(T("feature.newsSearch"))+'</a></div>'+streamTeaser(e)+(links?'<div class="featured-meta"><strong>'+esc(T("feature.candidate"))+'</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
   }).join("");
@@ -354,7 +360,7 @@ function renderDetail(){
   const updates=changes.length?'<section class="detail-updates"><h3>'+esc(T("status.updated"))+'</h3><ul>'+changes.map(c=>'<li><strong>'+esc(T(({"route":"status.routeChange","start":"status.timeChange","end":"status.timeChange","location":"status.placeChange","date":"status.dateChange","event_status":"status.statusChange"})[c.field]||"status.otherChange"))+'</strong>: '+esc(T("status.previous"))+' '+esc(c.previous||"—")+' → '+esc(T("status.current"))+' '+esc(c.current||"—")+'</li>').join("")+'</ul><p class="small">'+esc(T("status.uncertain"))+'</p></section>':"";
   const reports=Array.isArray(articleMatches[event.id])?articleMatches[event.id].slice(0,3):[];
   const newsQuery="https://news.google.com/search?q="+encodeURIComponent('"'+event.title.slice(0,120)+'" '+event.city)+"&hl="+(locale()==="de-DE"?"de":"en")+"&gl=DE";
-    const news=reports.length?'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.candidate"))+'</p><ul>'+reports.filter(n=>safeSourceUrl(n.url)).map(n=>'<li><a href="'+esc(safeSourceUrl(n.url))+'" target="_blank" rel="noopener noreferrer">'+esc(n.source)+': '+esc(n.title)+'</a></li>').join("")+'</ul></section>':'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.none"))+'</p></section>';
+    const news=reports.length?'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.candidate"))+'</p><ul>'+reports.filter(n=>safeNewsUrl(n.url)).map(n=>'<li><a href="'+esc(safeNewsUrl(n.url))+'" target="_blank" rel="noopener noreferrer">'+esc(n.source)+': '+esc(n.title)+'</a></li>').join("")+'</ul></section>':'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.none"))+'</p></section>';
   const newsSearch='<a href="'+esc(newsQuery)+'" target="_blank" rel="noopener noreferrer">'+esc(T("news.find"))+'</a>';
   const source=safeSourceUrl(event.source_url);
   const license=event.license?'<p class="small">'+esc(T("detail.license"))+': '+esc(event.license)+'</p>':"";
