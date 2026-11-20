@@ -38,7 +38,7 @@ const freshnessDescription=s=>{
 const isRolling=s=>s.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(s.source);
 const filter=document.querySelector("#sourceFilter");
 const search=document.querySelector("#sourceSearch");
-let states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[],rejectedCandidates=[];
+let coverageReviewDay=null,states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[],rejectedCandidates=[];
 let initialized=false;
 const render=()=>{
  if(!initialized)return;
@@ -59,6 +59,13 @@ const render=()=>{
   const pill=$("span","source-chip "+(state.status==="no_confirmed_regular_feed"?"muted":"partial"),coverageText(state.status));
   top.append(pill);article.append(top);
   article.append($("p","source-scope",state.scope));
+  const assessmentAge=daysSince(coverageReviewDay);
+  const assessmentDescription=assessmentAge===null||assessmentAge<0?
+    t("Bundesweite Quelleninventur ohne gültiges Prüfdatum.","State source coverage audit has no valid review date."):
+    assessmentAge>30?
+    t("Bundesweite Quelleninventur "+assessmentAge+" Tage alt – Abdeckung erneut prüfen.","State source inventory is "+assessmentAge+" days old – recheck source coverage."):
+    t("Quelleninventur geprüft am ","Coverage inventory reviewed on ")+fmt(coverageReviewDay);
+  article.append($("p",assessmentAge===null||assessmentAge<0||assessmentAge>30?"source-warning":"source-detail",assessmentDescription));
   const list=$("div","source-list");
   if(!entries.length)list.append($("p","source-empty",t("Keine konkret geprüfte Importquelle für dieses Bundesland aufgeführt. Das bedeutet nicht, dass dort keine Demos stattfinden.","No specifically audited importer listed for this state. This does not mean there are no demonstrations.")));
   for(const s of entries){
@@ -159,6 +166,7 @@ Promise.all([
  if(rejections.version!==1||!Array.isArray(rejections.candidates))throw Error("Unexpected official candidate assessment schema");
  rejectedCandidates=rejections.candidates.filter(x=>x.recurring_demo_dates===false&&x.decision?.startsWith("rejected_"));
  reuseAudits=reuse.feeds;
+ coverageReviewDay=coverage.reviewed_on;
  states=coverage.states;quality=data.sources;health=format.feeds;monitors=Array.isArray(expansion.sources)?expansion.sources.filter(s=>coverage.states.some(x=>x.state===s.state)&&typeof s.url==="string"):[];
  const latest=quality.map(s=>s.last_checked).filter(validDay).sort().at(-1);
  document.querySelector("#lastCheck").textContent=t("Letzte belegte Quellenprüfung: ","Last evidenced source check: ")+fmt(latest);
