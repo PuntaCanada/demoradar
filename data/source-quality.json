@@ -143,6 +143,16 @@
       "check_freshness": "recent"
     },
     {
+      "city": "Bad Oldesloe",
+      "state": "Schleswig-Holstein",
+      "source": "Polizeidirektion Ratzeburg",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "Single police-announced assembly on 21 November 2026; time and exact venue unconfirmed; not a recurring source",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
       "city": "Frankfurt am Main",
       "state": "Hessen",
       "source": "Stadt Frankfurt",

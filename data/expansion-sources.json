@@ -44,8 +44,9 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming",
-      "status": "reachable_archive_only",
-      "checked_on": "2026-11-20"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-20",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Schwerin",
@@ -266,8 +267,9 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-20"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-20",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     }
   ]
 }
