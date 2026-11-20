@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize,ambiguousOrInvalidTitleDates,platformAccount,candidateStillMatches} from "./stream-matcher.mjs";
+import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize,ambiguousOrInvalidTitleDates,platformAccount,candidateStillMatches,candidateObservationFresh} from "./stream-matcher.mjs";
 const date="2026-11-19",iso="2026-11-19T12:00:00Z";
 const events=[
  {id:"berlin-climate",city:"Berlin",date,title:"Kundgebung Klimaschutz und Energiewende"},
@@ -80,4 +80,16 @@ assert.equal(platformAccount("https://user:pass@www.youtube.com/@Eskalabe","yout
 assert.equal(platformAccount("not a URL","youtube"),"");
 assert.equal(platformAccount("https://www.twitch.tv/../../../foo","twitch"),"");
 assert.equal(platformAccount("https://www.youtube.com/@aa","youtube"),"");
+
+const observedAt=new Date("2026-11-20T11:00:00Z");
+const streaming=(status,checked_at)=>({status,checked_at});
+assert.equal(candidateObservationFresh(streaming("live","2026-11-20T10:50:00Z"),observedAt),true);
+assert.equal(candidateObservationFresh(streaming("live","2026-11-20T10:30:00Z"),observedAt),false,"Expired LIVE cannot linger");
+assert.equal(candidateObservationFresh(streaming("live",null),observedAt),false,"Missing evidence cannot imply LIVE");
+assert.equal(candidateObservationFresh(streaming("live","nonsense"),observedAt),false);
+assert.equal(candidateObservationFresh(streaming("live","2026-11-21T11:00:00Z"),observedAt),false,"Future timestamps cannot imply LIVE");
+assert.equal(candidateObservationFresh(streaming("recording","2026-11-01T11:00:00Z"),observedAt),true);
+assert.equal(candidateObservationFresh(streaming("recording","2026-09-01T11:00:00Z"),observedAt),false);
+assert.equal(candidateObservationFresh(streaming("scheduled","2026-11-20T11:00:00Z"),observedAt),false);
+
 console.log("stream-matcher: 47 safety checks passed");
