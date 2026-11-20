@@ -7,6 +7,9 @@ const states=JSON.parse(readFileSync("data/state-source-coverage.json","utf8")).
 assert.equal(states.length,16);
 assert.ok(source.includes("const checkAge=checked=>"),"Age must be calculated from actual date, not cached freshness labels");
 assert.ok(source.includes("checkIsStale(s)"),"Heatmap must reflect aged or missing checks");
+assert.ok(source.includes("coverageReviewWarning()"),"Show when sixteen-state coverage inventory is outdated");
+assert.ok(registry.includes("coverageReviewDay=coverage.reviewed_on"),"Show actual coverage audit date instead of making daily feeds look like fresh state audits");
+assert.ok(registry.includes("assessmentAge>30"),"Warn for outdated federal-state audit even when individual imports succeeded");
 assert.ok(source.includes('fetch("/data/expansion-sources.json"'),"Heatmap must display research-only state coverage separately");
 assert.ok(source.includes("monitorInfo(state)"),"Heatmap must label monitored pages as non-feeds");
 assert.ok(source.includes('s.status==="unavailable"')&&source.includes('checkAge(s.checked_on)'),"Unreachable and stale monitor status must warn on heatmap");
