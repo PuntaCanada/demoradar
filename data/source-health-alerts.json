@@ -2,7 +2,7 @@
   "version": 1,
   "scope": "non-actionable warnings only; no events are generated or removed",
   "checked_sources": 13,
-  "checked_research_pages": 21,
+  "checked_research_pages": 22,
   "alerts": [
     {
       "city": "Köln",
@@ -29,6 +29,15 @@
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
+      "city": "Weimar",
+      "state": "Thüringen",
+      "source": "Research-only official page",
+      "condition": "monitor_content_unverified",
+      "last_checked": "2026-11-20",
+      "url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
       "city": "Nürnberg",
       "state": "Bayern",
       "source": "Research-only official page",
@@ -53,6 +62,15 @@
       "condition": "monitor_http_restricted",
       "last_checked": "2026-11-20",
       "url": "https://www.polizei.bremen.de/news/pressestelle/pressearchiv-5034",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "source": "Research-only official page",
+      "condition": "monitor_transport_unverified",
+      "last_checked": "2026-11-20",
+      "url": "https://www.hamburg.de/service/info/111097758/",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     }
   ]

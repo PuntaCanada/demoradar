@@ -3,6 +3,18 @@
   "method": "read-only official-page check; reachability never establishes event coverage or reuse rights",
   "sources": [
     {
+      "city": "Weimar",
+      "state": "Thüringen",
+      "type": "official_assembly_upcoming_html",
+      "url": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
+      "parser": null,
+      "data_rights": "Official listing of confirmed upcoming assembly registrations; no source-specific open machine reuse licence or structured JSON/CSV/RSS endpoint verified. Research and link only, never automated import.",
+      "scope": "Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register.",
+      "status": "content_unverified",
+      "checked_on": "2026-11-20",
+      "error": "Weimar confirmed-assembly heading missing"
+    },
+    {
       "city": "Magdeburg",
       "state": "Sachsen-Anhalt",
       "type": "official_police_historical_notice",
@@ -77,7 +89,8 @@
       "data_rights": "Published under Art. 13 BayVersG; factual listings are public but no verified open bulk reuse licence or maintained structured API; monitor and link only until rights and individual-date validation are confirmed",
       "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-20"
+      "checked_on": "2026-11-20",
+      "date_conflicts": []
     },
     {
       "city": "Potsdam",
@@ -233,8 +246,9 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-20"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-20",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     }
   ]
 }
