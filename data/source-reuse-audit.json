@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-20",
+  "method": "Manual inspection of official publisher metadata/pages. Technical public access does not prove an open reuse licence. Registry describes source permissions, not a legal opinion or a change to event importer behaviour.",
+  "feeds": [
+    {
+      "source": "Polizei Berlin",
+      "city": "Berlin",
+      "state": "Berlin",
+      "format": "JSON REST API (also XML/CSV)",
+      "classification": "restricted_metadata",
+      "reuse_confirmed": false,
+      "source_url": "https://daten.berlin.de/datensaetze/simple_search_wwwberlindepolizeiserviceversammlungsbehoerdeversammlungenaufzuege",
+      "evidence": "Berlin Open Data lists the dataset licence as 'Siehe Website des Datensatzes (other-closed)' despite offering JSON; no unequivocal open bulk-reuse licence proven.",
+      "handling": "Original source attribution and cautious factual summaries only; request explicit clarification before claiming unrestricted downstream reuse."
+    },
+    {
+      "source": "Stadt Dresden",
+      "city": "Dresden",
+      "state": "Sachsen",
+      "format": "JSON",
+      "classification": "rights_not_verified",
+      "reuse_confirmed": false,
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "evidence": "Municipal JSON endpoint in existing importer. No source-specific unambiguous licence terms verified in this audit.",
+      "handling": "Retain source attribution, do not claim open licence; verify dataset-specific reuse terms."
+    },
+    {
+      "source": "Stadt Rostock",
+      "city": "Rostock",
+      "state": "Mecklenburg-Vorpommern",
+      "format": "RSS/HTML",
+      "classification": "rights_not_verified",
+      "reuse_confirmed": false,
+      "source_url": "https://rathaus.rostock.de/de/informationen_ueber_versammlungsanmeldungen_kuenftig_online_recherchierbar/345349",
+      "evidence": "Rostock officially announced an assembly RSS feed on 12 April 2022; no general open redistribution licence established in this audit.",
+      "handling": "Original source attribution; publication of an RSS feed does not by itself grant unqualified reuse rights."
+    },
+    {
+      "source": "Stadt Köln",
+      "city": "Köln",
+      "state": "Nordrhein-Westfalen",
+      "format": "HTML traffic calendar",
+      "classification": "rights_not_verified",
+      "reuse_confirmed": false,
+      "source_url": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/index.html",
+      "evidence": "Selected traffic-relevant city notices rather than a complete assembly register; no blanket open HTML reuse licence evidenced.",
+      "handling": "Only attributable factual event details; never describe this as full NRW assembly coverage."
+    },
+    {
+      "source": "Stadt Jena",
+      "city": "Jena",
+      "state": "Thüringen",
+      "format": "HTML notices",
+      "classification": "rights_not_verified",
+      "reuse_confirmed": false,
+      "source_url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen",
+      "evidence": "Official city notice page; no general machine-readable licence or comprehensive future event feed confirmed.",
+      "handling": "Date-specific official notices only; not a regularly complete city or state feed."
+    }
+  ]
+}
