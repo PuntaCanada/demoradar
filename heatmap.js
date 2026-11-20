@@ -11,7 +11,7 @@ const tier=n=>n>=50?5:n>=15?4:n>=5?3:n>=2?2:n>=1?1:0;
 let shapes=null,records=[],coverage=null,sourceHealth=null,sourceFormat=null,monitoredSources=[];
 const svgNS="http://www.w3.org/2000/svg";
 const sourceFor=state=>coverage?.states?.find(s=>s.state===state)||null;
-const monitorInfo=state=>{const n=monitoredSources.filter(s=>s.state===state).length;return n?((document.documentElement.lang==="en"?"Official research pages (not feeds): ":"Amtliche Recherche-Seiten (keine Feeds): ")+n):""};
+const monitorInfo=state=>{const entries=monitoredSources.filter(s=>s.state===state);const n=entries.length;if(!n)return "";const bad=entries.filter(s=>{const age=checkAge(s.checked_on);return s.status==="unavailable"||age===null||age<0||age>2}).length;return (document.documentElement.lang==="en"?"Official research pages (not feeds): ":"Amtliche Recherche-Seiten (keine Feeds): ")+n+(bad?(document.documentElement.lang==="en"?" · outdated/unreachable: ":" · veraltet/nicht erreichbar: ")+bad:"")};
 const checkAge=checked=>{if(!/^20\d{2}-\d{2}-\d{2}$/.test(String(checked||"")))return null;const date=new Date(checked+"T12:00:00Z");if(!Number.isFinite(date.getTime())||date.toISOString().slice(0,10)!==checked)return null;return Math.floor((Date.parse(todayBerlin()+"T12:00:00Z")-date.getTime())/86400000)};
 const checkIsStale=entry=>{const age=checkAge(entry.last_checked);return age===null||age<0||age>2};
 const sourceLabel=state=>{
@@ -106,7 +106,7 @@ function draw(){
   const detail=sourceDetails(item.state);
   const health=document.createElement("small");health.className="heatmap-health-label";
   const stateHealth=(sourceHealth?.sources||[]).filter(s=>s.state===item.state);
-  if(stateHealth.some(s=>s.status==="unavailable"||checkIsStale(s))||formatIssues(item.state).length)health.classList.add("is-warning");
+  if(stateHealth.some(s=>s.status==="unavailable"||checkIsStale(s))||monitoredSources.some(s=>{const age=checkAge(s.checked_on);return s.state===item.state&&(s.status==="unavailable"||age===null||age<0||age>2)})||formatIssues(item.state).length)health.classList.add("is-warning");
   else if(stateHealth.length===0||stateHealth.every(s=>s.status==="unknown"))health.classList.add("is-muted");
   health.textContent=healthDetail(item.state);
   if(health.textContent)caption.title=health.textContent;
