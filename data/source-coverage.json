@@ -5,7 +5,7 @@
     "from": "2026-10-21",
     "to": "2026-11-27"
   },
-  "event_records": 479,
+  "event_records": 480,
   "diagnostic_video_samples": 23,
   "cities": [
     {
@@ -57,12 +57,12 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
           "type": "official_police_operational_notice",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
