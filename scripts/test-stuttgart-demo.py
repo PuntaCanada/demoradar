@@ -27,6 +27,12 @@ class Test(unittest.TestCase):
    DOC.replace("Demo zum Internationaler Tag gegen Gewalt an Frauen","FoodBRYCKE Demo Day")
   ):
    self.assertEqual(m["parse"](bad),[])
+ def test_original_word_breaks_and_cms_wrapping(self):
+  wrapped=DOC.replace("25. November 2026 18:00 Uhr","25.\n November 2026   18:00  Uhr")
+  self.assertEqual(len(m["parse"](wrapped)),1)
+  content,checks=m["visible_and_evidence"](DOC)
+  self.assertTrue(all(checks.values()))
+  self.assertEqual(m["parse"](DOC.replace("Rotebühlplatz, 70173 Stuttgart","Rotebühlplatz, 70173 Berlin")),[])
  def test_never_generates_multiple_events_or_media_links(self):
   events=m["parse"](DOC)
   self.assertEqual(len({e["id"] for e in events}),1)

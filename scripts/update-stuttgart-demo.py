@@ -28,7 +28,7 @@ class Visible(HTMLParser):
  @property
  def text(self):return re.sub(r"\s+"," "," ".join(self.parts)).strip()
 
-def parse(html):
+def visible_and_evidence(html):
  p=Visible();p.feed(html)
  body=p.text
  required=[
@@ -38,7 +38,12 @@ def parse(html):
   "Rotebühlplatz, 70173 Stuttgart",
   "Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet."
  ]
- if not all(word in body for word in required):return []
+ checks={key:re.search(r"\s+".join(map(re.escape,key.split())),body,re.I) is not None for key in required}
+ return body,checks
+
+def parse(html):
+ body,checks=visible_and_evidence(html)
+ if not all(checks.values()):return []
  # A generic event search result or software demo cannot impersonate this
  # precise calendar entry, whose place and organizing group are individually known.
  if not re.search(r"Demo zum Internationaler Tag gegen Gewalt an Frauen\s+25\. November 2026\s+18:00 Uhr",body):return []
@@ -55,7 +60,11 @@ def fetch():
  req=urllib.request.Request(URL,headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
  with urllib.request.urlopen(req,timeout=18) as r:
   if r.status!=200:raise ValueError("HTTP "+str(r.status))
-  data=r.read(850000)
+  # Government CMS may put event content after extensive navigation.
+  # Refuse overly large or truncated pages rather than assuming a partial
+  # HTML document can verify a specific event.
+  data=r.read(2_000_001)
+  if len(data)>2_000_000:raise ValueError("Municipal HTML exceeds safe 2 MB limit")
   if len(data)<450:raise ValueError("Stuttgart city calendar content too short")
   return data.decode("utf-8","replace")
 
@@ -81,7 +90,12 @@ def main():
  found=[]
  if dt.date(2026,11,19)<=today<=dt.date(2026,12,25):
   try:
-   found=parse(fetch())
+   html=fetch()
+   _,checks=visible_and_evidence(html)
+   status["source_bytes_checked"]=len(html.encode("utf-8","replace"))
+   status["evidence_fields_found"]=sum(checks.values())
+   status["evidence_fields_total"]=len(checks)
+   found=parse(html)
    status.update(status="verified_city_event_one_off" if found else "original_content_unverified_no_new_import",count=len(found))
   except Exception as error:
    status.update(status="original_unavailable_no_new_import",error=str(error)[:150])
