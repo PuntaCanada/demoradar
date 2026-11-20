@@ -84,6 +84,14 @@ export function nearbyDate(timestamp,eventDay,status){
  // Livestream takes place on event day; recordings may be published the day after.
  return status==="recording"?delta>=-1&&delta<=2:delta===0;
 }
+// Shared city names must be explicitly disambiguated in an archive title.
+// A generic "Frankfurt" recording can otherwise falsely attach to Frankfurt (Oder) or Main.
+export function unambiguousCity(title,city){
+ const c=normalize(city),v=normalize(title);
+ if(c==="frankfurt am main")return /\bfrankfurt (?:am )?main\b/.test(v);
+ if(c==="frankfurt oder")return /\bfrankfurt (?:an der )?oder\b/.test(v);
+ return true;
+}
 export function matchEvents(video,events){
  if(!video||!video.title||!video.date||!["live","recording"].includes(video.status))return [];
  // Historical uploads and live broadcasts are proposals only; unknown platform status must never be paired.
@@ -94,6 +102,7 @@ export function matchEvents(video,events){
  for(const event of events){
   if(!event?.id||!event?.title||!event?.city||!event?.date)continue;
   if(!cityMatches(video.title,event.city))continue;
+  if(!unambiguousCity(video.title,event.city))continue;
   // Explicit broadcast date in a recording title can identify the event even
   // when an edited excerpt was uploaded days later. Keep it a proposal only.
   const namedDay=explicitDateInTitle(video.title);
