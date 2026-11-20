@@ -11,6 +11,7 @@ from pathlib import Path
 
 OUTPUT=Path("data/expansion-sources.json")
 SOURCES=[
+ {"city":"Landsberg am Lech","state":"Bayern","type":"official_assembly_list_html","url":"https://www.landkreis-landsberg.de/versammlungen/","parser":None,"data_rights":"Published under Art. 13 BayVersG; factual listings are public but no verified open bulk reuse licence or maintained structured API; monitor and link only until rights and individual-date validation are confirmed","scope":"Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import"},
  {"city":"Potsdam","state":"Brandenburg","type":"official_assembly_guidance","url":"https://www.potsdam.de/de/informationen-fuer-veranstalter","parser":None,"data_rights":"Assembly application guidance only; no current event data feed or reuse licence verified; monitor only","scope":"Potsdam points organizers to Brandenburg police; no published event list verified"},
  {"city":"Karlsruhe","state":"Baden-Württemberg","type":"official_city_press","url":"https://www.karlsruhe.de/stadt-rathaus/aktuelles/meldungen/versammlung-system-change-camp-2026-in-der-guenther-klotz-anlage","parser":None,"data_rights":"Individual city press notice, no recurring feed or blanket reuse permission; link only","scope":"Historical official notice from 2026; do not infer future scheduled assemblies"},
  {"city":"Braunschweig","state":"Niedersachsen","type":"official_consented_assembly_list","url":"https://www.braunschweig.de/politik_verwaltung/bekanntmachungen/versammlungen/index.php","parser":None,"data_rights":"Only assemblies whose applicants consent to publication; no explicit blanket reuse licence found; monitor only","scope":"Official list is conditional on publication consent and was empty in the verified 19 Nov 2026 snapshot"},
@@ -33,6 +34,11 @@ def inspect(item):
   with urllib.request.urlopen(req,timeout=12) as response:
    payload=response.read(160_000)
    if response.status!=200 or len(payload)<400:raise ValueError("Empty or non-200 page")
+   # A generic HTTP 200 is not enough to claim a working assembly register.
+   if item["type"]=="official_assembly_list_html":
+    decoded=payload.decode("utf-8",errors="replace").lower()
+    if "versammlungen" not in decoded or "thema der versammlung" not in decoded:
+     raise ValueError("Assembly-list content marker missing; page may have changed")
    output["status"]="reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed"
  except Exception as exc:output["error"]=str(exc)[:125]
  return output
