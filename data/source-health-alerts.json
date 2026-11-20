@@ -2,7 +2,7 @@
   "version": 1,
   "scope": "non-actionable warnings only; no events are generated or removed",
   "checked_sources": 13,
-  "checked_research_pages": 19,
+  "checked_research_pages": 21,
   "alerts": [
     {
       "city": "Köln",
@@ -27,6 +27,15 @@
       "condition": "unavailable",
       "last_checked": null,
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
+    },
+    {
+      "city": "Magdeburg",
+      "state": "Sachsen-Anhalt",
+      "source": "Research-only official page",
+      "condition": "monitor_unavailable",
+      "last_checked": "2026-11-20",
+      "url": "https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {
       "city": "Nürnberg",

@@ -3,6 +3,29 @@
   "method": "read-only official-page check; reachability never establishes event coverage or reuse rights",
   "sources": [
     {
+      "city": "Magdeburg",
+      "state": "Sachsen-Anhalt",
+      "type": "official_police_historical_notice",
+      "url": "https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821",
+      "parser": null,
+      "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
+      "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
+      "status": "unavailable",
+      "checked_on": "2026-11-20",
+      "error": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "city": "Halle (Saale)",
+      "state": "Sachsen-Anhalt",
+      "type": "official_police_historical_notice",
+      "url": "https://polizei.sachsen-anhalt.de/bs/pressemitteilungen/polizei?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=695807",
+      "parser": null,
+      "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
+      "scope": "Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming",
+      "status": "reachable_archive_only",
+      "checked_on": "2026-11-20"
+    },
+    {
       "city": "Schwerin",
       "state": "Mecklenburg-Vorpommern",
       "type": "official_assembly_authority_guidance",
