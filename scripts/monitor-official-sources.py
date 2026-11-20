@@ -4,6 +4,7 @@ Reachability is NOT event availability, licensing permission, or completeness.
 No speculative events are generated and no page text is republished.
 """
 import json
+import socket
 from datetime import datetime, timezone
 import urllib.error
 import urllib.request
@@ -46,7 +47,20 @@ def inspect(item):
     if "versammlungen" not in decoded or "thema der versammlung" not in decoded:
      raise ValueError("Assembly-list content marker missing; page may have changed")
    output["status"]="reachable_archive_only" if item["type"]=="official_police_historical_notice" else ("reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed")
- except Exception as exc:output["error"]=str(exc)[:125]
+ except urllib.error.HTTPError as exc:
+  output["status"]="http_restricted" if exc.code in (401,403,429) else ("unavailable" if exc.code in (404,410) else "transport_unverified")
+  output["error"]="HTTP "+str(exc.code)
+ except (urllib.error.URLError,ConnectionError,TimeoutError,socket.timeout) as exc:
+  # Network denial, connection reset and bot filtering do not establish that an
+  # official announcement was removed. Never turn that ambiguity into an event.
+  output["status"]="transport_unverified"
+  output["error"]=type(exc).__name__+": "+str(exc)[:100]
+ except ValueError as exc:
+  output["status"]="content_unverified"
+  output["error"]=str(exc)[:125]
+ except Exception as exc:
+  output["status"]="transport_unverified"
+  output["error"]=type(exc).__name__+": "+str(exc)[:100]
  return output
 def main():
  result={"version":1,"method":"read-only official-page check; reachability never establishes event coverage or reuse rights","sources":[inspect(x) for x in SOURCES]}
