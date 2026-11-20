@@ -5,11 +5,28 @@
   "checked_research_pages": 19,
   "alerts": [
     {
+      "city": "Köln",
+      "state": "Nordrhein-Westfalen",
+      "source": "Stadt Köln",
+      "condition": "missing_check_date",
+      "last_checked": null,
+      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
+    },
+    {
+      "city": "Leipzig",
+      "state": "Sachsen",
+      "source": "Polizeidirektion Leipzig",
+      "condition": "missing_check_date",
+      "last_checked": null,
+      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
+    },
+    {
       "city": "Frankfurt am Main",
+      "state": "Hessen",
       "source": "Stadt Frankfurt",
       "condition": "unavailable",
       "last_checked": null,
-      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur."
+      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
       "city": "Nürnberg",
