@@ -25,3 +25,7 @@ jobs:
           node --check sources/source-status.js
           node scripts/test-source-transparency.mjs
           node scripts/test-stream-matcher.mjs
+      - name: Verify Chromium available and run real browser regression
+        run: |
+          command -v google-chrome || command -v chromium || command -v chromium-browser
+          node scripts/test-browser.mjs
