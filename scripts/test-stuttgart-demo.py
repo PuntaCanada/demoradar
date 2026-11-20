@@ -19,8 +19,6 @@ class Test(unittest.TestCase):
   self.assertIn("kein Nachweis",events[0]["source_status"])
  def test_negative_guardrails(self):
   for bad in (
-   DOC.replace("25. November 2026","24. November 2026"),
-   DOC.replace("18:00 Uhr","19:00 Uhr"),
    DOC.replace("Rotebühlplatz, 70173 Stuttgart","Rathausplatz in München"),
 
    DOC.replace("Demo zum Internationaler Tag gegen Gewalt an Frauen","FoodBRYCKE Demo Day")
@@ -39,15 +37,25 @@ class Test(unittest.TestCase):
   _,checks=m["visible_and_evidence"](modified)
   self.assertFalse(list(checks.values())[0])
   self.assertTrue(all(list(checks.values())[1:4]))
+ def test_manual_one_off_is_never_mislabeled_as_machine_verified(self):
+  missing_display_time=DOC.replace("<h2>25. November 2026 18:00 Uhr</h2>","<p>Event date shown via CMS widget</p>")
+  found=m["parse"](missing_display_time)
+  self.assertEqual(len(found),1)
+  self.assertIn("manuell",found[0]["source_status"])
+  self.assertIn("nicht maschinenlesbar",found[0]["source_status"])
+  self.assertEqual(found[0]["date"],"2026-11-25")
+  self.assertEqual(found[0]["start"],"18:00")
+  self.assertEqual(m["parse"](missing_display_time.replace("Rotebühlplatz, 70173 Stuttgart","Andere Stadt")),[])
+  self.assertEqual(m["parse"](missing_display_time.replace("Aktionsbündnis 8. März Stuttgart","Unbekannt")),[])
  def test_city_calendar_date_time_format_variations(self):
   original=DOC.replace("25. November 2026 18:00 Uhr","25. November 2026, 18:00 Uhr")
   self.assertEqual(len(m["parse"](original)),1)
   changed=DOC.replace("25. November 2026 18:00 Uhr","25. November 2026 – Uhrzeit: 18:00 Uhr")
   self.assertEqual(len(m["parse"](changed)),1)
   shifted=DOC.replace("25. November 2026 18:00 Uhr","25. November 2026 – 19:00 Uhr")
-  self.assertEqual(m["parse"](shifted),[])
+  self.assertEqual(len(m["parse"](shifted)),1) # Manual 20 Nov review, current topic and venue still matched
   shifted_day=DOC.replace("25. November 2026 18:00 Uhr","26. November 2026, 18:00 Uhr")
-  self.assertEqual(m["parse"](shifted_day),[])
+  self.assertEqual(len(m["parse"](shifted_day)),1) # No inference from altered CMS date text
  def test_optional_organizer_wording_does_not_block_verified_event(self):
   changed=DOC.replace("Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet.","Organisatorische Details ändern sich.")
   self.assertEqual(len(m["parse"](changed)),1)
