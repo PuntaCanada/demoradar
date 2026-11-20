@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-20T10:08:30.852Z",
+  "updated_at": "2026-11-20T12:12:41.881Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -44,7 +44,7 @@
       "title": "LIVE ❗ Verdi & Gen Z Demo 💥 Frankfurt im Ausnahmezustand 😱 Eskaliert es wieder? Protest & Polizei",
       "url": "https://www.youtube.com/watch?v=9U87riALREM",
       "date": "2026-11-20T08:47:32Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {
@@ -92,7 +92,7 @@
       "title": "🔴LIVE \"Internationaler Jugendstreik!\" Frankfurt 20.11.26",
       "url": "https://www.youtube.com/watch?v=Yoz5iV53DXM",
       "date": "2026-11-20T09:29:08Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {
@@ -113,6 +113,14 @@
     },
     {
       "channel": "Eskalabe",
+      "title": "🔴LIVE: DIE JUGEND SAGT NEIN! Großer Protest gegen Wehrpflicht und Militarisierung ⛓️",
+      "url": "https://www.youtube.com/watch?v=QhX66_1UfH4",
+      "date": "2026-11-20T10:21:02Z",
+      "status": "live",
+      "match_count": 0
+    },
+    {
+      "channel": "Eskalabe",
       "title": "🔴LIVE: GEN Z REGELT – PHASE 2❗️ Jugendprotest zieht über den Ku'damm 🏚",
       "url": "https://www.youtube.com/watch?v=ODg-BIToY14",
       "date": "2026-11-14T15:54:04Z",
@@ -124,14 +132,6 @@
       "title": "🔴LIVE: „Dieser Staat schützt uns nicht!“ – Demonstration in Berlin-Lichtenberg [2K]",
       "url": "https://www.youtube.com/watch?v=hn8XglAIuio",
       "date": "2026-11-12T16:45:32Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Eskalabe",
-      "title": "🔴LIVE: Großdemonstration zum Nahostkonflikt in Berlin-Wedding",
-      "url": "https://www.youtube.com/watch?v=MS2YsmyTUso",
-      "date": "2026-11-07T14:18:34Z",
       "status": "recording",
       "match_count": 0
     },

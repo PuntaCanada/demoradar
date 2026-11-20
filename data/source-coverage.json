@@ -25,9 +25,9 @@
     },
     {
       "city": "Berlin",
-      "event_count": 395,
+      "event_count": 394,
       "days_with_events": 9,
-      "observed_video_title_samples": 3,
+      "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
@@ -57,12 +57,12 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         },
         {
           "type": "official_police_operational_notice",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         },
         {
