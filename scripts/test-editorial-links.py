@@ -43,8 +43,8 @@ class EditorialSafetyTests(unittest.TestCase):
  def test_time_window(self):
   self.assertEqual(match_links([EVENT],[BASE],dt.date(2026,11,26)),{})
  def test_review_date_is_honest(self):
-  a=match_links([EVENT],[BASE],TODAY,reviewed_on="2026-11-19")
-  self.assertEqual(a["actual-1"][0]["reviewed_on"],"2026-11-19")
+  a=match_links([EVENT],[dict(BASE,published_on="2026-11-19")],TODAY,reviewed_on="2026-11-20")
+  self.assertEqual(a["actual-1"][0]["reviewed_on"],"2026-11-20")
  def test_old_editorial_review_expires(self):
   self.assertEqual(match_links([EVENT],[BASE],TODAY,reviewed_on="2026-11-10"),{})
  def test_future_review_not_trusted(self):
