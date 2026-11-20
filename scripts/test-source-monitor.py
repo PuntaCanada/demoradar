@@ -9,6 +9,8 @@ spec=importlib.util.spec_from_file_location("official_sources","scripts/monitor-
 module=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 assert any(x["city"]=="Köln" and x["parser"] for x in module.SOURCES)
+assert any(x["city"]=="Potsdam" and x["state"]=="Brandenburg" and x["parser"] is None for x in module.SOURCES)
+assert any(x["city"]=="Karlsruhe" and x["state"]=="Baden-Württemberg" and x["parser"] is None for x in module.SOURCES)
 assert sum(x["city"]=="Leipzig" for x in module.SOURCES)==2
 assert any(x["city"]=="Bremen" and x["parser"] is None and x["type"]=="official_police_press_archive" for x in module.SOURCES)
 assert any(x["city"]=="Hamburg" and x["type"]=="official_police_operational_notice" and x["parser"] is None for x in module.SOURCES)
@@ -24,6 +26,7 @@ with patch.object(module.urllib.request,"urlopen",return_value=Response()):
   checked=module.inspect(item)
   assert checked["status"]==("reachable_parser_configured" if item["parser"] else "reachable_monitor_only_not_a_feed")
   assert "events" not in checked
+  assert len(checked["checked_on"])==10 and checked["checked_on"].count("-")==2
 with tempfile.TemporaryDirectory() as tmp:
  p=Path(tmp)/"sources.json"
  with patch.object(module,"OUTPUT",p),patch.object(module.urllib.request,"urlopen",return_value=Response()):

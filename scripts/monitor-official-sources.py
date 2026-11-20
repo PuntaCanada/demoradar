@@ -4,12 +4,15 @@ Reachability is NOT event availability, licensing permission, or completeness.
 No speculative events are generated and no page text is republished.
 """
 import json
+from datetime import datetime, timezone
 import urllib.error
 import urllib.request
 from pathlib import Path
 
 OUTPUT=Path("data/expansion-sources.json")
 SOURCES=[
+ {"city":"Potsdam","state":"Brandenburg","type":"official_assembly_guidance","url":"https://www.potsdam.de/de/informationen-fuer-veranstalter","parser":None,"data_rights":"Assembly application guidance only; no current event data feed or reuse licence verified; monitor only","scope":"Potsdam points organizers to Brandenburg police; no published event list verified"},
+ {"city":"Karlsruhe","state":"Baden-Württemberg","type":"official_city_press","url":"https://www.karlsruhe.de/stadt-rathaus/aktuelles/meldungen/versammlung-system-change-camp-2026-in-der-guenther-klotz-anlage","parser":None,"data_rights":"Individual city press notice, no recurring feed or blanket reuse permission; link only","scope":"Historical official notice from 2026; do not infer future scheduled assemblies"},
  {"city":"Braunschweig","state":"Niedersachsen","type":"official_consented_assembly_list","url":"https://www.braunschweig.de/politik_verwaltung/bekanntmachungen/versammlungen/index.php","parser":None,"data_rights":"Only assemblies whose applicants consent to publication; no explicit blanket reuse licence found; monitor only","scope":"Official list is conditional on publication consent and was empty in the verified 19 Nov 2026 snapshot"},
  {"city":"Köln","state":"Nordrhein-Westfalen","type":"official_city_traffic_calendar","url":"https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/index.html","parser":"scripts/update-cologne.py","data_rights":"Only factual event details with original source and attribution; blanket open reuse licence for HTML not confirmed","scope":"Selected traffic-relevant demonstrations, not all registered assemblies"},
  {"city":"Nürnberg","state":"Bayern","type":"official_city_press","url":"https://www.nuernberg.de/presse/mitteilungen/","parser":None,"data_rights":"Press release reuse permission not verified; monitoring and linking only","scope":"Occasional ahead-of-time official protest notices, no complete public assembly list"},
@@ -24,7 +27,7 @@ SOURCES=[
  {"city":"Hamburg","state":"Hamburg","type":"official_registration_information","url":"https://www.hamburg.de/service/info/111097758/","parser":None,"data_rights":"Not an event feed; no bulk licence applicable","scope":"Registration rules and contacts only; not a future event source"},
 ]
 def inspect(item):
- output={**item,"status":"unavailable"}
+ output={**item,"status":"unavailable","checked_on":datetime.now(timezone.utc).date().isoformat()}
  req=urllib.request.Request(item["url"],headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
  try:
   with urllib.request.urlopen(req,timeout=12) as response:

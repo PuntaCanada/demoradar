@@ -4,7 +4,7 @@ const en=document.documentElement.lang==="en";
 const t=(de,english)=>en?english:de;
 const fmt=date=>/^20\d{2}-\d\d-\d\d$/.test(String(date||""))?new Intl.DateTimeFormat(en?"en-GB":"de-DE",{day:"2-digit",month:"2-digit",year:"numeric",timeZone:"UTC"}).format(new Date(date+"T12:00:00Z")):t("Nicht bekannt","Unknown");
 const validDay=date=>/^20\d{2}-\d\d-\d\d$/.test(String(date||""))&&Number.isFinite(Date.parse(date+"T12:00:00Z"))&&new Date(date+"T12:00:00Z").toISOString().slice(0,10)===date;
-const daysSince=date=>validDay(date)?Math.floor((Date.now()-new Date(date+"T00:00:00Z").getTime())/86400000):null;
+const daysSince=date=>{if(!validDay(date))return null;const berlinDay=new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());return Math.round((Date.parse(berlinDay+"T12:00:00Z")-Date.parse(date+"T12:00:00Z"))/86400000)};
 const $=(tag,className,txt)=>{const node=document.createElement(tag);if(className)node.className=className;if(txt!==undefined)node.textContent=txt;return node};
 const statusText=status=>({
  observed_data:t("Amtliche Daten geliefert","Official data returned"),
@@ -88,6 +88,10 @@ const render=()=>{
     const el=$("div","source-item");
     el.append($("strong","",candidate.city+" · "+t("Nur Beobachtung","Monitoring only")));
     el.append($("p","source-detail",candidate.scope||""));
+    const checkAge=daysSince(candidate.checked_on);
+    const checked=checkAge===null?t("Letzte Prüfung nicht dokumentiert","Last check not documented"):checkAge<0?t("Ungültiges Prüfdatum","Invalid check date"):t("Zuletzt geprüft: ","Last checked: ")+fmt(candidate.checked_on)+(checkAge>2?t(" · Prüfung veraltet"," · check is outdated"):"");
+    el.append($("p","source-detail",checked));
+    if(checkAge===null||checkAge<0||checkAge>2)el.append($("p","source-warning",t("Erreichbarkeitsstatus nicht aktuell bestätigt","Reachability status not recently confirmed")));
     el.append($("p","source-detail",t("Nachnutzungsstatus: ","Reuse assessment: ")+(candidate.data_rights||t("Nicht bestätigt","Not verified"))));
     if(candidate.status==="unavailable")el.append($("p","source-warning",t("Bei der letzten automatischen Prüfung nicht erreichbar","Unavailable during last automated check")));
     if(/^https:\/\//.test(candidate.url||"")){
