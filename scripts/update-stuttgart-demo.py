@@ -38,7 +38,7 @@ def visible_and_evidence(html):
   "Rotebühlplatz, 70173 Stuttgart",
   "Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet."
  ]
- checks={key:re.search(r"\\s+".join(map(re.escape,key.split())),body,re.I) is not None for key in required}
+ checks={key:re.search(r"\s+".join(map(re.escape,key.split())),body,re.I) is not None for key in required}
  return body,checks
 
 def parse(html):
