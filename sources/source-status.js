@@ -152,7 +152,13 @@ const render=()=>{
     if(checkAge===null||checkAge<0||checkAge>2)el.append($("p","source-warning",t("Erreichbarkeitsstatus nicht aktuell bestätigt","Reachability status not recently confirmed")));
     el.append($("p","source-detail",t("Nachnutzungsstatus: ","Reuse assessment: ")+(candidate.data_rights||t("Nicht bestätigt","Not verified"))));
     if(candidate.type==="official_police_historical_notice")el.append($("p","source-warning",t("Archivbeleg: keine automatische Terminübernahme und keine Aussage über zukünftige Demos.","Archive evidence: no automatic import and no statement about upcoming demonstrations.")));
-    if(candidate.status==="unavailable")el.append($("p","source-warning",t("Bei der letzten automatischen Prüfung nicht erreichbar","Unavailable during last automated check")));
+    const monitoringMessage={
+      unavailable:t("HTTP 404/410 oder bestätigter Ausfall beim letzten Abruf – kein Beweis für abgesagte Demos.","HTTP 404/410 or observed retrieval failure – not evidence of cancellations."),
+      http_restricted:t("HTTP-Zugriff eingeschränkt (401/403/429) – kein Beweis, dass die Seite gelöscht ist.","HTTP access restricted (401/403/429) – does not mean the page was deleted."),
+      transport_unverified:t("Netzwerk-/Verbindungsfehler; Erreichbarkeit ungeklärt. Original-Link bleibt erhalten.","Network/connection error; reachability inconclusive. Original link retained."),
+      content_unverified:t("Inhaltsstruktur nicht bestätigt; möglicherweise geänderte Quellenseite.","Source contents could not be validated; structure may have changed.")
+    }[candidate.status];
+    if(monitoringMessage)el.append($("p","source-warning",monitoringMessage));
     if(/^https:\/\//.test(candidate.url||"")){
      const a=$("a","source-link",t("Amtliche Recherchequelle öffnen","Open official research source"));
      a.href=candidate.url;a.target="_blank";a.rel="noopener noreferrer";el.append(a);
