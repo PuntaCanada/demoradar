@@ -75,6 +75,18 @@ class LongLandsberg(Response):
 with patch.object(module.urllib.request,"urlopen",return_value=LongLandsberg()):
  lands=module.inspect(next(s for s in module.SOURCES if s["city"]=="Landsberg am Lech"))
  assert lands["date_conflicts"] and lands["status"]=="reachable_monitor_only_not_a_feed"
+assert lands["documented_date_discrepancy"]["observed_on"]=="2026-11-20"
+assert lands["documented_date_discrepancy"]["reproduced_in_latest_fetch"] is True
+# Navigation/content changes may hide a documented discrepancy in later fetches.
+class LandsbergWithoutConflict(Response):
+ def read(self,n):
+  return b"<h1>Versammlungen</h1><p>Thema der Versammlung</p>"*18
+with patch.object(module.urllib.request,"urlopen",return_value=LandsbergWithoutConflict()):
+ later=module.inspect(next(s for s in module.SOURCES if s["city"]=="Landsberg am Lech"))
+ assert later["date_conflicts"]==[]
+ assert later["documented_date_discrepancy"]["reproduced_in_latest_fetch"] is False
+ assert later["documented_date_discrepancy"]["observed_on"]=="2026-11-20"
+ assert "events" not in later
 assert len(module.verify_landsberg_weekdays(land_html))==1
 assert "weekday contradicts Mittwoch" in module.verify_landsberg_weekdays(land_html)[0]
 class ReplacedPage(Response):
