@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "checks": [
+    {
+      "city": "Hannover",
+      "state": "Niedersachsen",
+      "source": "https://interventionistische-linke.org/hannover/termine/maenner-toeten-patriarchale-gewalt-in-autoritaeten-zeiten",
+      "checked_on": "2026-11-20",
+      "status": "verified_non_government_one_off",
+      "count": 1,
+      "source_type": "non_government_event_original_single_notice",
+      "rights": "Reuse short factual date/subject/venue with attribution only; no content, official police verification or bulk licence"
+    },
+    {
+      "city": "Ludwigshafen",
+      "state": "Rheinland-Pfalz",
+      "source": "https://rheinland-pfalz-saarland.dgb.de/veranstaltungen/veranstaltung/aktionstag-gegen-gewalt-an-frauen-demo-ludwigshafen/",
+      "checked_on": "2026-11-20",
+      "status": "verified_non_government_one_off",
+      "count": 1,
+      "source_type": "non_government_event_original_single_notice",
+      "rights": "Reuse short factual date/subject/venue with attribution only; no content, official police verification or bulk licence"
+    },
+    {
+      "city": "Wiesbaden",
+      "state": "Hessen",
+      "source": "https://rheinland-pfalz-saarland.dgb.de/veranstaltungen/veranstaltung/aktionstag-bunt-laut-und-unuebersehbar-zur-arbeits-und-sozialministerkonferenz/",
+      "checked_on": "2026-11-20",
+      "status": "verified_non_government_one_off",
+      "count": 1,
+      "source_type": "non_government_event_original_single_notice",
+      "rights": "Reuse short factual date/subject/venue with attribution only; no content, official police verification or bulk licence"
+    }
+  ]
+}

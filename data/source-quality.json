@@ -183,6 +183,36 @@
       "check_freshness": "recent"
     },
     {
+      "city": "Hannover",
+      "state": "Niedersachsen",
+      "source": "Interventionistische Linke Hannover (Einzeltermin)",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "One organizer/union original protest notice; no police registration or licensed official feed proven",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
+      "city": "Ludwigshafen",
+      "state": "Rheinland-Pfalz",
+      "source": "DGB Rheinland-Pfalz/Saarland (Ludwigshafen-Einzeltermin)",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "One organizer/union original protest notice; no police registration or licensed official feed proven",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
+      "city": "Wiesbaden",
+      "state": "Hessen",
+      "source": "DGB/GEW – Wiesbaden-Einzeltermin",
+      "status": "verified_one_off",
+      "count": 1,
+      "scope": "One organizer/union original protest notice; no police registration or licensed official feed proven",
+      "last_checked": "2026-11-20",
+      "check_freshness": "recent"
+    },
+    {
       "city": "Frankfurt am Main",
       "state": "Hessen",
       "source": "Stadt Frankfurt",

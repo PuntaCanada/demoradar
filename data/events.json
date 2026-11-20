@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-20T17:22:54.023Z",
-  "count": 1376,
+  "updated_at": "2026-11-20T17:48:06.427Z",
+  "count": 1379,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -2854,6 +2854,21 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "regional-oneoff-4378fc15ec74f399",
+      "country": "DE",
+      "state": "Rheinland-Pfalz",
+      "city": "Ludwigshafen",
+      "date": "2026-11-25",
+      "start": "11:55",
+      "end": "14:00",
+      "title": "Aktionstag gegen Gewalt an Frauen – Demonstration",
+      "location": "Europaplatz, 67063 Ludwigshafen",
+      "route": "",
+      "source": "DGB Rheinland-Pfalz/Saarland – Gewerkschaftlicher Veranstaltungshinweis",
+      "source_url": "https://rheinland-pfalz-saarland.dgb.de/veranstaltungen/veranstaltung/aktionstag-gegen-gewalt-an-frauen-demo-ludwigshafen/",
+      "source_status": "Einzelne Veranstaltung von nichtstaatlichem Originalherausgeber angekündigt; keine amtliche Versammlungsregistrierung oder freie Bulk-Lizenz belegt."
+    },
+    {
       "id": "berlin-407",
       "country": "DE",
       "state": "Berlin",
@@ -3109,6 +3124,21 @@
       "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
       "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
       "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "regional-oneoff-2ffa351337e84955",
+      "country": "DE",
+      "state": "Niedersachsen",
+      "city": "Hannover",
+      "date": "2026-11-25",
+      "start": "17:00",
+      "end": "",
+      "title": "Demonstration gegen patriarchale Gewalt an FLINTA*",
+      "location": "Christuskirche, Hannover",
+      "route": "",
+      "source": "Interventionistische Linke – Veranstaltungsaufruf",
+      "source_url": "https://interventionistische-linke.org/hannover/termine/maenner-toeten-patriarchale-gewalt-in-autoritaeten-zeiten",
+      "source_status": "Einzelne Veranstaltung von nichtstaatlichem Originalherausgeber angekündigt; keine amtliche Versammlungsregistrierung oder freie Bulk-Lizenz belegt."
     },
     {
       "id": "berlin-443",
@@ -5032,6 +5062,21 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "regional-oneoff-667999550d24ece1",
+      "country": "DE",
+      "state": "Hessen",
+      "city": "Wiesbaden",
+      "date": "2026-12-02",
+      "start": "17:30",
+      "end": "19:30",
+      "title": "Aktionstag zur Arbeits- und Sozialministerkonferenz",
+      "location": "Kochbrunnenplatz, Wiesbaden",
+      "route": "",
+      "source": "DGB Rheinland-Pfalz/Saarland – Veranstaltungshinweis",
+      "source_url": "https://rheinland-pfalz-saarland.dgb.de/veranstaltungen/veranstaltung/aktionstag-bunt-laut-und-unuebersehbar-zur-arbeits-und-sozialministerkonferenz/",
+      "source_status": "Einzelne Veranstaltung von nichtstaatlichem Originalherausgeber angekündigt; keine amtliche Versammlungsregistrierung oder freie Bulk-Lizenz belegt."
     },
     {
       "id": "berlin-755",
