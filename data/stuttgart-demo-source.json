@@ -5,5 +5,8 @@
   "event_date": "2026-11-25",
   "status": "original_content_unverified_no_new_import",
   "count": 0,
-  "rights": "Independently reviewed public factual date, venue and topic only; event calendar RSS and iCal are NOT licensed for bulk syndication by this record."
+  "rights": "Independently reviewed public factual date, venue and topic only; event calendar RSS and iCal are NOT licensed for bulk syndication by this record.",
+  "source_bytes_checked": 69472,
+  "evidence_fields_found": 4,
+  "evidence_fields_total": 5
 }
