@@ -32,9 +32,8 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-20",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_archive_only",
+      "checked_on": "2026-11-20"
     },
     {
       "city": "Halle (Saale)",
@@ -242,8 +241,9 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-20"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-20",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Bremen",
