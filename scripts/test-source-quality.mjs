@@ -11,7 +11,7 @@ const files={
  frankfurt:{status:"unavailable",count:0}
 };
 const rows=sourceHealth(files).sources;
-assert.equal(rows.length,19);
+assert.equal(rows.length,22);
 const row=name=>rows.find(s=>s.source===name);
 assert.equal(row("Polizei Berlin").status,"observed_data");
 assert.equal(row("Polizei Berlin").count,2);
@@ -27,6 +27,17 @@ assert.equal(row("Polizeidirektion Leipzig (Archiv)").status,"unknown");
 assert.equal(row("Stadt Jena").status,"no_matching_items");
 assert.equal(row("Stadt Frankfurt").status,"unavailable");
 assert.equal(row("Stadt Freiburg").status,"unknown");
+for(const publisher of ["Interventionistische Linke Hannover (Einzeltermin)","DGB Rheinland-Pfalz/Saarland (Ludwigshafen-Einzeltermin)","DGB/GEW – Wiesbaden-Einzeltermin"])assert.equal(row(publisher).status,"unknown");
+const checkedRegional=sourceHealth({...files,threeRegionalOneoffs:{checks:[
+ {city:"Hannover",status:"verified_non_government_one_off",count:1,checked_on:"2026-11-20"},
+ {city:"Ludwigshafen",status:"verified_non_government_one_off",count:1,checked_on:"2026-11-20"},
+ {city:"Wiesbaden",status:"verified_non_government_one_off",count:1,checked_on:"2026-11-20"}]}},{today:"2026-11-20"}).sources;
+for(const city of ["Hannover","Ludwigshafen","Wiesbaden"]){
+ const item=checkedRegional.find(x=>x.city===city&&x.source.includes("Einzeltermin"));
+ assert.equal(item.status,"verified_one_off");assert.equal(item.count,1);assert.equal(item.check_freshness,"recent");
+ assert.match(item.scope,/no police registration/);
+}
+
 assert.equal(row("Netzwerk der brandenburgischen Frauenhäuser (Einzelankündigung)").status,"unknown");
 assert.equal(row("Grüne Landkreis Lindau (Einzelankündigung)").status,"unknown");
 const organizerRows=sourceHealth({...files,organizerNotices:{checks:[
