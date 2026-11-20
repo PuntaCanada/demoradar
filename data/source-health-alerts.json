@@ -12,6 +12,15 @@
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur."
     },
     {
+      "city": "Karlsruhe",
+      "state": "Baden-Württemberg",
+      "source": "Research-only official page",
+      "condition": "monitor_unavailable",
+      "last_checked": "2026-11-20",
+      "url": "https://www.karlsruhe.de/stadt-rathaus/aktuelles/meldungen/versammlung-system-change-camp-2026-in-der-guenther-klotz-anlage",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
       "city": "Nürnberg",
       "state": "Bayern",
       "source": "Research-only official page",
@@ -27,24 +36,6 @@
       "condition": "monitor_unavailable",
       "last_checked": "2026-11-20",
       "url": "https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
-      "city": "Hamburg",
-      "state": "Hamburg",
-      "source": "Research-only official page",
-      "condition": "monitor_unavailable",
-      "last_checked": "2026-11-20",
-      "url": "https://www.polizei.hamburg/versammlungsbehoerde-kontakt-791244",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
-      "city": "Hamburg",
-      "state": "Hamburg",
-      "source": "Research-only official page",
-      "condition": "monitor_unavailable",
-      "last_checked": "2026-11-20",
-      "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {
