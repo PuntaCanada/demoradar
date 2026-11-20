@@ -8,6 +8,8 @@ on:
       - 'scripts/test-heatmap-freshness.mjs'
       - 'scripts/monitor-official-sources.py'
       - 'scripts/update-stuttgart-demo.py'
+      - 'scripts/update-regional-organizer-oneoffs.py'
+      - 'scripts/test-regional-organizer-oneoffs.py'
       - 'scripts/test-stuttgart-demo.py'
       - 'scripts/test-source-monitor.py'
       - 'scripts/source-health-alerts.mjs'
@@ -79,6 +81,7 @@ jobs:
           node scripts/test-public-crawlability.mjs
           node scripts/test-frontend.mjs
           node --check scripts/update-streams.mjs
+          python3 scripts/test-regional-organizer-oneoffs.py
           python3 scripts/test-stuttgart-demo.py
           python3 scripts/test-source-monitor.py
       - name: Verify Chromium available and run real browser regression
