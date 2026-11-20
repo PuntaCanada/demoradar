@@ -110,6 +110,11 @@ try{
    assert.ok(provenance.firstLinkHeight>=43||provenance.cards===0,"Event links need a readable mobile tap target");
    assert.equal(provenance.badSourceLinks,0,"Do not expose unsafe original-source URLs");
    assert.equal(provenance.staleHidden,true,"Today's current generated page must not show a stale-date warning");
+   const coverage=await evaluate('(()=>{const d=document.querySelector(".coverage details"),s=d?.querySelector("summary");if(!d||!s)return null;const before=d.open;s.click();return {before,after:d.open,count:d.querySelectorAll(".state-list li").length,scroll:document.documentElement.scrollWidth,summaryHeight:s.getBoundingClientRect().height}})()');
+   assert.ok(coverage&&!coverage.before&&coverage.after,"Coverage disclosure must open in real Chromium");
+   assert.equal(coverage.count,16,"All 16 states must render after expanding the disclosure");
+   assert.ok(coverage.summaryHeight>=43,"Disclosure must be easy to tap on smartphones");
+   assert.ok(coverage.scroll<=width+2,"Expanded state coverage causes horizontal overflow");
    console.log(route,width+"px today landing page; scrollWidth "+info.scroll);
   }
  }
