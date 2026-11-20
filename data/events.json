@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-20T07:51:14.828Z",
-  "count": 1370,
+  "updated_at": "2026-11-20T08:48:03.817Z",
+  "count": 1371,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -2283,6 +2283,26 @@
       "kind": "Kundgebung",
       "organizer": "",
       "registered_participants": "ca. 50 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "rostock-5d4e837575f4a312",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-23",
+      "start": "16:30",
+      "end": "18:00",
+      "title": "Gegen Gewalt gegen Frauen",
+      "postal_code": "",
+      "location": "öffentliche Gehwegfläche des Margaretenplatzes",
+      "route": "",
+      "kind": "Kundgebung",
+      "organizer": "",
+      "registered_participants": "ca. 10 bis 15 Personen",
       "event_status": "beschieden",
       "source": "Hanse- und Universitätsstadt Rostock",
       "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
@@ -22128,6 +22148,16 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Polizei Berlin",
+      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
+    },
+    {
+      "name": "Stadt Rostock",
+      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }

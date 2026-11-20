@@ -188,8 +188,9 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-20"
+      "status": "unavailable",
+      "checked_on": "2026-11-20",
+      "error": "<urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Bremen",
@@ -211,8 +212,9 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-20"
+      "status": "unavailable",
+      "checked_on": "2026-11-20",
+      "error": "<urlopen error [Errno 104] Connection reset by peer>"
     }
   ]
 }
