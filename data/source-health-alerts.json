@@ -1,7 +1,7 @@
 {
   "version": 1,
   "scope": "non-actionable warnings only; no events are generated or removed",
-  "checked_sources": 16,
+  "checked_sources": 17,
   "checked_research_pages": 22,
   "alerts": [
     {
@@ -29,24 +29,6 @@
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
-      "city": "Magdeburg",
-      "state": "Sachsen-Anhalt",
-      "source": "Research-only official page",
-      "condition": "monitor_transport_unverified",
-      "last_checked": "2026-11-20",
-      "url": "https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
-      "city": "Halle (Saale)",
-      "state": "Sachsen-Anhalt",
-      "source": "Research-only official page",
-      "condition": "monitor_transport_unverified",
-      "last_checked": "2026-11-20",
-      "url": "https://polizei.sachsen-anhalt.de/bs/pressemitteilungen/polizei?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=695807",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
       "city": "Nürnberg",
       "state": "Bayern",
       "source": "Research-only official page",
@@ -70,6 +52,15 @@
       "source": "Research-only official page",
       "condition": "monitor_transport_unverified",
       "last_checked": "2026-11-20",
+      "url": "https://www.polizei.hamburg/versammlungsbehoerde-kontakt-791244",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "source": "Research-only official page",
+      "condition": "monitor_transport_unverified",
+      "last_checked": "2026-11-20",
       "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
@@ -80,15 +71,6 @@
       "condition": "monitor_http_restricted",
       "last_checked": "2026-11-20",
       "url": "https://www.polizei.bremen.de/news/pressestelle/pressearchiv-5034",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
-      "city": "Hamburg",
-      "state": "Hamburg",
-      "source": "Research-only official page",
-      "condition": "monitor_transport_unverified",
-      "last_checked": "2026-11-20",
-      "url": "https://www.hamburg.de/service/info/111097758/",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     }
   ]
