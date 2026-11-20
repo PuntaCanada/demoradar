@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+"""Strictly evidence-gated single municipal demonstration announcement.
+City Stuttgart event page is NOT a dedicated protest feed. No automatic syndication,
+no article or copyrighted imagery copied, and no claims of governmental registration.
+"""
+import datetime as dt
+import hashlib
+import json
+import re
+import urllib.request
+from html.parser import HTMLParser
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+URL="https://www.stuttgart.de/veranstaltungskalender/veranstaltungen/demo-zum-internationaler-tag-gegen-gewalt-an-frauen-536688"
+DAY=dt.date(2026,11,25)
+EVENTS=Path("data/events.json")
+STATUS=Path("data/stuttgart-demo-source.json")
+
+class Visible(HTMLParser):
+ def __init__(self):super().__init__(convert_charrefs=True);self.parts=[];self.skip=0
+ def handle_starttag(self,tag,attrs):
+  if tag in ("script","style","noscript"):self.skip+=1
+ def handle_endtag(self,tag):
+  if tag in ("script","style","noscript"):self.skip=max(0,self.skip-1)
+ def handle_data(self,value):
+  if not self.skip:self.parts.append(value)
+ @property
+ def text(self):return re.sub(r"\s+"," "," ".join(self.parts)).strip()
+
+def parse(html):
+ p=Visible();p.feed(html)
+ body=p.text
+ required=[
+  "Landeshauptstadt Stuttgart",
+  "Demo zum Internationaler Tag gegen Gewalt an Frauen",
+  "25. November 2026 18:00 Uhr",
+  "Rotebühlplatz, 70173 Stuttgart",
+  "Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet."
+ ]
+ if not all(word in body for word in required):return []
+ # A generic event search result or software demo cannot impersonate this
+ # precise calendar entry, whose place and organizing group are individually known.
+ if not re.search(r"Demo zum Internationaler Tag gegen Gewalt an Frauen\s+25\. November 2026\s+18:00 Uhr",body):return []
+ ident=hashlib.sha256((URL+"|"+DAY.isoformat()).encode()).hexdigest()[:16]
+ return [{"id":"stuttgart-oneoff-"+ident,"country":"DE","state":"Baden-Württemberg",
+  "city":"Stuttgart","date":DAY.isoformat(),"start":"18:00","end":"",
+  "title":"Demonstration zum Internationalen Tag gegen Gewalt an Frauen",
+  "location":"Rotebühlplatz, 70173 Stuttgart","route":"",
+  "source":"Landeshauptstadt Stuttgart – städtischer Veranstaltungskalender",
+  "source_url":URL,
+  "source_status":"Einzelner von der Stadt veröffentlichter Demonstrationstermin; kein Nachweis einer behördlichen Versammlungsanmeldung, kein vollständiger Versammlungskalender"}]
+
+def fetch():
+ req=urllib.request.Request(URL,headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
+ with urllib.request.urlopen(req,timeout=18) as r:
+  if r.status!=200:raise ValueError("HTTP "+str(r.status))
+  data=r.read(850000)
+  if len(data)<450:raise ValueError("Stuttgart city calendar content too short")
+  return data.decode("utf-8","replace")
+
+def update(found,today):
+ data=json.loads(EVENTS.read_text(encoding="utf-8"))
+ if not isinstance(data.get("events"),list):raise ValueError("Invalid existing official events")
+ prev={e["id"]:e for e in data["events"] if str(e.get("id","")).startswith("stuttgart-oneoff-")
+  and e.get("date","")>=str(today-dt.timedelta(days=30))}
+ for e in found:prev[e["id"]]=e
+ unrelated=[e for e in data["events"] if not str(e.get("id","")).startswith("stuttgart-oneoff-")]
+ result=sorted(unrelated+list(prev.values()),key=lambda e:(e["date"],e.get("start",""),e["id"]))
+ if result!=data["events"]:
+  data["events"]=result;data["count"]=len(result)
+  EVENTS.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+ return len(prev)
+
+def main():
+ today=dt.datetime.now(ZoneInfo("Europe/Berlin")).date()
+ status={"source":URL,"mode":"single_municipal_announcement_no_bulk_rights",
+  "checked_on":today.isoformat(),"event_date":DAY.isoformat(),
+  "status":"outside_verification_window","count":0,
+  "rights":"Independently reviewed public factual date, venue and topic only; event calendar RSS and iCal are NOT licensed for bulk syndication by this record."}
+ found=[]
+ if dt.date(2026,11,19)<=today<=dt.date(2026,12,25):
+  try:
+   found=parse(fetch())
+   status.update(status="verified_city_event_one_off" if found else "original_content_unverified_no_new_import",count=len(found))
+  except Exception as error:
+   status.update(status="original_unavailable_no_new_import",error=str(error)[:150])
+ update(found,today)
+ before={}
+ try:before=json.loads(STATUS.read_text(encoding="utf-8"))
+ except (OSError,ValueError):pass
+ if status!=before:STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+ print("Stuttgart city single demonstration:",status["status"],status["count"])
+if __name__=="__main__":main()
