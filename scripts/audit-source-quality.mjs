@@ -78,7 +78,7 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
   oldesloe.checked_on);
  const stuttgart=files.stuttgart||{};
  add("Stuttgart","Baden-Württemberg","Landeshauptstadt Stuttgart (Einzeltermin)",
-  stuttgart.status==="verified_city_event_one_off"?"verified_one_off":
+  ["verified_city_event_one_off","verified_manual_one_off_time_not_machine_confirmed"].includes(stuttgart.status)?"verified_one_off":
   stuttgart.status==="original_unavailable_no_new_import"?"unavailable":
   stuttgart.status==="original_content_unverified_no_new_import"?"no_matching_items":"unknown",
   stuttgart.count,"Specific city-calendar demonstration on 25 November; not a licensed assembly feed or official registration confirmation",stuttgart.checked_on);
