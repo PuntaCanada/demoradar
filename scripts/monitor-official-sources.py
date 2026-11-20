@@ -14,6 +14,7 @@ import urllib.request
 from pathlib import Path
 
 OUTPUT=Path("data/expansion-sources.json")
+EVIDENCE=Path("data/source-date-evidence.json")
 SOURCES=[
  {"city":"Weimar","state":"Thüringen","type":"official_assembly_upcoming_html","url":"https://stadt.weimar.de/de/versammlungsanmeldungen.html","parser":None,"data_rights":"Official listing of confirmed upcoming assembly registrations; no source-specific open machine reuse licence or structured JSON/CSV/RSS endpoint verified. Research and link only, never automated import.","scope":"Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register."},
  {"city":"Magdeburg","state":"Sachsen-Anhalt","type":"official_police_historical_notice","url":"https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821","parser":None,"data_rights":"Single police after-action report, no verified open event-data reuse licence; retain as original link only","scope":"Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed"},
@@ -112,6 +113,21 @@ def inspect(item):
     return output
    if item["type"]=="official_assembly_list_html":
     output["date_conflicts"]=verify_landsberg_weekdays(payload)
+    # A dated, independently verified original-page contradiction is not erased
+    # just because the current parser did not reproduce it. Keep both statuses.
+    try:record=next(r for r in json.loads(EVIDENCE.read_text(encoding="utf-8"))["records"] if r["source_url"]==item["url"])
+    except (OSError,KeyError,ValueError,StopIteration):record=None
+    if record:
+     published=date.fromisoformat(record["published_date"])
+     if GERMAN_WEEKDAYS[published.weekday()] == "Mi" or record["published_weekday"]!="Mittwoch":
+      raise ValueError("Official weekday/date evidence is internally inconsistent")
+     output["documented_date_discrepancy"]={
+      "observed_on":record["observed_on"],
+      "published_date":record["published_date"],
+      "published_weekday":record["published_weekday"],
+      "actual_weekday":record["actual_weekday"],
+      "reproduced_in_latest_fetch":any(record["published_date"] in x for x in output["date_conflicts"])
+     }
    # A generic HTTP 200 is not enough to claim a working assembly register.
    if item["type"]=="official_assembly_list_html":
     decoded=payload.decode("utf-8",errors="replace").lower()
