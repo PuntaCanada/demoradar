@@ -2,6 +2,7 @@
   "version": 1,
   "scope": "non-actionable warnings only; no events are generated or removed",
   "checked_sources": 13,
+  "checked_research_pages": 19,
   "alerts": [
     {
       "city": "Frankfurt am Main",
@@ -9,6 +10,42 @@
       "condition": "unavailable",
       "last_checked": null,
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur."
+    },
+    {
+      "city": "Nürnberg",
+      "state": "Bayern",
+      "source": "Research-only official page",
+      "condition": "monitor_unavailable",
+      "last_checked": "2026-11-20",
+      "url": "https://www.nuernberg.de/presse/mitteilungen/",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
+      "city": "Frankfurt am Main",
+      "state": "Hessen",
+      "source": "Research-only official page",
+      "condition": "monitor_unavailable",
+      "last_checked": "2026-11-20",
+      "url": "https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "source": "Research-only official page",
+      "condition": "monitor_unavailable",
+      "last_checked": "2026-11-20",
+      "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
+      "city": "Bremen",
+      "state": "Bremen",
+      "source": "Research-only official page",
+      "condition": "monitor_unavailable",
+      "last_checked": "2026-11-20",
+      "url": "https://www.polizei.bremen.de/news/pressestelle/pressearchiv-5034",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     }
   ]
 }
