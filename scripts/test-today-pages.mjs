@@ -5,6 +5,9 @@ const source=JSON.parse(read("data/events.json"));
 const day=new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const sitemap=read("sitemap.xml");
 const robots=read("robots.txt");
+const coverage=JSON.parse(read("data/state-source-coverage.json"));
+assert.equal(coverage.states.length,16);
+assert.equal(new Set(coverage.states.map(s=>s.state)).size,16);
 assert.ok(robots.includes("Sitemap: https://demoradar.pages.dev/sitemap.xml"));
 for(const [route,file,lang,heading] of [
  ["/heute/","heute/index.html","de","Demonstrationen heute"],
@@ -16,6 +19,16 @@ for(const [route,file,lang,heading] of [
  assert.ok(page.includes("<h1>"+heading+"</h1>"));
  assert.ok(page.includes(day),"Date must come from Berlin calendar and match regeneration day");
  assert.ok(page.includes("https://demoradar.pages.dev")||page.includes("Quellenabdeckung"));
+ assert.ok(page.includes('id="stateCoverageHead"'),"Static today page must include a source-coverage section");
+ assert.ok(page.includes('class="state-list"'),"Accessible 16-state disclosure must be present");
+ assert.ok(page.includes("<details><summary>"),"Region detail must be keyboard-openable");
+ assert.ok(page.includes(coverage.reviewed_on),"Audit must show the actual recorded review date, not today's fake freshness");
+ for(const state of coverage.states){
+  assert.ok(page.includes(state.state),"Every federal state must be visible inside the static source inventory: "+state.state);
+ }
+ assert.ok(page.includes(lang==="en"?"may still have protests":"können Proteste stattfinden"),"Missing sources must never imply missing demonstrations");
+ assert.ok(page.includes(lang==="en"?"NOT the number of demonstrations":"NICHT die Anzahl stattfindender Demonstrationen"),"Do not present source coverage as events");
+ assert.ok(page.includes(lang==="en"?"Read the full audit":"Vollständige Quellenprüfung"),"Visible official-source warnings should remain one click away");
  assert.ok(page.includes("nicht")||page.includes("incomplete"),"Coverage limitations required");
  assert.ok(!page.includes('application/ld+json'),"Never claim Google Event rich result from incomplete sources");
  assert.ok(sitemap.includes("<loc>https://demoradar.pages.dev"+route+"</loc>"));
