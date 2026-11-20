@@ -1,16 +1,33 @@
 {
-  "checked_at": "2026-11-19T09:52:37.668060+00:00",
-  "policy": "Nur Überschriften, Quellenlinks und Veröffentlichungsdatum; mögliche Zuordnung, keine Bestätigung",
-  "feeds": [
-    "tagesschau Inland",
-    "tagesschau Aktuell",
-    "MDR Sachsen",
-    "NDR Mecklenburg-Vorpommern",
-    "tagesschau Regional Berlin",
-    "tagesschau Regional Bayern",
-    "tagesschau Regional NRW",
-    "tagesschau Regional Niedersachsen",
-    "tagesschau Regional Thüringen"
+  "checked_at": "2026-11-20T09:50:19.988171+00:00",
+  "policy": "Only independently authored labels and verified source URLs; manually reviewed link candidates, automatic event association is NOT event verification. No RSS syndication.",
+  "feeds": [],
+  "editorial_sources": [
+    "MDR",
+    "NDR",
+    "tagesschau / WDR",
+    "tagesschau / rbb"
   ],
-  "matches": {}
+  "matches": {
+    "police-leipzig-35d02c0eda686b0d": [
+      {
+        "url": "https://www.mdr.de/nachrichten/deutschland/politik/genz-regelt-fridays-for-future-schulstreik-wehrpflicht-klima-sachsen-anhalt-thueringen%2Cgen-z-regelt-proteste-104.html",
+        "source": "MDR",
+        "title": "MDR-Bericht über den Jugendprotesttag",
+        "published": "2026-11-20",
+        "match_type": "independently linked editorial context; not event confirmation",
+        "reviewed_on": "2026-11-20"
+      }
+    ],
+    "police-cologne-56b73605c84b93d1": [
+      {
+        "url": "https://www.tagesschau.de/inland/regional/nordrheinwestfalen/wdr-jugendproteste-hier-geht-die-gen-z-in-nrw-wieder-auf-die-strasse-100.html",
+        "source": "tagesschau / WDR",
+        "title": "Bericht über die Jugendproteste in Nordrhein-Westfalen",
+        "published": "2026-11-20",
+        "match_type": "independently linked editorial context; not event confirmation",
+        "reviewed_on": "2026-11-20"
+      }
+    ]
+  }
 }
