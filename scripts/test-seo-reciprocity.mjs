@@ -21,14 +21,20 @@ for(const [de,en] of groups){
   assert.equal(actual.get("x-default"),origin+de);
  }
 }
-for(const [route,file,lang,other] of [
- ["/","index.html","de","/en/"],["/en/","en/index.html","en","/"],
- ["/heute/","heute/index.html","de","/en/today/"],["/en/today/","en/today/index.html","en","/heute/"]
+for(const [route,file,lang,other,fallback] of [
+ ["/","index.html","de","/en/","/"],["/en/","en/index.html","en","/","/"],
+ ["/sources/","sources/index.html","de","/en/sources/","/sources/"],
+ ["/en/sources/","en/sources/index.html","en","/sources/","/sources/"],
+ ["/community/","community/index.html","de","/en/community/","/community/"],
+ ["/en/community/","en/community/index.html","en","/community/","/community/"],
+ ["/heute/","heute/index.html","de","/en/today/","/heute/"],
+ ["/en/today/","en/today/index.html","en","/heute/","/heute/"]
 ]){
  const html=read(file);
  assert.ok(html.includes('<html lang="'+lang+'">'),"Correct document language: "+route);
  assert.ok(html.includes('<link rel="canonical" href="'+origin+route+'">'),"Self-canonical route: "+route);
  assert.ok(html.includes('hreflang="'+(lang==="en"?"de":"en")+'" href="'+origin+other+'">'),"Reciprocal language variant: "+route);
+ assert.ok(html.includes('hreflang="x-default" href="'+origin+fallback+'">'),"HTML x-default must match sitemap: "+route);
  assert.ok(!/<meta[^>]*name="robots"[^>]*noindex/.test(html),"Indexable routes must not be noindex: "+route);
 }
 assert.ok(!/<lastmod>/.test(sitemap),"No invented lastmod timestamps in sitemap");
