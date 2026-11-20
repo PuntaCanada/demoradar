@@ -29,6 +29,13 @@ class EditorialSafetyTests(unittest.TestCase):
   self.assertEqual(match_links([EVENT,dict(EVENT,id="another-protest")],[BASE],TODAY),{})
  def test_old_article_no_future_link(self):
   self.assertEqual(match_links([EVENT],[dict(BASE,published_on="2026-11-08")],TODAY),{})
+ def test_checked_and_access_blocked_links_remain_context_only(self):
+  for code in ("content_verified","access_inconclusive"):
+   link=dict(BASE,url_check_status=code,url_check_date="2026-11-20")
+   m=match_links([EVENT],[link],TODAY,"2026-11-20")
+   self.assertEqual(m["actual-1"][0]["url_check_status"],code)
+  self.assertFalse(is_allowed_link(dict(BASE,url_check_status="confirmed_broken",url_check_date="2026-11-20")))
+  self.assertFalse(is_allowed_link(dict(BASE,url_check_status="content_verified",url_check_date="2026-02-30")))
  def test_url_must_be_official_https_host(self):
   for url in ("http://www.tagesschau.de/test","https://tagesschau.de.evil.example/test","https://www.tagesschau.de.evil.example/test","https://user:pass@www.tagesschau.de/test","https://www.tagesschau.de:8080/test"):
    self.assertFalse(is_allowed_link(dict(BASE,url=url)))
