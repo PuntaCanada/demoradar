@@ -7,10 +7,10 @@
       "city": "Berlin",
       "source": "Polizei Berlin",
       "status": "ok",
-      "last_checked": "2026-11-19",
+      "last_checked": "2026-11-20",
       "last_success": {
         "count": 1361,
-        "checked_on": "2026-11-19"
+        "checked_on": "2026-11-20"
       },
       "baseline_count": 1361,
       "observed_count": 1361,
@@ -22,10 +22,10 @@
       "city": "Dresden",
       "source": "Stadt Dresden",
       "status": "ok",
-      "last_checked": "2026-11-19",
+      "last_checked": "2026-11-20",
       "last_success": {
         "count": 42,
-        "checked_on": "2026-11-19"
+        "checked_on": "2026-11-20"
       },
       "baseline_count": 42,
       "observed_count": 42,
@@ -37,10 +37,10 @@
       "city": "Rostock",
       "source": "Stadt Rostock",
       "status": "ok",
-      "last_checked": "2026-11-19",
+      "last_checked": "2026-11-20",
       "last_success": {
         "count": 8,
-        "checked_on": "2026-11-19"
+        "checked_on": "2026-11-20"
       },
       "baseline_count": 8,
       "observed_count": 8,

@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-19T20:49:00.039Z",
-  "count": 1367,
+  "updated_at": "2026-11-20T07:29:49.202Z",
+  "count": 1370,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -49,25 +49,6 @@
       "source": "Polizeipräsidium Frankfurt am Main – amtliche Originalmeldung",
       "source_url": "https://www.presseportal.de/blaulicht/pm/4970/6390267",
       "source_status": "Historische, ausdrücklich angekündigte Kundgebung; keine komplette Versammlungsliste"
-    },
-    {
-      "id": "dresden-8951a73b36d21bec",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-19",
-      "start": "",
-      "end": "",
-      "title": "Gegen Zwangsräumung in RM16",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "",
-      "registered_participants": "20-30",
-      "event_status": "abgemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
-      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-2",
@@ -231,26 +212,6 @@
       "source_status": "behördlich angezeigt"
     },
     {
-      "id": "rostock-3105a037ef96230f",
-      "country": "DE",
-      "state": "Mecklenburg-Vorpommern",
-      "city": "Rostock",
-      "date": "2026-11-19",
-      "start": "14:00",
-      "end": "16:00",
-      "title": "Gegen Gewalt gegen Frauen",
-      "postal_code": "",
-      "location": "öffentliche Gehwegfläche des Margaretenplatzes",
-      "route": "",
-      "kind": "Kundgebung",
-      "organizer": "",
-      "registered_participants": "ca. 10 bis 15 Personen",
-      "event_status": "beschieden/vom Veranstalter abgesagt",
-      "source": "Hanse- und Universitätsstadt Rostock",
-      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
       "id": "berlin-35",
       "country": "DE",
       "state": "Berlin",
@@ -297,25 +258,6 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "dresden-7e5891fb5f45b9f9",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-19",
-      "start": "16:00",
-      "end": "18:00",
-      "title": "Mahnwache der OMAS GEGEN RECHTS.DRESDEN für Frieden - gegen Krieg und Gewalt überall",
-      "location": "Kleine Kirchgasse",
-      "postal_code": "",
-      "route": "",
-      "organizer": "OMAS GEGEN RECHTS.DRESDEN",
-      "registered_participants": "8",
-      "event_status": "beschieden",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
-      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-44",
@@ -783,6 +725,38 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "cologne-66bbdcaac04142a5",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Köln",
+      "date": "2026-11-20",
+      "start": "11:00",
+      "end": "16:00",
+      "title": "Versammlung mit Aufzug (Innenstadt) - Stadt Köln",
+      "postal_code": "",
+      "location": "Uniwiese Beginn des Aufzuges: ca. 12:00 Uhr",
+      "route": "Uniwiese - Bachemer-Straße – Lindenstraße - Lützowstraße - Moltkestraße - Vogelsanger Straße - Innere Kanalstraße - Venloer Straße – Neptunstraße",
+      "source": "Stadt Köln – Verkehrskalender",
+      "source_url": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/versammlung-mit-aufzug-innenstadt-3",
+      "source_status": "amtliche Verkehrsinformation (keine vollständige Versammlungsliste)"
+    },
+    {
+      "id": "cologne-7b3e662d69e3ee2b",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Köln",
+      "date": "2026-11-20",
+      "start": "11:00",
+      "end": "16:00",
+      "title": "Demonstration (Ehrenfeld) - Stadt Köln",
+      "postal_code": "",
+      "location": "",
+      "route": "",
+      "source": "Stadt Köln – Verkehrskalender",
+      "source_url": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/demonstration-muelheim",
+      "source_status": "amtliche Verkehrsinformation (keine vollständige Versammlungsliste)"
+    },
+    {
       "id": "police-cologne-f0738361372a71b2",
       "country": "DE",
       "state": "Nordrhein-Westfalen",
@@ -866,6 +840,22 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "cologne-bb2ec85d9e4ae6d3",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Köln",
+      "date": "2026-11-20",
+      "start": "13:00",
+      "end": "16:00",
+      "title": "Demonstration (Innenstadt) - Stadt Köln",
+      "postal_code": "",
+      "location": "",
+      "route": "Hohenzollernring (Friesenplatz) – Kaiser-Wilhelm-Ring – Christophstraße – Komödienstraße – Zeughausstraße – Magnusstraße – Hohenzollernring (Friesenplatz)",
+      "source": "Stadt Köln – Verkehrskalender",
+      "source_url": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/demonstration-innenstadt-19",
+      "source_status": "amtliche Verkehrsinformation (keine vollständige Versammlungsliste)"
+    },
+    {
       "id": "police-cologne-56b73605c84b93d1",
       "country": "DE",
       "state": "Nordrhein-Westfalen",
@@ -927,6 +917,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-775fe2dd92f5402c",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-20",
+      "start": "15:00",
+      "end": "17:00",
+      "title": "Zubringer zu 'GenZ regelt das'",
+      "location": "Fritz-Förster-Platz",
+      "postal_code": "",
+      "route": "",
+      "organizer": "SDS Dresden",
+      "registered_participants": "80",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "rostock-0f1c4925a4adee71",
@@ -2032,6 +2041,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-a4ecb0d2b440b1eb",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-23",
+      "start": "",
+      "end": "",
+      "title": "Wer schweigt stimmt zu - Zeit für Bürgerverantwortung",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "150",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-296",
       "country": "DE",
       "state": "Berlin",
@@ -2239,6 +2267,26 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "rostock-1508ae59e245c2e1",
+      "country": "DE",
+      "state": "Mecklenburg-Vorpommern",
+      "city": "Rostock",
+      "date": "2026-11-23",
+      "start": "16:00",
+      "end": "17:30",
+      "title": "Mahnwache/Schilder-Aktion: Botschaften zum Nachdenken und Hinterfragen",
+      "postal_code": "",
+      "location": "öffentliche Gehwegfläche im Bereich Neuer Markt 1",
+      "route": "",
+      "kind": "Kundgebung",
+      "organizer": "",
+      "registered_participants": "ca. 50 Personen",
+      "event_status": "beschieden",
+      "source": "Hanse- und Universitätsstadt Rostock",
+      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-338",
@@ -22080,6 +22128,16 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Polizei Berlin",
+      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
+    },
+    {
+      "name": "Stadt Rostock",
+      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }
