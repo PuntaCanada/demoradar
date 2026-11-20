@@ -74,7 +74,7 @@ async function youtube(){
     if(!isLive&&!recording)continue;
     discoveryStats.youtube_streams_seen++;
     add({platform:"YouTube",channel:entry.name,title:s.title,url:"https://www.youtube.com/watch?v="+v.id,
-     date:d.actualStartTime||s.publishedAt,published_at:s.publishedAt,status:isLive?"live":"recording",
+     date:d.actualStartTime||s.publishedAt,published_at:s.publishedAt,broadcast_started_at:d.actualStartTime||null,status:isLive?"live":"recording",
      checked_at:now.toISOString(),evidence_url:"https://www.youtube.com/watch?v="+v.id});
    }
   }catch(error){errors.push("YouTube "+entry.name+": "+error.message)}
