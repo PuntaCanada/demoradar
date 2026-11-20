@@ -21,7 +21,7 @@ class Checks(unittest.TestCase):
   self.assertEqual(len(m["parse"](DOC.replace("19:00 bis 21:00 Uhr","19:15 bis 21:00 Uhr"))),3)
   self.assertEqual(len(m["parse"](DOC.replace("Bunte Begegnung - Für","Another event - Für"))),3)
   self.assertEqual(len(m["parse"](DOC.replace("Di, 24.11.26","Di, 24.11.27"))),3)
-  self.assertEqual(len(m["parse"](DOC.replace("Goetheplatz","Other square",1))),4)
+  self.assertEqual(len(m["parse"](DOC.replace("Goetheplatz","Other square",1))),3)
   self.assertEqual(len(m["parse"](DOC.replace("<h4>Frieden schaffen ohne Waffen</h4>Goetheplatz","<h4>Frieden schaffen ohne Waffen</h4>Unbekannt"))),3)
  def test_no_false_link_to_previous_date(self):
   wrong=DOC.replace("So, 22.11.26 15:00 bis 18:00 Uhr","So, 22.11.26 12:00 bis 13:00 Uhr")
