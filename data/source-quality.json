@@ -36,8 +36,8 @@
       "city": "Köln",
       "state": "Nordrhein-Westfalen",
       "source": "Stadt Köln",
-      "status": "no_matching_items",
-      "count": 0,
+      "status": "observed_data",
+      "count": 3,
       "scope": "Traffic calendar only; not the assembly register",
       "last_checked": null,
       "check_freshness": "unknown"
