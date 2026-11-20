@@ -39,6 +39,15 @@ class Test(unittest.TestCase):
   _,checks=m["visible_and_evidence"](modified)
   self.assertFalse(list(checks.values())[0])
   self.assertTrue(all(list(checks.values())[1:4]))
+ def test_city_calendar_date_time_format_variations(self):
+  original=DOC.replace("25. November 2026 18:00 Uhr","25. November 2026, 18:00 Uhr")
+  self.assertEqual(len(m["parse"](original)),1)
+  changed=DOC.replace("25. November 2026 18:00 Uhr","25. November 2026 – Uhrzeit: 18:00 Uhr")
+  self.assertEqual(len(m["parse"](changed)),1)
+  shifted=DOC.replace("25. November 2026 18:00 Uhr","25. November 2026 – 19:00 Uhr")
+  self.assertEqual(m["parse"](shifted),[])
+  shifted_day=DOC.replace("25. November 2026 18:00 Uhr","26. November 2026, 18:00 Uhr")
+  self.assertEqual(m["parse"](shifted_day),[])
  def test_optional_organizer_wording_does_not_block_verified_event(self):
   changed=DOC.replace("Die Demonstration wird vom Aktionsbündnis 8. März Stuttgart veranstaltet.","Organisatorische Details ändern sich.")
   self.assertEqual(len(m["parse"](changed)),1)
