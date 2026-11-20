@@ -62,7 +62,7 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
