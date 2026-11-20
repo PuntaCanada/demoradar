@@ -27,7 +27,7 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "unavailable",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
@@ -171,6 +171,21 @@
       ]
     },
     {
+      "city": "Kreis Unna",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_assembly_authority_guidance",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
       "city": "Landsberg am Lech",
       "event_count": 0,
       "days_with_events": 0,
@@ -195,6 +210,51 @@
       "source_status": [
         {
           "type": "official_assembly_guidance",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Rheinland-Pfalz",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_assembly_guidance",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Schleswig-Holstein",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_assembly_online_service",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Schwerin",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_assembly_authority_guidance",
           "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
