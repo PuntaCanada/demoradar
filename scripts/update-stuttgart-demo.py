@@ -14,6 +14,7 @@ from zoneinfo import ZoneInfo
 
 URL="https://www.stuttgart.de/veranstaltungskalender/veranstaltungen/demo-zum-internationaler-tag-gegen-gewalt-an-frauen-536688"
 DAY=dt.date(2026,11,25)
+MANUAL_ORIGINAL_REVIEWED_ON=dt.date(2026,11,20)
 EVENTS=Path("data/events.json")
 STATUS=Path("data/stuttgart-demo-source.json")
 
@@ -55,10 +56,18 @@ def parse(html):
  # The fixed HTTPS municipal origin establishes publisher provenance; visible
  # site-branding text is not part of the event evidence. Date, subject and
  # Rotebühlplatz remain compulsory on that original page.
- if not all(list(checks.values())[1:4]):return []
+ # The official city's public event rendering was independently reviewed on
+ # 2026-11-20 and explicitly identified 25 Nov, 18:00. The raw HTML served
+ # to Github Actions omitted that display-time label while STILL proving
+ # the city masthead, unique demo subject, exact Rotebühlplatz and organizer.
+ # Allow ONLY the four existing, manually fixed factual event fields when
+ # the current official HTML continues to verify the distinct event and
+ # exact location. Do not add any generic calendar dates from this parser.
+ if not all([list(checks.values())[0],list(checks.values())[1],list(checks.values())[3],list(checks.values())[4]]):return []
  # A generic event search result or software demo cannot impersonate this
  # precise calendar entry, whose place and organizing group are individually known.
- if not re.search(r"Demo zum Internationaler Tag gegen Gewalt an Frauen.{0,220}?25\.\s*November\s+2026.{0,110}?18:00\s*Uhr",body,re.I):return []
+ # Calendar date/time is a separately manually verified one-off fact; no
+ # claim that the machine-rendered HTML exposes the event time.
  ident=hashlib.sha256((URL+"|"+DAY.isoformat()).encode()).hexdigest()[:16]
  return [{"id":"stuttgart-oneoff-"+ident,"country":"DE","state":"Baden-Württemberg",
   "city":"Stuttgart","date":DAY.isoformat(),"start":"18:00","end":"",
@@ -66,7 +75,7 @@ def parse(html):
   "location":"Rotebühlplatz, 70173 Stuttgart","route":"",
   "source":"Landeshauptstadt Stuttgart – städtischer Veranstaltungskalender",
   "source_url":URL,
-  "source_status":"Einzelner von der Stadt veröffentlichter Demonstrationstermin; kein Nachweis einer behördlichen Versammlungsanmeldung, kein vollständiger Versammlungskalender"}]
+  "source_status":"Einzeln anhand der amtlichen Veranstaltungsseite am 20.11.2026 manuell geprüfter Termin; derzeitiges Roh-HTML bestätigt Datum/Uhrzeit nicht maschinenlesbar; behördliche Versammlungsanmeldung nicht nachgewiesen"}]
 
 def fetch():
  req=urllib.request.Request(URL,headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
@@ -98,7 +107,9 @@ def main():
  status={"source":URL,"mode":"single_municipal_announcement_no_bulk_rights",
   "checked_on":today.isoformat(),"event_date":DAY.isoformat(),
   "status":"outside_verification_window","count":0,
-  "rights":"Independently reviewed public factual date, venue and topic only; event calendar RSS and iCal are NOT licensed for bulk syndication by this record."}
+  "rights":"Only separately manually vetted individual factual date/time/topic/place; the city RSS/iCal has no verified blanket reuse licence. No bulk import.",
+  "manual_original_reviewed_on":MANUAL_ORIGINAL_REVIEWED_ON.isoformat(),
+  "automatic_day_time_independently_verified":False}
  found=[]
  if dt.date(2026,11,19)<=today<=dt.date(2026,12,25):
   try:
@@ -114,7 +125,9 @@ def main():
    status["municipal_heading_verified"]=list(checks.values())[0]
    status["organizer_text_verified"]=list(checks.values())[4]
    found=parse(html)
-   status.update(status="verified_city_event_one_off" if found else "original_content_unverified_no_new_import",count=len(found))
+   status.update(status=("verified_manual_one_off_time_not_machine_confirmed" if found and not list(checks.values())[2] else
+     "verified_city_event_one_off" if found else "original_content_unverified_no_new_import"),count=len(found))
+   status["automatic_day_time_independently_verified"]=bool(list(checks.values())[2])
   except Exception as error:
    status.update(status="original_unavailable_no_new_import",error=str(error)[:150])
  update(found,today)
