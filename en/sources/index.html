@@ -44,7 +44,19 @@
 <option value="regional_partial">Partial city sources</option>
 <option value="local_partial">Individual local sources</option>
 <option value="no_confirmed_regular_feed">No regular official feed confirmed</option>
-</select></div></div>
+</select></div>
+<div class="control"><label for="sourceKind">Source category</label>
+<select id="sourceKind">
+<option value="all">All source categories</option>
+<option value="feed">Recurring official feeds</option>
+<option value="oneoff">Individual official announcements</option>
+<option value="archive">Historical archives</option>
+<option value="warnings">Outdated or unavailable checks</option>
+<option value="unverified">No verified regular feed</option>
+</select></div>
+<div class="control control-sort"><label for="sourceSort">Order</label>
+<select id="sourceSort"><option value="name">State name (A–Z)</option><option value="warnings">Most source warnings first</option></select></div>
+<button type="button" id="sourceReset" class="source-reset">Reset filters</button></div>
 <p class="results" id="sourceResults" role="status" aria-live="polite">Loading official sources…</p>
 <div class="grid" id="stateGrid"></div>
 </section>
