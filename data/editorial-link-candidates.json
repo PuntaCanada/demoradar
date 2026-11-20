@@ -1,7 +1,7 @@
 {
   "version": 1,
   "reviewed_on": "2026-11-20",
-  "policy": "Hand-verified URLs from broadcaster original websites. Only own short labels, source names and URLs; no syndicated RSS headlines, article text, photos, video or excerpts. Match only pre-existing events with a unique same-city same-day subject match; no new events or live claims.",
+  "policy": "Hand-verified URLs from broadcaster original websites. Only own short labels, source names and URLs; no syndicated RSS headlines, article text, photos, video or excerpts. Match only pre-existing events with a unique same-city same-day subject match; no new events or live claims. Access diagnostics distinguish confirmed article pages from possible access restrictions; uncertainty is not evidence of a broken link.",
   "links": [
     {
       "publisher": "tagesschau / rbb",
@@ -13,7 +13,10 @@
         "gen z",
         "regelt"
       ],
-      "label": "Hintergrund zum Berliner Jugendprotest"
+      "label": "Hintergrund zum Berliner Jugendprotest",
+      "url_check_status": "access_inconclusive",
+      "url_check_date": "2026-11-20",
+      "url_check_note": "External tool access did not independently confirm the article; may be restricted, not proof of a broken URL. Preserve link subject to review."
     },
     {
       "publisher": "tagesschau / rbb",
@@ -25,7 +28,10 @@
         "schulstreik",
         "wehrpflicht"
       ],
-      "label": "Bericht zu den Berliner Schülerprotesten"
+      "label": "Bericht zu den Berliner Schülerprotesten",
+      "url_check_status": "access_inconclusive",
+      "url_check_date": "2026-11-20",
+      "url_check_note": "External tool access did not independently confirm the article; may be restricted, not proof of a broken URL. Preserve link subject to review."
     },
     {
       "publisher": "MDR",
@@ -37,7 +43,10 @@
         "gen z",
         "regelt"
       ],
-      "label": "MDR-Bericht über den Jugendprotesttag"
+      "label": "MDR-Bericht über den Jugendprotesttag",
+      "url_check_status": "content_verified",
+      "url_check_date": "2026-11-20",
+      "url_check_note": "Official article landing page opened and its protest/date context checked."
     },
     {
       "publisher": "NDR",
@@ -49,7 +58,10 @@
         "gen z",
         "regelt"
       ],
-      "label": "NDR-Hintergrund zu Protesten in Hamburg"
+      "label": "NDR-Hintergrund zu Protesten in Hamburg",
+      "url_check_status": "content_verified",
+      "url_check_date": "2026-11-20",
+      "url_check_note": "Official article landing page opened and its protest/date context checked."
     },
     {
       "publisher": "tagesschau / WDR",
@@ -61,7 +73,10 @@
         "gen z",
         "regelt"
       ],
-      "label": "Bericht über die Jugendproteste in Nordrhein-Westfalen"
+      "label": "Bericht über die Jugendproteste in Nordrhein-Westfalen",
+      "url_check_status": "access_inconclusive",
+      "url_check_date": "2026-11-20",
+      "url_check_note": "External tool access did not independently confirm the article; may be restricted, not proof of a broken URL. Preserve link subject to review."
     }
   ]
 }
