@@ -152,6 +152,14 @@ const render=()=>{
     if(checkAge===null||checkAge<0||checkAge>2)el.append($("p","source-warning",t("Erreichbarkeitsstatus nicht aktuell bestätigt","Reachability status not recently confirmed")));
     el.append($("p","source-detail",t("Nachnutzungsstatus: ","Reuse assessment: ")+(candidate.data_rights||t("Nicht bestätigt","Not verified"))));
     if(candidate.type==="official_police_historical_notice")el.append($("p","source-warning",t("Archivbeleg: keine automatische Terminübernahme und keine Aussage über zukünftige Demos.","Archive evidence: no automatic import and no statement about upcoming demonstrations.")));
+    if(candidate.type==="official_assembly_upcoming_html"){
+     const verified=Array.isArray(candidate.future_dates_verified)?candidate.future_dates_verified.filter(validDay):[];
+     el.append($("p","source-detail",t("Amtliche Zukunftsterminliste · belegte Veranstaltungstage: ","Official upcoming-assembly list · evidenced event dates: ")+verified.length));
+     if(verified.length)el.append($("p","source-detail",verified.map(fmt).join(" · ")));
+     el.append($("p","source-warning",t("Keine bestätigte offene Bulk-Nachnutzungslizenz: Originaltermine bitte beim Amt nachsehen; kein automatischer Eventimport.","No verified open bulk reuse licence: consult the original schedule; no automatic event import.")));
+    }
+    if(Array.isArray(candidate.date_conflicts)&&candidate.date_conflicts.length)el.append($("p","source-warning",t("Datum/Wochentag-Konflikte: ","Date/weekday inconsistencies: ")+candidate.date_conflicts.join("; ")+t(" · keine automatische Korrektur."," · no automatic correction.")));
+
     const monitoringMessage={
       unavailable:t("HTTP 404/410 oder bestätigter Ausfall beim letzten Abruf – kein Beweis für abgesagte Demos.","HTTP 404/410 or observed retrieval failure – not evidence of cancellations."),
       http_restricted:t("HTTP-Zugriff eingeschränkt (401/403/429) – kein Beweis, dass die Seite gelöscht ist.","HTTP access restricted (401/403/429) – does not mean the page was deleted."),
