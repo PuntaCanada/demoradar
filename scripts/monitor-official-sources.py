@@ -61,7 +61,7 @@ def verify_weimar_dates(raw,today=None):
  if "Bestätigte Versammlungsanmeldungen in Weimar" not in text:
   raise ValueError("Weimar confirmed-assembly heading missing")
  # Page uses 'So, 22.11.26' before each row; count only calendar-valid weekday matches.
- hits=re.findall(r"\\b(Mo|Di|Mi|Do|Fr|Sa|So),\\s*(\\d{1,2})\\.(\\d{1,2})\\.(20\\d{2}|\\d{2})\\b",text)
+ hits=re.findall(r"\b(Mo|Di|Mi|Do|Fr|Sa|So),\s*(\d{1,2})\.(\d{1,2})\.(20\d{2}|\d{2})\b",text)
  valid=set()
  inconsistent=[]
  for wd,day,month,year in hits:
@@ -83,7 +83,7 @@ def verify_landsberg_weekdays(raw):
  text=" ".join(parser.parts)
  names={"Montag":0,"Dienstag":1,"Mittwoch":2,"Donnerstag":3,"Freitag":4,"Samstag":5,"Sonntag":6}
  issues=[]
- for name,day,month,year in re.findall(r"\\b(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag),?\\s*(\\d{1,2})\\.(\\d{1,2})\\.(20\\d{2})\\b",text):
+ for name,day,month,year in re.findall(r"\b(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag),?\s*(\d{1,2})\.(\d{1,2})\.(20\d{2})\b",text):
   try:d=date(int(year),int(month),int(day))
   except ValueError:
    issues.append(f"{day}.{month}.{year}: invalid date")
