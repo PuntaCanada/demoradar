@@ -46,9 +46,9 @@
     },
     {
       "state": "Hessen",
-      "status": "no_confirmed_regular_feed",
-      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
-      "url": null
+      "status": "local_partial",
+      "scope": "Wiesbaden: Gewerkschaften DGB und GEW kündigen für 02.12.2026 17:30 eine Demonstration am Kochbrunnenplatz an. Zwei unabhängige Gewerkschafts-Originalseiten; keine amtliche Polizeianmeldung und kein landesweiter Demo-Feed belegt.",
+      "url": "https://www.gew-hessen.de/details/demonstration-in-wiesbaden-gegen-kuerzungen-der-bundesregierung"
     },
     {
       "state": "Mecklenburg-Vorpommern",
@@ -58,9 +58,9 @@
     },
     {
       "state": "Niedersachsen",
-      "status": "no_confirmed_regular_feed",
-      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
-      "url": null
+      "status": "local_partial",
+      "scope": "Hannover: Interventionistische Linke / FLINTA*-Bündnis kündigen für 25.11.2026 ab 17:00 eine Demonstration an der Christuskirche an. Veranstalterquelle; keine amtliche Versammlungsanmeldung oder landesweiter Feed belegt.",
+      "url": "https://interventionistische-linke.org/hannover/termine/maenner-toeten-patriarchale-gewalt-in-autoritaeten-zeiten"
     },
     {
       "state": "Nordrhein-Westfalen",
@@ -70,9 +70,9 @@
     },
     {
       "state": "Rheinland-Pfalz",
-      "status": "no_confirmed_regular_feed",
-      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
-      "url": null
+      "status": "local_partial",
+      "scope": "Ludwigshafen: DGB veröffentlicht eine Demonstration gegen Gewalt an Frauen am 25.11.2026 ab 11:55 Europaplatz. Gewerkschaftliche Originalquelle mit Hinweis auf städtische Redner; keine amtliche Versammlungsanmeldung oder landesweiter Feed belegt.",
+      "url": "https://rheinland-pfalz-saarland.dgb.de/veranstaltungen/veranstaltung/aktionstag-gegen-gewalt-an-frauen-demo-ludwigshafen/"
     },
     {
       "state": "Saarland",

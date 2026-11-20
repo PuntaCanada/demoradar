@@ -94,6 +94,18 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
    item.count,"One non-government original event notice, no police registration confirmed and no licensed machine-readable feed",
    item.checked_on);
  }
+ const regionalFuture=files.threeRegionalOneoffs||{};
+ for(const [city,state,publisher] of [
+  ["Hannover","Niedersachsen","Interventionistische Linke Hannover (Einzeltermin)"],
+  ["Ludwigshafen","Rheinland-Pfalz","DGB Rheinland-Pfalz/Saarland (Ludwigshafen-Einzeltermin)"],
+  ["Wiesbaden","Hessen","DGB/GEW – Wiesbaden-Einzeltermin"]]){
+  const item=(regionalFuture.checks||[]).find(x=>x.city===city)||{};
+  add(city,state,publisher,
+   item.status==="verified_non_government_one_off"?"verified_one_off":
+   item.status==="source_unavailable_no_import"?"unavailable":
+   item.status==="original_content_not_verified_no_import"?"no_matching_items":"unknown",
+   item.count,"One organizer/union original protest notice; no police registration or licensed official feed proven",item.checked_on);
+ }
  const frankfurt=files.frankfurt||{};
  add("Frankfurt am Main","Hessen","Stadt Frankfurt",frankfurt.status==="ok"?"verified_one_off":frankfurt.status==="unavailable"?"unavailable":"unknown",frankfurt.count,"Single notice, not complete state or city coverage");
  return {version:1,method:"Observed importer outcomes only; neither state completeness nor actual number of protests can be inferred.",sources:out};
@@ -107,7 +119,7 @@ if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){
   policeFrankfurtArchive:read("data/frankfurt-police-archive-source.json"),
   policeLeipzig:read("data/leipzig-police-source.json"),
   leipzigArchive:read("data/leipzig-archive-source.json"),
-  sourceStatus:read("data/source-status.json"),freiburg:read("data/freiburg-source.json"),stuttgart:read("data/stuttgart-demo-source.json"),organizerNotices:read("data/potsdam-lindenberg-source.json"),badOldesloe:read("data/bad-oldesloe-police-source.json"),weimarOneoffs:read("data/weimar-oneoffs-source.json"),frankfurt:read("data/frankfurt-source.json")});
+  sourceStatus:read("data/source-status.json"),freiburg:read("data/freiburg-source.json"),stuttgart:read("data/stuttgart-demo-source.json"),organizerNotices:read("data/potsdam-lindenberg-source.json"),threeRegionalOneoffs:read("data/three-regional-oneoffs-source.json"),badOldesloe:read("data/bad-oldesloe-police-source.json"),weimarOneoffs:read("data/weimar-oneoffs-source.json"),frankfurt:read("data/frankfurt-source.json")});
  const prev=read("data/source-quality.json");
  if(JSON.stringify(next)===JSON.stringify(prev)){console.log("Source quality unchanged");process.exit(0)}
  writeFileSync("data/source-quality.json",JSON.stringify(next,null,2)+"\n");

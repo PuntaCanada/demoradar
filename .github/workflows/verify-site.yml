@@ -54,6 +54,8 @@ on:
       - 'scripts/update-dortmund-police.py'
       - 'scripts/update-stuttgart-demo.py'
       - 'scripts/update-regional-organizer-oneoffs.py'
+      - 'scripts/update-three-regional-oneoffs.py'
+      - 'scripts/test-three-regional-oneoffs.py'
       - 'scripts/test-regional-organizer-oneoffs.py'
       - 'scripts/test-stuttgart-demo.py'
       - 'scripts/test-dortmund-police.py'
@@ -108,6 +110,7 @@ jobs:
           node --check i18n.js
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
+          python3 scripts/test-three-regional-oneoffs.py
           python3 scripts/test-regional-organizer-oneoffs.py
           python3 scripts/test-stuttgart-demo.py
           node scripts/test-community.mjs
