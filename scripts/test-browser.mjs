@@ -90,6 +90,12 @@ try{
    console.log(path,width+"px",state.calendar+" day markers; scrollWidth "+state.scrollWidth);
   }
  }
+ for(const languageRoute of ["/","/en/"]){
+  await navigate(languageRoute,320);
+  const tap=await evaluate('(()=>{const host=document.createElement("div");host.className="detail-press";const a=document.createElement("a");a.className="editorial-link";a.textContent="MDR: Weiterführender redaktioneller Medienbericht zum Demo-Termin";a.href="https://www.mdr.de/";host.append(a);document.querySelector("main").append(host);const h=a.getBoundingClientRect().height;const w=document.documentElement.scrollWidth;host.remove();return {h,w}})()');
+  assert.ok(tap.h>=43,"Editorial links require smartphone-sized touch targets: "+languageRoute+" "+JSON.stringify(tap));
+  assert.ok(tap.w<=322,"Editorial link must not cause horizontal scroll at 320px: "+languageRoute+" "+JSON.stringify(tap));
+ }
  await navigate("/",375);
  await evaluate('document.querySelector("#heatmapSvg [aria-label^=\\\"Sachsen:\\\"]").dispatchEvent(new MouseEvent("click",{bubbles:true}));true');
  assert.equal(await evaluate('document.getElementById("region").value'),"Sachsen","Clickable state heatmap filters calendar");

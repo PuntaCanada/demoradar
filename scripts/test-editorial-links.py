@@ -8,6 +8,7 @@ spec.loader.exec_module(module)
 match_links=module.match_links
 is_allowed_link=module.is_allowed_link
 has_phrase=module.has_phrase
+link_is_fresh=module.link_is_fresh
 TODAY=dt.date(2026,11,20)
 BASE={"publisher":"tagesschau / rbb","url":"https://www.tagesschau.de/inland/regional/berlin/rbb-nicht-nur-gen-z-regelt-neue-jugendproteste-am-freitag-in-berlin-100.html",
  "city":"Berlin","event_day":"2026-11-20","published_on":"2026-11-20",
@@ -28,6 +29,13 @@ class EditorialSafetyTests(unittest.TestCase):
   self.assertEqual(match_links([EVENT,dict(EVENT,id="another-protest")],[BASE],TODAY),{})
  def test_old_article_no_future_link(self):
   self.assertEqual(match_links([EVENT],[dict(BASE,published_on="2026-11-08")],TODAY),{})
+ def test_checked_and_access_blocked_links_remain_context_only(self):
+  for code in ("content_verified","access_inconclusive"):
+   link=dict(BASE,url_check_status=code,url_check_date="2026-11-20")
+   m=match_links([EVENT],[link],TODAY,"2026-11-20")
+   self.assertEqual(m["actual-1"][0]["url_check_status"],code)
+  self.assertFalse(is_allowed_link(dict(BASE,url_check_status="confirmed_broken",url_check_date="2026-11-20")))
+  self.assertFalse(is_allowed_link(dict(BASE,url_check_status="content_verified",url_check_date="2026-02-30")))
  def test_url_must_be_official_https_host(self):
   for url in ("http://www.tagesschau.de/test","https://tagesschau.de.evil.example/test","https://www.tagesschau.de.evil.example/test","https://user:pass@www.tagesschau.de/test","https://www.tagesschau.de:8080/test"):
    self.assertFalse(is_allowed_link(dict(BASE,url=url)))
@@ -41,6 +49,19 @@ class EditorialSafetyTests(unittest.TestCase):
   self.assertEqual(len(m["actual-1"]),1)
  def test_time_window(self):
   self.assertEqual(match_links([EVENT],[BASE],dt.date(2026,11,26)),{})
+ def test_review_date_is_honest(self):
+  a=match_links([EVENT],[dict(BASE,published_on="2026-11-19")],TODAY,reviewed_on="2026-11-20")
+  self.assertEqual(a["actual-1"][0]["reviewed_on"],"2026-11-20")
+ def test_old_editorial_review_expires(self):
+  self.assertEqual(match_links([EVENT],[BASE],TODAY,reviewed_on="2026-11-10"),{})
+ def test_future_review_not_trusted(self):
+  self.assertEqual(match_links([EVENT],[BASE],TODAY,reviewed_on="2026-11-21"),{})
+ def test_review_must_follow_publication(self):
+  self.assertEqual(match_links([EVENT],[BASE],TODAY,reviewed_on="2026-11-19"),{})
+ def test_link_expires_after_seven_days_even_if_event_changes(self):
+  a=dict(BASE,event_day="2026-11-25",published_on="2026-11-25")
+  b=dict(EVENT,date="2026-11-25")
+  self.assertEqual(match_links([b],[a],dt.date(2026,11,25),reviewed_on="2026-11-20"),{})
  def test_word_boundaries(self):
   self.assertTrue(has_phrase("Demo Gen Z regelt am Freitag","gen z"))
   self.assertFalse(has_phrase("Regeltechnik in der Schule","regelt"))

@@ -6,6 +6,13 @@ const updater=read("scripts/update-news.py");
 const dict=read("i18n.js");
 assert.ok(live.includes("const editorialHosts=new Set("),"Only audited news publisher hosts may be used");
 assert.ok(live.includes("safeNewsUrl(n.url)"),"All displayed editorial URLs must be filtered");
+assert.ok(live.includes("pressLinkNote(n)"),"Differentiates verified publisher URLs from inconclusive tool access");
+assert.ok(live.includes('class="editorial-link"'),"Editorial links need distinct accessible styling");
+assert.ok(updater.includes("EDITORIAL_MAX_AGE_DAYS=7"),"Editorial evidence requires bounded review freshness");
+assert.ok(updater.includes("reviewed_on=reviewed_on"),"Never replace actual human review with current refresh date");
+assert.ok(updater.includes("berlin_day()"),"Publication window should use Berlin local day");
+assert.ok(read("index.html").includes("min-height:44px"),"Mobile report links must be touch friendly");
+
 assert.ok(!updater.includes("urllib.request"),"No RSS feed syndication/downloads in news updater");
 assert.ok(updater.includes('EDITORIAL=ROOT/"editorial-link-candidates.json"'));
 assert.ok(updater.includes("len(matching)!=1"),"Only uniquely matched event gets a news context link");

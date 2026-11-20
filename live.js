@@ -284,6 +284,10 @@ function renderMonitoredSources(){
  }
 }
 
+const pressLinkNote=n=>n?.url_check_status==="content_verified"?
+ (locale()==="de-DE"?"Originalseite überprüft":"Original article checked"):
+ (locale()==="de-DE"?"Originalseite extern nicht eindeutig überprüfbar":"External link access could not be confirmed");
+const pressLink=(n)=>'<a class="editorial-link" href="'+esc(safeNewsUrl(n.url))+'" target="_blank" rel="noopener noreferrer" title="'+esc(pressLinkNote(n))+'">'+esc(n.source)+": "+esc(n.title)+'</a>';
 let articleMatches={};
 function renderFeatured(){
  const parts=new Intl.DateTimeFormat("de-DE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
@@ -321,7 +325,7 @@ function renderFeatured(){
   holder.className="featured-grid";
   holder.innerHTML=items.map(e=>{
    const articles=Array.isArray(articleMatches[e.id])?articleMatches[e.id].filter(n=>safeNewsUrl(n.url)).slice(0,2):[];
-   const links=articles.map(n=>'<a href="'+esc(safeNewsUrl(n.url))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.candidateTitle"))+'" >'+esc(n.source)+": "+esc(n.title)+'</a>').join("");
+   const links=articles.map(pressLink).join("");
    const meta=(x.id==="week"?esc(formatDate(e.date))+" · ":"")+esc(e.start||T("calendar.timeUnknown"))+(e.start?" ":"")+" · "+esc(e.city)+(e.location?" · "+esc(e.location):"")+(e.organizer?" · "+esc(e.organizer):"")+(e.registered_participants?" · "+esc(T("feature.registered"))+": "+esc(e.registered_participants):"");
    return '<article class="featured-item topic-card topic-'+topicSlug(e.title)+'"><span class="featured-badge topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><h3><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(e.title)+'</a></h3>'+statusPills(e)+'<div class="featured-meta">'+meta+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(T("feature.source"))+'</a><a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.searchTitle"))+'" >'+esc(T("feature.newsSearch"))+'</a></div>'+streamTeaser(e)+(links?'<div class="featured-meta"><strong>'+esc(T("feature.candidate"))+'</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
   }).join("");
@@ -360,7 +364,7 @@ function renderDetail(){
   const updates=changes.length?'<section class="detail-updates"><h3>'+esc(T("status.updated"))+'</h3><ul>'+changes.map(c=>'<li><strong>'+esc(T(({"route":"status.routeChange","start":"status.timeChange","end":"status.timeChange","location":"status.placeChange","date":"status.dateChange","event_status":"status.statusChange"})[c.field]||"status.otherChange"))+'</strong>: '+esc(T("status.previous"))+' '+esc(c.previous||"—")+' → '+esc(T("status.current"))+' '+esc(c.current||"—")+'</li>').join("")+'</ul><p class="small">'+esc(T("status.uncertain"))+'</p></section>':"";
   const reports=Array.isArray(articleMatches[event.id])?articleMatches[event.id].slice(0,3):[];
   const newsQuery="https://news.google.com/search?q="+encodeURIComponent('"'+event.title.slice(0,120)+'" '+event.city)+"&hl="+(locale()==="de-DE"?"de":"en")+"&gl=DE";
-    const news=reports.length?'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.candidate"))+'</p><ul>'+reports.filter(n=>safeNewsUrl(n.url)).map(n=>'<li><a href="'+esc(safeNewsUrl(n.url))+'" target="_blank" rel="noopener noreferrer">'+esc(n.source)+': '+esc(n.title)+'</a></li>').join("")+'</ul></section>':'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.none"))+'</p></section>';
+    const news=reports.length?'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.candidate"))+'</p><ul>'+reports.filter(n=>safeNewsUrl(n.url)).map(n=>"<li>"+pressLink(n)+"</li>").join("")+'</ul></section>':'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.none"))+'</p></section>';
   const newsSearch='<a href="'+esc(newsQuery)+'" target="_blank" rel="noopener noreferrer">'+esc(T("news.find"))+'</a>';
   const source=safeSourceUrl(event.source_url);
   const license=event.license?'<p class="small">'+esc(T("detail.license"))+': '+esc(event.license)+'</p>':"";
