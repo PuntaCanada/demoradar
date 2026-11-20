@@ -11,7 +11,7 @@ const files={
  frankfurt:{status:"unavailable",count:0}
 };
 const rows=sourceHealth(files).sources;
-assert.equal(rows.length,13);
+assert.equal(rows.length,14);
 const row=name=>rows.find(s=>s.source===name);
 assert.equal(row("Polizei Berlin").status,"observed_data");
 assert.equal(row("Polizei Berlin").count,2);
@@ -26,6 +26,11 @@ assert.equal(row("Polizeipräsidium Frankfurt (Archiv)").status,"unknown");
 assert.equal(row("Polizeidirektion Leipzig (Archiv)").status,"unknown");
 assert.equal(row("Stadt Jena").status,"no_matching_items");
 assert.equal(row("Stadt Frankfurt").status,"unavailable");
+assert.equal(row("Stadt Freiburg").status,"unknown");
+const freiburg=sourceHealth({...files,freiburg:{status:"verified_one_off",count:3,checked_on:"2026-11-20"}},{today:"2026-11-20"}).sources.find(x=>x.source==="Stadt Freiburg");
+assert.equal(freiburg.status,"verified_one_off");
+assert.equal(freiburg.count,3);
+assert.equal(freiburg.check_freshness,"recent");
 assert.ok(rows.every(s=>s.scope&&!/complete coverage/.test(s.scope)));
 assert.equal(sourceHealth({...files,policeLeipzig:{status:"unavailable_no_import"}}).sources.find(s=>s.source==="Polizeidirektion Leipzig").status,"unavailable");
 assert.equal(sourceHealth({...files,policeCologne:{sources:[]}}).sources.find(s=>s.source==="Polizei Köln").status,"unknown");
