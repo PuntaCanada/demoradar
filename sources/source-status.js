@@ -38,20 +38,37 @@ const freshnessDescription=s=>{
 const isRolling=s=>s.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(s.source);
 const filter=document.querySelector("#sourceFilter");
 const search=document.querySelector("#sourceSearch");
+const sourceKind=document.querySelector("#sourceKind");
+const sourceSort=document.querySelector("#sourceSort");
+const sourceReset=document.querySelector("#sourceReset");
 let coverageReviewDay=null,states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[],rejectedCandidates=[],sourceAlerts=[];
 let initialized=false;
 const render=()=>{
  if(!initialized)return;
  const phrase=(search.value||"").toLocaleLowerCase(en?"en":"de").trim(),choice=filter.value;
  const target=document.querySelector("#stateGrid");target.replaceChildren();
+ const warningCount=state=>sourceAlerts.filter(a=>a.state===state.state||quality.some(s=>s.state===state.state&&s.city===a.city&&s.source===a.source)).length+
+  quality.filter(s=>s.state===state.state&&(s.status==="unavailable"||daysSince(s.last_checked)===null||daysSince(s.last_checked)<0||daysSince(s.last_checked)>2)).length;
+ const orderedStates=[...states].sort((a,b)=>sourceSort.value==="warnings"?warningCount(b)-warningCount(a)||a.state.localeCompare(b.state,"de"):a.state.localeCompare(b.state,"de"));
  let visible=0;
- for(const state of states){
+ for(const state of orderedStates){
   const entries=quality.filter(s=>s.state===state.state);
   const candidateSources=monitors.filter(s=>s.state===state.state);
   const stateAlerts=sourceAlerts.filter(a=>a.state===state.state||entries.some(s=>s.city===a.city&&s.source===a.source));
   const rejected=rejectedCandidates.filter(s=>s.state===state.state);
   const text=[state.state,state.scope,...entries.map(e=>[e.city,e.source,e.scope].join(" ")),...candidateSources.map(s=>[s.city,s.scope,s.type].join(" ")) ,...rejected.map(s=>[s.city,s.title,s.reason].join(" "))].join(" ").toLocaleLowerCase(en?"en":"de");
-  if((choice!=="all"&&state.status!==choice)||(phrase&&!text.includes(phrase)))continue;
+  const kind=sourceKind.value;
+  const hasFeed=entries.some(isRolling);
+  const hasOneOff=entries.some(s=>s.status==="verified_one_off");
+  const hasArchive=entries.some(s=>s.status==="verified_historical_one_off");
+  const hasWarnings=warningCount(state)>0;
+  const kindMatches=kind==="all"||
+   kind==="feed"&&hasFeed||
+   kind==="oneoff"&&hasOneOff||
+   kind==="archive"&&hasArchive||
+   kind==="warnings"&&hasWarnings||
+   kind==="unverified"&&!hasFeed;
+  if(!kindMatches||(choice!=="all"&&state.status!==choice)||(phrase&&!text.includes(phrase)))continue;
   visible++;
   const article=$("article","source-card");
   article.setAttribute("aria-label",state.state);
@@ -164,7 +181,8 @@ const render=()=>{
   }
   target.append(article);
  }
- document.querySelector("#sourceResults").textContent=t(visible+" von 16 Bundesländern",""+visible+" of 16 federal states");
+ document.querySelector("#sourceResults").textContent=t(visible+" von 16 Bundesländern angezeigt","Showing "+visible+" of 16 federal states");
+ sourceReset.disabled=!search.value&&filter.value==="all"&&sourceKind.value==="all"&&sourceSort.value==="name";
  if(!visible)target.append($("p","source-empty",t("Keine Treffer für diese Auswahl.","No matches for this selection.")));
 };
 const load=async path=>{
@@ -206,4 +224,6 @@ Promise.all([
  console.warn("Official source dashboard unavailable",err);
 });
 filter.addEventListener("change",render);search.addEventListener("input",render);
+sourceKind.addEventListener("change",render);sourceSort.addEventListener("change",render);
+sourceReset.addEventListener("click",()=>{search.value="";filter.value="all";sourceKind.value="all";sourceSort.value="name";render();search.focus()});
 })();
