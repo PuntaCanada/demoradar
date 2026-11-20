@@ -38,7 +38,7 @@ const freshnessDescription=s=>{
 const isRolling=s=>s.status==="observed_data"&&["Polizei Berlin","Stadt Dresden","Stadt Rostock"].includes(s.source);
 const filter=document.querySelector("#sourceFilter");
 const search=document.querySelector("#sourceSearch");
-let states=[],quality=[],health=[],issues=[],monitors=[];
+let states=[],quality=[],health=[],issues=[],monitors=[],reuseAudits=[];
 let initialized=false;
 const render=()=>{
  if(!initialized)return;
@@ -69,6 +69,16 @@ const render=()=>{
    item.append($("p","source-detail",freshnessDescription(s)));
    item.append($("p","source-detail",t("Quellentyp: ","Source type: ")+(isRolling(s)?t("regelmäßig beobachteter Terminfeed","monitored recurring event feed"):s.status==="verified_historical_one_off"?t("historische Einzelmeldung (kein aktueller Feed)","historical one-off (not a current feed)"):s.status==="verified_one_off"?t("amtliche Einzelmeldung (kein regelmäßiger Feed)","official one-off notice (not a recurring feed)"):t("kein bestätigter regelmäßiger Terminfeed","no confirmed recurring event feed"))));
    item.append($("p","source-scope",s.scope||t("Reichweite nicht dokumentiert","Scope not documented")));
+   const reuse=reuseAudits.find(a=>a.source===s.source&&a.state===s.state);
+   if(reuse){
+    item.append($("p","source-detail",t("Technisches Format: ","Technical format: ")+reuse.format));
+    item.append($("p","source-warning",reuse.classification==="restricted_metadata"?
+      t("Nachnutzung laut amtlichem Metadatensatz eingeschränkt oder nicht offen bestätigt.","Official metadata marks reuse as restricted or not confirmed open."):
+      t("Keine eindeutige offene Nachnutzungslizenz für diese Quelle bestätigt.","No unambiguous open reuse licence confirmed for this source.")));
+    item.append($("p","source-detail",t("Beleg: ","Evidence: ")+reuse.evidence));
+    const link=$("a","source-link",t("Amtliche Lizenz-/Quellenangaben prüfen","Review official licence/source details"));
+    link.href=reuse.source_url;link.target="_blank";link.rel="noopener noreferrer";item.append(link);
+   }
    if(s.status==="observed_data"&&Number.isInteger(s.count))item.append($("p","source-detail",t("Beim Abruf gelieferte Einträge: ","Items in last fetch: ")+s.count.toLocaleString(en?"en-GB":"de-DE")));
    const affected=health.filter(h=>h.city===s.city&&h.source===s.source);
    for(const h of affected)for(const issue of h.issues||[]){
@@ -119,11 +129,14 @@ Promise.all([
  load("/data/state-source-coverage.json"),
  load("/data/source-quality.json"),
  load("/data/source-format-health.json"),
- load("/data/expansion-sources.json").catch(()=>({sources:[]}))
-]).then(([coverage,data,format,expansion])=>{
+ load("/data/expansion-sources.json").catch(()=>({sources:[]})),
+ load("/data/source-reuse-audit.json")
+]).then(([coverage,data,format,expansion,reuse])=>{
  if(coverage.version!==1||coverage.states?.length!==16||!Array.isArray(data.sources)||!Array.isArray(format.feeds))throw Error("Unexpected source schema");
  const keys=new Set(coverage.states.map(s=>s.state));
  if(keys.size!==16)throw Error("Duplicate or incomplete state coverage");
+ if(reuse.version!==1||!Array.isArray(reuse.feeds))throw Error("Unexpected source reuse audit schema");
+ reuseAudits=reuse.feeds;
  states=coverage.states;quality=data.sources;health=format.feeds;monitors=Array.isArray(expansion.sources)?expansion.sources.filter(s=>coverage.states.some(x=>x.state===s.state)&&typeof s.url==="string"):[];
  const latest=quality.map(s=>s.last_checked).filter(validDay).sort().at(-1);
  document.querySelector("#lastCheck").textContent=t("Letzte belegte Quellenprüfung: ","Last evidenced source check: ")+fmt(latest);
