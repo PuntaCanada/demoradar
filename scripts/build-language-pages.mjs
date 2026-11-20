@@ -49,12 +49,74 @@ const de=addSeo(original,"de");
 if(de!==original)writeFileSync("index.html",de);
 mkdirSync("en",{recursive:true});
 writeFileSync("en/index.html",buildEnglish());
+
+/* Search-indexable daily landing pages are generated from existing, dated
+   source records only. They never assert that a listing is still LIVE or
+   that uncovered regions have no demonstrations. No event-schema fabrication. */
+const dayInBerlin=()=>new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+const safeRecord=(e,today)=>e&&e.country==="DE"&&e.date===today&&
+ typeof e.id==="string"&&e.id.length>0&&typeof e.title==="string"&&e.title.trim().length>0&&
+ typeof e.city==="string"&&e.city.trim().length>0&&
+ !["cancelled","canceled","withdrawn","stopped","abgesagt","zurückgezogen"].includes(String(e.status_code||"").toLocaleLowerCase("de"));
+const isRealDate=date=>/^20\d{2}-\d{2}-\d{2}$/.test(String(date||""))&&
+ Number.isFinite(Date.parse(date+"T12:00:00Z"))&&new Date(date+"T12:00:00Z").toISOString().slice(0,10)===date;
+function buildTodayPages(){
+ const current=dayInBerlin();
+ if(!isRealDate(current))throw Error("Invalid current Europe/Berlin day");
+ const official=JSON.parse(readFileSync("data/events.json","utf8"));
+ if(!Array.isArray(official.events))throw Error("Missing official event records for today page");
+ const unique=new Map();
+ for(const e of official.events.filter(e=>safeRecord(e,current))){
+  const key=[e.date,e.city,e.start||"",e.title].join("|").toLocaleLowerCase("de");
+  if(!unique.has(key))unique.set(key,e);
+ }
+ const items=[...unique.values()].sort((a,b)=>String(a.city).localeCompare(String(b.city),"de")||
+  String(a.start||"").localeCompare(String(b.start||""))||String(a.title).localeCompare(String(b.title),"de")).slice(0,60);
+ const timeText=(e,en)=>/^\d{2}:\d{2}$/.test(String(e.start||""))?(en?"at ":"um ")+escapeHTML(e.start)+(en?"":" Uhr"):(en?"time not confirmed":"Uhrzeit nicht bestätigt");
+ for(const [lang,dir,route] of [["de","heute","/heute/"],["en","en/today","/en/today/"]]){
+  const en=lang==="en",pageTitle=en?"Demonstrations today in Germany | DemoRadar":"Demonstrationen heute in Deutschland | DemoRadar";
+  const caveat=en?"Only existing dated source records are listed. The selection is incomplete; an unlisted demonstration may still take place. The appearance of an event does not establish that it is happening LIVE.":"Nur bereits vorhandene, datierte Quellenmeldungen werden aufgeführt. Die Übersicht ist unvollständig: Nicht aufgeführte Demonstrationen können trotzdem stattfinden. Ein Eintrag bestätigt keinen LIVE-Status.";
+  const desc=en?"Demonstrations reported for today by source, location and time where known. Incomplete coverage; verify with the original publisher.":"Heute gemeldete Demonstrationen nach Ort und bekannter Uhrzeit. Unvollständige Abdeckung; Originalquelle beachten.";
+  const nodes=items.map(e=>{
+   const href=(en?"/en/":"/")+"?event="+encodeURIComponent(e.id)+"#eventDetail";
+   const city=escapeHTML(e.city);
+   const title=escapeHTML(e.title);
+   return '<li class="item"><a class="event" href="'+escapeAttr(href)+'">'+title+'</a><p>'+city+' · '+timeText(e,en)+'</p></li>';
+  }).join("\n");
+  const empty=en?"No confirmed source listing for today is available here. That does not mean no demonstrations are taking place.":"Für heute liegt hier kein passender Quelleneintrag vor. Das bedeutet nicht, dass keine Demonstrationen stattfinden.";
+  const canonical=origin+route,other=origin+(en?"/heute/":"/en/today/");
+  const links=en?
+   '<a href="/en/">Calendar</a><a href="/en/sources/">Official sources</a><a href="/en/community/">Community</a><a href="/heute/" hreflang="de">Deutsch</a>':
+   '<a href="/">Kalender</a><a href="/sources/">Amtliche Quellen</a><a href="/community/">Community</a><a href="/en/today/" hreflang="en">English</a>';
+  const html='<!doctype html><html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+
+   '<title>'+pageTitle+'</title><meta name="description" content="'+escapeAttr(desc)+'">'+
+   '<meta name="robots" content="index,follow"><link rel="canonical" href="'+canonical+'">'+
+   '<link rel="alternate" hreflang="'+lang+'" href="'+canonical+'"><link rel="alternate" hreflang="'+(en?"de":"en")+'" href="'+other+'">'+
+   '<link rel="alternate" hreflang="x-default" href="'+origin+'/heute/">'+
+   '<style>:root{font-family:system-ui,sans-serif;color:#192942;background:#f5f8fc}*{box-sizing:border-box}body{margin:0}header{background:#111e30;padding:16px max(20px,calc((100vw - 1050px)/2))}nav{display:flex;flex-wrap:wrap;gap:14px}nav a{color:white}main{max-width:980px;margin:auto;padding:26px 20px 70px}h1{font-size:clamp(27px,5vw,42px);line-height:1.2}p{line-height:1.55}.notice{border-left:4px solid #126b8a;background:white;padding:14px;border-radius:8px}ul{padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px}.item{border:1px solid #d9e2eb;background:white;border-radius:12px;padding:16px;min-width:0;overflow-wrap:anywhere}.event{font-weight:700;color:#115890;display:inline-block;padding:7px 0;min-height:44px}.item p{color:#526276;margin:4px 0}a:focus-visible{outline:3px solid #db9f19;outline-offset:3px}.bottom{margin-top:24px}</style></head>'+
+   '<body><header><nav aria-label="'+(en?"Navigation":"Navigation")+'">'+links+'</nav></header><main>'+
+   '<h1>'+(en?"Demonstrations today":"Demonstrationen heute")+'</h1>'+
+   '<p><strong>'+(en?"Date (Europe/Berlin): ":"Datum (Europe/Berlin): ")+current+'</strong></p><p class="notice">'+caveat+'</p>'+
+   '<h2>'+(en?"Reported entries: ":"Gemeldete Einträge: ")+items.length+'</h2>'+
+   (items.length?'<ul>'+nodes+'</ul>':'<p>'+empty+'</p>')+
+   '<p class="bottom"><a href="'+(en?"/en/":"/")+'">'+(en?"Open interactive calendar and filters":"Interaktiven Kalender und Filter öffnen")+'</a></p>'+
+   '<p><a href="'+(en?"/en/sources/":"/sources/")+'">'+(en?"Review source coverage for all 16 states":"Quellenabdeckung aller 16 Bundesländer prüfen")+'</a></p>'+
+   '</main></body></html>';
+  mkdirSync(dir,{recursive:true});
+  writeFileSync(dir+"/index.html",html);
+ }
+ return current;
+}
+const todayPageDate=buildTodayPages();
+
 const alternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/"/>';
 const sourceAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/sources/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/sources/"/>';
 const communityAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/community/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/community/"/>';
+const todayAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/heute/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/today/"/>';
 const sourceUrls=[
  ["/",alternate],["/en/",alternate],["/community/",communityAlternate],["/en/community/",communityAlternate],
- ["/sources/",sourceAlternate],["/en/sources/",sourceAlternate]
+ ["/sources/",sourceAlternate],["/en/sources/",sourceAlternate],
+ ["/heute/",todayAlternate],["/en/today/",todayAlternate]
 ];
 const sitemapLines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
  ...sourceUrls.map(([route,links])=>'<url><loc>'+origin+route+'</loc>'+links+'</url>'),'</urlset>',''];
