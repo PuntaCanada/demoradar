@@ -21,6 +21,7 @@ on:
       - 'scripts/check-source-admission.mjs'
       - 'scripts/test-source-transparency.mjs'
       - '.github/workflows/source-transparency.yml'
+      - '.github/workflows/update-events.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -38,6 +39,8 @@ jobs:
           node --check sources/source-status.js
           node scripts/test-source-transparency.mjs
           node scripts/test-source-reuse-audit.mjs
+          node --check heatmap.js
+          node --check scripts/stream-matcher.mjs
           node scripts/check-source-admission.mjs
           node scripts/test-rejected-candidates.mjs
           node scripts/test-heatmap-freshness.mjs
