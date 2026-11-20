@@ -21,6 +21,9 @@ on:
       - 'en/index.html'
       - 'scripts/build-language-pages.mjs'
       - 'scripts/test-today-pages.mjs'
+      - 'scripts/today-selection.mjs'
+      - 'scripts/test-today-selection.mjs'
+      - 'scripts/test-seo-reciprocity.mjs'
       - 'heute/**'
       - 'en/today/**'
       - 'scripts/test-browser.mjs'
@@ -65,6 +68,8 @@ jobs:
           node scripts/test-editorial-frontend.mjs
           node scripts/build-language-pages.mjs
           node scripts/test-today-pages.mjs
+          node scripts/test-today-selection.mjs
+          node scripts/test-seo-reciprocity.mjs
           node scripts/test-frontend.mjs
           node --check scripts/update-streams.mjs
           python3 scripts/test-source-monitor.py

@@ -48,6 +48,9 @@ on:
       - 'scripts/update-demos.py'
       - 'scripts/build-language-pages.mjs'
       - 'scripts/test-today-pages.mjs'
+      - 'scripts/today-selection.mjs'
+      - 'scripts/test-today-selection.mjs'
+      - 'scripts/test-seo-reciprocity.mjs'
       - 'heute/index.html'
       - 'en/today/index.html'
       - 'scripts/update-news.py'
@@ -160,6 +163,8 @@ jobs:
           node --check scripts/build-language-pages.mjs
           node --input-type=module -e 'import{readFileSync}from"node:fs";const de=readFileSync("index.html","utf8"),en=readFileSync("en/index.html","utf8"),sitemap=readFileSync("sitemap.xml","utf8");if(!de.includes("hreflang=\"en\"")||!en.includes("<html lang=\"en\"")||!en.includes("<link rel=\"canonical\" href=\"https://demoradar.pages.dev/en/\"")||!en.includes("Important today"))throw Error("Missing translated SEO route");if(!sitemap.includes("/en/"))throw Error("Missing sitemap translation entry");console.log("/en/ static SEO checks: OK")'
           node scripts/test-today-pages.mjs
+          node scripts/test-today-selection.mjs
+          node scripts/test-seo-reciprocity.mjs
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
           node scripts/test-community.mjs
