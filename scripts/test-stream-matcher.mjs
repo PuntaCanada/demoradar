@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize,ambiguousOrInvalidTitleDates,platformAccount} from "./stream-matcher.mjs";
+import {cityMatches,localDay,nearbyDate,matchEvents,explicitDateInTitle,normalize,ambiguousOrInvalidTitleDates,platformAccount,candidateStillMatches} from "./stream-matcher.mjs";
 const date="2026-11-19",iso="2026-11-19T12:00:00Z";
 const events=[
  {id:"berlin-climate",city:"Berlin",date,title:"Kundgebung Klimaschutz und Energiewende"},
@@ -16,6 +16,13 @@ assert.equal(find("LIVE Demo Berlin Klimaschutz").length,0,"one theme word is no
 assert.equal(find("Demo Berlin Energiewende Klimaschutz","2026-11-24T12:00:00Z").length,0,"wrong date");
 assert.equal(find("Mein Gaming Stream Berlin Klimaschutz Energiewende").length,0,"demo context missing");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"recording").length,1);
+const saved={event_id:"berlin-climate",title:"Demo Berlin Klimaschutz Energiewende",date:iso,status:"recording"};
+assert.equal(candidateStillMatches(saved,[events[0]]),true,"Unchanged verified event preserves review-only proposal");
+assert.equal(candidateStillMatches(saved,[{...events[0],status_code:"cancelled"}]),false,"Withdrawn event invalidates a cached proposal");
+assert.equal(candidateStillMatches(saved,[{...events[0],title:"Kundgebung für öffentliche Bibliotheken"}]),false,"Event title changes cannot preserve obsolete matches");
+assert.equal(candidateStillMatches({...saved,event_id:"missing"},[events[0]]),false,"Missing event invalidates cached suggestion");
+assert.equal(candidateStillMatches(saved,[events[0],{...events[0],id:"clone"}]),false,"Ambiguous competing event prevents cached suggestion");
+
 for(const code of ["cancelled","CANCELLED","canceled","withdrawn","stopped","abgesagt","zurückgezogen"])assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"recording",[{...events[0],status_code:code}]).length,0,"Blocked archive match to "+code+" assembly");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"premiere").length,0,"premiere status is not automatically an archive or live event");
 assert.equal(find("Demo Berlin Klimaschutz Energiewende",iso,"unknown").length,0,"unknown platform status cannot match");
