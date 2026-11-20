@@ -20,6 +20,10 @@ on:
       - 'index.html'
       - 'en/index.html'
       - 'scripts/build-language-pages.mjs'
+      - 'scripts/test-today-pages.mjs'
+      - 'heute/**'
+      - 'en/today/**'
+      - 'scripts/test-browser.mjs'
       - 'data/state-source-coverage.json'
       - 'data/source-quality.json'
       - 'data/source-format-health.json'
@@ -60,6 +64,7 @@ jobs:
           python3 scripts/test-editorial-links.py
           node scripts/test-editorial-frontend.mjs
           node scripts/build-language-pages.mjs
+          node scripts/test-today-pages.mjs
           node scripts/test-frontend.mjs
           node --check scripts/update-streams.mjs
           python3 scripts/test-source-monitor.py
