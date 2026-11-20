@@ -36,6 +36,8 @@ on:
       - 'scripts/update-frankfurt.py'
       - 'scripts/update-freiburg.py'
       - 'scripts/test-freiburg.py'
+      - 'scripts/update-bad-oldesloe-police.py'
+      - 'scripts/test-bad-oldesloe-police.py'
       - 'scripts/update-dortmund-police.py'
       - 'scripts/test-dortmund-police.py'
       - 'scripts/import-frankfurt-police-archive.py'
@@ -104,6 +106,8 @@ jobs:
         run: python3 scripts/update-leipzig-police.py
       - name: Verifiziere historische Leipziger Versammlung vom 31. Oktober für Aufzeichnungen
         run: python3 scripts/import-leipzig-archive.py
+      - name: Verifiziere angemeldete Demonstration am 21. November in Bad Oldesloe anhand der Originalpolizei-Meldung
+        run: python3 scripts/update-bad-oldesloe-police.py
       - name: Erfasse die drei am 20. November amtlich gemeldeten Freiburger Versammlungen
         run: python3 scripts/update-freiburg.py
       - name: Verifiziere vier einzeln belegte künftige Weimarer Versammlungen am amtlichen Original
@@ -142,7 +146,7 @@ jobs:
         run: node scripts/build-language-pages.mjs
       - name: Prüfe Kalendercode und Datenformat
         run: |
-          python3 -m py_compile scripts/update-dresden-jena.py scripts/test-jena-archive.py scripts/update-rostock.py scripts/update-dresden.py scripts/test-rostock-source.py scripts/test-dresden-archive.py scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py scripts/update-cologne.py scripts/update-nrw-police.py scripts/update-leipzig-police.py scripts/import-leipzig-archive.py scripts/update-police-notices.py scripts/update-frankfurt.py scripts/update-weimar-oneoffs.py scripts/test-weimar-oneoffs.py scripts/update-dortmund-police.py scripts/import-frankfurt-police-archive.py scripts/monitor-official-sources.py
+          python3 -m py_compile scripts/update-dresden-jena.py scripts/test-jena-archive.py scripts/update-rostock.py scripts/update-dresden.py scripts/test-rostock-source.py scripts/test-dresden-archive.py scripts/update-demos.py scripts/update-news.py scripts/track-event-updates.py scripts/update-cologne.py scripts/update-nrw-police.py scripts/update-leipzig-police.py scripts/import-leipzig-archive.py scripts/update-police-notices.py scripts/update-frankfurt.py scripts/update-bad-oldesloe-police.py scripts/test-bad-oldesloe-police.py scripts/update-weimar-oneoffs.py scripts/test-weimar-oneoffs.py scripts/update-dortmund-police.py scripts/import-frankfurt-police-archive.py scripts/monitor-official-sources.py
           node scripts/test-berlin-feed.mjs
           python3 scripts/test-rostock-source.py
           python3 scripts/test-dresden-archive.py
@@ -162,6 +166,7 @@ jobs:
           python3 scripts/test-freiburg.py
           python3 scripts/test-weimar-oneoffs.py
           python3 scripts/test-frankfurt.py
+          python3 scripts/test-bad-oldesloe-police.py
           python3 scripts/test-dortmund-police.py
           python3 scripts/test-frankfurt-police-archive.py
           python3 scripts/test-source-monitor.py
@@ -195,10 +200,10 @@ jobs:
           '
       - name: Commit nur bei Änderungen
         run: |
-          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/freiburg-source.json data/weimar-oneoffs-source.json data/dortmund-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html heute/index.html en/today/index.html sitemap.xml robots.txt)" ]; then
+          if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/freiburg-source.json data/weimar-oneoffs-source.json data/dortmund-police-source.json data/bad-oldesloe-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html heute/index.html en/today/index.html sitemap.xml robots.txt)" ]; then
             git config user.name "demoradar-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/freiburg-source.json data/weimar-oneoffs-source.json data/dortmund-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html heute/index.html en/today/index.html sitemap.xml robots.txt
+            git add data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/freiburg-source.json data/weimar-oneoffs-source.json data/dortmund-police-source.json data/bad-oldesloe-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html heute/index.html en/today/index.html sitemap.xml robots.txt
             git commit -m "data: refresh demonstration sources and observed changes"
             for attempt in 1 2 3; do
               if git push; then break; fi
