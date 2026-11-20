@@ -9,12 +9,18 @@ export function checkAdmissions(health,licences){
  const problems=[];
  const audits=new Map((licences.feeds||[]).map(x=>[x.source,x]));
  const identities=new Set();
+ const mapped=new Set();
  if(new Set((licences.feeds||[]).map(x=>x.source)).size!==(licences.feeds||[]).length)problems.push("Duplicate source rights record");
  for(const x of health.feeds||[]){
   if(!x.source||!x.id){problems.push("Invalid feed identity");continue}
   if(identities.has(x.id)){problems.push("Duplicate feed identity: "+x.id);continue}
   identities.add(x.id);
-  if(historical.get(x.id)===x.source)continue;
+  if(mapped.has(x.source)){problems.push("Multiple recurring feed IDs for the same source: "+x.source);continue}
+  mapped.add(x.source);
+  if(historical.get(x.id)===x.source){
+   if(!audits.has(x.source))problems.push("Historical importer missing transparent licence audit: "+x.source);
+   continue;
+  }
   if(historical.has(x.id)&&historical.get(x.id)!==x.source)problems.push("Original feed ID changed owner: "+x.id);
   const a=audits.get(x.source);
   if(!a){problems.push("Missing verified audit for new recurring feed: "+x.source);continue}
@@ -27,6 +33,11 @@ const directRun=process.argv[1]&&import.meta.url===new URL("file://"+process.arg
 if(directRun){
  const health=read("data/source-format-health.json"),audit=read("data/source-reuse-audit.json");
  assert.equal(health.version,1);assert.equal(audit.version,1);
+ // The six-hour production job must call this gate before any official fetch.
+ const workflow=readFileSync(".github/workflows/update-events.yml","utf8");
+ const gate=workflow.indexOf("node scripts/check-source-admission.mjs");
+ const firstImport=workflow.indexOf("run: node scripts/update-events.mjs");
+ assert.ok(gate>=0&&firstImport>gate,"Scheduled official imports must run admission checks first");
  const actual=checkAdmissions(health,audit);
  assert.deepEqual(actual,[],"Do not add new official recurring importers without source-specific open licence and admission review");
  const unlicensed=checkAdmissions({feeds:[...health.feeds,{id:"unreviewed",source:"Unlicensed City"}]},audit);
