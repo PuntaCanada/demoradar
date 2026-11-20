@@ -2,6 +2,13 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 const source=readFileSync("heatmap.js","utf8");
 const registry=readFileSync("sources/source-status.js","utf8");
+assert.ok(source.includes("const coverageEvidence=state=>"),"Heatmap must explain locality and feed observation, not state completeness");
+assert.ok(source.includes('new Set(rows.filter(s=>s.status==="observed_data"'),"Count distinct recently observed local source cities only");
+assert.ok(source.includes("coverageEvidence(state)"),"Show evidence in heatmap rank and accessible state descriptions");
+assert.ok(registry.includes("const recent=new Set(entries.filter("),"Public registry must separately count currently checked local sources");
+assert.ok(registry.includes("const oneOff=new Set(entries.filter("),"Public registry must differentiate isolated and historical notices");
+assert.ok(registry.includes("keine landesweite Vollständigkeit"),"Explain that observation is not complete state coverage");
+
 const monitored=JSON.parse(readFileSync("data/expansion-sources.json","utf8")).sources;
 const states=JSON.parse(readFileSync("data/state-source-coverage.json","utf8")).states;
 assert.equal(states.length,16);
