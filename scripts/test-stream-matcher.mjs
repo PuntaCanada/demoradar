@@ -39,6 +39,13 @@ assert.equal(find("Demo Berlin Klimaschutz Energiewende 18.11.2026",iso,"recordi
 assert.equal(find("Demo Berlin Klimaschutz Energiewende 19.11.2026",iso,"recording").length,1,"matching explicit date accepted");
 assert.equal(cityMatches("Demo Frankfurt (Oder) Klimaschutz","Frankfurt am Main"),false);
 assert.equal(cityMatches("Demo Frankfurt am Main Klimaschutz","Frankfurt (Oder)"),false);
+const frankfurtMain=[{id:"ffm-demo",city:"Frankfurt am Main",date,title:"Demo Klimaschutz Energiewende"}];
+const frankfurtOder=[{id:"ffo-demo",city:"Frankfurt (Oder)",date,title:"Demo Klimaschutz Energiewende"}];
+assert.equal(find("Demo Frankfurt Klimaschutz Energiewende",iso,"recording",frankfurtMain).length,0,"generic Frankfurt must not imply Main");
+assert.equal(find("Demo Frankfurt Klimaschutz Energiewende",iso,"recording",frankfurtOder).length,0,"generic Frankfurt must not imply Oder");
+assert.equal(find("Demo Frankfurt am Main Klimaschutz Energiewende",iso,"recording",frankfurtMain).length,1,"explicit Main accepted as review candidate");
+assert.equal(find("Demo Frankfurt Oder Klimaschutz Energiewende",iso,"recording",frankfurtOder).length,1,"explicit Oder accepted as review candidate");
+
 assert.equal(explicitDateInTitle("Antifa Gegendemo Köln14.11.26"),"2026-11-14","day.month.year shorthand");
 assert.equal(normalize("Köln14.11.26").includes("koln 14"),true,"city/date without whitespace");
 const late=[{id:"demo-k",city:"Köln",date:"2026-11-14",title:"Antifa Naziaufmarsch Gegendemonstration",location:"Neumarkt"}];
