@@ -134,3 +134,13 @@ export function matchEvents(video,events){
  if(best.length!==1)return [];
  return [{...best[0],matched_terms:best[0].matched_terms.slice(0,6)}];
 }
+
+ // Re-evaluate saved suggestions against the current event evidence before keeping
+ // them in the private review queue. A changed/cancelled event invalidates an old match.
+export function candidateStillMatches(candidate,currentEvents){
+ if(!candidate||!candidate.event_id||!Array.isArray(currentEvents))return false;
+ const current=currentEvents.find(e=>e.id===candidate.event_id);
+ if(!current)return false;
+ const matches=matchEvents(candidate,currentEvents);
+ return matches.length===1&&matches[0].event_id===candidate.event_id;
+}

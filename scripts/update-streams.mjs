@@ -2,7 +2,7 @@
 // DemoRadar: optional YouTube/Twitch discovery. Uses official APIs, no scraping.
 // Deliberately creates a review queue, NOT publicly approved event streams.
 import {readFileSync,writeFileSync} from "node:fs";
-import {matchEvents,platformAccount} from "./stream-matcher.mjs";
+import {matchEvents,platformAccount,candidateStillMatches} from "./stream-matcher.mjs";
 const OUT="data/stream-discoveries.json";
 const api={youtube:process.env.YOUTUBE_API_KEY||"",twitchId:process.env.TWITCH_CLIENT_ID||"",twitchSecret:process.env.TWITCH_CLIENT_SECRET||""};
 const read=path=>{try{return JSON.parse(readFileSync(path,"utf8"))}catch{return {}}};
@@ -122,6 +122,7 @@ const combined=new Map();
 for(const x of [...prev,...candidates]){
  const k=x.event_id+"|"+x.url;
  if(!x.event_id||!x.url||!currentEventIds.has(x.event_id))continue;
+ if(!candidateStillMatches(x,[...unique.values()]))continue;
  // Never keep a stale live state merely because the original candidate was found.
  // Recordings remain reviewable for 30 days of site history.
  if(x.status==="live"&&x.checked_at&&now-new Date(x.checked_at)>15*60000)continue;

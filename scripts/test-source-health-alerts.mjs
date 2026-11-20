@@ -22,4 +22,17 @@ assert.deepEqual(drift.alerts.map(x=>x.condition),["format_change_suspected","la
 assert.equal(drift.alerts[0].last_checked,"2026-11-19");
 assert.equal(drift.alerts.every(x=>/No assertion/.test(x.note)),true);
 assert.equal(alertsFromReport({sources:[]},{feeds:[{id:"berlin",city:"Berlin",source:"Polizei Berlin",issues:[]}]}).alerts.length,0);
-console.log("source health alerts: 12 safety checks passed");
+const monitors={sources:[
+ {city:"Potsdam",state:"Brandenburg",url:"https://www.potsdam.de/",status:"unavailable",checked_on:"2026-11-20"},
+ {city:"Kiel",state:"Schleswig-Holstein",url:"https://www.kiel.de/",status:"reachable_monitor_only_not_a_feed",checked_on:"2026-11-10"}
+]};
+const observed=alertsFromReport({sources:[]},{},monitors,{today:"2026-11-20"});
+assert.equal(observed.checked_research_pages,2);
+assert.deepEqual(observed.alerts.map(a=>a.condition),["monitor_unavailable","monitor_outdated"]);
+assert.ok(observed.alerts.every(a=>a.source==="Research-only official page"&&a.note.includes("not an event feed")));
+assert.ok(observed.alerts.every(a=>!Object.hasOwn(a,"events")));
+const future=alertsFromReport({sources:[]},{},{sources:[{city:"X",state:"Bayern",url:"https://example.org",status:"reachable_monitor_only_not_a_feed",checked_on:"2099-01-01"}]},{today:"2026-11-20"});
+assert.equal(future.alerts[0].condition,"monitor_outdated","Future checks cannot imply fresh source data");
+const broken=alertsFromReport({sources:[]},{},{sources:[{city:"X",state:"Bayern",url:"https://example.org",status:"reachable_monitor_only_not_a_feed",checked_on:"2026-02-30"}]},{today:"2026-11-20"});
+assert.equal(broken.alerts[0].condition,"monitor_outdated","Invalid dates cannot imply valid monitoring");
+console.log("source health alerts: research-only source safeguards and 12 existing safety checks passed");

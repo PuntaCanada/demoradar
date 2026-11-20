@@ -130,7 +130,8 @@ try{
    await send("Page.navigate",{url:rootUrl+route});
    let dashboard;
    for(let attempt=0;attempt<70;attempt++){
-    dashboard=await evaluate('(()=>({lang:document.documentElement.lang,states:document.querySelectorAll("#stateGrid .source-card").length,scroll:document.documentElement.scrollWidth,body:document.body.scrollWidth,feed:document.querySelector("#feedCount")?.textContent,errors:document.querySelector("#sourceResults")?.textContent}))()');
+    // During Page.navigate Chromium can temporarily invalidate the old execution context.
+    try{dashboard=await evaluate('(()=>({lang:document.documentElement.lang,states:document.querySelectorAll("#stateGrid .source-card").length,scroll:document.documentElement.scrollWidth,body:document.body.scrollWidth,feed:document.querySelector("#feedCount")?.textContent,errors:document.querySelector("#sourceResults")?.textContent}))()')}catch{await delay(140);continue}
     if(dashboard.states===16)break;
     await delay(140);
    }
