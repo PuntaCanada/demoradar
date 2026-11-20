@@ -24,23 +24,53 @@ const server=createServer((req,res)=>{
 await new Promise(r=>server.listen(0,"127.0.0.1",r));
 const port=server.address().port;
 const freePort=()=>new Promise(resolve=>{const t=makeTcp();t.listen(0,"127.0.0.1",()=>{const p=t.address().port;t.close(()=>resolve(p))})});
-const debugPort=await freePort();
-const profile=mkdtempSync(join(tmpdir(),"demoradar-chrome-"));
-const chrome=spawn(chromeBin,["--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage","--no-first-run","--no-default-browser-check","--disable-background-networking","--disable-extensions","--remote-debugging-port="+debugPort,"--user-data-dir="+profile,"about:blank"],{stdio:"ignore"});
-let socket=null;
+// GitHub-hosted runners occasionally start Chromium without exposing DevTools.
+// A fresh profile and debug port for each attempt avoids colliding with an
+// orphaned prior launch; the test still FAILS if no real browser starts.
+const startupAttempts=3;
+let chrome=null,profile=null,socket=null,target=null;
+const startupDiagnostics=[];
 try{
- let target;
- for(let retry=0;retry<70;retry++){
-  if(chrome.exitCode!==null)throw Error("Chrome exited before debugging became available");
-  try{
-   const response=await fetch("http://127.0.0.1:"+debugPort+"/json/list");
-   const tabs=await response.json();
-   target=tabs.find(t=>t.type==="page"&&t.webSocketDebuggerUrl);
-   if(target)break;
-  }catch{}
-  await delay(150);
+ for(let attempt=1;attempt<=startupAttempts;attempt++){
+  const debugPort=await freePort();
+  profile=mkdtempSync(join(tmpdir(),"demoradar-chrome-"));
+  const stderr=[];
+  chrome=spawn(chromeBin,["--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage",
+   "--no-first-run","--no-default-browser-check","--disable-background-networking","--disable-extensions",
+   "--remote-debugging-address=127.0.0.1","--remote-debugging-port="+debugPort,
+   "--user-data-dir="+profile,"about:blank"],{stdio:["ignore","ignore","pipe"]});
+  chrome.stderr?.on("data",chunk=>{
+   if(stderr.join("").length<3000)stderr.push(String(chunk).slice(0,500));
+  });
+  let spawnError=null;
+  chrome.on("error",error=>{spawnError=error});
+  let connected=false;
+  for(let retry=0;retry<75;retry++){
+   if(chrome.exitCode!==null||spawnError)break;
+   try{
+    const response=await fetch("http://127.0.0.1:"+debugPort+"/json/list",{
+     signal:AbortSignal.timeout(350)});
+    if(response.ok){
+     const tabs=await response.json();
+     target=tabs.find(t=>t.type==="page"&&t.webSocketDebuggerUrl);
+     if(target){connected=true;break}
+    }
+   }catch{}
+   await delay(120);
+  }
+  if(connected){
+   console.log("Real Chromium DevTools connected (attempt "+attempt+"/"+startupAttempts+")");
+   break;
+  }
+  startupDiagnostics.push("attempt "+attempt+": exit="+chrome.exitCode+
+   (spawnError?", spawn="+spawnError.message:"")+", stderr="+stderr.join("").slice(-500));
+  chrome.kill("SIGKILL");
+  try{rmSync(profile,{recursive:true,force:true})}catch{}
+  chrome=null;profile=null;target=null;
+  if(attempt<startupAttempts)await delay(400);
  }
- assert.ok(target,"Could not connect to Chrome DevTools");
+ assert.ok(target,"Could not connect to Chrome DevTools after "+startupAttempts+
+  " fresh real-Chromium launches: "+startupDiagnostics.join(" | "));
  socket=new WebSocket(target.webSocketDebuggerUrl);
  await new Promise((resolve,reject)=>{socket.addEventListener("open",resolve,{once:true});socket.addEventListener("error",reject,{once:true})});
  let id=0;
@@ -185,7 +215,7 @@ try{
  console.log("Chromium mobile/desktop, language switch, filters, calendar and no horizontal overflow: OK");
 }finally{
  try{socket?.close()}catch{}
- chrome.kill("SIGKILL");
+ chrome?.kill("SIGKILL");
  await new Promise(r=>server.close(r));
- try{rmSync(profile,{recursive:true,force:true})}catch{}
+ if(profile)try{rmSync(profile,{recursive:true,force:true})}catch{}
 }
