@@ -1,0 +1,28 @@
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+const read=p=>readFileSync(p,"utf8");
+const audit=JSON.parse(read("data/source-reuse-audit.json"));
+const quality=JSON.parse(read("data/source-quality.json"));
+const coverage=JSON.parse(read("data/state-source-coverage.json"));
+assert.equal(audit.version,1);
+assert.match(audit.reviewed_on,/^20\d\d-\d\d-\d\d$/);
+assert.ok(audit.feeds.length>=5,"Known recurring and municipal sources need evidence");
+const names=new Set();
+for(const item of audit.feeds){
+ assert.ok(item.source&&item.state&&item.city&&item.format&&item.evidence&&item.handling);
+ assert.ok(quality.sources.some(s=>s.source===item.source&&s.state===item.state),"Source must already exist in quality registry");
+ assert.ok(coverage.states.some(s=>s.state===item.state));
+ assert.ok(/^https:\/\//.test(item.source_url),"Evidence must have official https source");
+ assert.ok(["restricted_metadata","rights_not_verified","open_verified"].includes(item.classification));
+ assert.equal(item.reuse_confirmed,item.classification==="open_verified");
+ const id=item.state+"/"+item.source;assert.ok(!names.has(id),"Duplicate licence claims");names.add(id);
+}
+assert.equal(audit.feeds.find(x=>x.source==="Polizei Berlin").classification,"restricted_metadata");
+assert.ok(audit.feeds.find(x=>x.source==="Polizei Berlin").source_url.includes("daten.berlin.de"));
+const registry=read("sources/source-status.js"),map=read("heatmap.js");
+assert.ok(registry.includes('load("/data/source-reuse-audit.json")'));
+assert.ok(registry.includes("reuseAudits.find("));
+assert.ok(registry.includes('No unambiguous open reuse licence confirmed'));
+assert.ok(map.includes('fetch("/data/source-reuse-audit.json"'));
+assert.ok(map.includes("reuseInfo(state)")&&map.includes("reuseAudits.some("));
+console.log("Source rights: official metadata, state mapping, dashboard, and map uncertainty labels validated");
