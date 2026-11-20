@@ -11,7 +11,7 @@ const files={
  frankfurt:{status:"unavailable",count:0}
 };
 const rows=sourceHealth(files).sources;
-assert.equal(rows.length,17);
+assert.equal(rows.length,19);
 const row=name=>rows.find(s=>s.source===name);
 assert.equal(row("Polizei Berlin").status,"observed_data");
 assert.equal(row("Polizei Berlin").count,2);
@@ -27,6 +27,19 @@ assert.equal(row("Polizeidirektion Leipzig (Archiv)").status,"unknown");
 assert.equal(row("Stadt Jena").status,"no_matching_items");
 assert.equal(row("Stadt Frankfurt").status,"unavailable");
 assert.equal(row("Stadt Freiburg").status,"unknown");
+assert.equal(row("Netzwerk der brandenburgischen Frauenhäuser (Einzelankündigung)").status,"unknown");
+assert.equal(row("Grüne Landkreis Lindau (Einzelankündigung)").status,"unknown");
+const organizerRows=sourceHealth({...files,organizerNotices:{checks:[
+ {city:"Potsdam",status:"verified_organizer_one_off",count:1,checked_on:"2026-11-20"},
+ {city:"Lindenberg im Allgäu",status:"verified_organizer_one_off",count:1,checked_on:"2026-11-20"}
+]}},{today:"2026-11-20"}).sources;
+for(const city of ["Potsdam","Lindenberg im Allgäu"]){
+ const found=organizerRows.find(x=>x.city===city);
+ assert.equal(found.status,"verified_one_off");
+ assert.equal(found.count,1);
+ assert.match(found.scope,/non-government/);
+}
+
 assert.equal(row("Landeshauptstadt Stuttgart (Einzeltermin)").status,"unknown");
 const stuttgart=sourceHealth({...files,stuttgart:{status:"verified_city_event_one_off",count:1,checked_on:"2026-11-20"}},{today:"2026-11-20"}).sources.find(s=>s.city==="Stuttgart");
 assert.equal(stuttgart.status,"verified_one_off");

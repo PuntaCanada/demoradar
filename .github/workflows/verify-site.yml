@@ -53,6 +53,8 @@ on:
       - 'data/frankfurt-police-archive-source.json'
       - 'scripts/update-dortmund-police.py'
       - 'scripts/update-stuttgart-demo.py'
+      - 'scripts/update-regional-organizer-oneoffs.py'
+      - 'scripts/test-regional-organizer-oneoffs.py'
       - 'scripts/test-stuttgart-demo.py'
       - 'scripts/test-dortmund-police.py'
       - 'scripts/import-frankfurt-police-archive.py'
@@ -106,6 +108,7 @@ jobs:
           node --check i18n.js
           node scripts/test-i18n.mjs
           node scripts/test-frontend.mjs
+          python3 scripts/test-regional-organizer-oneoffs.py
           python3 scripts/test-stuttgart-demo.py
           node scripts/test-community.mjs
           node scripts/test-source-coverage.mjs
