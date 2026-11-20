@@ -14,6 +14,8 @@ on:
       - 'data/state-source-coverage.json'
       - 'data/source-quality.json'
       - 'data/source-format-health.json'
+      - 'data/source-reuse-audit.json'
+      - 'scripts/test-source-reuse-audit.mjs'
       - 'scripts/test-source-transparency.mjs'
       - '.github/workflows/source-transparency.yml'
   workflow_dispatch:
@@ -32,6 +34,7 @@ jobs:
         run: |
           node --check sources/source-status.js
           node scripts/test-source-transparency.mjs
+          node scripts/test-source-reuse-audit.mjs
           node scripts/test-heatmap-freshness.mjs
           node scripts/test-source-registry.mjs
           node scripts/test-heatmap-coverage.mjs
