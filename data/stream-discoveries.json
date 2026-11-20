@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-20T07:42:09.180Z",
+  "updated_at": "2026-11-20T08:49:46.050Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -11,7 +11,7 @@
   "statistics": {
     "youtube_channels_checked": 10,
     "youtube_videos_checked": 500,
-    "youtube_streams_seen": 227,
+    "youtube_streams_seen": 228,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
@@ -41,6 +41,14 @@
     },
     {
       "channel": "Utopia TV Deutschland",
+      "title": "LIVE ❗ Verdi & Gen Z Demo 💥 Frankfurt im Ausnahmezustand 😱 Eskaliert es wieder? Protest & Polizei",
+      "url": "https://www.youtube.com/watch?v=9U87riALREM",
+      "date": "2026-11-20T08:47:32Z",
+      "status": "live",
+      "match_count": 0
+    },
+    {
+      "channel": "Utopia TV Deutschland",
       "title": "LIVE ❗ Gen Z Frankfurt 💥 Polizei & Läden rüsten auf! 😳 Der Tag vor den Demos Zeil & Innenstadt",
       "url": "https://www.youtube.com/watch?v=cmgqYBwiN3A",
       "date": "2026-11-19T15:52:28Z",
@@ -52,14 +60,6 @@
       "title": "SPD Influencer BLAMIERT sich total! 💥Hannes Kreschel von Iggy ZERLEGT! 😲 Migration & Wirtschaft",
       "url": "https://www.youtube.com/watch?v=Sdy-xRFabh8",
       "date": "2026-11-17T15:27:21Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Utopia TV Deutschland",
-      "title": "LIVE ❗ Endstation Blackout? Von der Energiekrise zur Staatskrise? Droht Stromausfall? AfD Vortrag",
-      "url": "https://www.youtube.com/watch?v=Yfk5jK4qVCI",
-      "date": "2026-11-16T17:31:33Z",
       "status": "recording",
       "match_count": 0
     },

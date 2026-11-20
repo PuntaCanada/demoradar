@@ -5,7 +5,7 @@
     "from": "2026-10-21",
     "to": "2026-11-27"
   },
-  "event_records": 477,
+  "event_records": 478,
   "diagnostic_video_samples": 23,
   "cities": [
     {
@@ -32,12 +32,27 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         },
         {
           "type": "official_registration_information",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Frankfurt am Main",
+      "event_count": 2,
+      "days_with_events": 1,
+      "observed_video_title_samples": 2,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_press",
+          "status": "unavailable",
           "reuse_rights_verified": false
         }
       ]
@@ -53,21 +68,6 @@
         {
           "type": "official_police_assembly_authority",
           "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
-      "city": "Frankfurt am Main",
-      "event_count": 2,
-      "days_with_events": 1,
-      "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_city_press",
-          "status": "unavailable",
           "reuse_rights_verified": false
         }
       ]
