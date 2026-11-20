@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-20",
+  "policy": "Hand-verified URLs from broadcaster original websites. Only own short labels, source names and URLs; no syndicated RSS headlines, article text, photos, video or excerpts. Match only pre-existing events with a unique same-city same-day subject match; no new events or live claims.",
+  "links": [
+    {
+      "publisher": "tagesschau / rbb",
+      "url": "https://www.tagesschau.de/inland/regional/berlin/rbb-nicht-nur-gen-z-regelt-neue-jugendproteste-am-freitag-in-berlin-100.html",
+      "city": "Berlin",
+      "event_day": "2026-11-20",
+      "published_on": "2026-11-20",
+      "match_phrases": [
+        "gen z",
+        "regelt"
+      ],
+      "label": "Hintergrund zum Berliner Jugendprotest"
+    },
+    {
+      "publisher": "tagesschau / rbb",
+      "url": "https://www.tagesschau.de/inland/regional/berlin/rbb-nicht-nur-gen-z-regelt-neue-jugendproteste-am-freitag-in-berlin-100.html",
+      "city": "Berlin",
+      "event_day": "2026-11-20",
+      "published_on": "2026-11-20",
+      "match_phrases": [
+        "schulstreik",
+        "wehrpflicht"
+      ],
+      "label": "Bericht zu den Berliner Schülerprotesten"
+    },
+    {
+      "publisher": "MDR",
+      "url": "https://www.mdr.de/nachrichten/deutschland/politik/genz-regelt-fridays-for-future-schulstreik-wehrpflicht-klima-sachsen-anhalt-thueringen%2Cgen-z-regelt-proteste-104.html",
+      "city": "Leipzig",
+      "event_day": "2026-11-20",
+      "published_on": "2026-11-20",
+      "match_phrases": [
+        "gen z",
+        "regelt"
+      ],
+      "label": "MDR-Bericht über den Jugendprotesttag"
+    },
+    {
+      "publisher": "NDR",
+      "url": "https://www.ndr.de/nachrichten/hamburg/schulstreik-und-gen-z-regelt-proteste-in-hamburg-was-geplant-ist%2Cgenz-284.html",
+      "city": "Hamburg",
+      "event_day": "2026-11-20",
+      "published_on": "2026-11-19",
+      "match_phrases": [
+        "gen z",
+        "regelt"
+      ],
+      "label": "NDR-Hintergrund zu Protesten in Hamburg"
+    },
+    {
+      "publisher": "tagesschau / WDR",
+      "url": "https://www.tagesschau.de/inland/regional/nordrheinwestfalen/wdr-jugendproteste-hier-geht-die-gen-z-in-nrw-wieder-auf-die-strasse-100.html",
+      "city": "Köln",
+      "event_day": "2026-11-20",
+      "published_on": "2026-11-20",
+      "match_phrases": [
+        "gen z",
+        "regelt"
+      ],
+      "label": "Bericht über die Jugendproteste in Nordrhein-Westfalen"
+    }
+  ]
+}
