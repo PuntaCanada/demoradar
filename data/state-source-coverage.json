@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewed_on": "2026-11-19",
+  "reviewed_on": "2026-11-20",
   "method": "Conservative source audit, not a measure of actual demonstrations or complete state coverage. Sources listed may cover only a municipality.",
   "levels": {
     "regional_partial": "A directly imported official source covers a city/territory within this state; never the whole state",
@@ -10,9 +10,9 @@
   "states": [
     {
       "state": "Baden-Württemberg",
-      "status": "no_confirmed_regular_feed",
-      "scope": "Keine aktuell verifizierte regelmäßige amtliche Versammlungs-Terminquelle für das gesamte Bundesland",
-      "url": null
+      "status": "local_partial",
+      "scope": "Freiburg im Breisgau: einzelne amtliche Bekanntmachung von drei Versammlungen am 20.11.2026; kein landesweiter Terminfeed und keine Vollständigkeitsgarantie",
+      "url": "https://www.freiburg.de/pb/2670264.html"
     },
     {
       "state": "Bayern",
