@@ -81,7 +81,7 @@ permissions:
 jobs:
   frontend:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -131,6 +131,17 @@ jobs:
           for route in / /en/ /heute/ /en/today/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/news-matches.json /data/editorial-link-candidates.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/source-reuse-audit.json /data/rejected-official-candidates.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
+            # On first release, the scheduled data refresh must write the two
+            # newly generated HTML routes before Cloudflare can serve them.
+            # Wait for the actual deployed page; do not report success on a 404.
+            if [ "$route" = "/heute/" ] || [ "$route" = "/en/today/" ]; then
+              for retry in $(seq 1 18); do
+                if [ "$code" = "200" ]; then break; fi
+                echo "::notice::Waiting for generated $route publication (attempt $retry)"
+                sleep 8
+                code=$(curl -L -sS --connect-timeout 7 --max-time 12 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
+              done
+            fi
             echo "$route -> HTTP $code"
             if [ "$code" != "200" ]; then
               echo "::warning::Cloudflare route $route returned HTTP $code"
