@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-20T09:50:19.988171+00:00",
+  "checked_at": "2026-11-20T10:03:48.997061+00:00",
   "policy": "Only independently authored labels and verified source URLs; manually reviewed link candidates, automatic event association is NOT event verification. No RSS syndication.",
   "feeds": [],
   "editorial_sources": [
@@ -16,7 +16,8 @@
         "title": "MDR-Bericht über den Jugendprotesttag",
         "published": "2026-11-20",
         "match_type": "independently linked editorial context; not event confirmation",
-        "reviewed_on": "2026-11-20"
+        "reviewed_on": "2026-11-20",
+        "url_check_status": "content_verified"
       }
     ],
     "police-cologne-56b73605c84b93d1": [
@@ -26,7 +27,8 @@
         "title": "Bericht über die Jugendproteste in Nordrhein-Westfalen",
         "published": "2026-11-20",
         "match_type": "independently linked editorial context; not event confirmation",
-        "reviewed_on": "2026-11-20"
+        "reviewed_on": "2026-11-20",
+        "url_check_status": "access_inconclusive"
       }
     ]
   }
