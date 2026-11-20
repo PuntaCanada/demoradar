@@ -103,7 +103,7 @@ export function matchEvents(video,events){
  const options=[];
  for(const event of events){
   if(!event?.id||!event?.title||!event?.city||!event?.date)continue;
-  if(["cancelled","withdrawn","stopped"].includes(event.status_code))continue;
+  if(["cancelled","canceled","withdrawn","stopped","abgesagt","zuruckgezogen","zurueckgezogen"].includes(normalize(event.status_code)))continue;
   if(!cityMatches(video.title,event.city))continue;
   if(!unambiguousCity(video.title,event.city))continue;
   // Explicit broadcast date in a recording title can identify the event even
