@@ -24,11 +24,13 @@ const checkIsStale=entry=>{const age=checkAge(entry.last_checked);return age===n
 const coverageEvidence=state=>{
  const rows=(sourceHealth?.sources||[]).filter(s=>s.state===state);
  const observed=new Set(rows.filter(s=>s.status==="observed_data"&&!checkIsStale(s)).map(s=>s.city));
- const individual=new Set(rows.filter(s=>["verified_one_off","verified_historical_one_off"].includes(s.status)).map(s=>s.city));
+ const currentNotices=new Set(rows.filter(s=>s.status==="verified_one_off"&&!checkIsStale(s)).map(s=>s.city));
+ const historical=new Set(rows.filter(s=>s.status==="verified_historical_one_off").map(s=>s.city));
  const failed=rows.filter(s=>s.status==="unavailable"||checkIsStale(s)).length;
  const en=document.documentElement.lang==="en";
  return (en?"Current local official-source cities: ":"Aktuell belegte amtliche Ortsquellen: ")+observed.size+
- (en?" · Cities with one-off/historical notices: ":" · Orte mit Einzel-/Archivmeldungen: ")+individual.size+
+ (en?" · Cities with checked one-off notices: ":" · Orte mit aktuell geprüften Einzelmeldungen: ")+currentNotices.size+
+ (en?" · Cities with historical notices: ":" · Orte mit Archivmeldungen: ")+historical.size+
  (failed?(en?" · Unavailable/outdated checks: ":" · Fehlende/veraltete Prüfungen: ")+failed:"")+
  (en?" · Not complete statewide coverage":" · Keine landesweite Vollständigkeit");
 };
