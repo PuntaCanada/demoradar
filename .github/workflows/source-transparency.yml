@@ -19,6 +19,8 @@ on:
       - 'data/editorial-link-candidates.json'
       - 'index.html'
       - 'en/index.html'
+      - 'community/index.html'
+      - 'en/community/index.html'
       - 'scripts/build-language-pages.mjs'
       - 'scripts/test-today-pages.mjs'
       - 'scripts/today-selection.mjs'
