@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "checked_on": "2026-11-21",
+  "method": "Exactly compare persisted event IDs before and after the full import on the same runner. Source disappearance does NOT establish cancellation.",
+  "before_total": 1366,
+  "after_total": 1366,
+  "delta": 0,
+  "removed_from_dataset_count": 0,
+  "added_to_dataset_count": 0,
+  "removed_entries_are_cancellations": false,
+  "source_groups": [
+    {
+      "group": "berlin_official_json",
+      "before": 1294,
+      "after": 1294,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    },
+    {
+      "group": "freiburg_official_oneoffs",
+      "before": 3,
+      "after": 3,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    },
+    {
+      "group": "other_organizer_oneoffs",
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    },
+    {
+      "group": "other_source_records",
+      "before": 47,
+      "after": 47,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    },
+    {
+      "group": "police_oneoff_notices",
+      "before": 12,
+      "after": 12,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    },
+    {
+      "group": "regional_organizer_oneoffs",
+      "before": 3,
+      "after": 3,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    },
+    {
+      "group": "stuttgart_manual_city_oneoff",
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    },
+    {
+      "group": "weimar_official_oneoffs",
+      "before": 4,
+      "after": 4,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
+    }
+  ],
+  "removed_samples": [],
+  "added_samples": []
+}
