@@ -8,6 +8,7 @@ on:
       - 'scripts/update-events.mjs'
       - 'scripts/audit-event-count-delta.py'
       - 'scripts/audit-future-source-evidence.py'
+      - 'data/future-source-evidence.json'
       - 'scripts/test-future-source-evidence.py'
       - 'scripts/test-event-count-delta.py'
       - 'scripts/check-source-admission.mjs'
