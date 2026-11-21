@@ -2,9 +2,9 @@
   "version": 1,
   "reviewed_on": "2026-11-21",
   "scope": "Events dated today or later, not necessarily still upcoming at the current hour; source-provenance classification, NOT formal assembly registration, legal licence or completeness",
-  "all_event_records": 1366,
+  "all_event_records": 1332,
   "dated_today_or_later": 1314,
-  "old_event_records": 52,
+  "old_event_records": 18,
   "invalid_dates": 0,
   "unmapped_state_records": 0,
   "source_categories": {
