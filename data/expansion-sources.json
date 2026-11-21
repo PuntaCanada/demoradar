@@ -1,7 +1,48 @@
 {
   "version": 1,
   "method": "read-only official-page check; reachability never establishes event coverage or reuse rights",
+  "priority_research_only": {
+    "Saarland": 1,
+    "Hessen": 2,
+    "Niedersachsen": 1,
+    "Rheinland-Pfalz": 2
+  },
   "sources": [
+    {
+      "city": "Saarland Polizei-Presse",
+      "state": "Saarland",
+      "type": "official_police_press_index",
+      "url": "https://www.saarland.de/polizei/DE/aktuelles/rss-feed",
+      "parser": null,
+      "data_rights": "Official police RSS press overview; RSS publication alone does not license recurring re-publication of demonstration data. Never import automatically.",
+      "scope": "Press communications including unrelated crime and traffic; no assembly-only calendar and no verified future rally in the review on 2026-11-21.",
+      "status": "http_restricted",
+      "checked_on": "2026-11-21",
+      "error": "HTTP 403"
+    },
+    {
+      "city": "Polizei Hessen Meldungen",
+      "state": "Hessen",
+      "type": "official_police_press_index",
+      "url": "https://www.polizei.hessen.de/meldungen",
+      "parser": null,
+      "data_rights": "Government press page, not an expressly licensed structured assembly-event feed; links and research only.",
+      "scope": "General police releases including the 19 Nov notice of 20 Nov assemblies, now historical; does not establish a future event calendar.",
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-21"
+    },
+    {
+      "city": "Polizei Rheinland-Pfalz Presse",
+      "state": "Rheinland-Pfalz",
+      "type": "official_police_press_index",
+      "url": "https://www.polizei.rlp.de/service/presse",
+      "parser": null,
+      "data_rights": "Official police press listing without verified dataset-specific open event reuse licence; links and research only.",
+      "scope": "General police press, including unrelated topics; no verified upcoming assembly-specific machine-readable collection.",
+      "status": "unavailable",
+      "checked_on": "2026-11-21",
+      "error": "HTTP 404"
+    },
     {
       "city": "Weimar",
       "state": "Thüringen",
@@ -22,8 +63,9 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
-      "status": "reachable_archive_only",
-      "checked_on": "2026-11-21"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-21",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Halle (Saale)",
@@ -33,9 +75,8 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-21",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_archive_only",
+      "checked_on": "2026-11-21"
     },
     {
       "city": "Schwerin",
@@ -221,8 +262,9 @@
       "parser": null,
       "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
       "scope": "Contact route to official assembly authority; do not import registrations without permission",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-21"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-21",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Hamburg",
@@ -232,8 +274,9 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-21"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-21",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Bremen",
@@ -255,8 +298,9 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-21"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-21",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     }
   ]
 }
