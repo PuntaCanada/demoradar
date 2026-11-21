@@ -32,6 +32,10 @@ assert.ok(script.includes('textContent=txt'),"All source descriptions must be pl
 assert.ok(!script.includes(".innerHTML"),"Never inject untrusted source names as HTML");
 assert.ok(script.includes('rel="noopener noreferrer"')||script.includes('link.rel="noopener noreferrer"'));
 assert.ok(script.includes('Promise.all('));
+assert.ok(script.includes("Veranstalterankündigung (nichtamtlich)"),"Organizer one-offs cannot be displayed as official police notices");
+assert.ok(script.includes("municipal_event_calendar_no_registration"),"City event calendar is not proof of assembly registration");
+assert.ok(script.includes("statusText(s)"),"Source row provenance must reach its status label");
+
 assert.ok(script.includes('candidate.type==="official_police_historical_notice"'),"Historical police notices must be labelled as archive-only");
 assert.ok(script.includes('data/source-format-health.json'));
 assert.ok(script.includes('kind==="upcoming"')&&script.includes('hasUpcomingList'),"Missing official upcoming source filtering");

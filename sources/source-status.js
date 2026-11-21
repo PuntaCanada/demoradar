@@ -6,14 +6,29 @@ const fmt=date=>/^20\d{2}-\d\d-\d\d$/.test(String(date||""))?new Intl.DateTimeFo
 const validDay=date=>/^20\d{2}-\d\d-\d\d$/.test(String(date||""))&&Number.isFinite(Date.parse(date+"T12:00:00Z"))&&new Date(date+"T12:00:00Z").toISOString().slice(0,10)===date;
 const daysSince=date=>{if(!validDay(date))return null;const berlinDay=new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());return Math.round((Date.parse(berlinDay+"T12:00:00Z")-Date.parse(date+"T12:00:00Z"))/86400000)};
 const $=(tag,className,txt)=>{const node=document.createElement(tag);if(className)node.className=className;if(txt!==undefined)node.textContent=txt;return node};
-const statusText=status=>({
+const organizerSources=new Set([
+ "Netzwerk der brandenburgischen Frauenhäuser (Einzelankündigung)",
+ "Grüne Landkreis Lindau (Einzelankündigung)",
+ "Interventionistische Linke Hannover (Einzeltermin)",
+ "DGB Rheinland-Pfalz/Saarland (Ludwigshafen-Einzeltermin)",
+ "DGB/GEW – Wiesbaden-Einzeltermin"
+]);
+const statusText=s=>{
+ if(s.status==="verified_one_off"){
+  if(s.origin_type==="non_government_organizer"||organizerSources.has(s.source))
+   return t("Veranstalterankündigung (nichtamtlich)","Organizer notice (non-government)");
+  if(s.origin_type==="municipal_event_calendar_no_registration"||s.source==="Landeshauptstadt Stuttgart (Einzeltermin)")
+   return t("Städtischer Kalenderhinweis (Anmeldung nicht belegt)","City event listing (registration unverified)");
+ }
+ return ({
  observed_data:t("Amtliche Daten geliefert","Official data returned"),
  verified_one_off:t("Amtliche Einzelmeldung","Official one-off notice"),
  verified_historical_one_off:t("Historische Einzelmeldung","Historical one-off notice"),
  no_matching_items:t("Keine passenden Einträge","No matching items"),
  unavailable:t("Quelle derzeit nicht erreichbar","Source unavailable"),
  unknown:t("Prüfstatus unbekannt","Status unknown")
-})[status]||t("Unbekannt","Unknown");
+})[s.status]||t("Unbekannt","Unknown");
+};
 const coverageText=status=>({
  regional_partial:t("Amtliche Orts-/Teilquelle","Official city/partial source"),
  local_partial:t("Einzelne lokale Quellen","Individual local sources"),
@@ -111,7 +126,7 @@ const render=()=>{
   for(const s of entries){
    const item=$("div","source-item");
    const heading=$("div","source-item-head");heading.append($("strong","",s.source));
-   heading.append($("span","source-chip "+classification(s),statusText(s.status)));
+   heading.append($("span","source-chip "+classification(s),statusText(s)));
    item.append(heading);
    item.append($("p","source-detail",s.city+" · "+t("Letzte belegte Prüfung: ","Last evidenced check: ")+fmt(s.last_checked)));
    item.append($("p","source-detail",freshnessDescription(s)));

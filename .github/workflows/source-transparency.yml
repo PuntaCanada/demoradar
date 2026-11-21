@@ -37,6 +37,9 @@ on:
       - 'heute/**'
       - 'en/today/**'
       - 'scripts/test-browser.mjs'
+      - 'scripts/audit-future-source-evidence.py'
+      - 'scripts/test-future-source-evidence.py'
+      - 'data/future-source-evidence.json'
       - 'scripts/audit-event-count-delta.py'
       - 'scripts/test-event-count-delta.py'
       - 'scripts/check-cloudflare-dataset.mjs'
@@ -91,6 +94,7 @@ jobs:
           python3 scripts/test-stuttgart-demo.py
           python3 scripts/test-source-monitor.py
           python3 scripts/test-event-count-delta.py
+          python3 scripts/test-future-source-evidence.py
           node --check scripts/check-cloudflare-dataset.mjs
       - name: Verify Chromium available and run real browser regression
         run: |

@@ -87,6 +87,9 @@ on:
       - 'scripts/test-frontend.mjs'
       - 'scripts/test-i18n.mjs'
       - 'scripts/test-browser.mjs'
+      - 'scripts/audit-future-source-evidence.py'
+      - 'scripts/test-future-source-evidence.py'
+      - 'data/future-source-evidence.json'
       - 'scripts/check-cloudflare-dataset.mjs'
       - 'scripts/test-event-count-delta.py'
       - 'scripts/build-language-pages.mjs'
@@ -118,6 +121,7 @@ jobs:
           python3 scripts/test-regional-organizer-oneoffs.py
           python3 scripts/test-stuttgart-demo.py
           python3 scripts/test-event-count-delta.py
+          python3 scripts/test-future-source-evidence.py
           node scripts/test-community.mjs
           node scripts/test-source-coverage.mjs
           node scripts/test-heatmap-coverage.mjs
