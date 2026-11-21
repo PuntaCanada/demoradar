@@ -16,6 +16,9 @@ from pathlib import Path
 OUTPUT=Path("data/expansion-sources.json")
 EVIDENCE=Path("data/source-date-evidence.json")
 SOURCES=[
+ {"city":"Saarland Polizei-Presse","state":"Saarland","type":"official_police_press_index","url":"https://www.saarland.de/polizei/DE/aktuelles/rss-feed","parser":None,"data_rights":"Official police RSS press overview; RSS publication alone does not license recurring re-publication of demonstration data. Never import automatically.","scope":"Press communications including unrelated crime and traffic; no assembly-only calendar and no verified future rally in the review on 2026-11-21."},
+ {"city":"Polizei Hessen Meldungen","state":"Hessen","type":"official_police_press_index","url":"https://www.polizei.hessen.de/meldungen","parser":None,"data_rights":"Government press page, not an expressly licensed structured assembly-event feed; links and research only.","scope":"General police releases including the 19 Nov notice of 20 Nov assemblies, now historical; does not establish a future event calendar."},
+ {"city":"Polizei Rheinland-Pfalz Presse","state":"Rheinland-Pfalz","type":"official_police_press_index","url":"https://www.polizei.rlp.de/service/presse","parser":None,"data_rights":"Official police press listing without verified dataset-specific open event reuse licence; links and research only.","scope":"General police press, including unrelated topics; no verified upcoming assembly-specific machine-readable collection."},
  {"city":"Weimar","state":"Thüringen","type":"official_assembly_upcoming_html","url":"https://stadt.weimar.de/de/versammlungsanmeldungen.html","parser":None,"data_rights":"Official listing of confirmed upcoming assembly registrations; no source-specific open machine reuse licence or structured JSON/CSV/RSS endpoint verified. Research and link only, never automated import.","scope":"Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register."},
  {"city":"Magdeburg","state":"Sachsen-Anhalt","type":"official_police_historical_notice","url":"https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821","parser":None,"data_rights":"Single police after-action report, no verified open event-data reuse licence; retain as original link only","scope":"Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed"},
  {"city":"Halle (Saale)","state":"Sachsen-Anhalt","type":"official_police_historical_notice","url":"https://polizei.sachsen-anhalt.de/bs/pressemitteilungen/polizei?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=695807","parser":None,"data_rights":"Single police after-action report, no verified open event-data reuse licence; retain as original link only","scope":"Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming"},
@@ -39,6 +42,24 @@ SOURCES=[
  {"city":"Bremen","state":"Bremen","type":"official_police_press_archive","url":"https://www.polizei.bremen.de/news/pressestelle/pressearchiv-5034","parser":None,"data_rights":"Public police press archive, no verified general event-data license; link and monitor only","scope":"Occasional press notices mention assemblies, but this is not an official upcoming-assemblies feed"},
  {"city":"Hamburg","state":"Hamburg","type":"official_registration_information","url":"https://www.hamburg.de/service/info/111097758/","parser":None,"data_rights":"Not an event feed; no bulk licence applicable","scope":"Registration rules and contacts only; not a future event source"},
 ]
+
+# These are research endpoints only. A general press RSS landing page is not an
+# assembly event feed and cannot silently be promoted to automatic ingestion.
+PRIORITY_STATES=("Saarland","Hessen","Niedersachsen","Rheinland-Pfalz")
+def validate_priority_registry(sources=SOURCES):
+ for state in PRIORITY_STATES:
+  items=[s for s in sources if s.get("state")==state]
+  if not items:raise ValueError("Missing monitored priority state: "+state)
+  for item in items:
+   if not item.get("url","").startswith("https://"):
+    raise ValueError("Official candidate requires HTTPS URL: "+state)
+   if not item.get("scope") or not item.get("data_rights"):
+    raise ValueError("Missing source limitations: "+state)
+   if item.get("parser") is not None:
+    raise ValueError("Priority research candidate unexpectedly enabled for import: "+state)
+ if len({s["url"] for s in sources})!=len(sources):
+  raise ValueError("Duplicate research source URL")
+ return {state:sum(s["state"]==state for s in sources) for state in PRIORITY_STATES}
 
 class BodyText(HTMLParser):
  def __init__(self):
@@ -154,7 +175,8 @@ def inspect(item):
   output["error"]=type(exc).__name__+": "+str(exc)[:100]
  return output
 def main():
- result={"version":1,"method":"read-only official-page check; reachability never establishes event coverage or reuse rights","sources":[inspect(x) for x in SOURCES]}
+ priority_counts=validate_priority_registry()
+ result={"version":1,"method":"read-only official-page check; reachability never establishes event coverage or reuse rights","priority_research_only":priority_counts,"sources":[inspect(x) for x in SOURCES]}
  previous={}
  try:previous=json.loads(OUTPUT.read_text(encoding="utf-8"))
  except Exception:pass

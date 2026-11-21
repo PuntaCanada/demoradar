@@ -24,6 +24,25 @@ assert sum(x["city"]=="Leipzig" for x in module.SOURCES)==2
 assert any(x["city"]=="Bremen" and x["parser"] is None and x["type"]=="official_police_press_archive" for x in module.SOURCES)
 assert any(x["city"]=="Hamburg" and x["type"]=="official_police_operational_notice" and x["parser"] is None for x in module.SOURCES)
 
+assert module.validate_priority_registry()=={"Saarland":1,"Hessen":2,"Niedersachsen":1,"Rheinland-Pfalz":2}
+assert all(s["parser"] is None for s in module.SOURCES if s["state"] in module.PRIORITY_STATES)
+assert any(s["city"]=="Saarland Polizei-Presse" and s["type"]=="official_police_press_index" for s in module.SOURCES)
+assert any(s["city"]=="Polizei Hessen Meldungen" and s["type"]=="official_police_press_index" for s in module.SOURCES)
+assert any(s["city"]=="Polizei Rheinland-Pfalz Presse" and s["type"]=="official_police_press_index" for s in module.SOURCES)
+from copy import deepcopy
+for broken in ("parser","url","scope","data_rights"):
+ sources=deepcopy(module.SOURCES)
+ item=next(s for s in sources if s["city"]=="Saarland Polizei-Presse")
+ item[broken]={"parser":"unlicensed-import.py","url":"http://insecure.example","scope":"","data_rights":""}[broken]
+ try:module.validate_priority_registry(sources)
+ except ValueError:pass
+ else:raise AssertionError("Invalid research source accepted: "+broken)
+with_duplicate=deepcopy(module.SOURCES)
+with_duplicate.append(deepcopy(with_duplicate[0]))
+try:module.validate_priority_registry(with_duplicate)
+except ValueError:pass
+else:raise AssertionError("Duplicate official source accepted")
+
 assert all("url" in x and "data_rights" in x and "scope" in x for x in module.SOURCES)
 class Response:
  status=200

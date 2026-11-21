@@ -1,5 +1,10 @@
 name: DemoRadar Website und Cloudflare prüfen
 on:
+  pull_request:
+    paths:
+      - 'scripts/monitor-official-sources.py'
+      - 'scripts/test-source-monitor.py'
+      - '.github/workflows/verify-site.yml'
   workflow_dispatch:
   push:
     paths:
@@ -89,6 +94,8 @@ on:
       - 'scripts/test-browser.mjs'
       - 'scripts/audit-future-source-evidence.py'
       - 'scripts/test-future-source-evidence.py'
+      - 'scripts/monitor-official-sources.py'
+      - 'scripts/test-source-monitor.py'
       - 'data/future-source-evidence.json'
       - 'scripts/check-cloudflare-dataset.mjs'
       - 'scripts/test-event-count-delta.py'
@@ -122,6 +129,7 @@ jobs:
           python3 scripts/test-stuttgart-demo.py
           python3 scripts/test-event-count-delta.py
           python3 scripts/test-future-source-evidence.py
+          python3 scripts/test-source-monitor.py
           node scripts/test-community.mjs
           node scripts/test-source-coverage.mjs
           node scripts/test-heatmap-coverage.mjs
