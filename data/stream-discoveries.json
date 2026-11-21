@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-21T16:23:43.470Z",
+  "updated_at": "2026-11-21T21:44:35.802Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -116,7 +116,7 @@
       "title": "🔴LIVE: Berlin im Zeichen des Nahostkonflikts - Gen Z, Protestbewegung und Versammlungsfreiheit⛓️",
       "url": "https://www.youtube.com/watch?v=-JZjvTJJb0o",
       "date": "2026-11-21T14:36:55Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {
@@ -137,6 +137,14 @@
     },
     {
       "channel": "Schmidtkes Welt",
+      "title": "Vermummte Antifa & Gewerkschafter attackieren Weichreite - GenZ Frankfurt | 20.11.2026 @weichreite ",
+      "url": "https://www.youtube.com/watch?v=lRsfacNY-A8",
+      "date": "2026-11-21T18:30:06Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Schmidtkes Welt",
       "title": "❗LIVE❗ in Frankfurt | GenZ REGELT + Schulstreik | 20.11.2026",
       "url": "https://www.youtube.com/watch?v=_bwV3lqYOZI",
       "date": "2026-11-20T09:26:01Z",
@@ -148,14 +156,6 @@
       "title": "\"Ehre, Freiheit, Vaterland\" Gespräch mit Kevin Dorow - Deutsche Burschenschaft | Seitenwechsel 2026",
       "url": "https://www.youtube.com/watch?v=GXjsFT8GWCk",
       "date": "2026-11-18T19:00:06Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Schmidtkes Welt",
-      "title": "„Gottlose Schei*e“ Gespräch mit Alexander Malenki @DieFiedel | Büchermesse Seitenwechsel 2026",
-      "url": "https://www.youtube.com/watch?v=Cm1wW5jlepI",
-      "date": "2026-11-15T19:00:06Z",
       "status": "recording",
       "match_count": 0
     },

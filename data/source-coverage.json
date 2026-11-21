@@ -5,14 +5,14 @@
     "from": "2026-10-22",
     "to": "2026-11-28"
   },
-  "event_records": 492,
+  "event_records": 459,
   "diagnostic_video_samples": 23,
   "cities": [
     {
       "city": "Frankfurt am Main",
       "event_count": 2,
       "days_with_events": 1,
-      "observed_video_title_samples": 9,
+      "observed_video_title_samples": 10,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -55,7 +55,7 @@
     },
     {
       "city": "Berlin",
-      "event_count": 403,
+      "event_count": 369,
       "days_with_events": 9,
       "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 1,
@@ -77,12 +77,12 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
           "type": "official_registration_information",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -171,7 +171,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "transport_unverified",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
         }
       ]
@@ -231,7 +231,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "transport_unverified",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
         }
       ]
@@ -385,8 +385,8 @@
     },
     {
       "city": "Münster",
-      "event_count": 7,
-      "days_with_events": 5,
+      "event_count": 8,
+      "days_with_events": 6,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
