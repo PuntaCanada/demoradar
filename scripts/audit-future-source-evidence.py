@@ -64,6 +64,7 @@ def report(events,states,today):
   "scope":"Events dated today or later, not necessarily still upcoming at the current hour; source-provenance classification, NOT formal assembly registration, legal licence or completeness",
   "all_event_records":len(events),"dated_today_or_later":len(upcoming),
   "old_event_records":len(events)-len(upcoming)-invalid,"invalid_dates":invalid,
+  "unmapped_state_records":categories["unmapped_state"],
   "source_categories":{k:categories[k] for k in kinds},
   "states_with_official_structured_future_events":sum(per_state[s]["official_structured_source"]>0 for s in valid),
   "states_with_any_future_official_notice":sum(
