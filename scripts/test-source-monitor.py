@@ -134,5 +134,18 @@ with tempfile.TemporaryDirectory() as tmp:
   module.main()
   result=json.loads(p.read_text())
   assert len(result["sources"])==len(module.SOURCES)
+  assert module.validate_monitor_report(result)==len(module.SOURCES)==25
   assert all("events" not in s for s in result["sources"])
+  from copy import deepcopy
+  for mutation in ("missing", "duplicate", "unknown", "event", "wrong_priority", "incomplete_status"):
+   corrupt=deepcopy(result)
+   if mutation=="missing":corrupt["sources"].pop()
+   elif mutation=="duplicate":corrupt["sources"][1]=deepcopy(corrupt["sources"][0])
+   elif mutation=="unknown":corrupt["sources"][0]["url"]="https://official.example/unknown"
+   elif mutation=="event":corrupt["sources"][0]["events"]=[{"id":"fabricated"}]
+   elif mutation=="wrong_priority":corrupt["priority_research_only"]["Saarland"]=99
+   else:corrupt["sources"][0]["status"]="verified_fictitious_event"
+   try:module.validate_monitor_report(corrupt)
+   except ValueError:pass
+   else:raise AssertionError("Unsafe source report passed: "+mutation)
 print("official-source monitor: safe statuses and no fictitious events OK")
