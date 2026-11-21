@@ -1,18 +1,18 @@
 {
-  "checked_at": "2026-11-20T20:33:56.103908+00:00",
+  "checked_at": "2026-11-21T07:26:30.564471+00:00",
   "sources": [
     {
       "city": "Dresden",
       "url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
       "status": "ok",
-      "imported": 43,
+      "imported": 38,
       "note": "Amtliche Dresdner JSON-Schnittstelle; Einträge werden direkt importiert."
     },
     {
       "city": "Jena",
       "url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen",
       "status": "ok",
-      "imported": 2,
+      "imported": 1,
       "note": "Only explicitly labelled assembly entries are imported; absence is not proof of no demonstrations."
     }
   ]

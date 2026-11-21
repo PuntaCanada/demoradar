@@ -7,10 +7,10 @@
       "city": "Berlin",
       "source": "Polizei Berlin",
       "status": "ok",
-      "last_checked": "2026-11-20",
+      "last_checked": "2026-11-21",
       "last_success": {
         "count": 1349,
-        "checked_on": "2026-11-20"
+        "checked_on": "2026-11-21"
       },
       "baseline_count": 1349,
       "observed_count": 1349,
@@ -22,13 +22,13 @@
       "city": "Dresden",
       "source": "Stadt Dresden",
       "status": "ok",
-      "last_checked": "2026-11-20",
+      "last_checked": "2026-11-21",
       "last_success": {
-        "count": 43,
-        "checked_on": "2026-11-20"
+        "count": 38,
+        "checked_on": "2026-11-21"
       },
-      "baseline_count": 43,
-      "observed_count": 43,
+      "baseline_count": 38,
+      "observed_count": 38,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
     },
@@ -37,13 +37,13 @@
       "city": "Rostock",
       "source": "Stadt Rostock",
       "status": "ok",
-      "last_checked": "2026-11-20",
+      "last_checked": "2026-11-21",
       "last_success": {
-        "count": 9,
-        "checked_on": "2026-11-20"
+        "count": 4,
+        "checked_on": "2026-11-21"
       },
-      "baseline_count": 9,
-      "observed_count": 9,
+      "baseline_count": 4,
+      "observed_count": 4,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
     }
