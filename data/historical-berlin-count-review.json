@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-21",
+  "comparison": {
+    "before_commit": "60756575",
+    "after_commit": "e84cba7a",
+    "event_count_before": 1379,
+    "event_count_after": 1376,
+    "net_event_delta": -3,
+    "berlin_official_feed_before": 1352,
+    "berlin_official_feed_after": 1349,
+    "berlin_feed_net_delta": -3
+  },
+  "evidence": "GitHub compare 6075657...e84cba7 shows the Berlin official source count changing 1352 to 1349 in data/berlin-source.json and the overall scheduled import logs report 1379 versus 1376. The compare does not identify the legal reason for individual records disappearing.",
+  "conclusion": "The three-record net loss is accounted for numerically by Berlin feed changes; neither the source deltas nor removed IDs establish three cancellations.",
+  "verification_limit": "Net count differences do not prove the particular three identities disappeared; other additions/removals may have offset. A newly added before/after source-group ledger will record exact IDs for subsequent runs.",
+  "read_only": true
+}
