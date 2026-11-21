@@ -174,9 +174,36 @@ def inspect(item):
   output["status"]="transport_unverified"
   output["error"]=type(exc).__name__+": "+str(exc)[:100]
  return output
+
+def validate_monitor_report(report, sources=SOURCES):
+ """Fail closed on partial/stale registry output before any publication."""
+ expected={s["url"] for s in sources}
+ if len(expected)!=len(sources):
+  raise ValueError("Duplicate URLs in the configured official-source registry")
+ rows=report.get("sources")
+ if not isinstance(rows,list) or len(rows)!=len(expected):
+  raise ValueError("Monitor report must include every configured official source exactly once")
+ if {r.get("url") for r in rows}!=expected or len({r.get("url") for r in rows})!=len(rows):
+  raise ValueError("Report has missing, duplicate, or unexpected official sources")
+ allowed={"unavailable","http_restricted","transport_unverified","content_unverified",
+          "reachable_upcoming_list_research_only","reachable_without_upcoming_dates",
+          "reachable_archive_only","reachable_parser_configured","reachable_monitor_only_not_a_feed"}
+ for row in rows:
+  if row.get("status") not in allowed or not row.get("checked_on"):
+   raise ValueError("Unverified status or missing check date")
+  if "events" in row:
+   raise ValueError("Read-only research monitor must never generate demonstration events")
+  if row.get("parser") is not None and row.get("state") in PRIORITY_STATES:
+   raise ValueError("Unlicensed priority source enabled for import")
+ counts=validate_priority_registry(sources)
+ if report.get("priority_research_only")!=counts:
+  raise ValueError("Priority source counts do not match configured registry")
+ return len(rows)
+
 def main():
  priority_counts=validate_priority_registry()
  result={"version":1,"method":"read-only official-page check; reachability never establishes event coverage or reuse rights","priority_research_only":priority_counts,"sources":[inspect(x) for x in SOURCES]}
+ validate_monitor_report(result)
  previous={}
  try:previous=json.loads(OUTPUT.read_text(encoding="utf-8"))
  except Exception:pass
