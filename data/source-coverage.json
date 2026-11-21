@@ -2,10 +2,10 @@
   "version": 1,
   "method": "Read-only diagnostic; only imported, attributable event IDs are counted. Title samples are not evidence of official registration.",
   "window": {
-    "from": "2026-10-21",
-    "to": "2026-11-27"
+    "from": "2026-10-22",
+    "to": "2026-11-28"
   },
-  "event_records": 482,
+  "event_records": 524,
   "diagnostic_video_samples": 23,
   "cities": [
     {
@@ -50,8 +50,8 @@
     },
     {
       "city": "Berlin",
-      "event_count": 384,
-      "days_with_events": 9,
+      "event_count": 423,
+      "days_with_events": 10,
       "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
@@ -340,8 +340,8 @@
     },
     {
       "city": "Münster",
-      "event_count": 6,
-      "days_with_events": 4,
+      "event_count": 7,
+      "days_with_events": 5,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
