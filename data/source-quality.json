@@ -149,9 +149,9 @@
       "city": "Weimar",
       "state": "Thüringen",
       "source": "Stadt Weimar (vier Einzelanmeldungen)",
-      "status": "unavailable",
+      "status": "verified_one_off",
       "origin_type": "government_source",
-      "count": 0,
+      "count": 4,
       "scope": "Four individually reviewed factual assembly notices on 22-25 Nov; no recurring import licence",
       "last_checked": "2026-11-21",
       "check_freshness": "recent"
