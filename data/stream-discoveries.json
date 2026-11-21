@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-21T01:30:26.371Z",
+  "updated_at": "2026-11-21T08:44:51.754Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -11,7 +11,7 @@
   "statistics": {
     "youtube_channels_checked": 10,
     "youtube_videos_checked": 500,
-    "youtube_streams_seen": 232,
+    "youtube_streams_seen": 230,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
