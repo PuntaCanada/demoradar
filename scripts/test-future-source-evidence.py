@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
  def test_wrong_weekday_or_guessed_state_never_claimed(self):
   r=m["report"]([e("regional-oneoff-x","2026-11-23","Unknown")],STATES,dt.date(2026,11,21))
   self.assertEqual(r["states_with_any_future_official_notice"],0)
-  self.assertEqual(r["source_categories"]["unmapped_state"],1)
+  self.assertEqual(r["unmapped_state_records"],1)
  def test_invalid_date_and_duplicates(self):
   r=m["report"]([e("berlin-x","2026-02-30")],STATES,dt.date(2026,11,21))
   self.assertEqual(r["invalid_dates"],1)
