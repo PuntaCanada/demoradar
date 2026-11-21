@@ -57,7 +57,7 @@ if(directRun){
   "update-frankfurt.py","update-freiburg.py","update-stuttgart-demo.py","update-regional-organizer-oneoffs.py","update-three-regional-oneoffs.py","update-bad-oldesloe-police.py","update-dortmund-police.py","import-frankfurt-police-archive.py",
   "monitor-official-sources.py","update-dresden.py","update-dresden-jena.py",
   "dedupe-events.py","check-demos-api.py","probe-demos-events.py","update-demos.py",
-  "source-format-health.mjs","audit-source-quality.mjs","source-health-alerts.mjs",
+  "source-format-health.mjs","audit-source-quality.mjs","audit-future-source-evidence.py","source-health-alerts.mjs",
   "track-event-updates.py","update-news.py","build-language-pages.mjs"
  ]);
  const declared=[...workflow.matchAll(/^        run: (?:python3|node) scripts\/([a-zA-Z0-9_.-]+)\s*$/gm)].map(m=>m[1]);
