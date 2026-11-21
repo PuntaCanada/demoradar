@@ -31,3 +31,32 @@ console.log(JSON.stringify({status,local_count:localCount,public_count:remoteCou
 if(status==="exact_dataset_match")console.log("PROVEN: public Cloudflare events.json matches checked-out GitHub events.json byte-for-byte");
 else console.log("NOT PROVEN: the public deployed dataset is identical; deployment may lag or content may differ");
 // Do not fail PR on expected deploy lag; leave precise auditable result in CI logs.
+
+const futureFile="data/future-source-evidence.json";
+const futureUrl="https://demoradar.pages.dev/"+futureFile;
+let futureProof={source_url:futureUrl,status:"not_verified",local_sha256:null,public_sha256:null,
+ checked_day:null,public_day:null,error:null};
+try{
+ const localFuture=readFileSync(futureFile);
+ const localDecoded=JSON.parse(localFuture.toString("utf8"));
+ if(localDecoded.version!==1||!Array.isArray(localDecoded.by_state)||localDecoded.by_state.length!==16)
+  throw Error("Invalid local 16-state future provenance audit");
+ futureProof.local_sha256=hash(localFuture);
+ futureProof.checked_day=localDecoded.reviewed_on;
+ const response=await fetch(futureUrl,{headers:{"User-Agent":"DemoRadar-Publication-Proof/1.0","Cache-Control":"no-cache"},
+  signal:AbortSignal.timeout(12000)});
+ if(!response.ok)throw Error("Cloudflare returned HTTP "+response.status);
+ const bytes=Buffer.from(await response.arrayBuffer());
+ if(bytes.length>500_000)throw Error("Unexpected future report size");
+ const published=JSON.parse(bytes.toString("utf8"));
+ if(published.version!==1||!Array.isArray(published.by_state)||published.by_state.length!==16)
+  throw Error("Public future provenance report missing 16-state evidence");
+ futureProof.public_day=published.reviewed_on;
+ futureProof.public_sha256=hash(bytes);
+ futureProof.status=futureProof.public_sha256===futureProof.local_sha256?
+  "exact_future_report_match":"future_report_differs";
+}catch(err){futureProof.error=String(err.message||err)}
+console.log("PUBLIC FUTURE PROVENANCE REPORT: "+JSON.stringify(futureProof));
+if(futureProof.status==="exact_future_report_match")
+ console.log("PROVEN: public Cloudflare future-source-evidence.json matches GitHub exact bytes");
+else console.log("NOT PROVEN: public future provenance report may lag or differ; do not claim publication");
