@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/update-events.yml'
       - 'scripts/update-events.mjs'
+      - 'scripts/monitor-official-sources.py'
+      - 'scripts/test-source-monitor.py'
       - 'scripts/audit-event-count-delta.py'
       - 'scripts/audit-future-source-evidence.py'
       - 'data/future-source-evidence.json'
@@ -139,6 +141,17 @@ jobs:
         run: python3 scripts/import-frankfurt-police-archive.py
       - name: Beobachte weitere amtliche Kandidatenquellen ohne erfundene Termine
         run: python3 scripts/monitor-official-sources.py
+      - name: Prüfe den vollständigen 25-Quellen-Bericht vor Veröffentlichung
+        run: |
+          python3 - <<'PY'
+          import importlib.util, json
+          spec=importlib.util.spec_from_file_location('monitor','scripts/monitor-official-sources.py')
+          m=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(m)
+          report=json.load(open('data/expansion-sources.json',encoding='utf8'))
+          count=m.validate_monitor_report(report)
+          print(f'Verified complete read-only source report: {count} entries; no demonstration import authorized')
+          PY
       - name: Lade Dresdner Versammlungen aus der amtlichen JSON-Schnittstelle
         run: python3 scripts/update-dresden.py
       - name: Prüfe Dresden und Jena und importiere eindeutig gekennzeichnete Jena-Versammlungen
