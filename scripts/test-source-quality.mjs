@@ -126,4 +126,14 @@ assert.equal(missing.find(s=>s.source==="Polizei Berlin").status,"unavailable");
 assert.equal(missing.find(s=>s.source==="Polizei Berlin").count,null);
 assert.equal(missing.find(s=>s.source==="Stadt Rostock").status,"unavailable");
 assert.equal(sourceHealth({berlin:{events:[{state:"Berlin"}]}}).sources.find(s=>s.source==="Polizei Berlin").status,"unknown","Old events without fetch evidence cannot prove a live source");
+const sourceOriginRows=sourceHealth({}).sources;
+assert.ok(sourceOriginRows.every(s=>["government_source","non_government_organizer","municipal_event_calendar_no_registration"].includes(s.origin_type)));
+const sourced=sourceHealth({threeRegionalOneoffs:{checks:[
+ {city:"Hannover",status:"verified_non_government_one_off",count:1},
+ {city:"Wiesbaden",status:"verified_non_government_one_off",count:1}
+]},organizerNotices:{checks:[{city:"Potsdam",status:"verified_organizer_one_off",count:1}]},
+ stuttgart:{status:"verified_manual_one_off_time_not_machine_confirmed",count:1}}).sources;
+for(const city of ["Hannover","Wiesbaden","Potsdam"])assert.equal(
+ sourced.find(s=>s.city===city&&s.status==="verified_one_off").origin_type,"non_government_organizer");
+assert.equal(sourced.find(s=>s.city==="Stuttgart").origin_type,"municipal_event_calendar_no_registration");
 console.log("source-quality: 37 explicit data-integrity assertions passed");
