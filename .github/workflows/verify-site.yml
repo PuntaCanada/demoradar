@@ -85,6 +85,8 @@ on:
       - 'scripts/test-frontend.mjs'
       - 'scripts/test-i18n.mjs'
       - 'scripts/test-browser.mjs'
+      - 'scripts/check-cloudflare-dataset.mjs'
+      - 'scripts/test-event-count-delta.py'
       - 'scripts/build-language-pages.mjs'
       - '.github/workflows/verify-site.yml'
 permissions:
@@ -113,6 +115,7 @@ jobs:
           python3 scripts/test-three-regional-oneoffs.py
           python3 scripts/test-regional-organizer-oneoffs.py
           python3 scripts/test-stuttgart-demo.py
+          python3 scripts/test-event-count-delta.py
           node scripts/test-community.mjs
           node scripts/test-source-coverage.mjs
           node scripts/test-heatmap-coverage.mjs
@@ -206,5 +209,7 @@ jobs:
             esac
           done
           echo "Cloudflare endpoints are reachable and include expected data."
+      - name: Prüfe Hash und Anzahl des tatsächlich ausgelieferten Cloudflare-Datenbestands
+        run: node scripts/check-cloudflare-dataset.mjs
       - name: Prüfe echte Google-Crawlability aller acht öffentlichen Seiten
         run: node scripts/verify-public-crawlability.mjs --live
