@@ -8,7 +8,17 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
   const isValid=/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(Date.parse(d+"T12:00:00Z"));
   const delta=isValid?Math.round((Date.parse(today+"T12:00:00Z")-Date.parse(d+"T12:00:00Z"))/86400000):null;
   const freshness=delta===null||delta<0?"unknown":delta<=2?"recent":"outdated_check";
-  out.push({city,state,source,status,count:Number.isFinite(count)&&count>=0?count:null,scope,
+  const organizerSources=new Set([
+   "Netzwerk der brandenburgischen Frauenhäuser (Einzelankündigung)",
+   "Grüne Landkreis Lindau (Einzelankündigung)",
+   "Interventionistische Linke Hannover (Einzeltermin)",
+   "DGB Rheinland-Pfalz/Saarland (Ludwigshafen-Einzeltermin)",
+   "DGB/GEW – Wiesbaden-Einzeltermin"
+  ]);
+  const origin_type=organizerSources.has(source)?"non_government_organizer":
+   source==="Landeshauptstadt Stuttgart (Einzeltermin)"?"municipal_event_calendar_no_registration":
+   "government_source";
+  out.push({city,state,source,status,origin_type,count:Number.isFinite(count)&&count>=0?count:null,scope,
    last_checked:isValid?d:null,check_freshness:freshness});
  };
  const berlin=files.berlin||{};
