@@ -87,6 +87,9 @@ on:
       - 'scripts/test-frontend.mjs'
       - 'scripts/test-i18n.mjs'
       - 'scripts/test-browser.mjs'
+      - 'scripts/audit-future-source-evidence.py'
+      - 'scripts/test-future-source-evidence.py'
+      - 'data/future-source-evidence.json'
       - 'scripts/check-cloudflare-dataset.mjs'
       - 'scripts/test-event-count-delta.py'
       - 'scripts/build-language-pages.mjs'
@@ -118,6 +121,7 @@ jobs:
           python3 scripts/test-regional-organizer-oneoffs.py
           python3 scripts/test-stuttgart-demo.py
           python3 scripts/test-event-count-delta.py
+          python3 scripts/test-future-source-evidence.py
           node scripts/test-community.mjs
           node scripts/test-source-coverage.mjs
           node scripts/test-heatmap-coverage.mjs
@@ -150,7 +154,7 @@ jobs:
         continue-on-error: false
         run: |
           set -eu
-          for route in / /en/ /heute/ /en/today/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/news-matches.json /data/editorial-link-candidates.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/source-reuse-audit.json /data/rejected-official-candidates.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
+          for route in / /en/ /heute/ /en/today/ /sources/ /en/sources/ /sources/source-status.js /sources/source-status.css /community/ /en/community/ /data/live-streams.json /data/news-matches.json /data/editorial-link-candidates.json /data/source-coverage.json /data/state-source-coverage.json /data/source-quality.json /data/source-format-health.json /data/source-reuse-audit.json /data/rejected-official-candidates.json /data/berlin-source.json /data/rostock-source.json /data/leipzig-police-source.json /data/leipzig-archive-source.json /data/nrw-police-source.json /data/dortmund-police-source.json /data/frankfurt-police-archive-source.json /data/source-health-alerts.json /data/police-notices-source.json /data/organizer-contacts.json /sitemap.xml /robots.txt /data/future-source-evidence.json /data/events.json /data/demos-events.json /data/event-updates.json /data/germany-states.json /i18n.js /live.js /heatmap.js; do
             url="https://demoradar.pages.dev$route"
             code=$(curl -L -sS --retry 2 --retry-delay 3 --connect-timeout 8 --max-time 25 -o /tmp/demoradar_response -w "%{http_code}" "$url") || code="000"
             # On first release, the scheduled data refresh must write the two
