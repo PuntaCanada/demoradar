@@ -3,8 +3,9 @@
   "mode": "fixed_four_independently_verified_one_off_facts",
   "checked_on": "2026-11-21",
   "source_reviewed_on": "2026-11-20",
-  "status": "verified_individual_oneoffs",
-  "count": 4,
+  "status": "source_unavailable_no_new_import",
+  "count": 0,
   "scope": "four individually verified municipal announcements dated 22-25 November 2026, not automatic bulk syndication",
-  "rights": "Only factual date/time/place/subject and direct primary link; blanket reuse licence NOT verified"
+  "rights": "Only factual date/time/place/subject and direct primary link; blanket reuse licence NOT verified",
+  "error": "<urlopen error _ssl.c:1063: The handshake operation timed out>"
 }

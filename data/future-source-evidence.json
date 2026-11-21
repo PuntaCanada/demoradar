@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-11-21",
+  "scope": "Events dated today or later, not necessarily still upcoming at the current hour; source-provenance classification, NOT formal assembly registration, legal licence or completeness",
+  "all_event_records": 1366,
+  "dated_today_or_later": 1314,
+  "old_event_records": 52,
+  "invalid_dates": 0,
+  "unmapped_state_records": 0,
+  "source_categories": {
+    "official_structured_source": 1302,
+    "official_individual_notice": 5,
+    "municipal_event_listing_registration_unconfirmed": 1,
+    "nongovernment_organizer_notice": 5,
+    "unclassified_source": 1
+  },
+  "states_with_official_structured_future_events": 3,
+  "states_with_any_future_official_notice": 5,
+  "by_state": [
+    {
+      "state": "Baden-Württemberg",
+      "future_records": 1,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 1,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Bayern",
+      "future_records": 1,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 1,
+      "unclassified": 0
+    },
+    {
+      "state": "Berlin",
+      "future_records": 1260,
+      "official_structured": 1260,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Brandenburg",
+      "future_records": 1,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 1,
+      "unclassified": 0
+    },
+    {
+      "state": "Bremen",
+      "future_records": 0,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Hamburg",
+      "future_records": 0,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Hessen",
+      "future_records": 1,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 1,
+      "unclassified": 0
+    },
+    {
+      "state": "Mecklenburg-Vorpommern",
+      "future_records": 4,
+      "official_structured": 4,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Niedersachsen",
+      "future_records": 1,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 1,
+      "unclassified": 0
+    },
+    {
+      "state": "Nordrhein-Westfalen",
+      "future_records": 0,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Rheinland-Pfalz",
+      "future_records": 1,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 1,
+      "unclassified": 0
+    },
+    {
+      "state": "Saarland",
+      "future_records": 0,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Sachsen",
+      "future_records": 38,
+      "official_structured": 38,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Sachsen-Anhalt",
+      "future_records": 0,
+      "official_structured": 0,
+      "official_one_off": 0,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Schleswig-Holstein",
+      "future_records": 1,
+      "official_structured": 0,
+      "official_one_off": 1,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 0
+    },
+    {
+      "state": "Thüringen",
+      "future_records": 5,
+      "official_structured": 0,
+      "official_one_off": 4,
+      "municipal_calendar_unregistered": 0,
+      "organizer_only": 0,
+      "unclassified": 1
+    }
+  ],
+  "method": "Deterministic and conservatively known event ID namespaces. Zero means nothing listed here; it is NOT evidence that no demonstrations are occurring. Counts include current calendar day. No inference of LIVE, cancellation or open reuse rights."
+}

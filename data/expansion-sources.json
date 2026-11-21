@@ -10,18 +10,9 @@
       "parser": null,
       "data_rights": "Official listing of confirmed upcoming assembly registrations; no source-specific open machine reuse licence or structured JSON/CSV/RSS endpoint verified. Research and link only, never automated import.",
       "scope": "Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register.",
-      "status": "reachable_upcoming_list_research_only",
+      "status": "transport_unverified",
       "checked_on": "2026-11-21",
-      "bytes_checked": 437275,
-      "future_announcement_rows_verified": 4,
-      "future_dates_verified": [
-        "2026-11-22",
-        "2026-11-23",
-        "2026-11-24",
-        "2026-11-25"
-      ],
-      "future_date_count": 4,
-      "date_conflicts": []
+      "error": "URLError: <urlopen error _ssl.c:1063: The handshake operation timed out>"
     },
     {
       "city": "Magdeburg",
@@ -42,8 +33,9 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming",
-      "status": "reachable_archive_only",
-      "checked_on": "2026-11-21"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-21",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Schwerin",
@@ -263,9 +255,8 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-21",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-21"
     }
   ]
 }
