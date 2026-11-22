@@ -5,7 +5,7 @@
     "from": "2026-10-23",
     "to": "2026-11-29"
   },
-  "event_records": 484,
+  "event_records": 429,
   "diagnostic_video_samples": 23,
   "cities": [
     {
@@ -55,8 +55,8 @@
     },
     {
       "city": "Berlin",
-      "event_count": 393,
-      "days_with_events": 10,
+      "event_count": 358,
+      "days_with_events": 9,
       "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 1,
       "source_count": 0,
@@ -82,7 +82,7 @@
         },
         {
           "type": "official_registration_information",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
@@ -385,7 +385,7 @@
     },
     {
       "city": "Münster",
-      "event_count": 8,
+      "event_count": 7,
       "days_with_events": 6,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
@@ -394,8 +394,8 @@
     },
     {
       "city": "Weimar",
-      "event_count": 10,
-      "days_with_events": 5,
+      "event_count": 8,
+      "days_with_events": 4,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
