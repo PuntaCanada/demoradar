@@ -140,7 +140,7 @@
       "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
       "status": "reachable_monitor_only_not_a_feed",
       "checked_on": "2026-11-22",
-      "bytes_checked": 77683,
+      "bytes_checked": 79058,
       "date_conflicts": [],
       "documented_date_discrepancy": {
         "observed_on": "2026-11-20",
@@ -281,8 +281,9 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-22"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-22",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Bremen",
