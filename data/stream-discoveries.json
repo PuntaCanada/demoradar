@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-21T21:44:35.802Z",
+  "updated_at": "2026-11-22T16:46:17.053Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -11,10 +11,26 @@
   "statistics": {
     "youtube_channels_checked": 10,
     "youtube_videos_checked": 500,
-    "youtube_streams_seen": 232,
+    "youtube_streams_seen": 236,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
+    {
+      "channel": "Weichreite",
+      "title": "Gehört Palästina auf diese Demos? \"Achtung! Fascho-Streamer!\" Gen Z regelt! Frankfurt 20.11.26",
+      "url": "https://www.youtube.com/watch?v=SjreaVSppOU",
+      "date": "2026-11-22T15:00:09Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
+      "title": "Übergriffe bei Gen Z Gewerkschaftsdemo! Frankfurt Antifa 20.11.26",
+      "url": "https://www.youtube.com/watch?v=7TjOpalBct4",
+      "date": "2026-11-22T10:00:10Z",
+      "status": "recording",
+      "match_count": 0
+    },
     {
       "channel": "Weichreite",
       "title": "Regenschirme beschädigt! Halbprominenz! Polizei Frankfurt 20.11.26 Internationaler Jugendstreik",
@@ -24,18 +40,10 @@
       "match_count": 0
     },
     {
-      "channel": "Weichreite",
-      "title": "Angriff + Festnahme von Weichreite \"Was passiert auf dem Stromkasten\" Frankfurt 20.11.26 GenZ regelt",
-      "url": "https://www.youtube.com/watch?v=qiV1eLWw6i4",
-      "date": "2026-11-21T09:00:09Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Weichreite",
-      "title": "Für Verbot der blauen Moschee: Exil-Iraner zu Gast beim AfD-Dialog & Gegenprotest Hamburg 16.11.26",
-      "url": "https://www.youtube.com/watch?v=qyDVyaf6d-4",
-      "date": "2026-11-20T17:00:11Z",
+      "channel": "Utopia TV Deutschland",
+      "title": "Politik mit Kopf in Frankfurt am Abend der Gen Z Proteste I Interview & Analyse Polizeigrossaufgebot",
+      "url": "https://www.youtube.com/watch?v=EGo5u43k8Zg",
+      "date": "2026-11-22T14:15:19Z",
       "status": "recording",
       "match_count": 0
     },
@@ -52,14 +60,6 @@
       "title": "LIVE ❗ Gen Z Demo 💥 Frankfurt im Ausnahmezustand 😱 Eskaliert es wieder? Protest & Polizeieinsatz",
       "url": "https://www.youtube.com/watch?v=usJwLf_3JJI",
       "date": "2026-11-20T13:33:24Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Utopia TV Deutschland",
-      "title": "LIVE ❗ Verdi & Gen Z Demo 💥 Frankfurt im Ausnahmezustand 😱 Eskaliert es wieder? Protest & Polizei",
-      "url": "https://www.youtube.com/watch?v=9U87riALREM",
-      "date": "2026-11-20T08:47:32Z",
       "status": "recording",
       "match_count": 0
     },
@@ -137,6 +137,14 @@
     },
     {
       "channel": "Schmidtkes Welt",
+      "title": "„Warum der Osten die Zukunft ist“ Gespräch mit Benedikt Kaiser | Büchermesse Seitenwechsel 2026",
+      "url": "https://www.youtube.com/watch?v=sGPKozntRm4",
+      "date": "2026-11-22T13:00:06Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Schmidtkes Welt",
       "title": "Vermummte Antifa & Gewerkschafter attackieren Weichreite - GenZ Frankfurt | 20.11.2026 @weichreite ",
       "url": "https://www.youtube.com/watch?v=lRsfacNY-A8",
       "date": "2026-11-21T18:30:06Z",
@@ -152,10 +160,10 @@
       "match_count": 0
     },
     {
-      "channel": "Schmidtkes Welt",
-      "title": "\"Ehre, Freiheit, Vaterland\" Gespräch mit Kevin Dorow - Deutsche Burschenschaft | Seitenwechsel 2026",
-      "url": "https://www.youtube.com/watch?v=GXjsFT8GWCk",
-      "date": "2026-11-18T19:00:06Z",
+      "channel": "Beobachter Live",
+      "title": "🔴 Live: Berlin | Impressionen Schlossinsel Köpenick",
+      "url": "https://www.youtube.com/watch?v=YpweEzF3wRA",
+      "date": "2026-11-22T13:26:31Z",
       "status": "recording",
       "match_count": 0
     },

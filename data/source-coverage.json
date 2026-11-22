@@ -6,13 +6,13 @@
     "to": "2026-11-29"
   },
   "event_records": 429,
-  "diagnostic_video_samples": 23,
+  "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Frankfurt am Main",
       "event_count": 2,
       "days_with_events": 1,
-      "observed_video_title_samples": 10,
+      "observed_video_title_samples": 11,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -24,10 +24,19 @@
       ]
     },
     {
+      "city": "Berlin",
+      "event_count": 358,
+      "days_with_events": 9,
+      "observed_video_title_samples": 3,
+      "observed_city_and_date_samples": 2,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
       "city": "Polizei Hessen Meldungen",
       "event_count": 0,
       "days_with_events": 0,
-      "observed_video_title_samples": 2,
+      "observed_video_title_samples": 1,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -42,7 +51,7 @@
       "city": "Polizei Rheinland-Pfalz Presse",
       "event_count": 0,
       "days_with_events": 0,
-      "observed_video_title_samples": 2,
+      "observed_video_title_samples": 1,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -50,40 +59,6 @@
           "type": "official_police_press_index",
           "status": "unavailable",
           "reuse_rights_verified": true
-        }
-      ]
-    },
-    {
-      "city": "Berlin",
-      "event_count": 358,
-      "days_with_events": 9,
-      "observed_video_title_samples": 2,
-      "observed_city_and_date_samples": 1,
-      "source_count": 0,
-      "source_status": []
-    },
-    {
-      "city": "Hamburg",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
-      "source_count": 3,
-      "source_status": [
-        {
-          "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        },
-        {
-          "type": "official_police_operational_notice",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        },
-        {
-          "type": "official_registration_information",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
         }
       ]
     },
@@ -172,6 +147,31 @@
         {
           "type": "official_police_historical_notice",
           "status": "reachable_archive_only",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Hamburg",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 3,
+      "source_status": [
+        {
+          "type": "official_police_assembly_authority",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        },
+        {
+          "type": "official_police_operational_notice",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        },
+        {
+          "type": "official_registration_information",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
