@@ -5,14 +5,14 @@
     "from": "2026-10-23",
     "to": "2026-11-29"
   },
-  "event_records": 429,
+  "event_records": 397,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Frankfurt am Main",
       "event_count": 2,
       "days_with_events": 1,
-      "observed_video_title_samples": 11,
+      "observed_video_title_samples": 10,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -25,7 +25,7 @@
     },
     {
       "city": "Berlin",
-      "event_count": 358,
+      "event_count": 326,
       "days_with_events": 9,
       "observed_video_title_samples": 3,
       "observed_city_and_date_samples": 2,
@@ -166,7 +166,7 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         },
         {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-22T16:46:17.053Z",
+  "updated_at": "2026-11-22T22:12:47.833Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -137,6 +137,14 @@
     },
     {
       "channel": "Schmidtkes Welt",
+      "title": "\"Sie wollen die Menschen reduzieren\" Gespräch mit Stefan Magnet @auf1tv  | Seitenwechsel 2026",
+      "url": "https://www.youtube.com/watch?v=Fl7IvFg3_zg",
+      "date": "2026-11-22T17:00:08Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Schmidtkes Welt",
       "title": "„Warum der Osten die Zukunft ist“ Gespräch mit Benedikt Kaiser | Büchermesse Seitenwechsel 2026",
       "url": "https://www.youtube.com/watch?v=sGPKozntRm4",
       "date": "2026-11-22T13:00:06Z",
@@ -148,14 +156,6 @@
       "title": "Vermummte Antifa & Gewerkschafter attackieren Weichreite - GenZ Frankfurt | 20.11.2026 @weichreite ",
       "url": "https://www.youtube.com/watch?v=lRsfacNY-A8",
       "date": "2026-11-21T18:30:06Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Schmidtkes Welt",
-      "title": "❗LIVE❗ in Frankfurt | GenZ REGELT + Schulstreik | 20.11.2026",
-      "url": "https://www.youtube.com/watch?v=_bwV3lqYOZI",
-      "date": "2026-11-20T09:26:01Z",
       "status": "recording",
       "match_count": 0
     },
