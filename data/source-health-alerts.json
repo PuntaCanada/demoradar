@@ -13,6 +13,14 @@
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
+      "city": "Köln",
+      "state": "Nordrhein-Westfalen",
+      "source": "Polizei Köln",
+      "condition": "outdated_check",
+      "last_checked": "2026-11-19",
+      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
+    },
+    {
       "city": "Leipzig",
       "state": "Sachsen",
       "source": "Polizeidirektion Leipzig",
@@ -33,7 +41,7 @@
       "state": "Saarland",
       "source": "Research-only official page",
       "condition": "monitor_http_restricted",
-      "last_checked": "2026-11-21",
+      "last_checked": "2026-11-22",
       "url": "https://www.saarland.de/polizei/DE/aktuelles/rss-feed",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
@@ -42,7 +50,7 @@
       "state": "Rheinland-Pfalz",
       "source": "Research-only official page",
       "condition": "monitor_unavailable",
-      "last_checked": "2026-11-21",
+      "last_checked": "2026-11-22",
       "url": "https://www.polizei.rlp.de/service/presse",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
@@ -51,7 +59,7 @@
       "state": "Bayern",
       "source": "Research-only official page",
       "condition": "monitor_http_restricted",
-      "last_checked": "2026-11-21",
+      "last_checked": "2026-11-22",
       "url": "https://www.nuernberg.de/presse/mitteilungen/",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
@@ -60,7 +68,7 @@
       "state": "Hessen",
       "source": "Research-only official page",
       "condition": "monitor_http_restricted",
-      "last_checked": "2026-11-21",
+      "last_checked": "2026-11-22",
       "url": "https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
@@ -69,17 +77,8 @@
       "state": "Bremen",
       "source": "Research-only official page",
       "condition": "monitor_http_restricted",
-      "last_checked": "2026-11-21",
+      "last_checked": "2026-11-22",
       "url": "https://www.polizei.bremen.de/news/pressestelle/pressearchiv-5034",
-      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
-    },
-    {
-      "city": "Hamburg",
-      "state": "Hamburg",
-      "source": "Research-only official page",
-      "condition": "monitor_transport_unverified",
-      "last_checked": "2026-11-21",
-      "url": "https://www.hamburg.de/service/info/111097758/",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     }
   ]

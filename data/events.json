@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-21T19:29:41.900Z",
-  "count": 1332,
+  "updated_at": "2026-11-22T07:06:38.387Z",
+  "count": 1329,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -359,26 +359,6 @@
       "source_status": "behördlich angezeigt"
     },
     {
-      "id": "rostock-cf0dcd0255d38c49",
-      "country": "DE",
-      "state": "Mecklenburg-Vorpommern",
-      "city": "Rostock",
-      "date": "2026-11-21",
-      "start": "10:00",
-      "end": "14:00",
-      "title": "Aufrechterhaltung der Straßenbahnlinie bis zur Endhaltestelle Neuer Friedhof",
-      "postal_code": "",
-      "location": "öffentliche Gehwegfläche im Bereich zwischen der Satower Straße und der Wendeschleife der Straßenbahn",
-      "route": "",
-      "kind": "Kundgebung",
-      "organizer": "",
-      "registered_participants": "ca. 10 Personen",
-      "event_status": "beschieden",
-      "source": "Hanse- und Universitätsstadt Rostock",
-      "source_url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
       "id": "berlin-14",
       "country": "DE",
       "state": "Berlin",
@@ -619,25 +599,6 @@
       "source_status": "behördlich angezeigt"
     },
     {
-      "id": "dresden-07844c4e063d132c",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-21",
-      "start": "13:30",
-      "end": "18:30",
-      "title": "Stoppt den Organraub an lebenden Falun Gong Praktizierenden in China! Der Kommunistischen Partei Chinas ein Ende setzen (END CCP)!",
-      "location": "Prager Straße",
-      "postal_code": "",
-      "route": "",
-      "organizer": "Deutscher Falun Dafa Verein e. V.",
-      "registered_participants": "12",
-      "event_status": "beschieden",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
       "id": "berlin-59",
       "country": "DE",
       "state": "Berlin",
@@ -716,25 +677,6 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
-    },
-    {
-      "id": "dresden-462019870944e473",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-21",
-      "start": "14:00",
-      "end": "17:00",
-      "title": "3 Minute Movie Challenge",
-      "location": "Prager Straße",
-      "postal_code": "",
-      "route": "",
-      "organizer": "Activists for the Victims e.V.",
-      "registered_participants": "10",
-      "event_status": "beschieden",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
-      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "berlin-74",
@@ -21476,6 +21418,16 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Polizei Berlin",
+      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
+    },
+    {
+      "name": "Stadt Rostock",
+      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }
