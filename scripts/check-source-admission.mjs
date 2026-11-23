@@ -5,7 +5,12 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 const read=p=>JSON.parse(readFileSync(p,"utf8"));
 export const historical=new Map([["berlin","Polizei Berlin"],["dresden","Stadt Dresden"],["rostock","Stadt Rostock"]]);
-export function checkAdmissions(health,licences){
+// New-source admission evidence is short-lived. The 30-day window limits stale
+// endpoint/licence claims; historical importers are explicitly exempt.
+export function checkAdmissions(health,licences,{today=new Date().toISOString().slice(0,10)}={}){
+ const validDay=d=>typeof d==="string"&&/^20\\d{2}-\\d{2}-\\d{2}$/.test(d)&&!Number.isNaN(Date.parse(d))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
+ if(!validDay(today))throw Error("Invalid admission inspection day");
+ const ageDays=d=>(Date.parse(today+"T12:00:00Z")-Date.parse(d+"T12:00:00Z"))/86400000;
  const problems=[];
  const audits=new Map((licences.feeds||[]).map(x=>[x.source,x]));
  const identities=new Set();
@@ -40,7 +45,9 @@ export function checkAdmissions(health,licences){
      v.latest_future_event_date<v.checked_on||
      !isDate(a.reviewed_on)||!isDate(v.licence_checked_on)||
      v.licence_checked_on!==a.reviewed_on||
-     v.checked_on<a.reviewed_on)
+     v.checked_on<a.reviewed_on||
+     // Future-dated evidence and stale checks cannot authorize a NEW feed.
+     [v.checked_on,v.licence_checked_on,a.reviewed_on].some(d=>!validDay(d)||ageDays(d)<0||ageDays(d)>30))
     problems.push("New recurring feed lacks dated, reachable, schema-valid future event and licence verification: "+x.source);
 
  }
@@ -85,7 +92,7 @@ if(directRun){
    reachable:true,schema_valid:true,has_future_event_dates:true,event_fields:["title","date","location"],
    checked_on:"2026-11-20",licence_checked_on:"2026-11-20",latest_future_event_date:"2026-12-01"}};
  const future={feeds:[{id:"teststadt",source:"Teststadt"}]};
- assert.deepEqual(checkAdmissions(future,{feeds:[approved]}),[],"Fully evidenced candidate should pass");
+ assert.deepEqual(checkAdmissions(future,{feeds:[approved]},{today:"2026-11-23"}),[],"Fully evidenced candidate should pass");
  for(const [field,value] of [["reachable",false],["schema_valid",false],["has_future_event_dates",false],
   ["format","html"],["latest_future_event_date","2026-11-01"],["checked_on","2026-13-01"],
   ["event_fields",["title","date"]]]){
@@ -102,13 +109,22 @@ if(directRun){
  const completeRss={...rssApproved,verification:{...rssApproved.verification,
   event_fields:["title","date","location","guid","pubDate","start","end","status"],
   cancellation_semantics_verified:true}};
- assert.deepEqual(checkAdmissions(future,{feeds:[completeRss]}),[],"Fully evidenced RSS can pass admission");
+ assert.deepEqual(checkAdmissions(future,{feeds:[completeRss]},{today:"2026-11-23"}),[],"Fully evidenced RSS can pass admission");
  for(const field of ["guid","pubDate","start","end","status"]){
   const candidate={...completeRss,verification:{...completeRss.verification,event_fields:completeRss.verification.event_fields.filter(x=>x!==field)}};
   assert.ok(checkAdmissions(future,{feeds:[candidate]}).length>0,"RSS missing "+field+" must fail closed");
  }
  assert.ok(checkAdmissions(future,{feeds:[{...completeRss,verification:{...completeRss.verification,cancellation_semantics_verified:false}}]}).length>0);
 
+ // Deterministic boundary tests: day 30 allowed, day 31 rejected; no future proofs.
+ const dateCase=(day)=>({feeds:[{...completeRss,reviewed_on:day,verification:{...completeRss.verification,
+  checked_on:day,licence_checked_on:day,latest_future_event_date:"2027-01-01"}}]});
+ const checkDay="2026-12-20";
+ assert.deepEqual(checkAdmissions(future,dateCase("2026-11-20"),{today:checkDay}),[],"30-day evidence accepted");
+ assert.ok(checkAdmissions(future,dateCase("2026-11-19"),{today:checkDay}).length>0,"31-day evidence rejected");
+ assert.ok(checkAdmissions(future,dateCase("2026-12-21"),{today:checkDay}).length>0,"Future evidence rejected");
+ assert.ok(checkAdmissions(future,{feeds:[{...completeRss,reviewed_on:"2026-12-21",verification:{...completeRss.verification,licence_checked_on:"2026-12-21",checked_on:"2026-12-21",latest_future_event_date:"2027-01-01"}}]},{today:checkDay}).length>0);
+ assert.throws(()=>checkAdmissions(future,dateCase("2026-11-20"),{today:"2026-02-31"}),/Invalid admission inspection day/);
  const mereReachability=checkAdmissions({feeds:[{id:"candidate",source:"Stadt Köln"}]},audit);
  assert.ok(mereReachability.length>0,"A live webpage or parser is not permission");
  console.log("Source admission: future recurring feeds require licence evidence and explicit approval; legacy feed scope unchanged");
