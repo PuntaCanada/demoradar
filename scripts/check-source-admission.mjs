@@ -34,6 +34,8 @@ export function checkAdmissions(health,licences){
   if(!v||!allowedFormat.has(v.format)||!/^https:\/\//.test(v.endpoint_url||"")||
      v.reachable!==true||v.schema_valid!==true||v.has_future_event_dates!==true||
      !Array.isArray(v.event_fields)||!["title","date","location"].every(field=>v.event_fields.includes(field))||
+     // RSS structure alone is not evidence of a usable, update-safe event feed.
+     (["rss","api-rss"].includes(v.format)&&(!["guid","pubDate","start","end","status"].every(field=>v.event_fields.includes(field))||v.cancellation_semantics_verified!==true))||
      !isDate(v.checked_on)||!isDate(v.latest_future_event_date)||
      v.latest_future_event_date<v.checked_on||
      !isDate(a.reviewed_on)||!isDate(v.licence_checked_on)||
@@ -92,6 +94,20 @@ if(directRun){
  }
  assert.ok(checkAdmissions(future,{feeds:[{...approved,licence_url:""}]}).length>0);
  assert.ok(checkAdmissions(future,{feeds:[{...approved,verification:{...approved.verification,licence_checked_on:"2026-11-19"}}]}).length>0);
+
+ // A formally valid RSS with a licence is still not a safe event feed without
+ // item identity, publication timestamp, times, status and cancellation semantics.
+ const rssApproved={...approved,format:"RSS",verification:{...approved.verification,format:"rss"}};
+ assert.ok(checkAdmissions(future,{feeds:[rssApproved]}).length>0,"RSS without lifecycle evidence must fail closed");
+ const completeRss={...rssApproved,verification:{...rssApproved.verification,
+  event_fields:["title","date","location","guid","pubDate","start","end","status"],
+  cancellation_semantics_verified:true}};
+ assert.deepEqual(checkAdmissions(future,{feeds:[completeRss]}),[],"Fully evidenced RSS can pass admission");
+ for(const field of ["guid","pubDate","start","end","status"]){
+  const candidate={...completeRss,verification:{...completeRss.verification,event_fields:completeRss.verification.event_fields.filter(x=>x!==field)}};
+  assert.ok(checkAdmissions(future,{feeds:[candidate]}).length>0,"RSS missing "+field+" must fail closed");
+ }
+ assert.ok(checkAdmissions(future,{feeds:[{...completeRss,verification:{...completeRss.verification,cancellation_semantics_verified:false}}]}).length>0);
 
  const mereReachability=checkAdmissions({feeds:[{id:"candidate",source:"Stadt Köln"}]},audit);
  assert.ok(mereReachability.length>0,"A live webpage or parser is not permission");
