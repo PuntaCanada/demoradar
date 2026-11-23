@@ -1,10 +1,10 @@
 {
   "source": "https://stadt.weimar.de/de/versammlungsanmeldungen.html",
   "mode": "fixed_four_independently_verified_one_off_facts",
-  "checked_on": "2026-11-22",
+  "checked_on": "2026-11-23",
   "source_reviewed_on": "2026-11-20",
-  "status": "verified_individual_oneoffs",
-  "count": 4,
+  "status": "incomplete_original_no_new_import",
+  "count": 3,
   "scope": "four individually verified municipal announcements dated 22-25 November 2026, not automatic bulk syndication",
   "rights": "Only factual date/time/place/subject and direct primary link; blanket reuse licence NOT verified"
 }

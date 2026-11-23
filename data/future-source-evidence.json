@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "reviewed_on": "2026-11-22",
+  "reviewed_on": "2026-11-23",
   "scope": "Events dated today or later, not necessarily still upcoming at the current hour; source-provenance classification, NOT formal assembly registration, legal licence or completeness",
   "all_event_records": 1297,
-  "dated_today_or_later": 1278,
-  "old_event_records": 19,
+  "dated_today_or_later": 1265,
+  "old_event_records": 32,
   "invalid_dates": 0,
   "unmapped_state_records": 0,
   "source_categories": {
-    "official_structured_source": 1267,
-    "official_individual_notice": 4,
+    "official_structured_source": 1255,
+    "official_individual_notice": 3,
     "municipal_event_listing_registration_unconfirmed": 1,
     "nongovernment_organizer_notice": 5,
     "unclassified_source": 1
@@ -37,8 +37,8 @@
     },
     {
       "state": "Berlin",
-      "future_records": 1228,
-      "official_structured": 1228,
+      "future_records": 1216,
+      "official_structured": 1216,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
@@ -154,9 +154,9 @@
     },
     {
       "state": "Thüringen",
-      "future_records": 5,
+      "future_records": 4,
       "official_structured": 0,
-      "official_one_off": 4,
+      "official_one_off": 3,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
       "unclassified": 1
