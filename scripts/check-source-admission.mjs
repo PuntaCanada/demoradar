@@ -8,7 +8,7 @@ export const historical=new Map([["berlin","Polizei Berlin"],["dresden","Stadt D
 // New-source admission evidence is short-lived. The 30-day window limits stale
 // endpoint/licence claims; historical importers are explicitly exempt.
 export function checkAdmissions(health,licences,{today=new Date().toISOString().slice(0,10)}={}){
- const validDay=d=>typeof d==="string"&&/^20\\d{2}-\\d{2}-\\d{2}$/.test(d)&&!Number.isNaN(Date.parse(d))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
+ const validDay=d=>typeof d==="string"&&/^20\d{2}-\d{2}-\d{2}$/.test(d)&&!Number.isNaN(Date.parse(d))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
  if(!validDay(today))throw Error("Invalid admission inspection day");
  const ageDays=d=>(Date.parse(today+"T12:00:00Z")-Date.parse(d+"T12:00:00Z"))/86400000;
  const problems=[];
