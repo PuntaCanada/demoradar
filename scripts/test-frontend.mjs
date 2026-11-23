@@ -142,7 +142,7 @@ for(const path of ["/","/en/"]){
  el("listBtn").onclick();
  assert.ok(el("list").innerHTML.includes("Hauptwache"),"Verified historic venue retained in search");
  assert.ok(el("list").innerHTML.includes("event-time-past"),"Historical search result explicitly marked past");
- assert.ok(el("list").innerHTML.includes("14."),"Original November date retained");
+ assert.ok(el("list").innerHTML.includes(path==="/en/"?"11/14/2026":"14.11.2026")||el("list").innerHTML.includes(path==="/en/"?"Nov 14":"14. November"),"Original November date retained");
 }
 assert.ok(html.includes('name="viewport"'));
 assert.ok(english.includes('name="viewport"'));
