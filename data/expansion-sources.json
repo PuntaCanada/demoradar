@@ -72,9 +72,8 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-23",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_archive_only",
+      "checked_on": "2026-11-23"
     },
     {
       "city": "Halle (Saale)",
@@ -141,7 +140,7 @@
       "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
       "status": "reachable_monitor_only_not_a_feed",
       "checked_on": "2026-11-23",
-      "bytes_checked": 69624,
+      "bytes_checked": 72398,
       "date_conflicts": [],
       "documented_date_discrepancy": {
         "observed_on": "2026-11-20",
@@ -282,8 +281,9 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-23",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Bremen",
@@ -305,9 +305,8 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-23",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-23"
     }
   ]
 }
