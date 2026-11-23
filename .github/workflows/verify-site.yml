@@ -116,6 +116,7 @@ jobs:
         run: |
           node scripts/build-language-pages.mjs
           node scripts/test-today-pages.mjs
+          node scripts/test-berlin-page.mjs
           node scripts/test-today-selection.mjs
           node scripts/test-seo-reciprocity.mjs
           node scripts/test-public-crawlability.mjs
@@ -227,5 +228,10 @@ jobs:
         run: node scripts/test-publication-after-refresh.mjs
       - name: Prüfe Hash und Anzahl des tatsächlich ausgelieferten Cloudflare-Datenbestands
         run: node scripts/check-cloudflare-dataset.mjs
-      - name: Prüfe echte Google-Crawlability aller acht öffentlichen Seiten
-        run: node scripts/verify-public-crawlability.mjs --live
+      - name: Prüfe öffentliche Crawlability nur nach Main-Veröffentlichung
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ] && [ "${{ github.event_name }}" = "push" ]; then
+            node scripts/verify-public-crawlability.mjs --live
+          else
+            echo "PR/branch: production route is not deployed yet; offline Berlin crawlability is tested above. Live verification remains mandatory after main publication."
+          fi
