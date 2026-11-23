@@ -5,14 +5,14 @@
     "from": "2026-10-24",
     "to": "2026-11-30"
   },
-  "event_records": 398,
+  "event_records": 397,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Frankfurt am Main",
       "event_count": 2,
       "days_with_events": 1,
-      "observed_video_title_samples": 10,
+      "observed_video_title_samples": 7,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -25,7 +25,7 @@
     },
     {
       "city": "Berlin",
-      "event_count": 329,
+      "event_count": 325,
       "days_with_events": 9,
       "observed_video_title_samples": 4,
       "observed_city_and_date_samples": 3,
@@ -33,32 +33,26 @@
       "source_status": []
     },
     {
-      "city": "Polizei Hessen Meldungen",
-      "event_count": 0,
-      "days_with_events": 0,
+      "city": "Bonn",
+      "event_count": 1,
+      "days_with_events": 1,
       "observed_video_title_samples": 1,
       "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_police_press_index",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
+      "source_count": 0,
+      "source_status": []
     },
     {
-      "city": "Polizei Rheinland-Pfalz Presse",
-      "event_count": 0,
-      "days_with_events": 0,
+      "city": "Nürnberg",
+      "event_count": 1,
+      "days_with_events": 1,
       "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
+      "observed_city_and_date_samples": 1,
       "source_count": 1,
       "source_status": [
         {
-          "type": "official_police_press_index",
-          "status": "unavailable",
-          "reuse_rights_verified": true
+          "type": "official_city_press",
+          "status": "http_restricted",
+          "reuse_rights_verified": false
         }
       ]
     },
@@ -146,12 +140,12 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         },
         {
           "type": "official_registration_information",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
@@ -211,8 +205,38 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "transport_unverified",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Polizei Hessen Meldungen",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_press_index",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Polizei Rheinland-Pfalz Presse",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_press_index",
+          "status": "unavailable",
+          "reuse_rights_verified": true
         }
       ]
     },
@@ -277,15 +301,6 @@
       ]
     },
     {
-      "city": "Bonn",
-      "event_count": 1,
-      "days_with_events": 1,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 0,
-      "source_status": []
-    },
-    {
       "city": "Dortmund",
       "event_count": 1,
       "days_with_events": 1,
@@ -296,21 +311,6 @@
         {
           "type": "official_municipal_publications",
           "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
-      "city": "Nürnberg",
-      "event_count": 1,
-      "days_with_events": 1,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_city_press",
-          "status": "http_restricted",
           "reuse_rights_verified": false
         }
       ]
@@ -394,8 +394,8 @@
     },
     {
       "city": "Weimar",
-      "event_count": 8,
-      "days_with_events": 4,
+      "event_count": 9,
+      "days_with_events": 5,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
