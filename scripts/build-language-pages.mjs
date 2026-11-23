@@ -1,3 +1,4 @@
+import {buildBerlin} from "./build-berlin-page.mjs";
 import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
 import vm from "node:vm";
 import {selectTodayEntries} from "./today-selection.mjs";
@@ -152,6 +153,7 @@ function buildTodayPages(){
  return current;
 }
 const todayPageDate=buildTodayPages();
+buildBerlin();
 
 const alternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/"/>';
 const sourceAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/sources/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/sources/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/sources/"/>';
@@ -160,7 +162,7 @@ const todayAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel
 const sourceUrls=[
  ["/",alternate],["/en/",alternate],["/community/",communityAlternate],["/en/community/",communityAlternate],
  ["/sources/",sourceAlternate],["/en/sources/",sourceAlternate],
- ["/heute/",todayAlternate],["/en/today/",todayAlternate]
+ ["/heute/",todayAlternate],["/en/today/",todayAlternate],["/berlin/",""]
 ];
 const sitemapLines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
  ...sourceUrls.map(([route,links])=>'<url><loc>'+origin+route+'</loc>'+links+'</url>'),'</urlset>',''];
