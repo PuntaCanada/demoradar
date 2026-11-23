@@ -239,6 +239,8 @@ jobs:
             if (!data.events.every(e => /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.title && e.country === "DE")) throw Error("Invalid event");
             console.log("Validated", data.events.length, "events");
           '
+      - name: Teste nachgelagerten Produktionsabgleich offline
+        run: node scripts/test-publication-after-refresh.mjs
       - name: Commit nur bei Änderungen
         run: |
           if [ -n "$(git status --porcelain data/events.json data/source-status.json data/news-matches.json data/dresden-source.json data/demos-api-status.json data/demos-api-sample.json data/demos-events.json data/event-updates.json data/event-count-change.json data/future-source-evidence.json data/cologne-source.json data/nrw-police-source.json data/source-health-alerts.json data/source-format-health.json data/leipzig-police-source.json data/leipzig-archive-source.json data/source-quality.json data/police-notices-source.json data/berlin-source.json data/rostock-source.json data/frankfurt-source.json data/freiburg-source.json data/stuttgart-demo-source.json data/potsdam-lindenberg-source.json data/three-regional-oneoffs-source.json data/weimar-oneoffs-source.json data/dortmund-police-source.json data/bad-oldesloe-police-source.json data/frankfurt-police-archive-source.json data/expansion-sources.json index.html en/index.html heute/index.html en/today/index.html sitemap.xml robots.txt)" ]; then
@@ -256,3 +258,5 @@ jobs:
           else
             echo "Keine Änderungen"
           fi
+      - name: Prüfe Veröffentlichung nach dem Daten-Push (ohne Folge-Workflow)
+        run: node scripts/check-publication-after-refresh.mjs
