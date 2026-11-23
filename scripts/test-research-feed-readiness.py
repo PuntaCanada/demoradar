@@ -9,7 +9,7 @@ def inspect_rss(payload, http_status=200):
         return False
     try:
         root = ET.fromstring(payload)
-    except ET.ParseError:
+    except (ET.ParseError, TypeError, ValueError):
         return False
     if root.tag != "rss" or root.attrib.get("version") != "2.0":
         return False
@@ -39,7 +39,9 @@ def inspect_notice(category, start, end, place, status):
         last = dt.datetime.fromisoformat(end)
     except (TypeError, ValueError):
         return False
-    return first.tzinfo is not None and last.tzinfo is not None and first < last
+    if first.tzinfo is None or last.tzinfo is None:
+        return False
+    return first.utcoffset() is not None and last.utcoffset() is not None and first < last
 
 class FailClosedTests(unittest.TestCase):
     def test_rss_errors_and_guid(self):
@@ -59,6 +61,24 @@ class FailClosedTests(unittest.TestCase):
             for index,value in changes.items():
                 modified[index]=value
             self.assertFalse(inspect_notice(*modified))
+    def test_rss_malformed_payload_types_and_empty_feed(self):
+        for invalid in (None, 42, b'', b'<rss version="2.0"><channel/></rss>',
+                        b'<rss version="2.0"><channel><item><guid> </guid></item></channel></rss>',
+                        b'<rss version="2.0"><channel><item><guid>x</guid></item><item><guid>x</guid></item></channel></rss>'):
+            with self.subTest(payload=invalid):
+                self.assertFalse(inspect_rss(invalid))
+
+    def test_notice_timezone_and_ambiguous_status(self):
+        valid = ("Versammlungen", "2026-11-25T16:00:00+01:00", "2026-11-25T20:00:00+01:00", "Holzmarkt", "confirmed")
+        for change in ({1: None}, {2: None}, {1: "2026-11-25T16:00:00"},
+                       {2: "2026-11-25T20:00:00"}, {4: "unknown"}, {4: "beschieden"},
+                       {4: "cancelled"}, {0: "Veranstaltungen"}, {3: "  "}):
+            candidate = list(valid)
+            for index, value in change.items():
+                candidate[index] = value
+            with self.subTest(change=change):
+                self.assertFalse(inspect_notice(*candidate))
+
     def test_no_import_path(self):
         self.assertFalse(inspect_notice("Versammlungen", "2026-11-25T16:00:00+01:00", "2026-11-25T20:00:00+01:00", "Holzmarkt", "beschieden"))
 if __name__ == "__main__":
