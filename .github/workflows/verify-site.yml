@@ -223,6 +223,8 @@ jobs:
             esac
           done
           echo "Cloudflare endpoints are reachable and include expected data."
+      - name: Teste Veröffentlichung nach Daten-Push offline
+        run: node scripts/test-publication-after-refresh.mjs
       - name: Prüfe Hash und Anzahl des tatsächlich ausgelieferten Cloudflare-Datenbestands
         run: node scripts/check-cloudflare-dataset.mjs
       - name: Prüfe echte Google-Crawlability aller acht öffentlichen Seiten
