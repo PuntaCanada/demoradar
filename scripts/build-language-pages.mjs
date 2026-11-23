@@ -42,6 +42,7 @@ function buildEnglish(){
  html=html.replace("Live-Daten werden vorbereitet","Loading live event data");
  html=html.replace("Noch keine verifizierten Termine","No verified events yet");
  html=html.replace("Die Filter sind vorbereitet. Nach Anbindung geprüfter Quellen erscheinen hier automatisch Veranstaltungen mit Quellen- und Aktualisierungsangaben.","Events from checked sources will appear here with attribution and update details.");
+ html=html.replace('<a href="/berlin/">Demos Berlin</a>','<a href="/berlin/">Berlin demonstrations</a>');
  html=html.replace(/href="\/community\/"/g,'href="/en/community/"');
  html=html.replace(/href="\/sources\/"/g,'href="/en/sources/"');
  html=html.replace('<a href="/heute/" aria-label="Heute gemeldete Demonstrationen als eigene Seite">Alle heutigen Meldungen</a>',
