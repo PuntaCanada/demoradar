@@ -2,6 +2,7 @@ name: DemoRadar Website und Cloudflare prüfen
 on:
   pull_request:
     paths:
+      - 'scripts/check-cloudflare-dataset.mjs'
       - 'scripts/monitor-official-sources.py'
       - 'scripts/test-source-monitor.py'
       - '.github/workflows/verify-site.yml'
