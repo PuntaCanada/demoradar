@@ -37,7 +37,8 @@ export function validateSnapshot(pages,root=origin){
  check(sitemapBody.includes("<urlset"),"Sitemap must contain an XML urlset, not an SPA HTML fallback");
  const routePaths=pairs.flat();
  const actualLocations=[...sitemapBody.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
- check(actualLocations.length===routePaths.length,"Sitemap must contain exactly eight unique canonical pages");
+ check(actualLocations.length===routePaths.length+1,"Sitemap must contain eight language routes plus Berlin");
+ check(actualLocations.includes(root+"/berlin/"),"Berlin must be in sitemap");
  check(new Set(actualLocations).size===actualLocations.length,"Sitemap must not duplicate canonical locations");
  for(const path of routePaths)check(actualLocations.includes(root+path),"Missing sitemap URL: "+path);
  for(const [de,en] of pairs){
