@@ -5,7 +5,7 @@
     "from": "2026-10-24",
     "to": "2026-11-30"
   },
-  "event_records": 436,
+  "event_records": 398,
   "diagnostic_video_samples": 24,
   "cities": [
     {
@@ -25,10 +25,10 @@
     },
     {
       "city": "Berlin",
-      "event_count": 360,
-      "days_with_events": 10,
-      "observed_video_title_samples": 3,
-      "observed_city_and_date_samples": 2,
+      "event_count": 329,
+      "days_with_events": 9,
+      "observed_video_title_samples": 4,
+      "observed_city_and_date_samples": 3,
       "source_count": 0,
       "source_status": []
     },
@@ -59,26 +59,6 @@
           "type": "official_police_press_index",
           "status": "unavailable",
           "reuse_rights_verified": true
-        }
-      ]
-    },
-    {
-      "city": "Leipzig",
-      "event_count": 3,
-      "days_with_events": 2,
-      "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
-      "source_count": 2,
-      "source_status": [
-        {
-          "type": "official_police_press",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        },
-        {
-          "type": "official_open_data_research",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
         }
       ]
     },
@@ -166,12 +146,12 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
           "type": "official_registration_information",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -231,7 +211,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "reachable_archive_only",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -369,6 +349,26 @@
       "source_status": []
     },
     {
+      "city": "Leipzig",
+      "event_count": 3,
+      "days_with_events": 2,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 2,
+      "source_status": [
+        {
+          "type": "official_police_press",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        },
+        {
+          "type": "official_open_data_research",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
       "city": "Köln",
       "event_count": 5,
       "days_with_events": 1,
@@ -385,8 +385,8 @@
     },
     {
       "city": "Münster",
-      "event_count": 7,
-      "days_with_events": 6,
+      "event_count": 6,
+      "days_with_events": 5,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
