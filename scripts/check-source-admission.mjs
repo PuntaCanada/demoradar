@@ -67,7 +67,9 @@ if(directRun){
   "monitor-official-sources.py","update-dresden.py","update-dresden-jena.py",
   "dedupe-events.py","check-demos-api.py","probe-demos-events.py","update-demos.py",
   "source-format-health.mjs","audit-source-quality.mjs","audit-future-source-evidence.py","source-health-alerts.mjs",
-  "track-event-updates.py","update-news.py","build-language-pages.mjs"
+  "track-event-updates.py","update-news.py","build-language-pages.mjs",
+  // Post-push read-only Cloudflare verification, never an importer.
+  "check-publication-after-refresh.mjs","test-publication-after-refresh.mjs"
  ]);
  const declared=[...workflow.matchAll(/^        run: (?:python3|node) scripts\/([a-zA-Z0-9_.-]+)\s*$/gm)].map(m=>m[1]);
  assert.ok(declared.includes("update-events.mjs")&&declared.includes("update-dresden.py"),"Known official import steps missing from approved scheduler");
