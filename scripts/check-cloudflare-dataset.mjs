@@ -60,3 +60,27 @@ console.log("PUBLIC FUTURE PROVENANCE REPORT: "+JSON.stringify(futureProof));
 if(futureProof.status==="exact_future_report_match")
  console.log("PROVEN: public Cloudflare future-source-evidence.json matches GitHub exact bytes");
 else console.log("NOT PROVEN: public future provenance report may lag or differ; do not claim publication");
+
+
+// Independent public JavaScript byte proof. This proves one deployed asset,
+// not the Cloudflare deployment ID or the complete production release.
+const liveJsUrl="https://demoradar.pages.dev/live.js";
+const localLiveJs=readFileSync("live.js");
+const liveJsProof={source_url:liveJsUrl,status:"not_verified",
+ local_sha256:hash(localLiveJs),public_sha256:null,checked_code_sha:process.env.GITHUB_SHA||null,error:null,
+ caveat:"An exact live.js byte match does not identify the full Cloudflare deployment."};
+try{
+ const response=await fetch(liveJsUrl,{headers:{"User-Agent":"DemoRadar-Publication-Proof/1.0","Cache-Control":"no-cache"},
+  signal:AbortSignal.timeout(12000)});
+ if(!response.ok)throw Error("Cloudflare returned HTTP "+response.status);
+ const bytes=Buffer.from(await response.arrayBuffer());
+ if(bytes.length>2_000_000)throw Error("Unexpectedly large production live.js");
+ liveJsProof.public_sha256=hash(bytes);
+ liveJsProof.status=liveJsProof.public_sha256===liveJsProof.local_sha256?
+  "exact_live_js_match":"live_js_differs";
+}catch(err){liveJsProof.error=String(err.message||err)}
+console.log("PUBLIC LIVE.JS BYTE PROOF: "+JSON.stringify(liveJsProof));
+if(liveJsProof.status==="exact_live_js_match")
+ console.log("PROVEN: public Cloudflare live.js matches checked-out GitHub live.js byte-for-byte");
+else console.log("NOT PROVEN: public live.js matches this GitHub commit; deployment may lag or differ");
+console.log("FULL CLOUDFLARE DEPLOYMENT ID: NOT VERIFIED (requires Cloudflare deployment metadata or authenticated API).");
