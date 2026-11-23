@@ -14,6 +14,7 @@ on:
       - 'scripts/test-regional-organizer-oneoffs.py'
       - 'scripts/test-stuttgart-demo.py'
       - 'scripts/test-source-monitor.py'
+      - 'scripts/test-research-feed-readiness.py'
       - 'scripts/source-health-alerts.mjs'
       - 'scripts/test-source-health-alerts.mjs'
       - 'scripts/stream-matcher.mjs'
@@ -93,6 +94,7 @@ jobs:
           python3 scripts/test-regional-organizer-oneoffs.py
           python3 scripts/test-stuttgart-demo.py
           python3 scripts/test-source-monitor.py
+          python3 scripts/test-research-feed-readiness.py
           python3 scripts/test-event-count-delta.py
           python3 scripts/test-future-source-evidence.py
           node --check scripts/check-cloudflare-dataset.mjs

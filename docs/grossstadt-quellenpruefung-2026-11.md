@@ -37,3 +37,39 @@ Diese Datei ist ein Rechercheprotokoll, **kein Importfreigabevermerk**. Diagnose
 ## Reproduzierbarer CI-Fehler am 23.11.2026
 
 PR #51, Workflow „Source transparency checks“, Run 45151803654: `scripts/test-source-monitor.py` Zeile 73 schlug fehl, weil die Weimar-Testdaten vom 22.–25.11.2026 mit dem echten aktuellen UTC-Datum geprüft wurden. Die Produktionslogik soll weiterhin vergangene Termine ausschließen. Der Test verwendet nun für die drei festen Weimar-Fixtures explizit den 20.11.2026; der optionale `today`-Parameter in `inspect` wird standardmäßig weiterhin aus der aktuellen UTC-Zeit bestimmt. Kein Ereignisimport geändert.
+
+## Amtliche Quellen-Nachprüfung am 23.11.2026 (nur Recherche, keine Importfreigabe)
+
+### Rostock
+- **Originalübersicht:** https://rathaus.rostock.de/sixcms/detail.php/rostock_01_test.c.343355.de — die offizielle Seite war öffentlich lesbar und zeigte konkrete Versammlungen vom 23. und 25.11.2026 mit Motto, Beginn, Ende, beantragtem/beschiedenem Streckenverlauf und Status (z. B. `beschieden`). **Nicht alle Statuswerte sind als Durchführung oder Absage interpretierbar.**
+- **Amtlich dokumentierter RSS:** https://rathaus.rostock.de/sixcms/list.php?page=rss_seite_versammlung_de — im Städtischen Anzeiger vom 30.04.2022 ausdrücklich als RSS für Neueintragungen genannt (https://rathaus.rostock.de/sixcms/media.php/rostock_01.a.11071.de/datei/St%C3%8420220430.pdf). Direkter Abruf über die Rechercheumgebung am 23.11.2026: Cache-Miss; **RSS-XML, IDs, GUID-Stabilität, Update- und Löschsemantik daher nicht verifiziert**.
+- **Recht:** Die Veröffentlichung und das RSS-Angebot sind kein ausdrücklicher Nachweis, dass Drittanbieter Daten automatisiert vervielfältigen, dauerhaft speichern oder weiterveröffentlichen dürfen. Eine eindeutige Nutzungsfreigabe liegt nicht vor. Keine personenbezogenen Angaben der Anmeldenden übernehmen.
+- **Importentscheidung:** gesperrt bis ausdrückliche Wiederverwendungsfreigabe, XML-Abruf und belastbare Tests für Änderungen/Absagen/Zeitzonen.
+
+### Jena
+- **Originalseite:** https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen — offizielles Rathausportal mit öffentlichen Versammlungen, Zeitpunkt, Ort und verlinkten Informations-PDFs. Die Stadt begründet die Veröffentlichung mit dem Thüringer Transparenzgesetz. Am 23.11.2026 waren unter anderem Einträge für den 25.11.2026 sichtbar.
+- **Technik:** gemischter Katalog von Veranstaltungen und Versammlungen; die Kategorie muss zwingend geprüft werden. HTML-Termin- und Ortsfelder sind vorhanden, PDF kann zusätzliche Auflagen enthalten. Stabile IDs, Absage- und Änderungssemantik und maschinenlesbarer Feed nicht nachgewiesen.
+- **Recht:** Die Entscheidung der Stadt zur öffentlichen Anzeige ist **keine ausdrückliche Drittanbieter-Reuse-Lizenz**. Kein Import ohne Klärung.
+
+### Dresden
+- **Amtlicher Nachweis:** https://www.dresden.de/media/pdf/amtsblatt/2024/gedruckte-ausgabe/Wegweiser-Rathaus-2024.pdf — städtische Beschreibung der täglich bis 8 Uhr aktualisierten Dreimonatsübersicht; sehr kurzfristige Versammlungen und Streiks können fehlen, Durchführung ist nicht garantiert.
+- **Abruf:** https://www.dresden.de/versammlungen lieferte bei der Recherche am 23.11.2026 HTTP 503. Damit weder aktuelle Datensätze noch strukturierte Datums-, Orts-, Absagefelder belastbar geprüft. Wiederverwendungsrechte nicht nachgewiesen.
+
+### Weitere priorisierte Städte
+München, Düsseldorf, Hannover, Dortmund, Stuttgart und Bremen: Keine neu verifizierte Kombination aus öffentlich abrufbarem Terminfeed, stabilen IDs, nachvollziehbarer Absagesemantik und ausdrücklicher Wiederverwendungsfreigabe. Bestehende Rechercheeinträge bleiben ohne Importberechtigung.
+
+### Regressionen vor späterer Freigabe (verbindlich)
+1. Nur als Versammlungen klassifizierte Einträge; Veranstaltungen, Presse-Rückblicke und Anmeldeformulare werden ausgeschlossen.
+2. Terminbeginn/-ende inklusive Europe/Berlin-Zeitzone valide; kein Datum aus einem Titel erraten.
+3. Quelle/Original-URL und stabile Event-ID nachweisen; gleiche Veranstaltung darf nicht dupliziert werden.
+4. RSS-Neueintrag ≠ Statusänderung oder Absage; Änderungen und Löschungen dürfen nicht ohne amtlichen Nachweis als Absage gelten.
+5. Persönliche Anmelderdaten nicht übernehmen; Quellenrechte explizit belegen.
+6. HTTP 403/429/503, XML-Fehler und fehlende Pflichtfelder führen zu **keinem** fiktiven oder ungeprüften Ereignis.
+
+## Direkte Nachprüfung am 23.11.2026
+
+- Rostock: Amtliche HTML-Übersicht mit den Feldern `Versammlungsbeginn`, `Versammlungsende`, `Versammlungsart`, `Status`, `Beantragter Streckenverlauf` und `Beschiedener Streckenverlauf` abrufbar: https://rathaus.rostock.de/sixcms/detail.php/rostock_01_test.c.343355.de. `beschieden` ist **keine** Absage und kein Nachweis der tatsächlichen Durchführung. Die Seite enthält auch Angaben zu Anmeldenden, die nicht übernommen werden dürfen. Der offizielle RSS-Endpunkt https://rathaus.rostock.de/sixcms/list.php?page=rss_seite_versammlung_de war bei der direkten Prüfung nicht abrufbar (Cache miss). Damit XML, GUID, Änderungs-/Löschsemantik und tatsächliche Aktualität des RSS weiterhin unbestätigt.
+- Jena: https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen liefert am Prüftag einen datierten Versammlungseintrag zum 25.11.2026 sowie getrennte Einträge der Kategorie `Veranstaltungen`. Informations-PDFs sind verlinkt. Einzelne Amtsblatt-PDFs, z. B. https://rathaus.jena.de/system/files/2026-10/42_26.pdf, enthalten Bekanntmachungen zu bereits vergangenen Versammlungen; sie sind kein vollständiger zukünftiger Terminfeed.
+- Dresden: Direkter Aufruf von https://www.dresden.de/versammlungen ergab HTTP 503. Polizeiliche Rückblick-Pressemitteilungen (z. B. https://www.medienservice.sachsen.de/medien/news/1101305) sind keine gleichwertige zukünftige amtliche Versammlungsübersicht und dürfen nicht als solche importiert werden.
+
+**Testanforderungen:** RSS-Verfügbarkeit darf nicht aus dem bloßen Vorhandensein eines amtlichen Links abgeleitet werden. Ein importierender Parser muss XML-Schema und GUIDs separat prüfen; bei 503, fehlendem GUID, fehlendem Veranstaltungsbeginn, widersprüchlicher Ortsangabe oder nicht eindeutigem Status fail-closed. Die Jena-Kategorie `Veranstaltungen` muss ausgeschlossen werden. Ein Status `beschieden` darf niemals zu `abgesagt` oder `durchgeführt` umgedeutet werden. Keine Importaktivierung ohne ausdrückliche Rechteklärung.
