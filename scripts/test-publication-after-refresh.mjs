@@ -14,6 +14,6 @@ calls=0;waits=0;
 assert.equal(await verify({run:async()=>{calls++;return {ok:false,output:""}},wait:async()=>{waits++},attempts:3}),"unavailable");
 assert.equal(calls,3);assert.equal(waits,2);
 const workflow=readFileSync(".github/workflows/update-events.yml","utf8");
-assert.ok(workflow.indexOf("node scripts/test-publication-after-refresh.mjs")<workflow.indexOf("node scripts/check-source-admission.mjs"));
+assert.ok(workflow.indexOf("node scripts/test-publication-after-refresh.mjs")>workflow.indexOf("node scripts/check-source-admission.mjs"));
 assert.ok(workflow.lastIndexOf("node scripts/check-publication-after-refresh.mjs")>workflow.lastIndexOf('git push'));
 console.log("Post-refresh publication probe: deterministic retry and state regressions passed");
