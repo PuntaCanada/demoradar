@@ -36,6 +36,16 @@ export function validateSnapshot(pages,root=origin){
  const sitemapBody=sitemap?.body||"";
  check(sitemapBody.includes("<urlset"),"Sitemap must contain an XML urlset, not an SPA HTML fallback");
  const routePaths=pairs.flat();
+ const berlin=get(root+"/berlin/"),berlinHtml=berlin?.body||"";
+ check(berlin?.status===200,"Berlin page not HTTP 200");
+ check(/text\\/html/i.test(berlin?.type||""),"Berlin page must be served as HTML");
+ check(/<html[^>]*lang="de"/i.test(berlinHtml),"Berlin route must be German HTML, not generic fallback");
+ check(canonicalOf(berlinHtml)===root+"/berlin/","Berlin self-canonical missing or fallback");
+ check(/<h1>Demonstrationen in Berlin<\\/h1>/.test(berlinHtml),"Berlin heading missing or fallback");
+ check(/<meta name="description" content="[^"]+"/.test(berlinHtml),"Berlin description missing");
+ check(/Stand der Übersicht: 20\\d{2}-\\d{2}-\\d{2}/.test(berlinHtml),"Berlin static date missing");
+ check(/Quelleneinträge/.test(berlinHtml)&&/Quellenabdeckung/.test(berlinHtml),"Berlin source and coverage disclosure missing");
+ check(!/<meta[^>]*content="[^"]*noindex/i.test(berlinHtml),"Berlin unexpectedly noindex");
  const actualLocations=[...sitemapBody.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
  check(actualLocations.length===routePaths.length+1,"Sitemap must contain eight language routes plus Berlin");
  check(actualLocations.includes(root+"/berlin/"),"Berlin must be in sitemap");
@@ -63,7 +73,7 @@ export function validateSnapshot(pages,root=origin){
  return {ok:errors.length===0,errors,checkedRoutes:routePaths.length};
 }
 export async function fetchSnapshot(root=origin){
- const paths=["/robots.txt","/sitemap.xml",...pairs.flat()],map=new Map();
+ const paths=["/robots.txt","/sitemap.xml","/berlin/",...pairs.flat()],map=new Map();
  await Promise.all(paths.map(async p=>{
   try{
    const response=await fetch(root+p,{redirect:"follow",cache:"no-store",headers:{"User-Agent":"DemoRadar-CrawlabilityAudit/1.0"}});
