@@ -116,7 +116,7 @@ def verify_landsberg_weekdays(raw):
   if d.weekday()!=names[name]:issues.append(f"{day}.{month}.{year}: weekday contradicts {name}")
  return issues
 
-def inspect(item):
+def inspect(item, today=None):
  output={**item,"status":"unavailable","checked_on":datetime.now(timezone.utc).date().isoformat()}
  req=urllib.request.Request(item["url"],headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
  try:
@@ -129,7 +129,7 @@ def inspect(item):
     output["bytes_checked"]=len(payload)
    if response.status!=200 or len(payload)<400:raise ValueError("Empty or non-200 page")
    if item["type"]=="official_assembly_upcoming_html":
-    dates,conflicts,rows=verify_weimar_dates(payload)
+    dates,conflicts,rows=verify_weimar_dates(payload,today)
     output["future_announcement_rows_verified"]=rows
     output["future_dates_verified"]=dates
     output["future_date_count"]=len(dates)

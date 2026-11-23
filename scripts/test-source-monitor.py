@@ -69,13 +69,13 @@ assert rows==4
 class WeimarResponse(Response):
  def read(self,_):return weimar_html
 with patch.object(module.urllib.request,"urlopen",return_value=WeimarResponse()):
- checked=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
+ checked=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"),today=module.date(2026,11,20))
  assert checked["status"]=="content_unverified" and checked["future_date_count"]==4
 good_html=weimar_html.replace(b"<div>Mi, 16.11.26 contradiction</div>",b"")
 class ValidWeimar(Response):
  def read(self,_):return good_html
 with patch.object(module.urllib.request,"urlopen",return_value=ValidWeimar()):
- checked=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
+ checked=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"),today=module.date(2026,11,20))
  assert checked["status"]=="reachable_upcoming_list_research_only"
  assert checked["future_date_count"]==4 and checked["future_announcement_rows_verified"]==4 and checked["future_dates_verified"][0]=="2026-11-22"
  assert "events" not in checked
@@ -90,7 +90,7 @@ class LongWeimar(Response):
   assert n>=300_000
   return b"<nav>"+b"Navigation links and official site sections. "*5000+b"</nav>"+good_html
 with patch.object(module.urllib.request,"urlopen",return_value=LongWeimar()):
- long_check=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"))
+ long_check=module.inspect(next(s for s in module.SOURCES if s["city"]=="Weimar"),today=module.date(2026,11,20))
  assert long_check["future_date_count"]==4 and long_check["future_announcement_rows_verified"]==4 and long_check["status"]=="reachable_upcoming_list_research_only"
 class LongLandsberg(Response):
  def read(self,n):

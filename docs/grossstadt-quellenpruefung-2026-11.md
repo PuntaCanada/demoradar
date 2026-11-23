@@ -15,7 +15,7 @@ Diese Datei ist ein Rechercheprotokoll, **kein Importfreigabevermerk**. Diagnose
 | Dortmund | 1 | Diagnose-Eintrag vorhanden | Ungeklärt | Polizeiliche/amtliche Quelle recherchieren |
 | Essen | nicht separat erfasst | Noch keine bestätigte Terminquelle | Ungeklärt | Zuständigkeit und Feed recherchieren |
 | Bremen | 0 | Polizei-Pressearchiv laut Diagnose HTTP-eingeschränkt | Ungeklärt / kein Feed bestätigt | Alternative amtliche Quelle suchen |
-| Dresden | nicht separat erfasst | Noch keine bestätigte Terminquelle | Ungeklärt | Zuständigkeit und Feed recherchieren |
+| Dresden | nicht separat erfasst | [Amtliche Versammlungsübersicht](https://www.dresden.de/versammlungen) laut städtischem Wegweiser täglich bis 8 Uhr aktualisiert, drei Monate Vorschau; direkter Abruf am 23.11.2026 mit HTTP 503 fehlgeschlagen | Öffentliche HTML-Übersicht dokumentiert, maschinenlesbarer Feed und Wiederverwendungsrechte **nicht bestätigt** | Abrufbarkeit, Nutzungsbedingungen, Datums-/Absagefelder prüfen; kein Import |
 | Hannover | nicht separat erfasst | [Städtische FAQ](https://www.hannover.de/Leben-in-der-Region-Hannover/Verwaltungen-Kommunen/Die-Verwaltung-der-Landeshauptstadt-Hannover/Dezernate-und-Fachbereiche-der-LHH/Jugend%2C-Familie-Sport/Fachbereich-Sport%2C-B%C3%A4der-und-Eventmanagement/Veranstaltungsservice-der-Landeshauptstadt-Hannover/%C3%96ffentliche-Veranstaltungen-in-Hannover-planen-und-anmelden) nennt Polizeidirektion als zuständig | Ungeklärt / kein bestätigter Feed | Polizeidirektion nach Termindaten fragen |
 | Nürnberg | 1 | Diagnose-Eintrag vorhanden | Ungeklärt | Amtliche Quelle prüfen |
 | Duisburg | nicht separat erfasst | Noch keine bestätigte Terminquelle | Ungeklärt | Zuständigkeit und Feed recherchieren |
@@ -33,3 +33,7 @@ Diese Datei ist ein Rechercheprotokoll, **kein Importfreigabevermerk**. Diagnose
 - Alle 15 Städte in dieser Tabelle dokumentiert; jeder Status unterscheidet recherchierte Quelle und importierbare Termine.
 - Keine neue Stadt erhält allein wegen einer Anmelde- oder Presseseite den Status „automatisch importierbar“.
 - Bestehende DemoRadar-Daten und die Website bleiben durch diese Dokumentation unverändert.
+
+## Reproduzierbarer CI-Fehler am 23.11.2026
+
+PR #51, Workflow „Source transparency checks“, Run 45151803654: `scripts/test-source-monitor.py` Zeile 73 schlug fehl, weil die Weimar-Testdaten vom 22.–25.11.2026 mit dem echten aktuellen UTC-Datum geprüft wurden. Die Produktionslogik soll weiterhin vergangene Termine ausschließen. Der Test verwendet nun für die drei festen Weimar-Fixtures explizit den 20.11.2026; der optionale `today`-Parameter in `inspect` wird standardmäßig weiterhin aus der aktuellen UTC-Zeit bestimmt. Kein Ereignisimport geändert.
