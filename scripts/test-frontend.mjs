@@ -30,7 +30,7 @@ const dataMap={
   checked_at:new Date().toISOString()
  }]}
 };
-async function mount(path,{failed=false,withReviewed=false,detail=false}={}){
+async function mount(path,{failed=false,withReviewed=false,detail=false,historical=false}={}){
  const all=new Map();
  function el(id){
   if(all.has(id))return all.get(id);
@@ -72,7 +72,7 @@ async function mount(path,{failed=false,withReviewed=false,detail=false}={}){
  const fetch=url=>failed&&url==="/data/events.json"?Promise.reject(new Error("network failure")):Promise.resolve({
  ok:(withReviewed&&url==="/data/live-streams.json")||dataMap[url]!==undefined,
  status:(withReviewed&&url==="/data/live-streams.json")||dataMap[url]!==undefined?200:404,
- json:async()=>structuredClone(withReviewed&&url==="/data/live-streams.json"?reviewed:dataMap[url])
+ json:async()=>structuredClone(historical&&url==="/data/events.json"?{events:[...official,{id:"police-frankfurt-archive-1",country:"DE",state:"Hessen",city:"Frankfurt am Main",date:"2026-11-14",start:"12:30",title:"Gen Z regelt",location:"Hauptwache",source:"Polizeipräsidium Frankfurt am Main",source_url:"https://www.presseportal.de/blaulicht/pm/4970/6390267"}],updated_at:new Date().toISOString()}:withReviewed&&url==="/data/live-streams.json"?reviewed:dataMap[url])
  });
  const Option=class{constructor(text,value){this.text=text;this.value=value}};
  const ctx={window,document:doc,location,navigator:{language:path.startsWith("/en/")?"en-GB":"de-DE"},localStorage,Option,fetch,Date,Intl,URL,URLSearchParams,console,CustomEvent:class{constructor(type,config){this.type=type;this.detail=config?.detail}}};
@@ -125,6 +125,24 @@ for(const path of ["/","/en/"]){
  assert.ok(rendered.includes("REPLAY123")===false,"LIVE must link to actual live playback, not old archive");
  assert.ok(rendered.includes(path==="/en/"?"Additional automated suggestions":"Weitere automatisch gefundene Vorschläge"),"Possible recording remains visible beside reviewed LIVE");
  assert.ok(rendered.includes("TEST123"),"Unverified archive retained separately");
+}
+
+// Historical Frankfurt police facts: dated 14 November 2026, not an upcoming rally.
+// Test calendar navigation and text search using the verified archival date and venue.
+for(const path of ["/","/en/"]){
+ const {el}=await mount(path,{historical:true});
+ el("search").value="Hauptwache";el("search").fire("input");
+ const currentMonth=new Date();
+ const targetMonth=new Date(2026,10,1);
+ const offset=(currentMonth.getFullYear()-targetMonth.getFullYear())*12+currentMonth.getMonth()-targetMonth.getMonth();
+ for(let i=0;i<Math.abs(offset);i++)el(offset>0?"prev":"next").onclick();
+ assert.ok(el("calendar").innerHTML.includes('data-date="2026-11-14"'),"Historical Frankfurt date remains navigable");
+ assert.ok(el("calendar").innerHTML.includes('event-day-past'),"Historical day visibly classified as past");
+ assert.ok(el("calendar").innerHTML.includes(path==="/en/"?"Past":"Vergangen"),"Historical calendar button announces past status");
+ el("listBtn").onclick();
+ assert.ok(el("list").innerHTML.includes("Hauptwache"),"Verified historic venue retained in search");
+ assert.ok(el("list").innerHTML.includes("event-time-past"),"Historical search result explicitly marked past");
+ assert.ok(el("list").innerHTML.includes("14."),"Original November date retained");
 }
 assert.ok(html.includes('name="viewport"'));
 assert.ok(english.includes('name="viewport"'));
