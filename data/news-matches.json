@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-20T15:34:13.547530+00:00",
+  "checked_at": "2026-11-24T00:05:50.536669+00:00",
   "policy": "Only independently authored labels and verified source URLs; manually reviewed link candidates, automatic event association is NOT event verification. No RSS syndication.",
   "feeds": [],
   "editorial_sources": [
@@ -10,28 +10,6 @@
     "tagesschau / rbb"
   ],
   "matches": {
-    "police-leipzig-35d02c0eda686b0d": [
-      {
-        "url": "https://www.mdr.de/nachrichten/deutschland/politik/genz-regelt-fridays-for-future-schulstreik-wehrpflicht-klima-sachsen-anhalt-thueringen%2Cgen-z-regelt-proteste-104.html",
-        "source": "MDR",
-        "title": "MDR-Bericht über den Jugendprotesttag",
-        "published": "2026-11-20",
-        "match_type": "independently linked editorial context; not event confirmation",
-        "reviewed_on": "2026-11-20",
-        "url_check_status": "content_verified"
-      }
-    ],
-    "police-cologne-56b73605c84b93d1": [
-      {
-        "url": "https://www.tagesschau.de/inland/regional/nordrheinwestfalen/wdr-jugendproteste-hier-geht-die-gen-z-in-nrw-wieder-auf-die-strasse-100.html",
-        "source": "tagesschau / WDR",
-        "title": "Bericht über die Jugendproteste in Nordrhein-Westfalen",
-        "published": "2026-11-20",
-        "match_type": "independently linked editorial context; not event confirmation",
-        "reviewed_on": "2026-11-20",
-        "url_check_status": "access_inconclusive"
-      }
-    ],
     "police-bad-oldesloe-4c3e5b08ea588799": [
       {
         "url": "https://www.tagesschau.de/inland/regional/schleswigholstein/vor-afd-landesparteitag-in-bad-oldesloe-politik-mit-gespraechsbedarf%2Cregionnorderstedtnews-4212.html",

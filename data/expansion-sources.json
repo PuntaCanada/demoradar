@@ -17,7 +17,7 @@
       "data_rights": "Official police RSS press overview; RSS publication alone does not license recurring re-publication of demonstration data. Never import automatically.",
       "scope": "Press communications including unrelated crime and traffic; no assembly-only calendar and no verified future rally in the review on 2026-11-21.",
       "status": "http_restricted",
-      "checked_on": "2026-11-23",
+      "checked_on": "2026-11-24",
       "error": "HTTP 403"
     },
     {
@@ -29,7 +29,7 @@
       "data_rights": "Government press page, not an expressly licensed structured assembly-event feed; links and research only.",
       "scope": "General police releases including the 19 Nov notice of 20 Nov assemblies, now historical; does not establish a future event calendar.",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Polizei Rheinland-Pfalz Presse",
@@ -40,7 +40,7 @@
       "data_rights": "Official police press listing without verified dataset-specific open event reuse licence; links and research only.",
       "scope": "General police press, including unrelated topics; no verified upcoming assembly-specific machine-readable collection.",
       "status": "unavailable",
-      "checked_on": "2026-11-23",
+      "checked_on": "2026-11-24",
       "error": "HTTP 404"
     },
     {
@@ -52,16 +52,15 @@
       "data_rights": "Official listing of confirmed upcoming assembly registrations; no source-specific open machine reuse licence or structured JSON/CSV/RSS endpoint verified. Research and link only, never automated import.",
       "scope": "Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register.",
       "status": "reachable_upcoming_list_research_only",
-      "checked_on": "2026-11-23",
-      "bytes_checked": 437290,
-      "future_announcement_rows_verified": 4,
+      "checked_on": "2026-11-24",
+      "bytes_checked": 435781,
+      "future_announcement_rows_verified": 3,
       "future_dates_verified": [
-        "2026-11-23",
         "2026-11-24",
         "2026-11-25",
         "2026-11-29"
       ],
-      "future_date_count": 4,
+      "future_date_count": 3,
       "date_conflicts": []
     },
     {
@@ -73,7 +72,7 @@
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
       "status": "reachable_archive_only",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Halle (Saale)",
@@ -84,7 +83,7 @@
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective notice about November 2026 assemblies in Halle (Saale); dates must not be interpreted as upcoming",
       "status": "reachable_archive_only",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Schwerin",
@@ -95,7 +94,7 @@
       "data_rights": "Official registration and authority information, not a public event calendar or a licence for event data reuse; monitor only",
       "scope": "Schwerin municipal assembly registration service; no recurring event list or licensed data format confirmed",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Kreis Unna",
@@ -106,7 +105,7 @@
       "data_rights": "Authority guidance only, no licensed machine-readable demonstration data feed; monitor only",
       "scope": "Kreis Unna police jurisdiction and registration details, not a published event register",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Rheinland-Pfalz",
@@ -117,7 +116,7 @@
       "data_rights": "Official police explanatory material; no upcoming event data and no reuse permission for a database; link only",
       "scope": "State police practical information on demonstration law; no confirmed regular assembly calendar",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Schleswig-Holstein",
@@ -128,7 +127,7 @@
       "data_rights": "Official online registration service listing; not an open event feed and no event-data reuse permission; monitor only",
       "scope": "State online service directory includes registering an assembly; no published calendar confirmed",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Landsberg am Lech",
@@ -139,8 +138,8 @@
       "data_rights": "Published under Art. 13 BayVersG; factual listings are public but no verified open bulk reuse licence or maintained structured API; monitor and link only until rights and individual-date validation are confirmed",
       "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23",
-      "bytes_checked": 72398,
+      "checked_on": "2026-11-24",
+      "bytes_checked": 74999,
       "date_conflicts": [],
       "documented_date_discrepancy": {
         "observed_on": "2026-11-20",
@@ -159,7 +158,7 @@
       "data_rights": "Assembly application guidance only; no current event data feed or reuse licence verified; monitor only",
       "scope": "Potsdam points organizers to Brandenburg police; no published event list verified",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Karlsruhe",
@@ -170,7 +169,7 @@
       "data_rights": "Individual city press notice, no recurring feed or blanket reuse permission; link only",
       "scope": "Historical official notice from 2026; do not infer future scheduled assemblies",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Braunschweig",
@@ -181,7 +180,7 @@
       "data_rights": "Only assemblies whose applicants consent to publication; no explicit blanket reuse licence found; monitor only",
       "scope": "Official list is conditional on publication consent and was empty in the verified 19 Nov 2026 snapshot",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Köln",
@@ -192,7 +191,7 @@
       "data_rights": "Only factual event details with original source and attribution; blanket open reuse licence for HTML not confirmed",
       "scope": "Selected traffic-relevant demonstrations, not all registered assemblies",
       "status": "reachable_parser_configured",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Nürnberg",
@@ -203,7 +202,7 @@
       "data_rights": "Press release reuse permission not verified; monitoring and linking only",
       "scope": "Occasional ahead-of-time official protest notices, no complete public assembly list",
       "status": "http_restricted",
-      "checked_on": "2026-11-23",
+      "checked_on": "2026-11-24",
       "error": "HTTP 403"
     },
     {
@@ -215,7 +214,7 @@
       "data_rights": "No verified bulk reuse licence for press texts; monitoring and linking only",
       "scope": "Event- and operation-specific police information, not complete calendar",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Frankfurt am Main",
@@ -226,7 +225,7 @@
       "data_rights": "No verified bulk republication licence; official fact notices linked only",
       "scope": "Detailed verified one-off municipal notice for 20 November 2026, not a rolling list",
       "status": "http_restricted",
-      "checked_on": "2026-11-23",
+      "checked_on": "2026-11-24",
       "error": "HTTP 403"
     },
     {
@@ -238,7 +237,7 @@
       "data_rights": "A 2023 hackathon showcase, not a licensed current rolling event feed; monitoring only",
       "scope": "Project goal mentions future open data; does not establish a 2026 import source",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Dortmund",
@@ -249,7 +248,7 @@
       "data_rights": "Municipal notices are not automatically licensed as a current protest database; monitoring only",
       "scope": "Official publications, no verified complete assembly calendar",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Düsseldorf",
@@ -260,7 +259,7 @@
       "data_rights": "Official city states demonstration/assembly authority belongs to police; not an event feed and no blanket licence",
       "scope": "Authority-routing reference, not a calendar; check Polizeipräsidium Düsseldorf for a publicly reusable current data feed",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Hamburg",
@@ -271,7 +270,7 @@
       "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
       "scope": "Contact route to official assembly authority; do not import registrations without permission",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Hamburg",
@@ -282,7 +281,7 @@
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
       "status": "transport_unverified",
-      "checked_on": "2026-11-23",
+      "checked_on": "2026-11-24",
       "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
@@ -294,7 +293,7 @@
       "data_rights": "Public police press archive, no verified general event-data license; link and monitor only",
       "scope": "Occasional press notices mention assemblies, but this is not an official upcoming-assemblies feed",
       "status": "http_restricted",
-      "checked_on": "2026-11-23",
+      "checked_on": "2026-11-24",
       "error": "HTTP 403"
     },
     {
@@ -306,7 +305,7 @@
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
       "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-23"
+      "checked_on": "2026-11-24"
     }
   ]
 }
