@@ -2,6 +2,8 @@ name: DemoRadar Website und Cloudflare prüfen
 on:
   pull_request:
     paths:
+      - 'scripts/update-dresden.py'
+      - 'scripts/test-dresden-archive.py'
       - 'public-source.js'
       - 'scripts/test-public-source.mjs'
       - 'scripts/monitor-official-sources.py'
