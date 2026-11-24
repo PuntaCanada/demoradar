@@ -29,6 +29,14 @@
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
+      "city": "Freiburg im Breisgau",
+      "state": "Baden-Württemberg",
+      "source": "Stadt Freiburg",
+      "condition": "unavailable",
+      "last_checked": "2026-11-24",
+      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
+    },
+    {
       "city": "Frankfurt am Main",
       "state": "Hessen",
       "source": "Stadt Frankfurt",
@@ -55,6 +63,15 @@
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {
+      "city": "Magdeburg",
+      "state": "Sachsen-Anhalt",
+      "source": "Research-only official page",
+      "condition": "monitor_transport_unverified",
+      "last_checked": "2026-11-24",
+      "url": "https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
       "city": "Nürnberg",
       "state": "Bayern",
       "source": "Research-only official page",
@@ -70,6 +87,15 @@
       "condition": "monitor_http_restricted",
       "last_checked": "2026-11-24",
       "url": "https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "source": "Research-only official page",
+      "condition": "monitor_transport_unverified",
+      "last_checked": "2026-11-24",
+      "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {

@@ -2,11 +2,11 @@
   "version": 1,
   "checked_on": "2026-11-24",
   "method": "Exactly compare persisted event IDs before and after the full import on the same runner. Source disappearance does NOT establish cancellation.",
-  "before_total": 1304,
-  "after_total": 1303,
-  "delta": -1,
-  "removed_from_dataset_count": 5,
-  "added_to_dataset_count": 4,
+  "before_total": 1307,
+  "after_total": 1307,
+  "delta": 0,
+  "removed_from_dataset_count": 0,
+  "added_to_dataset_count": 0,
   "removed_entries_are_cancellations": false,
   "source_groups": [
     {
@@ -35,11 +35,11 @@
     },
     {
       "group": "other_source_records",
-      "before": 43,
-      "after": 42,
-      "delta": -1,
-      "removed_ids": 5,
-      "added_ids": 4
+      "before": 46,
+      "after": 46,
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
     },
     {
       "group": "police_oneoff_notices",
@@ -74,62 +74,6 @@
       "added_ids": 0
     }
   ],
-  "removed_samples": [
-    {
-      "id": "dresden-2db5f7a6cd16a2e4",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-23"
-    },
-    {
-      "id": "dresden-3c6a401a741eff12",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-23"
-    },
-    {
-      "id": "dresden-568b83d4096c44b1",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-23"
-    },
-    {
-      "id": "dresden-8367f0795bac9d92",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-26"
-    },
-    {
-      "id": "dresden-c46508f48a5e5774",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-23"
-    }
-  ],
-  "added_samples": [
-    {
-      "id": "dresden-8d09663ef7bf0f15",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-28"
-    },
-    {
-      "id": "dresden-dca40dc49db8a51e",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-25"
-    },
-    {
-      "id": "dresden-de87670e8a722aaf",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-26"
-    },
-    {
-      "id": "dresden-f17e1371db76cb51",
-      "group": "other_source_records",
-      "city": "Dresden",
-      "date": "2026-11-28"
-    }
-  ]
+  "removed_samples": [],
+  "added_samples": []
 }

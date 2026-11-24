@@ -2,8 +2,9 @@
   "source": "https://www.freiburg.de/pb/2670264.html",
   "type": "official_city_press_one_off",
   "checked_on": "2026-11-24",
-  "status": "verified_one_off",
-  "count": 3,
+  "status": "source_unavailable_no_new_import",
+  "count": 0,
   "source_date": "2026-11-20",
-  "rights": "Short independently verified factual dates, times, locations and subjects only; no article, photo, bulk licence or new official feed claimed."
+  "rights": "Short independently verified factual dates, times, locations and subjects only; no article, photo, bulk licence or new official feed claimed.",
+  "error": "The read operation timed out"
 }

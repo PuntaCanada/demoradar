@@ -138,9 +138,9 @@
       "city": "Freiburg im Breisgau",
       "state": "Baden-Württemberg",
       "source": "Stadt Freiburg",
-      "status": "verified_one_off",
+      "status": "unavailable",
       "origin_type": "government_source",
-      "count": 3,
+      "count": 0,
       "scope": "Single city announcement about three dated assemblies on 20 Nov 2026; not a recurring feed",
       "last_checked": "2026-11-24",
       "check_freshness": "recent"
