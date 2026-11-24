@@ -2,16 +2,16 @@
   "version": 1,
   "method": "Read-only diagnostic; only imported, attributable event IDs are counted. Title samples are not evidence of official registration.",
   "window": {
-    "from": "2026-10-24",
-    "to": "2026-11-30"
+    "from": "2026-10-25",
+    "to": "2026-12-01"
   },
-  "event_records": 397,
+  "event_records": 425,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Frankfurt am Main",
-      "event_count": 2,
-      "days_with_events": 1,
+      "event_count": 3,
+      "days_with_events": 2,
       "observed_video_title_samples": 7,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
@@ -25,10 +25,10 @@
     },
     {
       "city": "Berlin",
-      "event_count": 325,
+      "event_count": 355,
       "days_with_events": 9,
       "observed_video_title_samples": 4,
-      "observed_city_and_date_samples": 3,
+      "observed_city_and_date_samples": 2,
       "source_count": 0,
       "source_status": []
     },
@@ -385,8 +385,8 @@
     },
     {
       "city": "Münster",
-      "event_count": 6,
-      "days_with_events": 5,
+      "event_count": 5,
+      "days_with_events": 4,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
@@ -394,7 +394,7 @@
     },
     {
       "city": "Weimar",
-      "event_count": 9,
+      "event_count": 8,
       "days_with_events": 5,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
