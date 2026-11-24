@@ -53,7 +53,7 @@
       "scope": "Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register.",
       "status": "reachable_upcoming_list_research_only",
       "checked_on": "2026-11-24",
-      "bytes_checked": 435781,
+      "bytes_checked": 435782,
       "future_announcement_rows_verified": 3,
       "future_dates_verified": [
         "2026-11-24",
@@ -71,9 +71,8 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-24",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_archive_only",
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Halle (Saale)",
@@ -94,8 +93,9 @@
       "parser": null,
       "data_rights": "Official registration and authority information, not a public event calendar or a licence for event data reuse; monitor only",
       "scope": "Schwerin municipal assembly registration service; no recurring event list or licensed data format confirmed",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-24"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-24",
+      "error": "URLError: <urlopen error timed out>"
     },
     {
       "city": "Kreis Unna",
@@ -140,7 +140,7 @@
       "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
       "status": "reachable_monitor_only_not_a_feed",
       "checked_on": "2026-11-24",
-      "bytes_checked": 74999,
+      "bytes_checked": 72398,
       "date_conflicts": [],
       "documented_date_discrepancy": {
         "observed_on": "2026-11-20",
@@ -281,9 +281,8 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-24",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-24"
     },
     {
       "city": "Bremen",
@@ -305,9 +304,8 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-24",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-24"
     }
   ]
 }
