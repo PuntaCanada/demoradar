@@ -2,20 +2,20 @@
   "version": 1,
   "checked_on": "2026-11-24",
   "method": "Exactly compare persisted event IDs before and after the full import on the same runner. Source disappearance does NOT establish cancellation.",
-  "before_total": 1295,
-  "after_total": 1304,
-  "delta": 9,
-  "removed_from_dataset_count": 50,
-  "added_to_dataset_count": 59,
+  "before_total": 1304,
+  "after_total": 1303,
+  "delta": -1,
+  "removed_from_dataset_count": 5,
+  "added_to_dataset_count": 4,
   "removed_entries_are_cancellations": false,
   "source_groups": [
     {
       "group": "berlin_official_json",
-      "before": 1226,
+      "before": 1236,
       "after": 1236,
-      "delta": 10,
-      "removed_ids": 49,
-      "added_ids": 59
+      "delta": 0,
+      "removed_ids": 0,
+      "added_ids": 0
     },
     {
       "group": "freiburg_official_oneoffs",
@@ -35,11 +35,11 @@
     },
     {
       "group": "other_source_records",
-      "before": 44,
-      "after": 43,
+      "before": 43,
+      "after": 42,
       "delta": -1,
-      "removed_ids": 1,
-      "added_ids": 0
+      "removed_ids": 5,
+      "added_ids": 4
     },
     {
       "group": "police_oneoff_notices",
@@ -76,150 +76,60 @@
   ],
   "removed_samples": [
     {
-      "id": "berlin-1097",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2026-12-17"
+      "id": "dresden-2db5f7a6cd16a2e4",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-23"
     },
     {
-      "id": "berlin-1670",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-01-18"
+      "id": "dresden-3c6a401a741eff12",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-23"
     },
     {
-      "id": "berlin-1742",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-01-27"
+      "id": "dresden-568b83d4096c44b1",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-23"
     },
     {
-      "id": "berlin-1802",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-02"
+      "id": "dresden-8367f0795bac9d92",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-26"
     },
     {
-      "id": "berlin-1874",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-09"
-    },
-    {
-      "id": "berlin-1934",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-16"
-    },
-    {
-      "id": "berlin-1997",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-24"
-    },
-    {
-      "id": "berlin-2051",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-03"
-    },
-    {
-      "id": "berlin-2114",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-09"
-    },
-    {
-      "id": "berlin-2168",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-18"
-    },
-    {
-      "id": "berlin-2219",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-26"
-    },
-    {
-      "id": "berlin-2261",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-04-01"
+      "id": "dresden-c46508f48a5e5774",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-23"
     }
   ],
   "added_samples": [
     {
-      "id": "berlin-1073",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2026-12-16"
+      "id": "dresden-8d09663ef7bf0f15",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-28"
     },
     {
-      "id": "berlin-1640",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-01-15"
+      "id": "dresden-dca40dc49db8a51e",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-25"
     },
     {
-      "id": "berlin-1712",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-01-20"
+      "id": "dresden-de87670e8a722aaf",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-26"
     },
     {
-      "id": "berlin-1772",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-01-27"
-    },
-    {
-      "id": "berlin-1844",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-04"
-    },
-    {
-      "id": "berlin-1904",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-09"
-    },
-    {
-      "id": "berlin-1967",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-17"
-    },
-    {
-      "id": "berlin-2021",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-02-23"
-    },
-    {
-      "id": "berlin-2084",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-03"
-    },
-    {
-      "id": "berlin-2138",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-09"
-    },
-    {
-      "id": "berlin-2189",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-16"
-    },
-    {
-      "id": "berlin-2231",
-      "group": "berlin_official_json",
-      "city": "Berlin",
-      "date": "2027-03-22"
+      "id": "dresden-f17e1371db76cb51",
+      "group": "other_source_records",
+      "city": "Dresden",
+      "date": "2026-11-28"
     }
   ]
 }

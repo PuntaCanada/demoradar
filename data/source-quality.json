@@ -19,7 +19,7 @@
       "source": "Stadt Dresden",
       "status": "observed_data",
       "origin_type": "government_source",
-      "count": 36,
+      "count": 35,
       "scope": "Dresden city JSON, not all of Saxony",
       "last_checked": "2026-11-24",
       "check_freshness": "recent"
@@ -138,9 +138,9 @@
       "city": "Freiburg im Breisgau",
       "state": "Baden-Württemberg",
       "source": "Stadt Freiburg",
-      "status": "unavailable",
+      "status": "verified_one_off",
       "origin_type": "government_source",
-      "count": 0,
+      "count": 3,
       "scope": "Single city announcement about three dated assemblies on 20 Nov 2026; not a recurring feed",
       "last_checked": "2026-11-24",
       "check_freshness": "recent"
