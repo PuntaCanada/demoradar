@@ -1,3 +1,4 @@
+import {buildBerlin} from "./build-berlin-page.mjs";
 import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
 import vm from "node:vm";
 import {selectTodayEntries} from "./today-selection.mjs";
@@ -41,6 +42,7 @@ function buildEnglish(){
  html=html.replace("Live-Daten werden vorbereitet","Loading live event data");
  html=html.replace("Noch keine verifizierten Termine","No verified events yet");
  html=html.replace("Die Filter sind vorbereitet. Nach Anbindung geprüfter Quellen erscheinen hier automatisch Veranstaltungen mit Quellen- und Aktualisierungsangaben.","Events from checked sources will appear here with attribution and update details.");
+ html=html.replace('<a href="/berlin/">Demos Berlin</a>','<a href="/berlin/">Berlin demonstrations</a>');
  html=html.replace(/href="\/community\/"/g,'href="/en/community/"');
  html=html.replace(/href="\/sources\/"/g,'href="/en/sources/"');
  html=html.replace('<a href="/heute/" aria-label="Heute gemeldete Demonstrationen als eigene Seite">Alle heutigen Meldungen</a>',
@@ -152,6 +154,7 @@ function buildTodayPages(){
  return current;
 }
 const todayPageDate=buildTodayPages();
+buildBerlin();
 
 const alternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/"/>';
 const sourceAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="de" href="'+origin+'/sources/"/><xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="'+origin+'/en/sources/"/>'+'<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="'+origin+'/sources/"/>';
@@ -160,7 +163,7 @@ const todayAlternate='<xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel
 const sourceUrls=[
  ["/",alternate],["/en/",alternate],["/community/",communityAlternate],["/en/community/",communityAlternate],
  ["/sources/",sourceAlternate],["/en/sources/",sourceAlternate],
- ["/heute/",todayAlternate],["/en/today/",todayAlternate]
+ ["/heute/",todayAlternate],["/en/today/",todayAlternate],["/berlin/",""]
 ];
 const sitemapLines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
  ...sourceUrls.map(([route,links])=>'<url><loc>'+origin+route+'</loc>'+links+'</url>'),'</urlset>',''];

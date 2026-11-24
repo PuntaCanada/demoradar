@@ -6,8 +6,9 @@ const routes=["/","/en/","/community/","/en/community/","/sources/","/en/sources
 const groups=[["/","/en/"],["/community/","/en/community/"],["/sources/","/en/sources/"],["/heute/","/en/today/"]];
 const sitemap=read("sitemap.xml");
 const xmlUrls=[...sitemap.matchAll(/<url><loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g)];
-assert.equal(xmlUrls.length,routes.length,"Sitemap should list precisely the 8 supported canonical routes");
-assert.deepEqual(new Set(xmlUrls.map(m=>m[1])),new Set(routes.map(r=>origin+r)));
+assert.equal(xmlUrls.length,routes.length+1,"Sitemap should list eight multilingual routes and Berlin");
+assert.deepEqual(new Set(xmlUrls.map(m=>m[1])),new Set([...routes.map(r=>origin+r),origin+"/berlin/"]));
+assert.ok(sitemap.includes("<loc>"+origin+"/berlin/</loc>"));
 for(const [de,en] of groups){
  for(const route of [de,en]){
   const record=xmlUrls.find(m=>m[1]===origin+route);
