@@ -8,6 +8,7 @@ import urllib.request
 from pathlib import Path
 
 URL="https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json"
+PUBLIC_URL="https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php"
 FILE=Path("data/events.json")
 STATUS=Path("data/dresden-source.json")
 def clean(s):return re.sub(r"\s+"," ",str(s or "")).strip()
@@ -44,7 +45,7 @@ def main():
             # the frontend excludes them from active counts instead of silently dropping them.
             parts=clean(item.get("Teilnehmer"))
             ident=hashlib.sha256(("|".join([date,start,title,location])).casefold().encode()).hexdigest()[:16]
-            events.append({"id":"dresden-"+ident,"country":"DE","state":"Sachsen","city":"Dresden","date":date,"start":start,"end":end,"title":title,"location":location,"postal_code":"","route":"","organizer":organizer,"registered_participants":parts,"event_status":status,"source":"Landeshauptstadt Dresden – Versammlungsübersicht","source_url":URL,"source_status":"behördlich veröffentlicht"})
+            events.append({"id":"dresden-"+ident,"country":"DE","state":"Sachsen","city":"Dresden","date":date,"start":start,"end":end,"title":title,"location":location,"postal_code":"","route":"","organizer":organizer,"registered_participants":parts,"event_status":status,"source":"Landeshauptstadt Dresden – Versammlungsübersicht","source_url":PUBLIC_URL,"source_status":"behördlich veröffentlicht"})
         if not events:raise ValueError("No valid Dresden event rows")
         data=json.loads(FILE.read_text(encoding="utf-8"))
         others=[e for e in data["events"] if e.get("city")!="Dresden"]

@@ -1,3 +1,4 @@
+import publicSourceUrl from "../public-source.js";
 import {buildBerlin} from "./build-berlin-page.mjs";
 import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
 import vm from "node:vm";
@@ -95,7 +96,6 @@ function buildTodayPages(){
   if(!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value))return en?"Time unconfirmed":"Uhrzeit nicht bestätigt";
   return (en?"at ":"um ")+escapeHTML(value)+(en?"":" Uhr");
  };
- const safeSource=value=>{try{const u=new URL(String(value||""));return u.protocol==="https:"&&!u.username&&!u.password&&!u.port&&u.hostname.includes(".")?u.href:""}catch{return""}};
  for(const [lang,dir,route] of [["de","heute","/heute/"],["en","en/today","/en/today/"]]){
   const en=lang==="en",pageTitle=en?"Demonstrations today in Germany | DemoRadar":"Demonstrationen heute in Deutschland | DemoRadar";
   const caveat=en?"Only existing dated source records are listed. The selection is incomplete; an unlisted demonstration may still take place. The appearance of an event does not establish that it is happening LIVE.":"Nur bereits vorhandene, datierte Quellenmeldungen werden aufgeführt. Die Übersicht ist unvollständig: Nicht aufgeführte Demonstrationen können trotzdem stattfinden. Ein Eintrag bestätigt keinen LIVE-Status.";
@@ -105,7 +105,7 @@ function buildTodayPages(){
    const city=escapeHTML(e.city);
    const title=escapeHTML(e.title);
    const publisher=escapeHTML(e.source||(en?"Unspecified":"Nicht angegeben"));
-   const direct=safeSource(e.source_url);
+   const direct=publicSourceUrl(e.source_url);
    const reference=direct?'<a href="'+escapeAttr(direct)+'" target="_blank" rel="noopener noreferrer">'+publisher+'</a>':publisher;
    return '<li class="item"><a class="event" href="'+escapeAttr(href)+'">'+title+'</a><p>'+city+' · '+timeText(e,en)+'</p><p class="evidence">'+(en?"Source listing: ":"Quelleneintrag: ")+reference+'</p></li>';
   }).join("\n");

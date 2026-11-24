@@ -2,12 +2,16 @@ name: DemoRadar Website und Cloudflare prüfen
 on:
   pull_request:
     paths:
+      - 'public-source.js'
+      - 'scripts/test-public-source.mjs'
       - 'scripts/monitor-official-sources.py'
       - 'scripts/test-source-monitor.py'
       - '.github/workflows/verify-site.yml'
   workflow_dispatch:
   push:
     paths:
+      - 'public-source.js'
+      - 'scripts/test-public-source.mjs'
       - 'index.html'
       - 'en/index.html'
       - 'heute/index.html'
@@ -120,6 +124,7 @@ jobs:
           node scripts/test-today-selection.mjs
           node scripts/test-seo-reciprocity.mjs
           node scripts/test-public-crawlability.mjs
+          node scripts/test-public-source.mjs
           node --check live.js
           node --check heatmap.js
           node --check i18n.js

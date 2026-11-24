@@ -184,6 +184,10 @@ function loadCommunityLinks(){
  }).catch(()=>{});
 }
 const detailHref=e=>"?event="+encodeURIComponent(e.id)+"#eventDetail";
+function eventSourceLink(event,label){
+ const url=publicSourceUrl(event.source_url);
+ return url?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>':esc(label);
+}
 const safeSourceUrl=url=>{try{const u=new URL(String(url||""),window.location?.origin||"https://demoradar.pages.dev");return u.protocol==="https:"||u.protocol==="http:"?u.href:""}catch{return""}};
 const editorialHosts=new Set(["www.tagesschau.de","www.rbb24.de","www.mdr.de","www.ndr.de","www1.wdr.de","www.br.de"]);
 const safeNewsUrl=url=>{try{
@@ -330,7 +334,7 @@ function renderFeatured(){
    const articles=Array.isArray(articleMatches[e.id])?articleMatches[e.id].filter(n=>safeNewsUrl(n.url)).slice(0,2):[];
    const links=articles.map(pressLink).join("");
    const meta=(x.id==="week"?esc(formatDate(e.date))+" · ":"")+esc(e.start||T("calendar.timeUnknown"))+(e.start?" ":"")+" · "+esc(e.city)+(e.location?" · "+esc(e.location):"")+(e.organizer?" · "+esc(e.organizer):"")+(e.registered_participants?" · "+esc(T("feature.registered"))+": "+esc(e.registered_participants):"");
-   return '<article class="featured-item topic-card topic-'+topicSlug(e.title)+'"><span class="featured-badge topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><h3><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(e.title)+'</a></h3>'+statusPills(e)+'<div class="featured-meta">'+meta+'</div><div class="featured-links"><a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(T("feature.source"))+'</a><a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.searchTitle"))+'" >'+esc(T("feature.newsSearch"))+'</a></div>'+streamTeaser(e)+(links?'<div class="featured-meta"><strong>'+esc(T("feature.candidate"))+'</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
+   return '<article class="featured-item topic-card topic-'+topicSlug(e.title)+'"><span class="featured-badge topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><h3><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(e.title)+'</a></h3>'+statusPills(e)+'<div class="featured-meta">'+meta+'</div><div class="featured-links">'+eventSourceLink(e,T("feature.source"))+'<a href="'+esc(search(e))+'" target="_blank" rel="noopener noreferrer" title="'+esc(T("feature.searchTitle"))+'" >'+esc(T("feature.newsSearch"))+'</a></div>'+streamTeaser(e)+(links?'<div class="featured-meta"><strong>'+esc(T("feature.candidate"))+'</strong></div><div class="featured-links">'+links+"</div>":"")+"</article>"
   }).join("");
  }
 }
@@ -369,7 +373,7 @@ function renderDetail(){
   const newsQuery="https://news.google.com/search?q="+encodeURIComponent('"'+event.title.slice(0,120)+'" '+event.city)+"&hl="+(locale()==="de-DE"?"de":"en")+"&gl=DE";
     const news=reports.length?'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.candidate"))+'</p><ul>'+reports.filter(n=>safeNewsUrl(n.url)).map(n=>"<li>"+pressLink(n)+"</li>").join("")+'</ul></section>':'<section class="detail-press"><h3>'+esc(T("news.title"))+'</h3><p class="small">'+esc(T("news.none"))+'</p></section>';
   const newsSearch='<a href="'+esc(newsQuery)+'" target="_blank" rel="noopener noreferrer">'+esc(T("news.find"))+'</a>';
-  const source=safeSourceUrl(event.source_url);
+  const source=publicSourceUrl(event.source_url);
   const license=event.license?'<p class="small">'+esc(T("detail.license"))+': '+esc(event.license)+'</p>':"";
   const venueCaveat=officialVenueCaveat(event)?'<p class="small">'+esc(officialVenueCaveat(event))+'</p>':'';
   holder.innerHTML='<span class="topic-badge topic-'+topicSlug(event.title)+'">'+esc(localTopic(event.title))+'</span><h2 id="eventDetailTitle">'+esc(event.title)+'</h2>'+statusPills(event)+'<div class="event-detail-grid">'+metadata+'</div>'+venueCaveat+'<p class="small">'+esc(T("calendar.source"))+': '+esc(event.source||T("calendar.officialSource"))+'</p>'+license+updates+news+newsSearch+communityExtra(event)+'<p class="small">'+esc(T("detail.note"))+'</p><div class="event-detail-actions">'+(source?'<a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">'+esc(T("detail.source"))+'</a>':"")+'<button id="eventShare" type="button">'+esc(T("detail.share"))+'</button><button id="eventBack" type="button">'+esc(T("detail.back"))+'</button></div>';
@@ -410,7 +414,7 @@ function officialVenueCaveat(e){
 }
 function card(e){
 const fields=[e.location,e.route?T("event.route")+": "+e.route:"",e.organizer?T("event.organizer")+": "+e.organizer:"",e.registered_participants?T("event.participants")+": "+e.registered_participants:"",officialVenueCaveat(e)].filter(Boolean);
-return '<article class="event-list-card topic-card topic-'+topicSlug(e.title)+'"><div class="event-card-top"><span class="topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><span class="small">'+esc(formatDate(e.date))+" · <span class=\"event-time-status event-time-"+dayStatus(e.date)+"\">"+esc(temporalLabel(e.date))+"</span> · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</span></div>"+statusPills(e)+"<strong>"+esc(e.title)+'</strong><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(T("detail.open"))+'</a><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': <a href="'+esc(e.source_url)+'" target="_blank" rel="noopener noreferrer">'+esc(e.source||T("calendar.officialSource"))+'</a> · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div>'+streamTeaser(e)+'</article>';
+return '<article class="event-list-card topic-card topic-'+topicSlug(e.title)+'"><div class="event-card-top"><span class="topic-badge topic-'+topicSlug(e.title)+'">'+esc(localTopic(e.title))+'</span><span class="small">'+esc(formatDate(e.date))+" · <span class=\"event-time-status event-time-"+dayStatus(e.date)+"\">"+esc(temporalLabel(e.date))+"</span> · "+esc(e.start)+(e.start&&locale()==="de-DE"?" Uhr":"")+" · "+esc(e.city)+"</span></div>"+statusPills(e)+"<strong>"+esc(e.title)+'</strong><a class="event-card-link" href="'+esc(detailHref(e))+'">'+esc(T("detail.open"))+'</a><div class="small">'+fields.map(esc).join(" · ")+'</div><div class="small" style="margin-top:8px">'+esc(T("calendar.source"))+': '+eventSourceLink(e,e.source||T("calendar.officialSource"))+' · '+esc(e.id.startsWith("demos-")?T("event.community"):T("event.official"))+'</div>'+streamTeaser(e)+'</article>';
 }
 document.getElementById("calendar").addEventListener("click",ev=>{const btn=ev.target.closest("[data-date]");if(!btn)return;selectedDay=btn.dataset.date;toggle(true)});
 function toggle(l){listMode=l;if(!l)selectedDay=null;document.getElementById("calendarWrap").classList.toggle("hidden",l);document.getElementById("list").classList.toggle("visible",l);document.getElementById("calendarBtn").classList.toggle("active",!l);document.getElementById("listBtn").classList.toggle("active",l);render()}

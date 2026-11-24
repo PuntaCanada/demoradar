@@ -38,6 +38,8 @@ class DresdenArchives(unittest.TestCase):
   d=[e for e in data["events"] if e.get("city")=="Dresden"]
   self.assertEqual(len(d),2)
   self.assertEqual([x["date"] for x in d],[(today-dt.timedelta(days=20)).isoformat(),(today+dt.timedelta(days=2)).isoformat()])
+  self.assertTrue(all(x["source_url"]==m["PUBLIC_URL"] for x in d))
+  self.assertEqual(status["url"],m["URL"])
   self.assertEqual(status["status"],"ok")
   self.assertEqual(status["checked_on"],today.isoformat())
   self.assertEqual(status["source_date"],today.isoformat())

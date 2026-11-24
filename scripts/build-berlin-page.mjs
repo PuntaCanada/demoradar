@@ -1,3 +1,4 @@
+import publicSourceUrl from "../public-source.js";
 import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
 const origin="https://demoradar.pages.dev", route="/berlin/";
 const escape=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -11,7 +12,8 @@ export function eligible(e,day){
  !/cancelled|canceled|withdrawn|stopped|abgesagt|zurückgezogen|zurueckgezogen|abgebrochen/i.test(status);
 }
 function sourceLink(e){
- try{const u=new URL(e.source_url);if(u.protocol==="https:"&&!u.username&&!u.password&&!u.port&&u.hostname.includes("."))return '<a href="'+escape(u.href)+'" rel="noopener noreferrer">'+escape(e.source||"Originalquelle")+'</a>';}catch{}
+ const url=publicSourceUrl(e.source_url);
+ if(url)return '<a href="'+escape(url)+'" rel="noopener noreferrer">'+escape(e.source||"Originalquelle")+'</a>';
  return escape(e.source||"Quelle nicht verlinkt");
 }
 export function render(events,day){

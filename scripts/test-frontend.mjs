@@ -1,3 +1,4 @@
+import publicSourceUrl from "../public-source.js";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {runInNewContext} from "node:vm";
@@ -10,10 +11,13 @@ const iso=(date)=>{const y=date.getFullYear(),m=String(date.getMonth()+1).padSta
 const now=new Date();
 const today=iso(now);
 const tomorrow=iso(new Date(now.getFullYear(),now.getMonth(),now.getDate()+1));
+const berlinPage="https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/";
+const dresdenPage="https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php";
+const demosPage="https://demonstrations.org/en/data";
 const official=[
- {id:"berlin-1",country:"DE",state:"Berlin",city:"Berlin",date:today,start:"12:00",title:"Kundgebung für Frieden",location:"Alexanderplatz",source:"Berlin",source_url:"https://www.berlin.de/"},
- {id:"dresden-1",country:"DE",state:"Sachsen",city:"Dresden",date:today,start:"16:00",title:"Mahnwache für Demokratie",location:"Altmarkt",source:"Dresden",source_url:"https://www.dresden.de/"},
- {id:"berlin-2",country:"DE",state:"Berlin",city:"Berlin",date:tomorrow,start:"14:00",title:"Klimastreik am Rathaus",location:"Rathaus",source:"Berlin",source_url:"https://www.berlin.de/"}
+ {id:"berlin-1",country:"DE",state:"Berlin",city:"Berlin",date:today,start:"12:00",title:"Kundgebung für Frieden",location:"Alexanderplatz",source:"Berlin",source_url:berlinPage+"index.php/index/all.json?q="},
+ {id:"dresden-1",country:"DE",state:"Sachsen",city:"Dresden",date:today,start:"16:00",title:"Mahnwache für Demokratie",location:"Altmarkt",source:"Dresden",source_url:"https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json"},
+ {id:"berlin-2",country:"DE",state:"Berlin",city:"Berlin",date:tomorrow,start:"14:00",title:"Klimastreik am Rathaus",location:"Rathaus",source:"Berlin",source_url:berlinPage+"index.php/index/all.json?q="}
 ];
 const community=[
  {id:"demos-1",country:"DE",state:"",city:"Dresden",date:today,start:"18:00",title:"Mahnwache für Demokratie",location:"Altmarkt",source:"Demos Berlin e.V.",source_url:"https://api.demonstrations.org/v1/event/1"},
@@ -77,7 +81,7 @@ async function mount(path,{failed=false,withReviewed=false,detail=false,historic
  const Option=class{constructor(text,value){this.text=text;this.value=value}};
  const ctx={window,document:doc,location,navigator:{language:path.startsWith("/en/")?"en-GB":"de-DE"},localStorage,Option,fetch,Date,Intl,URL,URLSearchParams,console,CustomEvent:class{constructor(type,config){this.type=type;this.detail=config?.detail}}};
  runInNewContext(i18n,ctx,{filename:"i18n.js"});
- runInNewContext(js,ctx,{filename:"live.js"});
+ runInNewContext(js,{...ctx,publicSourceUrl},{filename:"live.js"});
  for(let i=0;i<12;i++)await new Promise(resolve=>setImmediate(resolve));
  return {doc,el,location,i18n:window.DemoRadarI18n};
 }
@@ -97,6 +101,10 @@ for(const path of ["/","/en/"]){
  assert.ok(!el("list").innerHTML.includes("<img src=x"),"No untrusted HTML rendered");
  assert.ok(el("todayItems").innerHTML.includes(en?"Peace &amp; war":"Frieden &amp; Krieg"),"Topic labels are translated");
  assert.ok(el("notice").innerHTML.includes("Demos Berlin"),"Community provenance displayed: "+path+" "+el("notice").innerHTML);
+ for(const target of [el("todayItems"),el("list")]){
+  for(const url of [berlinPage,dresdenPage,demosPage])assert.ok(target.innerHTML.includes('href="'+url+'"'),path+" "+url);
+  assert.doesNotMatch(target.innerHTML,/all\.json|Versammlungen\.json|api\.demonstrations\.org/i);
+ }
  el("region").value="Sachsen";el("region").fire("change");
  assert.equal(el("city").options.length,2,"State filter limits city choices");
  assert.equal(el("city").options[1].value,"Dresden");
@@ -110,7 +118,7 @@ for(const path of ["/","/en/"]){
  el("search").value="";el("search").fire("input");
  el("calendar").fire("click",{target:{closest(){return{dataset:{date:today}}}}});
  assert.ok(el("list").innerHTML.includes("Mahnwache für Demokratie"));
- assert.ok(el("list").innerHTML.includes("dresden.de"));
+ assert.ok(el("list").innerHTML.includes('href="'+dresdenPage+'"'));
  el("backToCalendar").onclick();
  assert.equal(translator.language,en?"en":"de");
  translator.setLanguage(en?"de":"en");
@@ -121,6 +129,7 @@ for(const path of ["/","/en/"]){
 for(const path of ["/","/en/"]){
  const mixed=await mount(path,{withReviewed:true,detail:true});
  const rendered=mixed.el("eventDetailContent").innerHTML;
+ assert.ok(rendered.includes('href="'+berlinPage+'"'),"Details link to the Berlin public page");
  assert.ok(rendered.includes("LIVE123"),"Fresh reviewed LIVE link displayed");
  assert.ok(rendered.includes("REPLAY123")===false,"LIVE must link to actual live playback, not old archive");
  assert.ok(rendered.includes(path==="/en/"?"Additional automated suggestions":"Weitere automatisch gefundene Vorschläge"),"Possible recording remains visible beside reviewed LIVE");
@@ -141,6 +150,7 @@ for(const path of ["/","/en/"]){
  assert.ok(el("calendar").innerHTML.includes(path==="/en/"?"Past":"Vergangen"),"Historical calendar button announces past status");
  el("listBtn").onclick();
  assert.ok(el("list").innerHTML.includes("Hauptwache"),"Verified historic venue retained in search");
+ assert.ok(el("list").innerHTML.includes('href="https://www.presseportal.de/blaulicht/pm/4970/6390267"'),"Historical individual notice stays linked");
  assert.ok(el("list").innerHTML.includes("event-time-past"),"Historical search result explicitly marked past");
  assert.ok(el("list").innerHTML.includes("2026")&&el("list").innerHTML.includes("14"),"Original November 14, 2026 date retained in localized card");
 }
