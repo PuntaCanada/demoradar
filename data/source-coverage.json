@@ -12,7 +12,7 @@
       "city": "Frankfurt am Main",
       "event_count": 3,
       "days_with_events": 2,
-      "observed_video_title_samples": 7,
+      "observed_video_title_samples": 6,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -27,10 +27,55 @@
       "city": "Berlin",
       "event_count": 349,
       "days_with_events": 9,
-      "observed_video_title_samples": 4,
-      "observed_city_and_date_samples": 2,
+      "observed_video_title_samples": 5,
+      "observed_city_and_date_samples": 3,
       "source_count": 0,
       "source_status": []
+    },
+    {
+      "city": "Nürnberg",
+      "event_count": 1,
+      "days_with_events": 1,
+      "observed_video_title_samples": 2,
+      "observed_city_and_date_samples": 2,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_city_press",
+          "status": "http_restricted",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Polizei Hessen Meldungen",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_press_index",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Polizei Rheinland-Pfalz Presse",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_press_index",
+          "status": "unavailable",
+          "reuse_rights_verified": true
+        }
+      ]
     },
     {
       "city": "Bonn",
@@ -40,21 +85,6 @@
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
-    },
-    {
-      "city": "Nürnberg",
-      "event_count": 1,
-      "days_with_events": 1,
-      "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 1,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_city_press",
-          "status": "http_restricted",
-          "reuse_rights_verified": false
-        }
-      ]
     },
     {
       "city": "Bielefeld",
@@ -145,7 +175,7 @@
         },
         {
           "type": "official_registration_information",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
@@ -211,36 +241,6 @@
       ]
     },
     {
-      "city": "Polizei Hessen Meldungen",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_police_press_index",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
-      "city": "Polizei Rheinland-Pfalz Presse",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_police_press_index",
-          "status": "unavailable",
-          "reuse_rights_verified": true
-        }
-      ]
-    },
-    {
       "city": "Rheinland-Pfalz",
       "event_count": 0,
       "days_with_events": 0,
@@ -295,7 +295,7 @@
       "source_status": [
         {
           "type": "official_assembly_authority_guidance",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
