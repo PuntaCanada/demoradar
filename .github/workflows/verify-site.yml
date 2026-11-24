@@ -251,5 +251,5 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "seo: publish generated Berlin static HTML [skip ci]"
+          git commit -m "seo: publish generated Berlin static HTML"
           git push origin HEAD:refs/heads/seo/berlin-static-landing-20261123
