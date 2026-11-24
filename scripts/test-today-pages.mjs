@@ -34,11 +34,16 @@ for(const [route,file,lang,heading] of [
  assert.ok(sitemap.includes("<loc>https://demoradar.pages.dev"+route+"</loc>"));
  assert.ok(page.includes('href="'+(lang==="en"?"/en/":"/")+'"'),"Link back to interactive calendar");
  assert.ok(page.includes((lang==="en"?"/en/sources/":"/sources/")),"Explain 16-state gaps");
+ assert.doesNotMatch(page,/href="[^"]*(?:all\.json|Versammlungen\.json|api\.demonstrations\.org)/i);
  const ids=[...page.matchAll(/\?event=([^"#]+)#eventDetail/g)].map(m=>decodeURIComponent(m[1]));
  const events=source.events||[];
  for(const id of ids){
   const e=events.find(x=>x.id===id);
   assert.ok(e&&e.date===day&&e.country==="DE","Only today's actual recorded official-source events may be linked");
+  if(e.source_url?.includes("/versammlungen-aufzuege/index.php/index/all.json"))
+   assert.ok(page.includes('href="https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"'));
+  if(e.source_url?.includes("/versammlungsuebersicht/Versammlungen.json"))
+   assert.ok(page.includes('href="https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php"'));
   assert.ok(!["cancelled","withdrawn","stopped"].includes(e.status_code));
  }
  assert.ok(page.includes('id="staleNotice" hidden role="status"'),"Must warn about old day after midnight without claiming freshness");

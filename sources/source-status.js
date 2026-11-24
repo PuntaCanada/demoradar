@@ -142,7 +142,8 @@ const render=()=>{
     item.append($("p","source-warning",reuse.new_automated_import_allowed?t("Neue automatisierte Nutzung gesondert freigegeben.","New automated use separately approved."):t("Kein neuer automatischer Import freigegeben – Rechte und Format vor Aktivierung einzeln prüfen.","No new automated import approved – verify reuse rights and format before activation.")));
     item.append($("p","source-detail",t("Freigabeprüfung: ","Admission review: ")+fmt(reuse.reviewed_on)));
     const link=$("a","source-link",t("Amtliche Lizenz-/Quellenangaben prüfen","Review official licence/source details"));
-    link.href=reuse.source_url;link.target="_blank";link.rel="noopener noreferrer";item.append(link);
+    const reference=publicSourceUrl(reuse.source_url);
+    if(reference){link.href=reference;link.target="_blank";link.rel="noopener noreferrer";item.append(link);}
    }
    if(s.status==="observed_data"&&Number.isInteger(s.count))item.append($("p","source-detail",t("Beim Abruf gelieferte Einträge: ","Items in last fetch: ")+s.count.toLocaleString(en?"en-GB":"de-DE")));
    const affected=health.filter(h=>h.city===s.city&&h.source===s.source);
@@ -215,8 +216,9 @@ const render=()=>{
    }
    article.append(details);
   }
-  if(state.url&&/^https:\/\//.test(state.url)){
-   const link=$("a","source-link",t("Offizielle Quelle öffnen","Open official source"));link.href=state.url;link.target="_blank";link.rel="noopener noreferrer";article.append(link);
+  const stateSource=publicSourceUrl(state.url);
+  if(stateSource){
+   const link=$("a","source-link",t("Offizielle Quelle öffnen","Open official source"));link.href=stateSource;link.target="_blank";link.rel="noopener noreferrer";article.append(link);
   }
   target.append(article);
  }

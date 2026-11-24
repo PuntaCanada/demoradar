@@ -8,6 +8,7 @@ import {createServer as makeTcp} from "node:net";
 import {setTimeout as delay} from "node:timers/promises";
 const binaries=[process.env.CHROME_BIN,"google-chrome","google-chrome-stable","chromium","chromium-browser"].filter(Boolean);
 const chromeBin=binaries.find(p=>spawnSync(p,["--version"],{stdio:"ignore"}).status===0);
+if(!chromeBin&&process.env.CI)throw Error("Chrome/Chromium is required in CI");
 if(!chromeBin){console.log("SKIP: Chrome/Chromium not installed on this runner");process.exit(0)}
 const root=resolve(".");
 const server=createServer((req,res)=>{
@@ -163,7 +164,20 @@ try{
  await evaluate('document.querySelector("[data-language=en]").click();true');
  for(let i=0;i<50;i++){if(await evaluate("location.pathname")==="/en/")break;await delay(100)}
  assert.equal(await evaluate("location.pathname"),"/en/","DE/EN switch navigates to /en/");
- const sample=JSON.parse(readFileSync("data/events.json","utf8")).events[0];
+ const storedEvents=JSON.parse(readFileSync("data/events.json","utf8")).events;
+ const berlin=storedEvents.find(e=>e.source_url?.includes("/versammlungen-aufzuege/index.php/index/all.json"));
+ assert.ok(berlin?.id,"Fixture needs a Berlin feed event");
+ for(const route of ["/","/en/"]){
+  await navigate(route+"?event="+encodeURIComponent(berlin.id)+"#eventDetail",375);
+  let source;
+  for(let attempt=0;attempt<50;attempt++){
+   source=await evaluate('document.querySelector(".event-detail-actions a")?.href');
+   if(source)break;
+   await delay(100);
+  }
+  assert.equal(source,"https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/");
+ }
+ const sample=storedEvents.find(e=>e.source_url==="https://www.presseportal.de/blaulicht/pm/4970/6390267");
  assert.ok(sample?.id,"Fixture needs an event ID");
  const query="?event="+encodeURIComponent(sample.id)+"#eventDetail";
  await navigate("/"+query,375);
@@ -175,6 +189,7 @@ try{
  }
  assert.ok(details.visible&&details.title===sample.title,"Direct event link shows title and overlay: "+JSON.stringify(details));
  assert.ok(details.copy&&details.source,"Details expose sharing and original source");
+ assert.equal(await evaluate('document.querySelector(".event-detail-actions a")?.href'),sample.source_url,"Historical individual notice remains linked");
  await evaluate('document.querySelector("[data-language=en]").click();true');
  for(let i=0;i<50;i++){if(await evaluate("location.pathname")==="/en/")break;await delay(100)}
  assert.ok((await evaluate("location.search")).includes(encodeURIComponent(sample.id)),"Language switch preserves shared event ID");
