@@ -18,13 +18,13 @@ class Response:
  def read(self,*args):return self.payload
 
 class DresdenArchives(unittest.TestCase):
- def run_import(self,rows):
+ def run_import(self,rows,existing=()):
   now=dt.date.today()
   with tempfile.TemporaryDirectory() as folder:
    root=Path(folder)
    file=root/"events.json"
    status=root/"dresden-source.json"
-   file.write_text(json.dumps({"events":[{"id":"berlin-test","country":"DE","city":"Berlin","date":now.isoformat(),"title":"Demo Berlin"}]}),encoding="utf8")
+   file.write_text(json.dumps({"events":[{"id":"berlin-test","country":"DE","city":"Berlin","date":now.isoformat(),"title":"Demo Berlin"},*existing]}),encoding="utf8")
    original=m["main"].__globals__
    payload=json.dumps({"Versammlungen":rows,"Dateidatum":now.isoformat()}).encode()
    with patch.dict(original,{"FILE":file,"STATUS":status}),patch.object(original["urllib"].request,"urlopen",return_value=Response(payload)):
@@ -46,6 +46,15 @@ class DresdenArchives(unittest.TestCase):
  def test_preserves_unrelated_events(self):
   data,_=self.run_import([self.row(dt.date.today())])
   self.assertTrue(any(x["id"]=="berlin-test" for x in data["events"]))
+ def test_preserves_previously_recorded_history_and_individual_notices(self):
+  today=dt.date.today()
+  historic={"id":"dresden-history","date":(today-dt.timedelta(days=31)).isoformat(),"city":"Dresden","source":m["SOURCE"],"source_url":m["URL"]}
+  stale={**historic,"id":"dresden-stale","date":(today+dt.timedelta(days=1)).isoformat()}
+  notice={**stale,"id":"dresden-notice","source":"Amtliche Einzelmeldung","source_url":"https://www.dresden.de/meldung"}
+  data,_=self.run_import([self.row(today)],(historic,stale,notice))
+  self.assertIn(historic,data["events"])
+  self.assertIn(notice,data["events"])
+  self.assertNotIn(stale,data["events"])
  def test_empty_source_preserves_previous_data(self):
   today=dt.date.today()
   with tempfile.TemporaryDirectory() as folder:
