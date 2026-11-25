@@ -61,7 +61,7 @@ def parse(html,today):
   result.append({"id":"frankfurt-"+ident,"country":"DE","state":"Hessen","city":"Frankfurt am Main","date":day.isoformat(),"start":start,"end":end,"title":title,"postal_code":"","location":location,"route":route,"organizer":organizer[:120],"registered_participants":clean(participant[1]) if participant else "","source":"Stadt Frankfurt am Main – amtliche Mitteilung","source_url":URL,"source_status":"einzelne behördliche Pressemitteilung; keine vollständige Versammlungsübersicht"})
  return result
 def main():
- status={"source":URL,"scope":"one-off verified official notice, not complete calendar","licence":"Only factual time/place/topic data and source link; no open reuse licence for creative text established","status":"unavailable","count":0}
+ status={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),"source":URL,"scope":"one-off verified official notice, not complete calendar","licence":"Only factual time/place/topic data and source link; no open reuse licence for creative text established","status":"unavailable","count":0}
  try:
   req=urllib.request.Request(URL,headers={"User-Agent":"DemoRadar/1.0 (+https://github.com/PuntaCanada/demoradar)","Accept":"text/html"})
   with urllib.request.urlopen(req,timeout=20) as r:

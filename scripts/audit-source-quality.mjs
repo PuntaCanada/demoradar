@@ -5,7 +5,7 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
  const out=[];
  const add=(city,state,source,status,count,scope,checkedAt=null)=>{
   const d=String(checkedAt||"").slice(0,10);
-  const isValid=/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(Date.parse(d+"T12:00:00Z"));
+  const isValid=/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(Date.parse(d+"T12:00:00Z"))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
   const delta=isValid?Math.round((Date.parse(today+"T12:00:00Z")-Date.parse(d+"T12:00:00Z"))/86400000):null;
   const freshness=delta===null||delta<0?"unknown":delta<=2?"recent":"outdated_check";
   const organizerSources=new Set([
@@ -33,7 +33,7 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
   rostockFeed.status==="ok"?"observed_data":rostockFeed.status==="unavailable"?"unavailable":"unknown",
   rostockFeed.count,"Rostock-only list, not Mecklenburg-Vorpommern coverage",rostockFeed.checked_on);
  const col=files.cologne||{};
- add("Köln","Nordrhein-Westfalen","Stadt Köln",col.status==="ok"?"observed_data":col.status==="reachable_no_matching_detail_links"?"no_matching_items":col.status==="unavailable"?"unavailable":"unknown",col.count,"Traffic calendar only; not the assembly register");
+ add("Köln","Nordrhein-Westfalen","Stadt Köln",col.status==="ok"?"observed_data":col.status==="reachable_no_matching_detail_links"?"no_matching_items":col.status==="unavailable"?"unavailable":"unknown",col.count,"Traffic calendar only; not the assembly register",col.checked_at);
  const notice=files.policeCologne||{};
  add("Köln","Nordrhein-Westfalen","Polizei Köln",notice.sources?.[0]?.status==="verified_notice"?"verified_one_off":notice.sources?.[0]?.status==="unavailable_no_import"?"unavailable":"unknown",notice.sources?.[0]?.count,"One dated police notice, not rolling event coverage",notice.checked_at);
  const nrw=files.nrwPolice||{};
@@ -58,7 +58,7 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
   frankfurtArchive.status==="unverified_no_import"?"no_matching_items":"unknown",
   frankfurtArchive.count,"Two individually evidenced historical assembly records, not an ongoing feed",frankfurtArchive.checked_on);
  const leipzig=files.policeLeipzig||{};
- add("Leipzig","Sachsen","Polizeidirektion Leipzig",leipzig.status==="verified_notice"?"verified_one_off":leipzig.status==="unavailable_no_import"?"unavailable":"unknown",leipzig.count,"One dated police notice, not a rolling feed");
+ add("Leipzig","Sachsen","Polizeidirektion Leipzig",leipzig.status==="verified_notice"?"verified_one_off":leipzig.status==="unavailable_no_import"?"unavailable":"unknown",leipzig.count,"One dated police notice, not a rolling feed",leipzig.checked_at);
  const archive=files.leipzigArchive||{};
  add("Leipzig","Sachsen","Polizeidirektion Leipzig (Archiv)",
   archive.status==="verified_historical_notice"?"verified_historical_one_off":
@@ -117,7 +117,7 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
    item.count,"One organizer/union original protest notice; no police registration or licensed official feed proven",item.checked_on);
  }
  const frankfurt=files.frankfurt||{};
- add("Frankfurt am Main","Hessen","Stadt Frankfurt",frankfurt.status==="ok"?"verified_one_off":frankfurt.status==="unavailable"?"unavailable":"unknown",frankfurt.count,"Single notice, not complete state or city coverage");
+ add("Frankfurt am Main","Hessen","Stadt Frankfurt",frankfurt.status==="ok"?"verified_one_off":frankfurt.status==="unavailable"?"unavailable":"unknown",frankfurt.count,"Single notice, not complete state or city coverage",frankfurt.checked_at);
  return {version:1,method:"Observed importer outcomes only; neither state completeness nor actual number of protests can be inferred.",sources:out};
 }
 if(process.argv[1]&&import.meta.url===new URL("file://"+process.argv[1]).href){

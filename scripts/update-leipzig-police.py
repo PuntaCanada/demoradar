@@ -67,6 +67,7 @@ def main():
   if age>30 or age < -90:
    report["status"]="outside_retention_window"
   else:
+   report["checked_at"]=now.isoformat()
    found=parse(fetch())
    if not found:report["status"]="unverified_format_no_import"
    else:report.update(status="verified_notice",count=len(found))

@@ -96,7 +96,7 @@ def parse_detail(url,raw,today):
  ident=hashlib.sha256(url.encode()).hexdigest()[:16]
  return {"id":"cologne-"+ident,"country":"DE","state":"Nordrhein-Westfalen","city":"Köln","date":date.isoformat(),"start":start,"end":end,"title":title[:170],"postal_code":"","location":location[:150],"route":route,"source":"Stadt Köln – Verkehrskalender","source_url":url,"source_status":"amtliche Verkehrsinformation (keine vollständige Versammlungsliste)"}
 def main():
- status={"source":INDEX,"mode":"conservative_factual_extraction","licence":"No blanket open-data licence verified for the city HTML; reuse only unprotected factual details with direct attribution.","status":"unavailable","count":0}
+ status={"checked_at":dt.datetime.now(dt.timezone.utc).isoformat(),"source":INDEX,"mode":"conservative_factual_extraction","licence":"No blanket open-data licence verified for the city HTML; reuse only unprotected factual details with direct attribution.","status":"unavailable","count":0}
  try:
   # City calendar is alphabetically paginated (ten rows per page). Scanning
   # only the first page would systematically miss "Demonstration" and "Versammlung".
