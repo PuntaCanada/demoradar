@@ -5,14 +5,23 @@
     "from": "2026-10-26",
     "to": "2026-12-02"
   },
-  "event_records": 404,
+  "event_records": 402,
   "diagnostic_video_samples": 24,
   "cities": [
+    {
+      "city": "Berlin",
+      "event_count": 323,
+      "days_with_events": 9,
+      "observed_video_title_samples": 6,
+      "observed_city_and_date_samples": 3,
+      "source_count": 0,
+      "source_status": []
+    },
     {
       "city": "Frankfurt am Main",
       "event_count": 3,
       "days_with_events": 2,
-      "observed_video_title_samples": 6,
+      "observed_video_title_samples": 4,
       "observed_city_and_date_samples": 1,
       "source_count": 1,
       "source_status": [
@@ -24,19 +33,10 @@
       ]
     },
     {
-      "city": "Berlin",
-      "event_count": 329,
-      "days_with_events": 9,
-      "observed_video_title_samples": 5,
-      "observed_city_and_date_samples": 2,
-      "source_count": 0,
-      "source_status": []
-    },
-    {
       "city": "Nürnberg",
       "event_count": 0,
       "days_with_events": 0,
-      "observed_video_title_samples": 2,
+      "observed_video_title_samples": 3,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -170,7 +170,7 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         },
         {
@@ -235,7 +235,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "reachable_archive_only",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -295,7 +295,7 @@
       "source_status": [
         {
           "type": "official_assembly_authority_guidance",
-          "status": "content_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
