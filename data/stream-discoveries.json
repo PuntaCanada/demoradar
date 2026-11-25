@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-25T18:11:11.610Z",
+  "updated_at": "2026-11-25T20:39:16.479Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -89,7 +89,7 @@
     },
     {
       "channel": "Weichreite TV Uncut",
-      "title": "🔴LIVE aus ??? Internationaler Tag gegen Gewalt an Frauen 25.11.26",
+      "title": "🔴LIVE aus NRW  Internationaler Tag gegen Gewalt an Frauen 25.11.26 Bielefeld ",
       "url": "https://www.youtube.com/watch?v=kbS5tQMO5fE",
       "date": "2026-11-25T16:59:57Z",
       "status": "recording",
@@ -140,7 +140,7 @@
       "title": "❗LIVE❗in Berlin | Demo: \"Keine* mehr! Gegen geschlechtsbezogene & sexualisierte Gewalt\" | 25.11.2026",
       "url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
       "date": "2026-11-25T15:58:22Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {

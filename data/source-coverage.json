@@ -5,12 +5,12 @@
     "from": "2026-10-26",
     "to": "2026-12-02"
   },
-  "event_records": 402,
+  "event_records": 408,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 323,
+      "event_count": 329,
       "days_with_events": 9,
       "observed_video_title_samples": 6,
       "observed_city_and_date_samples": 3,
@@ -48,6 +48,15 @@
       ]
     },
     {
+      "city": "Bielefeld",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 0,
+      "source_status": []
+    },
+    {
       "city": "Polizei Hessen Meldungen",
       "event_count": 0,
       "days_with_events": 0,
@@ -82,15 +91,6 @@
       "event_count": 2,
       "days_with_events": 2,
       "observed_video_title_samples": 1,
-      "observed_city_and_date_samples": 0,
-      "source_count": 0,
-      "source_status": []
-    },
-    {
-      "city": "Bielefeld",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
@@ -235,7 +235,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "transport_unverified",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
         }
       ]
