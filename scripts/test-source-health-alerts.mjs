@@ -58,3 +58,14 @@ const transport=alertsFromReport({sources:[]},{},{sources:[
 assert.deepEqual(transport.alerts.map(a=>a.condition),["monitor_transport_unverified","monitor_http_restricted","monitor_content_unverified","monitor_unavailable"]);
 assert.ok(transport.alerts.every(a=>!Object.hasOwn(a,"events")));
 console.log("source health alerts: invalid/missing/future check dates, historical exclusions, state attribution and existing checks passed");
+
+const datedNotice={city:"Köln",source:"Polizei Köln",status:"verified_one_off",source_kind:"dated_notice",notice_event_date:"2026-11-20",last_checked:"2026-11-19",check_freshness:"outdated_check"};
+const checkNotice=s=>alertsFromReport({sources:[s]},{},{},{today:"2026-11-25"}).alerts;
+assert.equal(checkNotice(datedNotice).length,0);
+assert.equal(checkNotice({...datedNotice,status:"unavailable"})[0].condition,"unavailable");
+assert.equal(checkNotice({...datedNotice,last_checked:null})[0].condition,"missing_check_date");
+assert.equal(checkNotice({...datedNotice,last_checked:"2026-11-26"})[0].condition,"outdated_check");
+assert.equal(checkNotice({...datedNotice,notice_event_date:"2026-11-26"})[0].condition,"outdated_check");
+assert.equal(checkNotice({...datedNotice,notice_event_date:"2026-02-30"})[0].condition,"outdated_check");
+assert.equal(checkNotice({...datedNotice,source_kind:"rolling_feed"})[0].condition,"outdated_check");
+console.log("Dated historical notice versus rolling feed regression checks passed");
