@@ -137,3 +137,10 @@ for(const city of ["Hannover","Wiesbaden","Potsdam"])assert.equal(
  sourced.find(s=>s.city===city&&s.status==="verified_one_off").origin_type,"non_government_organizer");
 assert.equal(sourced.find(s=>s.city==="Stuttgart").origin_type,"municipal_event_calendar_no_registration");
 console.log("source-quality: 37 explicit data-integrity assertions passed");
+
+const dated=sourceHealth({cologne:{status:"ok",count:1,checked_at:"2026-11-25T10:00:00Z"},policeLeipzig:{status:"verified_notice",count:2,checked_at:"2026-11-25T10:00:00Z"},frankfurt:{status:"unavailable",count:0,checked_at:"2026-11-25T10:00:00Z"}},{today:"2026-11-25"}).sources;
+for(const name of ["Stadt Köln","Polizeidirektion Leipzig","Stadt Frankfurt"])assert.equal(dated.find(x=>x.source===name).last_checked,"2026-11-25");
+assert.equal(dated.find(x=>x.source==="Stadt Frankfurt").status,"unavailable");
+assert.equal(sourceHealth({cologne:{status:"ok",checked_at:"2026-02-30T10:00:00Z"}},{today:"2026-11-25"}).sources.find(x=>x.source==="Stadt Köln").last_checked,null);
+assert.equal(row("Stadt Köln").last_checked,null);
+console.log("Source timestamp propagation and invalid-date regression checks passed");
