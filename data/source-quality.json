@@ -129,9 +129,9 @@
       "city": "Jena",
       "state": "Thüringen",
       "source": "Stadt Jena",
-      "status": "observed_data",
+      "status": "no_matching_items",
       "origin_type": "government_source",
-      "count": 1,
+      "count": 0,
       "scope": "City source, only explicitly marked assemblies",
       "last_checked": "2026-11-25",
       "check_freshness": "recent"

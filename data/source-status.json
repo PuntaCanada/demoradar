@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-25T18:18:48.927733+00:00",
+  "checked_at": "2026-11-25T21:51:33.444224+00:00",
   "sources": [
     {
       "city": "Dresden",
@@ -12,7 +12,7 @@
       "city": "Jena",
       "url": "https://rathaus.jena.de/de/auflagen-aktueller-veranstaltungen",
       "status": "ok",
-      "imported": 1,
+      "imported": 0,
       "note": "Only explicitly labelled assembly entries are imported; absence is not proof of no demonstrations."
     }
   ]
