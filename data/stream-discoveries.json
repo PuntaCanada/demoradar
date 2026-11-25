@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-24T18:17:59.333Z",
+  "updated_at": "2026-11-25T02:39:25.351Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -116,7 +116,7 @@
       "title": "🔴LIVE: Tag gegen Gewalt an Frauen – Demonstration in Berlin [2K]",
       "url": "https://www.youtube.com/watch?v=gVKxgZFdveg",
       "date": "2026-11-24T16:51:28Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {
@@ -140,7 +140,7 @@
       "title": "Angriffe auf Weichreite bei GenZ in Frankfurt - Das geschah davor und danach ",
       "url": "https://www.youtube.com/watch?v=GmQ7P4NulKw",
       "date": "2026-11-24T18:00:10Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {
