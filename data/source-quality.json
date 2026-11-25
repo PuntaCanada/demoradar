@@ -55,7 +55,9 @@
       "count": 2,
       "scope": "One dated police notice, not rolling event coverage",
       "last_checked": "2026-11-19",
-      "check_freshness": "outdated_check"
+      "check_freshness": "outdated_check",
+      "source_kind": "dated_notice",
+      "notice_event_date": "2026-11-20"
     },
     {
       "city": "Bonn",
