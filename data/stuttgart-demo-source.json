@@ -1,14 +1,14 @@
 {
   "source": "https://www.stuttgart.de/veranstaltungskalender/veranstaltungen/demo-zum-internationaler-tag-gegen-gewalt-an-frauen-536688",
   "mode": "single_municipal_announcement_no_bulk_rights",
-  "checked_on": "2026-11-24",
+  "checked_on": "2026-11-25",
   "event_date": "2026-11-25",
   "status": "verified_manual_one_off_time_not_machine_confirmed",
   "count": 1,
   "rights": "Only separately manually vetted individual factual date/time/topic/place; the city RSS/iCal has no verified blanket reuse licence. No bulk import.",
   "manual_original_reviewed_on": "2026-11-20",
   "automatic_day_time_independently_verified": false,
-  "source_bytes_checked": 69470,
+  "source_bytes_checked": 69491,
   "evidence_fields_found": 4,
   "evidence_fields_total": 5,
   "evidence_fields_missing": [

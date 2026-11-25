@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-24T00:05:50.536669+00:00",
+  "checked_at": "2026-11-25T08:53:15.774822+00:00",
   "policy": "Only independently authored labels and verified source URLs; manually reviewed link candidates, automatic event association is NOT event verification. No RSS syndication.",
   "feeds": [],
   "editorial_sources": [
@@ -9,17 +9,5 @@
     "tagesschau / WDR",
     "tagesschau / rbb"
   ],
-  "matches": {
-    "police-bad-oldesloe-4c3e5b08ea588799": [
-      {
-        "url": "https://www.tagesschau.de/inland/regional/schleswigholstein/vor-afd-landesparteitag-in-bad-oldesloe-politik-mit-gespraechsbedarf%2Cregionnorderstedtnews-4212.html",
-        "source": "tagesschau / NDR",
-        "title": "NDR-Bericht zur angemeldeten Gegendemonstration in Bad Oldesloe",
-        "published": "2026-11-16",
-        "match_type": "independently linked editorial context; not event confirmation",
-        "reviewed_on": "2026-11-20",
-        "url_check_status": "content_verified"
-      }
-    ]
-  }
+  "matches": {}
 }

@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "reviewed_on": "2026-11-24",
+  "reviewed_on": "2026-11-25",
   "scope": "Events dated today or later, not necessarily still upcoming at the current hour; source-provenance classification, NOT formal assembly registration, legal licence or completeness",
-  "all_event_records": 1292,
-  "dated_today_or_later": 1267,
-  "old_event_records": 25,
+  "all_event_records": 1296,
+  "dated_today_or_later": 1248,
+  "old_event_records": 48,
   "invalid_dates": 0,
   "unmapped_state_records": 0,
   "source_categories": {
-    "official_structured_source": 1258,
-    "official_individual_notice": 2,
+    "official_structured_source": 1239,
+    "official_individual_notice": 1,
     "municipal_event_listing_registration_unconfirmed": 1,
     "nongovernment_organizer_notice": 5,
-    "unclassified_source": 1
+    "unclassified_source": 2
   },
   "states_with_official_structured_future_events": 3,
   "states_with_any_future_official_notice": 4,
@@ -37,8 +37,8 @@
     },
     {
       "state": "Berlin",
-      "future_records": 1221,
-      "official_structured": 1221,
+      "future_records": 1199,
+      "official_structured": 1199,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
@@ -82,8 +82,8 @@
     },
     {
       "state": "Mecklenburg-Vorpommern",
-      "future_records": 2,
-      "official_structured": 2,
+      "future_records": 4,
+      "official_structured": 4,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
@@ -100,12 +100,12 @@
     },
     {
       "state": "Nordrhein-Westfalen",
-      "future_records": 0,
+      "future_records": 1,
       "official_structured": 0,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
-      "unclassified": 0
+      "unclassified": 1
     },
     {
       "state": "Rheinland-Pfalz",
@@ -127,8 +127,8 @@
     },
     {
       "state": "Sachsen",
-      "future_records": 35,
-      "official_structured": 35,
+      "future_records": 36,
+      "official_structured": 36,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
@@ -154,9 +154,9 @@
     },
     {
       "state": "Thüringen",
-      "future_records": 3,
+      "future_records": 2,
       "official_structured": 0,
-      "official_one_off": 2,
+      "official_one_off": 1,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
       "unclassified": 1

@@ -10,7 +10,7 @@
       "origin_type": "government_source",
       "count": 1276,
       "scope": "Official city-wide reporting feed; completeness not guaranteed",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -19,9 +19,9 @@
       "source": "Stadt Dresden",
       "status": "observed_data",
       "origin_type": "government_source",
-      "count": 35,
+      "count": 36,
       "scope": "Dresden city JSON, not all of Saxony",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -30,18 +30,18 @@
       "source": "Stadt Rostock",
       "status": "observed_data",
       "origin_type": "government_source",
-      "count": 2,
+      "count": 4,
       "scope": "Rostock-only list, not Mecklenburg-Vorpommern coverage",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
       "city": "Köln",
       "state": "Nordrhein-Westfalen",
       "source": "Stadt Köln",
-      "status": "no_matching_items",
+      "status": "observed_data",
       "origin_type": "government_source",
-      "count": 0,
+      "count": 1,
       "scope": "Traffic calendar only; not the assembly register",
       "last_checked": null,
       "check_freshness": "unknown"
@@ -65,7 +65,7 @@
       "origin_type": "government_source",
       "count": 1,
       "scope": "One specific police press announcement, not a regularly updated assembly feed",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -76,7 +76,7 @@
       "origin_type": "government_source",
       "count": 2,
       "scope": "One specific police press announcement, not a regularly updated assembly feed",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -87,7 +87,7 @@
       "origin_type": "government_source",
       "count": 1,
       "scope": "Single dated police assembly announcement, not a rolling register",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -98,7 +98,7 @@
       "origin_type": "government_source",
       "count": 2,
       "scope": "Two individually evidenced historical assembly records, not an ongoing feed",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -131,7 +131,7 @@
       "origin_type": "government_source",
       "count": 1,
       "scope": "City source, only explicitly marked assemblies",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -142,7 +142,7 @@
       "origin_type": "government_source",
       "count": 3,
       "scope": "Single city announcement about three dated assemblies on 20 Nov 2026; not a recurring feed",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -151,9 +151,9 @@
       "source": "Stadt Weimar (vier Einzelanmeldungen)",
       "status": "no_matching_items",
       "origin_type": "government_source",
-      "count": 2,
+      "count": 1,
       "scope": "Four individually reviewed factual assembly notices on 22-25 Nov; no recurring import licence",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -164,7 +164,7 @@
       "origin_type": "government_source",
       "count": 1,
       "scope": "Single police-announced assembly on 21 November 2026; time and exact venue unconfirmed; not a recurring source",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -175,7 +175,7 @@
       "origin_type": "municipal_event_calendar_no_registration",
       "count": 1,
       "scope": "Specific city-calendar demonstration on 25 November; not a licensed assembly feed or official registration confirmation",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -186,7 +186,7 @@
       "origin_type": "non_government_organizer",
       "count": 1,
       "scope": "One non-government original event notice, no police registration confirmed and no licensed machine-readable feed",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -197,7 +197,7 @@
       "origin_type": "non_government_organizer",
       "count": 1,
       "scope": "One non-government original event notice, no police registration confirmed and no licensed machine-readable feed",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -208,7 +208,7 @@
       "origin_type": "non_government_organizer",
       "count": 1,
       "scope": "One organizer/union original protest notice; no police registration or licensed official feed proven",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -219,7 +219,7 @@
       "origin_type": "non_government_organizer",
       "count": 1,
       "scope": "One organizer/union original protest notice; no police registration or licensed official feed proven",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
@@ -230,7 +230,7 @@
       "origin_type": "non_government_organizer",
       "count": 1,
       "scope": "One organizer/union original protest notice; no police registration or licensed official feed proven",
-      "last_checked": "2026-11-24",
+      "last_checked": "2026-11-25",
       "check_freshness": "recent"
     },
     {
