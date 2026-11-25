@@ -14,8 +14,9 @@ export function alertsFromReport(report,formatHealth={},monitorReport={},{today=
   const date=stamp?new Date(stamp+"T12:00:00Z"):null;
   const valid=!!date&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===stamp;
   const age=valid?Math.round((Date.parse(today+"T12:00:00Z")-date.getTime())/86400000):null;
+  const historical=s.source_kind==="dated_notice"&&s.status==="verified_one_off"&&typeof s.notice_event_date==="string"&&/^20\d{2}-\d{2}-\d{2}$/.test(s.notice_event_date)&&Number.isFinite(Date.parse(s.notice_event_date+"T12:00:00Z"))&&new Date(s.notice_event_date+"T12:00:00Z").toISOString().slice(0,10)===s.notice_event_date&&s.notice_event_date<today;
   const severity=s.status==="unavailable"?"unavailable":
-   s.check_freshness==="outdated_check"||requiresCheck&&age!==null&&(age<0||age>2)?"outdated_check":
+   (age!==null&&age<0)||(!historical&&(s.check_freshness==="outdated_check"||requiresCheck&&age!==null&&age>2))?"outdated_check":
    requiresCheck&&age===null?"missing_check_date":null;
   return severity?[{city:s.city,state:s.state||null,source:s.source,condition:severity,last_checked:valid?stamp:null,
    note:"This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."}]:[];

@@ -3,7 +3,7 @@ import {readFileSync,writeFileSync} from "node:fs";
 const read=p=>{try{return JSON.parse(readFileSync(p,"utf8"))}catch{return {}}};
 export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}={}){
  const out=[];
- const add=(city,state,source,status,count,scope,checkedAt=null)=>{
+ const add=(city,state,source,status,count,scope,checkedAt=null,noticeDay=null)=>{
   const d=String(checkedAt||"").slice(0,10);
   const isValid=/^\d{4}-\d{2}-\d{2}$/.test(d)&&Number.isFinite(Date.parse(d+"T12:00:00Z"))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
   const delta=isValid?Math.round((Date.parse(today+"T12:00:00Z")-Date.parse(d+"T12:00:00Z"))/86400000):null;
@@ -19,7 +19,7 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
    source==="Landeshauptstadt Stuttgart (Einzeltermin)"?"municipal_event_calendar_no_registration":
    "government_source";
   out.push({city,state,source,status,origin_type,count:Number.isFinite(count)&&count>=0?count:null,scope,
-   last_checked:isValid?d:null,check_freshness:freshness});
+   last_checked:isValid?d:null,check_freshness:freshness,...(noticeDay?{source_kind:"dated_notice",notice_event_date:noticeDay}:{})});
  };
  const berlin=files.berlin||{};
  const berlinFeed=files.berlinStatus||{};
@@ -35,7 +35,7 @@ export function sourceHealth(files,{today=new Date().toISOString().slice(0,10)}=
  const col=files.cologne||{};
  add("Köln","Nordrhein-Westfalen","Stadt Köln",col.status==="ok"?"observed_data":col.status==="reachable_no_matching_detail_links"?"no_matching_items":col.status==="unavailable"?"unavailable":"unknown",col.count,"Traffic calendar only; not the assembly register",col.checked_at);
  const notice=files.policeCologne||{};
- add("Köln","Nordrhein-Westfalen","Polizei Köln",notice.sources?.[0]?.status==="verified_notice"?"verified_one_off":notice.sources?.[0]?.status==="unavailable_no_import"?"unavailable":"unknown",notice.sources?.[0]?.count,"One dated police notice, not rolling event coverage",notice.checked_at);
+ add("Köln","Nordrhein-Westfalen","Polizei Köln",notice.sources?.[0]?.status==="verified_notice"?"verified_one_off":notice.sources?.[0]?.status==="unavailable_no_import"?"unavailable":"unknown",notice.sources?.[0]?.count,"One dated police notice, not rolling event coverage",notice.checked_at,"2026-11-20");
  const nrw=files.nrwPolice||{};
  for(const city of ["Bonn","Münster"]){
   const item=(nrw.sources||[]).find(s=>s.city===city)||{};
