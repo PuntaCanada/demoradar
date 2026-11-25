@@ -7,25 +7,9 @@
     {
       "city": "Köln",
       "state": "Nordrhein-Westfalen",
-      "source": "Stadt Köln",
-      "condition": "missing_check_date",
-      "last_checked": null,
-      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
-    },
-    {
-      "city": "Köln",
-      "state": "Nordrhein-Westfalen",
       "source": "Polizei Köln",
       "condition": "outdated_check",
       "last_checked": "2026-11-19",
-      "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
-    },
-    {
-      "city": "Leipzig",
-      "state": "Sachsen",
-      "source": "Polizeidirektion Leipzig",
-      "condition": "missing_check_date",
-      "last_checked": null,
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
@@ -33,7 +17,7 @@
       "state": "Hessen",
       "source": "Stadt Frankfurt",
       "condition": "unavailable",
-      "last_checked": null,
+      "last_checked": "2026-11-25",
       "note": "This is a monitoring warning, not evidence that demonstrations were cancelled or did not occur. A missing or stale audit date is not proof of no demonstrations."
     },
     {
@@ -55,12 +39,12 @@
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {
-      "city": "Schwerin",
-      "state": "Mecklenburg-Vorpommern",
+      "city": "Magdeburg",
+      "state": "Sachsen-Anhalt",
       "source": "Research-only official page",
-      "condition": "monitor_content_unverified",
+      "condition": "monitor_transport_unverified",
       "last_checked": "2026-11-25",
-      "url": "https://www.schwerin.de/mein-schwerin/leben/ordnung-sicherheit-verkehr/ordnung-sicherheit/Versammlungsbehoerde/index.html",
+      "url": "https://polizei.sachsen-anhalt.de/das-sind-wir/presse/pi-magdeburg?tx_tsarssinclude_pi1%5Baction%5D=single&tx_tsarssinclude_pi1%5Bcontroller%5D=Base&tx_tsarssinclude_pi1%5Buid%5D=681821",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {
@@ -79,6 +63,15 @@
       "condition": "monitor_http_restricted",
       "last_checked": "2026-11-25",
       "url": "https://frankfurt.de/de-de/aktuelle-meldung/meldungen/mehrere-versammlungen-angemeldet/",
+      "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
+    },
+    {
+      "city": "Hamburg",
+      "state": "Hamburg",
+      "source": "Research-only official page",
+      "condition": "monitor_transport_unverified",
+      "last_checked": "2026-11-25",
+      "url": "https://www.polizei.hamburg/polizeilicher-einsatzraum-hamburg-mit-drohnenflugbeschraenkung-1239648",
       "note": "Read-only research source, not an event feed. Reachability or age never establishes whether a demonstration happens."
     },
     {

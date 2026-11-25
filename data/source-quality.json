@@ -8,7 +8,7 @@
       "source": "Polizei Berlin",
       "status": "observed_data",
       "origin_type": "government_source",
-      "count": 1276,
+      "count": 1287,
       "scope": "Official city-wide reporting feed; completeness not guaranteed",
       "last_checked": "2026-11-25",
       "check_freshness": "recent"
@@ -30,7 +30,7 @@
       "source": "Stadt Rostock",
       "status": "observed_data",
       "origin_type": "government_source",
-      "count": 4,
+      "count": 5,
       "scope": "Rostock-only list, not Mecklenburg-Vorpommern coverage",
       "last_checked": "2026-11-25",
       "check_freshness": "recent"
@@ -43,8 +43,8 @@
       "origin_type": "government_source",
       "count": 1,
       "scope": "Traffic calendar only; not the assembly register",
-      "last_checked": null,
-      "check_freshness": "unknown"
+      "last_checked": "2026-11-25",
+      "check_freshness": "recent"
     },
     {
       "city": "Köln",
@@ -109,8 +109,8 @@
       "origin_type": "government_source",
       "count": 2,
       "scope": "One dated police notice, not a rolling feed",
-      "last_checked": null,
-      "check_freshness": "unknown"
+      "last_checked": "2026-11-25",
+      "check_freshness": "recent"
     },
     {
       "city": "Leipzig",
@@ -241,8 +241,8 @@
       "origin_type": "government_source",
       "count": 0,
       "scope": "Single notice, not complete state or city coverage",
-      "last_checked": null,
-      "check_freshness": "unknown"
+      "last_checked": "2026-11-25",
+      "check_freshness": "recent"
     }
   ]
 }
