@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-11-25T21:51:33.444224+00:00",
+  "checked_at": "2026-11-26T08:17:44.675674+00:00",
   "sources": [
     {
       "city": "Dresden",
       "url": "https://www.dresden.de/data_ext/versammlungsuebersicht/Versammlungen.json",
       "status": "ok",
-      "imported": 36,
+      "imported": 39,
       "note": "Amtliche Dresdner JSON-Schnittstelle; Einträge werden direkt importiert."
     },
     {
