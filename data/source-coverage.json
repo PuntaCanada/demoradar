@@ -5,15 +5,15 @@
     "from": "2026-10-27",
     "to": "2026-12-03"
   },
-  "event_records": 426,
+  "event_records": 401,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 347,
-      "days_with_events": 10,
+      "event_count": 323,
+      "days_with_events": 9,
       "observed_video_title_samples": 6,
-      "observed_city_and_date_samples": 3,
+      "observed_city_and_date_samples": 2,
       "source_count": 0,
       "source_status": []
     },
@@ -165,7 +165,7 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         },
         {
@@ -295,7 +295,7 @@
       "source_status": [
         {
           "type": "official_assembly_authority_guidance",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "unavailable",
           "reuse_rights_verified": false
         }
       ]
@@ -395,7 +395,7 @@
     {
       "city": "Weimar",
       "event_count": 8,
-      "days_with_events": 5,
+      "days_with_events": 6,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
