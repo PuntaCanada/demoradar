@@ -53,13 +53,14 @@
       "scope": "Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register.",
       "status": "reachable_upcoming_list_research_only",
       "checked_on": "2026-11-26",
-      "bytes_checked": 434536,
-      "future_announcement_rows_verified": 2,
+      "bytes_checked": 435831,
+      "future_announcement_rows_verified": 3,
       "future_dates_verified": [
+        "2026-11-28",
         "2026-11-29",
         "2026-11-30"
       ],
-      "future_date_count": 2,
+      "future_date_count": 3,
       "date_conflicts": []
     },
     {
@@ -70,8 +71,9 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
-      "status": "reachable_archive_only",
-      "checked_on": "2026-11-26"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-26",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Halle (Saale)",
@@ -139,7 +141,7 @@
       "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
       "status": "reachable_monitor_only_not_a_feed",
       "checked_on": "2026-11-26",
-      "bytes_checked": 79234,
+      "bytes_checked": 74662,
       "date_conflicts": [],
       "documented_date_discrepancy": {
         "observed_on": "2026-11-20",
@@ -269,9 +271,8 @@
       "parser": null,
       "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
       "scope": "Contact route to official assembly authority; do not import registrations without permission",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-26",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-26"
     },
     {
       "city": "Hamburg",
@@ -281,8 +282,9 @@
       "parser": null,
       "data_rights": "Official notice used as a citation only; no confirmed complete licensed event calendar",
       "scope": "Police confirms several assemblies on 20 Nov 2026 but not unique event titles/time/place; never import events from a drone restriction window",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-26"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-26",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Bremen",

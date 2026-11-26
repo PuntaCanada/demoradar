@@ -8,7 +8,7 @@
       "source": "Polizei Berlin",
       "status": "observed_data",
       "origin_type": "government_source",
-      "count": 1289,
+      "count": 1272,
       "scope": "Official city-wide reporting feed; completeness not guaranteed",
       "last_checked": "2026-11-26",
       "check_freshness": "recent"
@@ -30,7 +30,7 @@
       "source": "Stadt Rostock",
       "status": "observed_data",
       "origin_type": "government_source",
-      "count": 2,
+      "count": 5,
       "scope": "Rostock-only list, not Mecklenburg-Vorpommern coverage",
       "last_checked": "2026-11-26",
       "check_freshness": "recent"

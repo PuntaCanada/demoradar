@@ -9,11 +9,11 @@
       "status": "ok",
       "last_checked": "2026-11-26",
       "last_success": {
-        "count": 1289,
+        "count": 1272,
         "checked_on": "2026-11-26"
       },
-      "baseline_count": 1289,
-      "observed_count": 1289,
+      "baseline_count": 1272,
+      "observed_count": 1272,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
     },
@@ -39,11 +39,11 @@
       "status": "ok",
       "last_checked": "2026-11-26",
       "last_success": {
-        "count": 2,
+        "count": 5,
         "checked_on": "2026-11-26"
       },
-      "baseline_count": 2,
-      "observed_count": 2,
+      "baseline_count": 5,
+      "observed_count": 5,
       "issues": [],
       "note": "Observation only. No conclusion about actual protests, cancellations or state-wide completeness."
     }
