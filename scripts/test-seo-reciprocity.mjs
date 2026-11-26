@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 const read=p=>readFileSync(p,"utf8");
 const origin="https://demoradar.pages.dev";
-const routes=["/","/en/","/community/","/en/community/","/sources/","/en/sources/","/heute/","/en/today/"];
-const groups=[["/","/en/"],["/community/","/en/community/"],["/sources/","/en/sources/"],["/heute/","/en/today/"]];
+const routes=["/","/en/","/community/","/en/community/","/sources/","/en/sources/","/heute/","/en/today/","/partners/","/en/partners/"];
+const groups=[["/","/en/"],["/community/","/en/community/"],["/sources/","/en/sources/"],["/heute/","/en/today/"],["/partners/","/en/partners/"]];
 const sitemap=read("sitemap.xml");
 const xmlUrls=[...sitemap.matchAll(/<url><loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g)];
-assert.equal(xmlUrls.length,routes.length+1,"Sitemap should list eight multilingual routes and Berlin");
+assert.equal(xmlUrls.length,routes.length+1,"Sitemap should list ten multilingual routes and Berlin");
 assert.deepEqual(new Set(xmlUrls.map(m=>m[1])),new Set([...routes.map(r=>origin+r),origin+"/berlin/"]));
 assert.ok(sitemap.includes("<loc>"+origin+"/berlin/</loc>"));
 for(const [de,en] of groups){
@@ -40,3 +40,6 @@ for(const [route,file,lang,other,fallback] of [
 }
 assert.ok(!/<lastmod>/.test(sitemap),"No invented lastmod timestamps in sitemap");
 console.log("SEO: 8 exact indexable routes, self-canonicals, reciprocal bilingual and x-default alternates");
+
+for(const [lang,file,route,homepage] of [["de","partners/index.html","/partners/","index.html"],["en","en/partners/index.html","/en/partners/","en/index.html"]]){const page=read(file);assert.ok(page.includes('<html lang="'+lang+'">'));assert.ok(page.includes('<link rel="canonical" href="'+origin+route+'">'));assert.ok(read(homepage).includes('id="partners-link" href="'+route+'"'));assert.deepEqual([...page.matchAll(/<li><a href="([^"]+)"/g)].map(m=>m[1]),["https://comparanetrd.pages.dev/","https://islaviva-rd.pages.dev/","https://vuelosrd.pages.dev/","https://oficiord.pages.dev/","https://recarganet-rd.pages.dev/","https://by-maria-beauty-store.pages.dev/","https://gewinnradar.pages.dev/","https://ahorrord.pages.dev/","https://hablard.pages.dev/","https://transporterd.pages.dev/","https://aprenderd.pages.dev/","https://handyfix.pages.dev/","https://dateiwerk.pages.dev/","https://voicefix.pages.dev/"]);assert.match(page,/simulat/i);for(const [l,r] of [["de","/partners/"],["en","/en/partners/"],["x-default","/partners/"]])assert.ok(page.includes('hreflang="'+l+'" href="'+origin+r+'"'));}
+console.log("PARTNERS PASS: 14 other projects in each language");
