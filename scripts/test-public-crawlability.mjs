@@ -8,7 +8,7 @@ const asMap=()=>new Map(Object.entries(paths).map(([route,path])=>[
 const baseline=asMap();
 const first=validateSnapshot(baseline);
 assert.deepEqual(first.errors,[],"Actual source files must be crawlable with correct canonical, language alternates and sitemap");
-assert.equal(first.checkedRoutes,10);
+assert.equal(first.checkedRoutes,11);
 assert.ok(brokenBerlinFallbackCheck());
 function brokenBerlinFallbackCheck(){const data=asMap();data.get(origin+"/berlin/").body=data.get(origin+"/").body;return validateSnapshot(data).errors.some(e=>/Berlin.*fallback|Berlin.*canonical|Berlin.*heading/.test(e));}
 const broken=edit=>{const data=asMap();edit(data);return validateSnapshot(data).errors};
@@ -21,4 +21,4 @@ assert.ok(broken(data=>{data.get(origin+"/community/").body=data.get(origin+"/co
 assert.ok(broken(data=>{data.get(origin+"/en/partners/").body=data.get(origin+"/en/").body}).some(x=>/canonical|fallback/.test(x)),"Partner fallback must fail");
 assert.ok(broken(data=>{data.get(origin+"/partners/").status=404}).some(x=>x.includes("not HTTP 200")),"Missing partner route must fail");
 assert.equal(pairs.flat().length,10);
-console.log("Crawler-safe offline audit passed: ten canonical paths, sitemap, robots, fallback and error regressions.");
+console.log("Crawler-safe offline audit passed: eleven canonical paths, sitemap, robots, fallback and error regressions.");
