@@ -71,7 +71,7 @@ export function validateSnapshot(pages,root=origin){
      "Incomplete multilingual sitemap entries: "+route);
   }
  }
- return {ok:errors.length===0,errors,checkedRoutes:routePaths.length};
+ return {ok:errors.length===0,errors,checkedRoutes:routePaths.length+1};
 }
 export async function fetchSnapshot(root=origin){
  const paths=["/robots.txt","/sitemap.xml","/berlin/",...pairs.flat()],map=new Map();
@@ -93,5 +93,5 @@ if(process.argv[1]&&new URL("file://"+process.argv[1]).href===import.meta.url){
   if(attempt<12)await new Promise(resolve=>setTimeout(resolve,10000));
  }
  if(!finalResult.ok){console.error(finalResult.errors.join("\n"));process.exitCode=1}
- else console.log("Public crawlability OK:",finalResult.checkedRoutes,"DE/EN HTML pages, robots and sitemap (not proof of Google indexing)");
+ else console.log("Public crawlability OK:",finalResult.checkedRoutes,"HTML pages (including Berlin), robots and sitemap (not proof of Google indexing)");
 }
