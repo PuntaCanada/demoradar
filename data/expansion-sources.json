@@ -269,8 +269,9 @@
       "parser": null,
       "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
       "scope": "Contact route to official assembly authority; do not import registrations without permission",
-      "status": "reachable_monitor_only_not_a_feed",
-      "checked_on": "2026-11-26"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-26",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Hamburg",
