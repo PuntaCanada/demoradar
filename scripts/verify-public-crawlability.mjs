@@ -10,7 +10,8 @@ export const pairs=[
  ["/","/en/"],
  ["/community/","/en/community/"],
  ["/sources/","/en/sources/"],
- ["/heute/","/en/today/"]
+ ["/heute/","/en/today/"],
+ ["/partners/","/en/partners/"]
 ];
 const tidy=s=>String(s||"").replace(/\s+/g," ").trim();
 export const canonicalOf=html=>html.match(/<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?\s*>/i)?.[1]||"";
@@ -47,7 +48,7 @@ export function validateSnapshot(pages,root=origin){
  check(/Quelleneinträge/.test(berlinHtml)&&/Quellenabdeckung/.test(berlinHtml),"Berlin source and coverage disclosure missing");
  check(!/<meta[^>]*content="[^"]*noindex/i.test(berlinHtml),"Berlin unexpectedly noindex");
  const actualLocations=[...sitemapBody.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
- check(actualLocations.length===routePaths.length+1,"Sitemap must contain eight language routes plus Berlin");
+ check(actualLocations.length===routePaths.length+1,"Sitemap must contain ten language routes plus Berlin");
  check(actualLocations.includes(root+"/berlin/"),"Berlin must be in sitemap");
  check(new Set(actualLocations).size===actualLocations.length,"Sitemap must not duplicate canonical locations");
  for(const path of routePaths)check(actualLocations.includes(root+path),"Missing sitemap URL: "+path);
@@ -70,7 +71,7 @@ export function validateSnapshot(pages,root=origin){
      "Incomplete multilingual sitemap entries: "+route);
   }
  }
- return {ok:errors.length===0,errors,checkedRoutes:routePaths.length};
+ return {ok:errors.length===0,errors,checkedRoutes:routePaths.length+1};
 }
 export async function fetchSnapshot(root=origin){
  const paths=["/robots.txt","/sitemap.xml","/berlin/",...pairs.flat()],map=new Map();
@@ -92,5 +93,5 @@ if(process.argv[1]&&new URL("file://"+process.argv[1]).href===import.meta.url){
   if(attempt<12)await new Promise(resolve=>setTimeout(resolve,10000));
  }
  if(!finalResult.ok){console.error(finalResult.errors.join("\n"));process.exitCode=1}
- else console.log("Public crawlability OK:",finalResult.checkedRoutes,"DE/EN HTML pages, robots and sitemap (not proof of Google indexing)");
+ else console.log("Public crawlability OK:",finalResult.checkedRoutes,"HTML pages (including Berlin), robots and sitemap (not proof of Google indexing)");
 }
