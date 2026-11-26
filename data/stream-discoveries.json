@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-25T20:39:16.479Z",
+  "updated_at": "2026-11-26T03:05:22.985Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -116,7 +116,7 @@
       "title": "🔴LIVE: Internationaler Tag gegen Gewalt 2026 – Demonstration in Neukölln✊🏽[2K]",
       "url": "https://www.youtube.com/watch?v=XRJlG2eW2Cg",
       "date": "2026-11-25T16:12:09Z",
-      "status": "live",
+      "status": "recording",
       "match_count": 0
     },
     {

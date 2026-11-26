@@ -2,16 +2,16 @@
   "version": 1,
   "method": "Read-only diagnostic; only imported, attributable event IDs are counted. Title samples are not evidence of official registration.",
   "window": {
-    "from": "2026-10-26",
-    "to": "2026-12-02"
+    "from": "2026-10-27",
+    "to": "2026-12-03"
   },
-  "event_records": 408,
+  "event_records": 426,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 329,
-      "days_with_events": 9,
+      "event_count": 347,
+      "days_with_events": 10,
       "observed_video_title_samples": 6,
       "observed_city_and_date_samples": 3,
       "source_count": 0,
@@ -88,8 +88,8 @@
     },
     {
       "city": "Bonn",
-      "event_count": 2,
-      "days_with_events": 2,
+      "event_count": 3,
+      "days_with_events": 3,
       "observed_video_title_samples": 1,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
@@ -170,7 +170,7 @@
         },
         {
           "type": "official_police_operational_notice",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
