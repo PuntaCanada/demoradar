@@ -10,7 +10,8 @@ export const pairs=[
  ["/","/en/"],
  ["/community/","/en/community/"],
  ["/sources/","/en/sources/"],
- ["/heute/","/en/today/"]
+ ["/heute/","/en/today/"],
+ ["/partners/","/en/partners/"]
 ];
 const tidy=s=>String(s||"").replace(/\s+/g," ").trim();
 export const canonicalOf=html=>html.match(/<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?\s*>/i)?.[1]||"";
@@ -47,7 +48,7 @@ export function validateSnapshot(pages,root=origin){
  check(/Quelleneinträge/.test(berlinHtml)&&/Quellenabdeckung/.test(berlinHtml),"Berlin source and coverage disclosure missing");
  check(!/<meta[^>]*content="[^"]*noindex/i.test(berlinHtml),"Berlin unexpectedly noindex");
  const actualLocations=[...sitemapBody.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
- check(actualLocations.length===routePaths.length+1,"Sitemap must contain eight language routes plus Berlin");
+ check(actualLocations.length===routePaths.length+1,"Sitemap must contain ten language routes plus Berlin");
  check(actualLocations.includes(root+"/berlin/"),"Berlin must be in sitemap");
  check(new Set(actualLocations).size===actualLocations.length,"Sitemap must not duplicate canonical locations");
  for(const path of routePaths)check(actualLocations.includes(root+path),"Missing sitemap URL: "+path);
