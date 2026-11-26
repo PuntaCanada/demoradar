@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-26T12:18:52.560Z",
+  "updated_at": "2026-11-26T21:46:34.737Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -17,6 +17,14 @@
   "diagnostic_sample": [
     {
       "channel": "Weichreite",
+      "title": "27 Missbrauchsfälle durch Kita-Leiter! \"Nazis beim TMR?\" Montagsdemo & Antifa Nürnberg 23.11.26",
+      "url": "https://www.youtube.com/watch?v=0_U0OVmjTqY",
+      "date": "2026-11-26T17:30:06Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite",
       "title": "\"Vollkommen andere Politik! / Freie Presse wichtig!\" Lob für Weichreite TMR Antifa Nürnberg 23.11.26",
       "url": "https://www.youtube.com/watch?v=l83cUIYdEm8",
       "date": "2026-11-25T16:00:11Z",
@@ -28,14 +36,6 @@
       "title": "Wütender gegen Weichreite & Polizei! / AfD gegen TMR Montagsdemo? Antifa Gegendemo Nürnberg 23.11.26",
       "url": "https://www.youtube.com/watch?v=I6XK630gX58",
       "date": "2026-11-24T17:00:09Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Weichreite",
-      "title": "Wo bleibt denn PETA? \"Jagd ist mehr als Fingerkrümmen!\" Kirchlicher Segen für Jäger Bonn 08.11.26",
-      "url": "https://www.youtube.com/watch?v=icbo_JE3bqM",
-      "date": "2026-11-23T14:00:08Z",
       "status": "recording",
       "match_count": 0
     },
@@ -137,25 +137,25 @@
     },
     {
       "channel": "Schmidtkes Welt",
+      "title": "\"Stahlgewitter einfließen lassen\" Gespräch Frank Kraemer (Metapol) | Büchermesse Seitenwechsel 2026",
+      "url": "https://www.youtube.com/watch?v=tYz6fiZzCI8",
+      "date": "2026-11-26T19:00:06Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Schmidtkes Welt",
       "title": "❗LIVE❗in Berlin | Demo: \"Keine* mehr! Gegen geschlechtsbezogene & sexualisierte Gewalt\" | 25.11.2026",
       "url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
       "date": "2026-11-25T15:58:22Z",
       "status": "recording",
-      "match_count": 0
+      "match_count": 1
     },
     {
       "channel": "Schmidtkes Welt",
       "title": "Angriffe auf Weichreite bei GenZ in Frankfurt - Das geschah davor und danach ",
       "url": "https://www.youtube.com/watch?v=GmQ7P4NulKw",
       "date": "2026-11-24T18:00:10Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Schmidtkes Welt",
-      "title": "\"Sie wollen die Menschen reduzieren\" Gespräch mit Stefan Magnet @auf1tv  | Seitenwechsel 2026",
-      "url": "https://www.youtube.com/watch?v=Fl7IvFg3_zg",
-      "date": "2026-11-22T17:00:08Z",
       "status": "recording",
       "match_count": 0
     },
@@ -208,6 +208,30 @@
       "match_count": 0
     }
   ],
-  "candidates": [],
+  "candidates": [
+    {
+      "platform": "YouTube",
+      "channel": "Schmidtkes Welt",
+      "title": "❗LIVE❗in Berlin | Demo: \"Keine* mehr! Gegen geschlechtsbezogene & sexualisierte Gewalt\" | 25.11.2026",
+      "url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
+      "date": "2026-11-25",
+      "published_at": "2026-11-25T21:09:53Z",
+      "broadcast_started_at": "2026-11-25T15:58:22Z",
+      "status": "recording",
+      "checked_at": "2026-11-26T21:46:34.737Z",
+      "evidence_url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
+      "event_id": "demos-65148",
+      "city": "Berlin",
+      "matched_terms": [
+        "keine",
+        "mehr",
+        "gewalt"
+      ],
+      "confidence_terms": 6,
+      "reviewed": false,
+      "auto_match": true,
+      "note": "AUTOMATIC CANDIDATE ONLY: unique city, event-day proximity and two distinctive topic terms matched. Verify independently before publishing."
+    }
+  ],
   "errors": []
 }
