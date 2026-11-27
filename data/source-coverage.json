@@ -2,16 +2,16 @@
   "version": 1,
   "method": "Read-only diagnostic; only imported, attributable event IDs are counted. Title samples are not evidence of official registration.",
   "window": {
-    "from": "2026-10-27",
-    "to": "2026-12-03"
+    "from": "2026-10-28",
+    "to": "2026-12-04"
   },
-  "event_records": 392,
+  "event_records": 422,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 309,
-      "days_with_events": 9,
+      "event_count": 339,
+      "days_with_events": 10,
       "observed_video_title_samples": 6,
       "observed_city_and_date_samples": 2,
       "source_count": 0,
