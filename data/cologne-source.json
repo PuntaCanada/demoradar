@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-11-26T21:43:47.900947+00:00",
+  "checked_at": "2026-11-27T08:49:10.043224+00:00",
   "source": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/index.html",
   "mode": "conservative_factual_extraction",
   "licence": "No blanket open-data licence verified for the city HTML; reuse only unprotected factual details with direct attribution.",
-  "status": "reachable_no_matching_detail_links",
-  "count": 0,
-  "links_inspected": 0,
-  "pages_checked": 11,
-  "note": "No clearly labelled demonstrations on sampled calendar page; no import"
+  "status": "ok",
+  "count": 1,
+  "links_inspected": 1,
+  "retained": 5,
+  "pages_checked": 11
 }

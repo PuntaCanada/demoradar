@@ -2,8 +2,8 @@
   "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
   "source_name": "Polizei Berlin – Versammlungsbehörde",
   "license_note": "Lizenzbedingungen der Originalquelle prüfen; keine CC-Freigabe behaupten",
-  "updated_at": "2026-11-26T21:43:45.411Z",
-  "count": 1299,
+  "updated_at": "2026-11-27T08:49:07.386Z",
+  "count": 1301,
   "events": [
     {
       "id": "police-leipzig-archive-ac018bdaf281ef71",
@@ -903,63 +903,6 @@
       "source_status": "behördlich angezeigt"
     },
     {
-      "id": "dresden-81f035c2b3c202ee",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-27",
-      "start": "",
-      "end": "",
-      "title": "'Ein Dach für alle Kinder' - Mahnwache für die obdachlosen Kinder der Welt",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "Jugendverein Roter Baum e.V.",
-      "registered_participants": "30",
-      "event_status": "angemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
-      "id": "dresden-9ddc2b67a79d072c",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-27",
-      "start": "",
-      "end": "",
-      "title": "Für ein demokratisches Sachsen-Anhalt!",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "",
-      "registered_participants": "1000",
-      "event_status": "angemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
-      "id": "dresden-fcef69bd03bbca98",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-27",
-      "start": "",
-      "end": "",
-      "title": "Für ein eigenständiges BSW - klare Kante gegen Rechts, auch ohne Brandmauer",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "",
-      "registered_participants": "10 max",
-      "event_status": "angemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
       "id": "berlin-59",
       "country": "DE",
       "state": "Berlin",
@@ -1152,6 +1095,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-af995114d10ab76c",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-27",
+      "start": "14:00",
+      "end": "18:00",
+      "title": "Für ein eigenständiges BSW - klare Kante gegen Rechts, auch ohne Brandmauer",
+      "location": "Messering",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "10 max",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "rostock-195f2f4d91e89bfd",
       "country": "DE",
       "state": "Mecklenburg-Vorpommern",
@@ -1288,6 +1250,44 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-30437ccaf52dbe77",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-27",
+      "start": "16:00",
+      "end": "19:00",
+      "title": "'Ein Dach für alle Kinder' - Mahnwache für die obdachlosen Kinder der Welt",
+      "location": "Dr.-Külz-Ring",
+      "postal_code": "",
+      "route": "",
+      "organizer": "Jugendverein Roter Baum e.V.",
+      "registered_participants": "30",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
+      "id": "dresden-702f200f830a650b",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-27",
+      "start": "16:00",
+      "end": "19:00",
+      "title": "Für ein demokratisches Sachsen-Anhalt!",
+      "location": "Messering",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "1000",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-113",
       "country": "DE",
       "state": "Berlin",
@@ -1404,6 +1404,22 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "cologne-031d393d9199ad09",
+      "country": "DE",
+      "state": "Nordrhein-Westfalen",
+      "city": "Köln",
+      "date": "2026-11-27",
+      "start": "18:00",
+      "end": "21:30",
+      "title": "Demonstration (Innenstadt) - Stadt Köln",
+      "postal_code": "",
+      "location": "am Bahnhofsvorplatz",
+      "route": "Bahnhofsvorplatz - Domprobst-Ketzer-Straße - Marzellenstraße - Eigelstein - Eigelsteintorburg (Zwischenkundgebung) - Ebertplatz - Neusser Straße - Roeckerathplatz/Agneskirche",
+      "source": "Stadt Köln – Verkehrskalender",
+      "source_url": "https://www.stadt-koeln.de/leben-in-koeln/verkehr/verkehrskalender/demonstration-innenstadt-2",
+      "source_status": "amtliche Verkehrsinformation (keine vollständige Versammlungsliste)"
+    },
+    {
       "id": "dresden-d17eda15f73e259f",
       "country": "DE",
       "state": "Sachsen",
@@ -1472,25 +1488,6 @@
       "organizer": "Centrum für Demokratieentwicklung",
       "registered_participants": "100",
       "event_status": "abgemeldet",
-      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
-      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
-      "source_status": "behördlich veröffentlicht"
-    },
-    {
-      "id": "dresden-f17e1371db76cb51",
-      "country": "DE",
-      "state": "Sachsen",
-      "city": "Dresden",
-      "date": "2026-11-28",
-      "start": "",
-      "end": "",
-      "title": "Gedenken an die Opfer des Holodomors",
-      "location": "",
-      "postal_code": "",
-      "route": "",
-      "organizer": "",
-      "registered_participants": "100",
-      "event_status": "angemeldet",
       "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
       "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
       "source_status": "behördlich veröffentlicht"
@@ -1951,6 +1948,25 @@
       "source_status": "behördlich angezeigt"
     },
     {
+      "id": "dresden-5b36aac761866bf6",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-28",
+      "start": "15:30",
+      "end": "16:30",
+      "title": "Gedenken an die Opfer des Holodomors",
+      "location": "Schloßplatz",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "100",
+      "event_status": "beschieden",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
+      "source_status": "behördlich veröffentlicht"
+    },
+    {
       "id": "berlin-212",
       "country": "DE",
       "state": "Berlin",
@@ -2220,6 +2236,25 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
+    },
+    {
+      "id": "dresden-39faa6f73b9d848a",
+      "country": "DE",
+      "state": "Sachsen",
+      "city": "Dresden",
+      "date": "2026-11-30",
+      "start": "",
+      "end": "",
+      "title": "Für ein buntes demokratisches Hochland!⁩",
+      "location": "",
+      "postal_code": "",
+      "route": "",
+      "organizer": "",
+      "registered_participants": "ca. 25",
+      "event_status": "angemeldet",
+      "source": "Landeshauptstadt Dresden – Versammlungsübersicht",
+      "source_url": "https://www.dresden.de/de/rathaus/dienstleistungen/versammlungsuebersicht.php",
+      "source_status": "behördlich veröffentlicht"
     },
     {
       "id": "dresden-3f366fa728730aa3",
@@ -20972,16 +21007,6 @@
       "source": "Polizei Berlin – Versammlungsbehörde",
       "source_url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/index.php/index/all.json?q=",
       "source_status": "behördlich angezeigt"
-    }
-  ],
-  "sources": [
-    {
-      "name": "Polizei Berlin",
-      "url": "https://www.berlin.de/polizei/service/versammlungsbehoerde/versammlungen-aufzuege/"
-    },
-    {
-      "name": "Stadt Rostock",
-      "url": "https://rathaus.rostock.de/de/versammlungen/343356?r=artikellink"
     }
   ]
 }

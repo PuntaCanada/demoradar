@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "reviewed_on": "2026-11-26",
+  "reviewed_on": "2026-11-27",
   "scope": "Events dated today or later, not necessarily still upcoming at the current hour; source-provenance classification, NOT formal assembly registration, legal licence or completeness",
-  "all_event_records": 1299,
-  "dated_today_or_later": 1264,
-  "old_event_records": 35,
+  "all_event_records": 1301,
+  "dated_today_or_later": 1245,
+  "old_event_records": 56,
   "invalid_dates": 0,
   "unmapped_state_records": 0,
   "source_categories": {
-    "official_structured_source": 1262,
+    "official_structured_source": 1242,
     "official_individual_notice": 0,
     "municipal_event_listing_registration_unconfirmed": 0,
     "nongovernment_organizer_notice": 2,
-    "unclassified_source": 0
+    "unclassified_source": 1
   },
   "states_with_official_structured_future_events": 3,
   "states_with_any_future_official_notice": 3,
@@ -37,8 +37,8 @@
     },
     {
       "state": "Berlin",
-      "future_records": 1218,
-      "official_structured": 1218,
+      "future_records": 1199,
+      "official_structured": 1199,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
@@ -100,12 +100,12 @@
     },
     {
       "state": "Nordrhein-Westfalen",
-      "future_records": 0,
+      "future_records": 1,
       "official_structured": 0,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
-      "unclassified": 0
+      "unclassified": 1
     },
     {
       "state": "Rheinland-Pfalz",
@@ -127,8 +127,8 @@
     },
     {
       "state": "Sachsen",
-      "future_records": 39,
-      "official_structured": 39,
+      "future_records": 38,
+      "official_structured": 38,
       "official_one_off": 0,
       "municipal_calendar_unregistered": 0,
       "organizer_only": 0,
