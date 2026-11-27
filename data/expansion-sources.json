@@ -53,7 +53,7 @@
       "scope": "Weimar city official list of confirmed assembly registrations. Actual dated forthcoming entries are checked in the page body; not a statewide register.",
       "status": "reachable_upcoming_list_research_only",
       "checked_on": "2026-11-27",
-      "bytes_checked": 435830,
+      "bytes_checked": 435919,
       "future_announcement_rows_verified": 3,
       "future_dates_verified": [
         "2026-11-28",
@@ -71,8 +71,9 @@
       "parser": null,
       "data_rights": "Single police after-action report, no verified open event-data reuse licence; retain as original link only",
       "scope": "Official police retrospective report from 4 September 2026 about assemblies in Magdeburg; not a future calendar or RSS/API event feed",
-      "status": "reachable_archive_only",
-      "checked_on": "2026-11-27"
+      "status": "transport_unverified",
+      "checked_on": "2026-11-27",
+      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
     },
     {
       "city": "Halle (Saale)",
@@ -141,7 +142,7 @@
       "scope": "Landkreis Landsberg am Lech official HTML table of notified assemblies; can include recurring series and internally inconsistent weekday/date; not an automated import",
       "status": "reachable_monitor_only_not_a_feed",
       "checked_on": "2026-11-27",
-      "bytes_checked": 74662,
+      "bytes_checked": 74614,
       "date_conflicts": [],
       "documented_date_discrepancy": {
         "observed_on": "2026-11-20",
@@ -238,9 +239,8 @@
       "parser": null,
       "data_rights": "A 2023 hackathon showcase, not a licensed current rolling event feed; monitoring only",
       "scope": "Project goal mentions future open data; does not establish a 2026 import source",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-27",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-27"
     },
     {
       "city": "Dortmund",
@@ -272,9 +272,8 @@
       "parser": null,
       "data_rights": "Official authority contact and application guidance, not an event feed or reuse permission",
       "scope": "Contact route to official assembly authority; do not import registrations without permission",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-27",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-27"
     },
     {
       "city": "Hamburg",
@@ -307,9 +306,8 @@
       "parser": null,
       "data_rights": "Not an event feed; no bulk licence applicable",
       "scope": "Registration rules and contacts only; not a future event source",
-      "status": "transport_unverified",
-      "checked_on": "2026-11-27",
-      "error": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "status": "reachable_monitor_only_not_a_feed",
+      "checked_on": "2026-11-27"
     }
   ]
 }
