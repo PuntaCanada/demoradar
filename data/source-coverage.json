@@ -5,15 +5,15 @@
     "from": "2026-10-28",
     "to": "2026-12-04"
   },
-  "event_records": 386,
+  "event_records": 377,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 310,
+      "event_count": 297,
       "days_with_events": 9,
-      "observed_video_title_samples": 6,
-      "observed_city_and_date_samples": 0,
+      "observed_video_title_samples": 7,
+      "observed_city_and_date_samples": 2,
       "source_count": 0,
       "source_status": []
     },
@@ -21,22 +21,7 @@
       "city": "Nürnberg",
       "event_count": 0,
       "days_with_events": 0,
-      "observed_video_title_samples": 4,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_city_press",
-          "status": "http_restricted",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
-      "city": "Frankfurt am Main",
-      "event_count": 2,
-      "days_with_events": 1,
-      "observed_video_title_samples": 4,
+      "observed_video_title_samples": 3,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -51,38 +36,38 @@
       "city": "Bielefeld",
       "event_count": 0,
       "days_with_events": 0,
-      "observed_video_title_samples": 1,
+      "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
     },
     {
-      "city": "Polizei Hessen Meldungen",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 1,
+      "city": "Frankfurt am Main",
+      "event_count": 2,
+      "days_with_events": 1,
+      "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
         {
-          "type": "official_police_press_index",
-          "status": "reachable_monitor_only_not_a_feed",
+          "type": "official_city_press",
+          "status": "http_restricted",
           "reuse_rights_verified": false
         }
       ]
     },
     {
-      "city": "Polizei Rheinland-Pfalz Presse",
-      "event_count": 0,
-      "days_with_events": 0,
+      "city": "Dortmund",
+      "event_count": 1,
+      "days_with_events": 1,
       "observed_video_title_samples": 1,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
         {
-          "type": "official_police_press_index",
-          "status": "unavailable",
-          "reuse_rights_verified": true
+          "type": "official_municipal_publications",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
         }
       ]
     },
@@ -156,7 +141,7 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         },
         {
@@ -166,7 +151,7 @@
         },
         {
           "type": "official_registration_information",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
@@ -226,8 +211,38 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "reachable_archive_only",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Polizei Hessen Meldungen",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_press_index",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Polizei Rheinland-Pfalz Presse",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 0,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_press_index",
+          "status": "unavailable",
+          "reuse_rights_verified": true
         }
       ]
     },
@@ -292,21 +307,6 @@
       ]
     },
     {
-      "city": "Dortmund",
-      "event_count": 1,
-      "days_with_events": 1,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_municipal_publications",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
       "city": "Potsdam",
       "event_count": 1,
       "days_with_events": 1,
@@ -363,7 +363,7 @@
         },
         {
           "type": "official_open_data_research",
-          "status": "transport_unverified",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]

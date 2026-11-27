@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-27T13:16:58.945Z",
+  "updated_at": "2026-11-27T22:10:43.758Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -11,10 +11,18 @@
   "statistics": {
     "youtube_channels_checked": 10,
     "youtube_videos_checked": 500,
-    "youtube_streams_seen": 233,
+    "youtube_streams_seen": 235,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
+    {
+      "channel": "Weichreite",
+      "title": "\"Machst du jetzt Bildungs-TV?\" Ganzer Demozug Internat. Tag gegen Gewalt an Frauen Bielefeld25.11.26",
+      "url": "https://www.youtube.com/watch?v=wqAMJ-9lMFI",
+      "date": "2026-11-27T16:00:06Z",
+      "status": "recording",
+      "match_count": 0
+    },
     {
       "channel": "Weichreite",
       "title": "27 Missbrauchsfälle durch Kita-Leiter! \"Nazis beim TMR?\" Montagsdemo & Antifa Nürnberg 23.11.26",
@@ -28,14 +36,6 @@
       "title": "\"Vollkommen andere Politik! / Freie Presse wichtig!\" Lob für Weichreite TMR Antifa Nürnberg 23.11.26",
       "url": "https://www.youtube.com/watch?v=l83cUIYdEm8",
       "date": "2026-11-25T16:00:11Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Weichreite",
-      "title": "Wütender gegen Weichreite & Polizei! / AfD gegen TMR Montagsdemo? Antifa Gegendemo Nürnberg 23.11.26",
-      "url": "https://www.youtube.com/watch?v=I6XK630gX58",
-      "date": "2026-11-24T17:00:09Z",
       "status": "recording",
       "match_count": 0
     },
@@ -89,6 +89,14 @@
     },
     {
       "channel": "Weichreite TV Uncut",
+      "title": "Schluss mit dem Nazitreffen! Antifa Gegendemo - Offener Abend Die Heimat Dortmund Dorstfeld 27.11.26",
+      "url": "https://www.youtube.com/watch?v=ugG487u3K3k",
+      "date": "2026-11-27T18:00:09Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite TV Uncut",
       "title": "🔴LIVE aus NRW  Internationaler Tag gegen Gewalt an Frauen 25.11.26 Bielefeld ",
       "url": "https://www.youtube.com/watch?v=kbS5tQMO5fE",
       "date": "2026-11-25T16:59:57Z",
@@ -104,10 +112,10 @@
       "match_count": 0
     },
     {
-      "channel": "Weichreite TV Uncut",
-      "title": "🔴LIVE Bahnhofsviertel  Frankfurt . Angriff + Polizeimaßnahme vom 20.11.26 & Bericht aus 21.11.26",
-      "url": "https://www.youtube.com/watch?v=9bgDluAbjQ0",
-      "date": "2026-11-21T09:48:31Z",
+      "channel": "Eskalabe",
+      "title": "🔴LIVE: Weg mit dem Kürzungshaushalt – Demonstration [2K]",
+      "url": "https://www.youtube.com/watch?v=t_uwB6mz7lg",
+      "date": "2026-11-27T15:26:07Z",
       "status": "recording",
       "match_count": 0
     },
@@ -128,10 +136,10 @@
       "match_count": 0
     },
     {
-      "channel": "Eskalabe",
-      "title": "🔴LIVE: Berlin im Zeichen des Nahostkonflikts - Gen Z, Protestbewegung und Versammlungsfreiheit⛓️",
-      "url": "https://www.youtube.com/watch?v=-JZjvTJJb0o",
-      "date": "2026-11-21T14:36:55Z",
+      "channel": "Schmidtkes Welt",
+      "title": "❗LIVE❗in Berlin | \"Hunderte Mrd. für Bildung & Soziales, statt für Aufrüstung & Krieg\" | 27.11.2026",
+      "url": "https://www.youtube.com/watch?v=AivS-BkiBLU",
+      "date": "2026-11-27T15:15:42Z",
       "status": "recording",
       "match_count": 0
     },
@@ -152,10 +160,10 @@
       "match_count": 0
     },
     {
-      "channel": "Schmidtkes Welt",
-      "title": "Angriffe auf Weichreite bei GenZ in Frankfurt - Das geschah davor und danach ",
-      "url": "https://www.youtube.com/watch?v=GmQ7P4NulKw",
-      "date": "2026-11-24T18:00:10Z",
+      "channel": "Beobachter Live",
+      "title": "🔴 Live: Berlin | Sozialkürzungen und Aufrüstung",
+      "url": "https://www.youtube.com/watch?v=BHK2IcRQGPk",
+      "date": "2026-11-27T15:03:59Z",
       "status": "recording",
       "match_count": 0
     },
@@ -172,14 +180,6 @@
       "title": "🔴 Live: Berlin | Impressionen Schlossinsel Köpenick",
       "url": "https://www.youtube.com/watch?v=YpweEzF3wRA",
       "date": "2026-11-22T13:26:31Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Beobachter Live",
-      "title": "🔴 Live: Dresden | Reformationstag 2026",
-      "url": "https://www.youtube.com/watch?v=S1P9OoFsnDc",
-      "date": "2026-10-31T12:15:19Z",
       "status": "recording",
       "match_count": 0
     },
