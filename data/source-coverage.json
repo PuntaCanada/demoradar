@@ -5,15 +5,15 @@
     "from": "2026-10-28",
     "to": "2026-12-04"
   },
-  "event_records": 422,
+  "event_records": 386,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 339,
-      "days_with_events": 10,
+      "event_count": 310,
+      "days_with_events": 9,
       "observed_video_title_samples": 6,
-      "observed_city_and_date_samples": 2,
+      "observed_city_and_date_samples": 0,
       "source_count": 0,
       "source_status": []
     },
@@ -34,10 +34,10 @@
     },
     {
       "city": "Frankfurt am Main",
-      "event_count": 3,
-      "days_with_events": 2,
+      "event_count": 2,
+      "days_with_events": 1,
       "observed_video_title_samples": 4,
-      "observed_city_and_date_samples": 1,
+      "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
         {
@@ -141,7 +141,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "reachable_archive_only",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -156,17 +156,17 @@
       "source_status": [
         {
           "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        },
-        {
-          "type": "official_police_operational_notice",
           "status": "transport_unverified",
           "reuse_rights_verified": false
         },
         {
-          "type": "official_registration_information",
+          "type": "official_police_operational_notice",
           "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        },
+        {
+          "type": "official_registration_information",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -226,7 +226,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "transport_unverified",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
         }
       ]
@@ -363,15 +363,15 @@
         },
         {
           "type": "official_open_data_research",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
     },
     {
       "city": "Münster",
-      "event_count": 4,
-      "days_with_events": 3,
+      "event_count": 3,
+      "days_with_events": 2,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
@@ -379,8 +379,8 @@
     },
     {
       "city": "Köln",
-      "event_count": 6,
-      "days_with_events": 2,
+      "event_count": 7,
+      "days_with_events": 3,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
@@ -394,7 +394,7 @@
     },
     {
       "city": "Weimar",
-      "event_count": 9,
+      "event_count": 7,
       "days_with_events": 7,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,

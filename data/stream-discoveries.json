@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-26T21:46:34.737Z",
+  "updated_at": "2026-11-27T13:16:58.945Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -11,7 +11,7 @@
   "statistics": {
     "youtube_channels_checked": 10,
     "youtube_videos_checked": 500,
-    "youtube_streams_seen": 235,
+    "youtube_streams_seen": 233,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
@@ -149,7 +149,7 @@
       "url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
       "date": "2026-11-25T15:58:22Z",
       "status": "recording",
-      "match_count": 1
+      "match_count": 0
     },
     {
       "channel": "Schmidtkes Welt",
@@ -208,30 +208,6 @@
       "match_count": 0
     }
   ],
-  "candidates": [
-    {
-      "platform": "YouTube",
-      "channel": "Schmidtkes Welt",
-      "title": "❗LIVE❗in Berlin | Demo: \"Keine* mehr! Gegen geschlechtsbezogene & sexualisierte Gewalt\" | 25.11.2026",
-      "url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
-      "date": "2026-11-25",
-      "published_at": "2026-11-25T21:09:53Z",
-      "broadcast_started_at": "2026-11-25T15:58:22Z",
-      "status": "recording",
-      "checked_at": "2026-11-26T21:46:34.737Z",
-      "evidence_url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
-      "event_id": "demos-65148",
-      "city": "Berlin",
-      "matched_terms": [
-        "keine",
-        "mehr",
-        "gewalt"
-      ],
-      "confidence_terms": 6,
-      "reviewed": false,
-      "auto_match": true,
-      "note": "AUTOMATIC CANDIDATE ONLY: unique city, event-day proximity and two distinctive topic terms matched. Verify independently before publishing."
-    }
-  ],
+  "candidates": [],
   "errors": []
 }
