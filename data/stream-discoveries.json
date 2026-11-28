@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-27T22:10:43.758Z",
+  "updated_at": "2026-11-28T12:31:43.437Z",
   "mode": "suggestions_only",
   "verified_public_live_count": 0,
   "notes": "Matches are candidates and are NOT published on event pages until independently reviewed. Platform-live ≠ event-confirmed.",
@@ -11,7 +11,7 @@
   "statistics": {
     "youtube_channels_checked": 10,
     "youtube_videos_checked": 500,
-    "youtube_streams_seen": 235,
+    "youtube_streams_seen": 237,
     "twitch_channels_checked": 0
   },
   "diagnostic_sample": [
@@ -41,6 +41,14 @@
     },
     {
       "channel": "Utopia TV Deutschland",
+      "title": "LIVE ❗ Demo Düsseldorf \"Einigung jetzt!\" Einigkeit für Deutschland Mittelstand bewegt Trommler u.a.",
+      "url": "https://www.youtube.com/watch?v=gHAo7QzHqjg",
+      "date": "2026-11-28T11:03:19Z",
+      "status": "live",
+      "match_count": 0
+    },
+    {
+      "channel": "Utopia TV Deutschland",
       "title": "LIVE ❗ Ulrich SIEGMUND AfD 🇩🇪 Martin Reichardt uva. Sülzetal Sachsen-Anhalt Bürgerdialog & Reden",
       "url": "https://www.youtube.com/watch?v=8sNUaFX0kd0",
       "date": "2026-11-23T16:34:07Z",
@@ -52,14 +60,6 @@
       "title": "Politik mit Kopf in Frankfurt am Abend der Gen Z Proteste I Interview & Analyse Polizeigrossaufgebot",
       "url": "https://www.youtube.com/watch?v=EGo5u43k8Zg",
       "date": "2026-11-22T14:15:19Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Utopia TV Deutschland",
-      "title": "LIVE ❗ Gen Z Demo 💥 Frankfurt im Ausnahmezustand 😱 Eskaliert es wieder? Protest & Polizeieinsatz",
-      "url": "https://www.youtube.com/watch?v=XKAzL4dKZpI",
-      "date": "2026-11-20T19:39:53Z",
       "status": "recording",
       "match_count": 0
     },
@@ -89,6 +89,14 @@
     },
     {
       "channel": "Weichreite TV Uncut",
+      "title": "🔴LIVE BPE Kundgebung Dortmund 28.11.26",
+      "url": "https://www.youtube.com/watch?v=ovQXG0_HZFE",
+      "date": "2026-11-28T11:29:28Z",
+      "status": "live",
+      "match_count": 0
+    },
+    {
+      "channel": "Weichreite TV Uncut",
       "title": "Schluss mit dem Nazitreffen! Antifa Gegendemo - Offener Abend Die Heimat Dortmund Dorstfeld 27.11.26",
       "url": "https://www.youtube.com/watch?v=ugG487u3K3k",
       "date": "2026-11-27T18:00:09Z",
@@ -100,14 +108,6 @@
       "title": "🔴LIVE aus NRW  Internationaler Tag gegen Gewalt an Frauen 25.11.26 Bielefeld ",
       "url": "https://www.youtube.com/watch?v=kbS5tQMO5fE",
       "date": "2026-11-25T16:59:57Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Weichreite TV Uncut",
-      "title": "🔴LIVE Nürnberg Montagsprotest Team Menschenrechte & Antifa Gegendemos 23.11.26",
-      "url": "https://www.youtube.com/watch?v=3SO9ZLN9ZAY",
-      "date": "2026-11-23T17:27:56Z",
       "status": "recording",
       "match_count": 0
     },
@@ -137,6 +137,14 @@
     },
     {
       "channel": "Schmidtkes Welt",
+      "title": "❗LIVE❗in Frankfurt (Oder) | Demo gegen Migrantengewalt:\"Sichere Schulen,sichere Stadt\" | 28.11.2026",
+      "url": "https://www.youtube.com/watch?v=iSzf8p4XSNY",
+      "date": "2026-11-28T09:58:41Z",
+      "status": "recording",
+      "match_count": 0
+    },
+    {
+      "channel": "Schmidtkes Welt",
       "title": "❗LIVE❗in Berlin | \"Hunderte Mrd. für Bildung & Soziales, statt für Aufrüstung & Krieg\" | 27.11.2026",
       "url": "https://www.youtube.com/watch?v=AivS-BkiBLU",
       "date": "2026-11-27T15:15:42Z",
@@ -152,11 +160,11 @@
       "match_count": 0
     },
     {
-      "channel": "Schmidtkes Welt",
-      "title": "❗LIVE❗in Berlin | Demo: \"Keine* mehr! Gegen geschlechtsbezogene & sexualisierte Gewalt\" | 25.11.2026",
-      "url": "https://www.youtube.com/watch?v=sWnx8RuG1tk",
-      "date": "2026-11-25T15:58:22Z",
-      "status": "recording",
+      "channel": "Beobachter Live",
+      "title": "🔴 Live: Chemnitz | Große Bergparade 2026",
+      "url": "https://www.youtube.com/watch?v=dm0jw3jDtg4",
+      "date": "2026-11-28T12:19:23Z",
+      "status": "live",
       "match_count": 0
     },
     {
@@ -172,14 +180,6 @@
       "title": "🔴 Live: Berlin | Protest gegen NATO-Tagung",
       "url": "https://www.youtube.com/watch?v=NbI98OLNZi4",
       "date": "2026-11-23T06:59:18Z",
-      "status": "recording",
-      "match_count": 0
-    },
-    {
-      "channel": "Beobachter Live",
-      "title": "🔴 Live: Berlin | Impressionen Schlossinsel Köpenick",
-      "url": "https://www.youtube.com/watch?v=YpweEzF3wRA",
-      "date": "2026-11-22T13:26:31Z",
       "status": "recording",
       "match_count": 0
     },

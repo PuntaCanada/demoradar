@@ -5,14 +5,14 @@
     "from": "2026-10-29",
     "to": "2026-12-05"
   },
-  "event_records": 427,
+  "event_records": 400,
   "diagnostic_video_samples": 24,
   "cities": [
     {
       "city": "Berlin",
-      "event_count": 344,
-      "days_with_events": 10,
-      "observed_video_title_samples": 7,
+      "event_count": 323,
+      "days_with_events": 9,
+      "observed_video_title_samples": 5,
       "observed_city_and_date_samples": 2,
       "source_count": 0,
       "source_status": []
@@ -21,7 +21,7 @@
       "city": "Nürnberg",
       "event_count": 0,
       "days_with_events": 0,
-      "observed_video_title_samples": 3,
+      "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
@@ -42,31 +42,46 @@
       "source_status": []
     },
     {
-      "city": "Frankfurt am Main",
-      "event_count": 2,
+      "city": "Dortmund",
+      "event_count": 1,
       "days_with_events": 1,
       "observed_video_title_samples": 2,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
         {
-          "type": "official_city_press",
-          "status": "http_restricted",
+          "type": "official_municipal_publications",
+          "status": "reachable_monitor_only_not_a_feed",
           "reuse_rights_verified": false
         }
       ]
     },
     {
-      "city": "Dortmund",
-      "event_count": 1,
+      "city": "Düsseldorf",
+      "event_count": 0,
+      "days_with_events": 0,
+      "observed_video_title_samples": 1,
+      "observed_city_and_date_samples": 0,
+      "source_count": 1,
+      "source_status": [
+        {
+          "type": "official_police_assembly_authority",
+          "status": "reachable_monitor_only_not_a_feed",
+          "reuse_rights_verified": false
+        }
+      ]
+    },
+    {
+      "city": "Frankfurt am Main",
+      "event_count": 2,
       "days_with_events": 1,
       "observed_video_title_samples": 1,
       "observed_city_and_date_samples": 0,
       "source_count": 1,
       "source_status": [
         {
-          "type": "official_municipal_publications",
-          "status": "reachable_monitor_only_not_a_feed",
+          "type": "official_city_press",
+          "status": "http_restricted",
           "reuse_rights_verified": false
         }
       ]
@@ -102,21 +117,6 @@
       ]
     },
     {
-      "city": "Düsseldorf",
-      "event_count": 0,
-      "days_with_events": 0,
-      "observed_video_title_samples": 0,
-      "observed_city_and_date_samples": 0,
-      "source_count": 1,
-      "source_status": [
-        {
-          "type": "official_police_assembly_authority",
-          "status": "reachable_monitor_only_not_a_feed",
-          "reuse_rights_verified": false
-        }
-      ]
-    },
-    {
       "city": "Halle (Saale)",
       "event_count": 0,
       "days_with_events": 0,
@@ -126,7 +126,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "transport_unverified",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
         }
       ]
@@ -151,7 +151,7 @@
         },
         {
           "type": "official_registration_information",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -211,7 +211,7 @@
       "source_status": [
         {
           "type": "official_police_historical_notice",
-          "status": "transport_unverified",
+          "status": "reachable_archive_only",
           "reuse_rights_verified": false
         }
       ]
@@ -226,7 +226,7 @@
       "source_status": [
         {
           "type": "official_police_press_index",
-          "status": "reachable_monitor_only_not_a_feed",
+          "status": "transport_unverified",
           "reuse_rights_verified": false
         }
       ]
@@ -331,7 +331,7 @@
       "source_status": []
     },
     {
-      "city": "Jena",
+      "city": "Bonn",
       "event_count": 2,
       "days_with_events": 2,
       "observed_video_title_samples": 0,
@@ -340,9 +340,9 @@
       "source_status": []
     },
     {
-      "city": "Bonn",
-      "event_count": 3,
-      "days_with_events": 3,
+      "city": "Jena",
+      "event_count": 2,
+      "days_with_events": 2,
       "observed_video_title_samples": 0,
       "observed_city_and_date_samples": 0,
       "source_count": 0,
